@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'codeigniter4/appstarter',
-        'pretty_version' => 'v4.5.5',
-        'version' => '4.5.5.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'bec2ab76da601385a9e9f867869f4b229a812551',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,13 +11,19 @@
     ),
     'versions' => array(
         'codeigniter4/appstarter' => array(
-            'pretty_version' => 'v4.5.5',
-            'version' => '4.5.5.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'bec2ab76da601385a9e9f867869f4b229a812551',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'codeigniter4/authentication-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
         ),
         'codeigniter4/framework' => array(
             'pretty_version' => 'v4.5.5',
@@ -25,6 +31,24 @@
             'reference' => '2849e7ff36b4c4aa1376d990a9a1e3f0c393b8d0',
             'type' => 'project',
             'install_path' => __DIR__ . '/../codeigniter4/framework',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'codeigniter4/settings' => array(
+            'pretty_version' => 'v2.2.0',
+            'version' => '2.2.0.0',
+            'reference' => '2748f2b4572d44a940f98c31847d65272cac5666',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../codeigniter4/settings',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'codeigniter4/shield' => array(
+            'pretty_version' => 'v1.1.0',
+            'version' => '1.1.0.0',
+            'reference' => '22a8b3b58dafa7a5c080bc61446653aeb9fffc06',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../codeigniter4/shield',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
