@@ -46,9 +46,9 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      */
     public array $views = [
-        'login'                       => '\CodeIgniter\Shield\Views\login',
-        'register'                    => '\CodeIgniter\Shield\Views\register',
-        'layout'                      => '\CodeIgniter\Shield\Views\layout',
+        'login'                       => '\CodeIgniter\Shield\Views\login', #cambiar 
+        'register'                    => '\CodeIgniter\Shield\Views\register', #cambiar 
+        'layout'                      => '\CodeIgniter\Shield\Views\layout', #cambiar?
         'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
         'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
         'action_email_2fa_email'      => '\CodeIgniter\Shield\Views\Email\email_2fa_email',
@@ -74,12 +74,12 @@ class Auth extends ShieldAuth
      * to apply any logic you may need.
      */
     public array $redirects = [
-        'register'          => '/',
-        'login'             => '/',
-        'logout'            => 'login',
+        'register'          => '/', #cambiar /
+        'login'             => '/', #cambiar /perfilusuario
+        'logout'            => 'login', #cambiar /
         'force_reset'       => '/',
         'permission_denied' => '/',
-        'group_denied'      => '/',
+        'group_denied'      => '/', #cambiar  
     ];
 
     /**
@@ -201,7 +201,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, bool|int|string>
      */
-    public array $sessionConfig = [
+    public array $sessionConfig = [ # cambiar
         'field'              => 'user',
         'allowRemembering'   => true,
         'rememberCookieName' => 'remember',
@@ -217,7 +217,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, array<int, string>|string>
      */
-    public array $usernameValidationRules = [
+    public array $usernameValidationRules = [ #cambiar 
         'label' => 'Auth.username',
         'rules' => [
             'required',
@@ -236,7 +236,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, array<int, string>|string>
      */
-    public array $emailValidationRules = [
+    public array $emailValidationRules = [ #cambiar 
         'label' => 'Auth.email',
         'rules' => [
             'required',
@@ -252,7 +252,7 @@ class Auth extends ShieldAuth
      * The minimum length that a password must be to be accepted.
      * Recommended minimum value by NIST = 8 characters.
      */
-    public int $minimumPasswordLength = 8;
+    public int $minimumPasswordLength = 8; #cambiar 
 
     /**
      * --------------------------------------------------------------------
@@ -280,7 +280,7 @@ class Auth extends ShieldAuth
      */
     public array $validFields = [
         'email',
-        // 'username',
+        'username',
     ];
 
     /**
@@ -343,7 +343,7 @@ class Auth extends ShieldAuth
      * - PASSWORD_ARGON2I  - As of PHP 7.2 only if compiled with support for it
      * - PASSWORD_ARGON2ID - As of PHP 7.3 only if compiled with support for it
      */
-    public string $hashAlgorithm = PASSWORD_DEFAULT;
+    public string $hashAlgorithm = PASSWORD_DEFAULT; #cambiar 
 
     /**
      * --------------------------------------------------------------------
@@ -406,7 +406,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, string>
      */
-    public array $tables = [
+    public array $tables = [ #cambiar (migracion?)
         'users'             => 'users',
         'identities'        => 'auth_identities',
         'logins'            => 'auth_logins',
@@ -428,13 +428,13 @@ class Auth extends ShieldAuth
      *
      * @var class-string<UserModel>
      */
-    public string $userProvider = UserModel::class;
+    public string $userProvider = UserModel::class; #cambiar ?
 
     /**
      * Returns the URL that a user should be redirected
      * to after a successful login.
      */
-    public function loginRedirect(): string
+    public function loginRedirect(): string #cambiar 
     {
         $session = session();
         $url     = $session->getTempdata('beforeLoginUrl') ?? setting('Auth.redirects')['login'];
@@ -446,7 +446,7 @@ class Auth extends ShieldAuth
      * Returns the URL that a user should be redirected
      * to after they are logged out.
      */
-    public function logoutRedirect(): string
+    public function logoutRedirect(): string #cambiar (todas las siguientes?)
     {
         $url = setting('Auth.redirects')['logout'];
 
@@ -457,7 +457,7 @@ class Auth extends ShieldAuth
      * Returns the URL the user should be redirected to
      * after a successful registration.
      */
-    public function registerRedirect(): string
+    public function registerRedirect(): string 
     {
         $url = setting('Auth.redirects')['register'];
 
@@ -468,7 +468,7 @@ class Auth extends ShieldAuth
      * Returns the URL the user should be redirected to
      * if force_reset identity is set to true.
      */
-    public function forcePasswordResetRedirect(): string
+    public function forcePasswordResetRedirect(): string 
     {
         $url = setting('Auth.redirects')['force_reset'];
 
@@ -479,7 +479,7 @@ class Auth extends ShieldAuth
      * Returns the URL the user should be redirected to
      * if permission denied.
      */
-    public function permissionDeniedRedirect(): string
+    public function permissionDeniedRedirect(): string 
     {
         $url = setting('Auth.redirects')['permission_denied'];
 
