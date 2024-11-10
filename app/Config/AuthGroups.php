@@ -40,7 +40,7 @@ class AuthGroups extends ShieldAuthGroups
      *
      * @see https://codeigniter4.github.io/shield/quick_start_guide/using_authorization/#change-available-groups for more info
      */
-    public array $groups = [
+    public array $groups = [ # cambiar
         'superadmin' => [
             'title'       => 'Super Admin',
             'description' => 'Complete control of the site.',
@@ -71,7 +71,7 @@ class AuthGroups extends ShieldAuthGroups
      *
      * If a permission is not listed here it cannot be used.
      */
-    public array $permissions = [
+    public array $permissions = [ # cambiar
         'admin.access'        => 'Can access the sites admin area',
         'admin.settings'      => 'Can access the main site settings',
         'users.manage-admins' => 'Can manage other admins',
@@ -89,7 +89,7 @@ class AuthGroups extends ShieldAuthGroups
      *
      * This defines group-level permissions.
      */
-    public array $matrix = [
+    public array $matrix = [ # cambiar
         'superadmin' => [
             'admin.*',
             'users.*',

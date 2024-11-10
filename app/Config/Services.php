@@ -29,4 +29,24 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+    public static function twig($viewDir = null, $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('twig', $viewDir);
+        }
+
+        $appPaths = new \Config\Paths();
+        $appViewPaths = $viewDir ?? $appPaths->viewDirectory;
+
+        // Comprobueba si estamos en entorno de desarrollo
+        $isDevelopment = getenv('CI_ENVIRONMENT') === 'development';
+
+        $loader = new \Twig\Loader\FilesystemLoader($appViewPaths);
+
+        return new \Twig\Environment($loader, [
+            'cache' => $isDevelopment ? false : WRITEPATH . '/cache/twig',  // Si estamos en entornos de desarrollo se desactiva la caché
+            'auto_reload' => $isDevelopment,  // Para que Twig recargue las plantillas al detectar cambios
+        ]);
+    }
 }

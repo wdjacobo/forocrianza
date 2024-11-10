@@ -17,4 +17,5 @@ class MainController extends BaseController
             . view('inicioView')
             . view('templates/footerTemplate');
     }
+
 }
