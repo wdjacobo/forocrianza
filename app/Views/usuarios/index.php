@@ -2,14 +2,16 @@
 
 <?php if ($lista_usuarios !== []): ?>
 
+
     <?php foreach ($lista_usuarios as $usuario): ?>
 
-        <h3><?= esc($usuario['nickname']) ?></h3>
+        <h3><?= esc($usuario->username) ?></h3>
 
         <div class="main">
-            <?= esc($usuario['email']) ?>
+            <?= esc($usuario->email); ?>
         </div>
-        <p><a href="/usuarios/<?= esc($usuario['id'], 'url') ?>">Ver usuario</a></p>
+
+        <p><a href="/usuarios/<?= esc($usuario->id, 'url') ?>">Ver usuario</a></p>
 
     <?php endforeach ?>
 

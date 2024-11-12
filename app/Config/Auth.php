@@ -46,17 +46,18 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      */
     public array $views = [
-        'login'                       => '\CodeIgniter\Shield\Views\login', #cambiar 
-        'register'                    => '\CodeIgniter\Shield\Views\register', #cambiar 
-        'layout'                      => '\CodeIgniter\Shield\Views\layout', #cambiar?
-        'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
-        'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
-        'action_email_2fa_email'      => '\CodeIgniter\Shield\Views\Email\email_2fa_email',
-        'action_email_activate_show'  => '\CodeIgniter\Shield\Views\email_activate_show',
-        'action_email_activate_email' => '\CodeIgniter\Shield\Views\Email\email_activate_email',
-        'magic-link-login'            => '\CodeIgniter\Shield\Views\magic_link_form',
-        'magic-link-message'          => '\CodeIgniter\Shield\Views\magic_link_message',
-        'magic-link-email'            => '\CodeIgniter\Shield\Views\Email\magic_link_email',
+        'login'                       => '\App\Views\Shield\iniciar-sesion', #'\CodeIgniter\Shield\Views\login' #cambiar cuanto .twig?
+        'register'                    => '\App\Views\Shield\registro', # '\CodeIgniter\Shield\Views\register', #cambiar 
+        # 'layout'                      => '\App\Views\Shield\layout', # '\CodeIgniter\Shield\Views\layout', #cambiar?
+        # 'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
+        # 'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
+        # 'action_email_2fa_email'      => '\CodeIgniter\Shield\Views\Email\email_2fa_email',
+        #'action_email_activate_show'  => '\CodeIgniter\Shield\Views\email_activate_show',
+        # 'action_email_activate_email' => '\CodeIgniter\Shield\Views\Email\email_activate_email',
+        # 'magic-link-login'            => '\CodeIgniter\Shield\Views\magic_link_form',
+        # 'magic-link-message'          => '\CodeIgniter\Shield\Views\magic_link_message',
+        #'magic-link-email'            => '\CodeIgniter\Shield\Views\Email\magic_link_email',
+        // Se comentan todas las rutas que no se vayan a usar de Shield
     ];
 
     /**

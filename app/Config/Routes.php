@@ -5,13 +5,22 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'MainController::index');
+$routes->get('/', 'MainController::proxecto');
 
 
 //CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule. Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
-use App\Controllers\UsuariosController;
+use App\Controllers\UsersController;
+use App\Controllers\MainController;
 
-$routes->get('form', [UsuariosController::class, 'index']);
-$routes->post('form', [UsuariosController::class, 'index']);
+$routes->get('usuarios', [UsersController::class, 'index']);
+$routes->get('usuarios/<:segment>', [UsersController::class, 'mostrar']);
+
+$routes->get('registro', [MainController::class, 'registro']);
+$routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion']);
+$routes->get('inicio', [MainController::class, 'inicio']);
+$routes->get('subcategoria', [MainController::class, 'subcategoria']);
+$routes->get('tema', [MainController::class, 'tema']);
+$routes->get('perfil', [MainController::class, 'perfil']);
+$routes->get('admin', [MainController::class, 'admin']);
 
 service('auth')->routes($routes);

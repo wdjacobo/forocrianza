@@ -1,2 +1,2 @@
-<h2><?= esc($usuario['nickname']) ?></h2>
-<p><?= esc($usuario['email']) ?></p>
+<h2><?= esc($usuario['username']) ?></h2>
+<p><?= esc($usuario['status']) ?></p>
