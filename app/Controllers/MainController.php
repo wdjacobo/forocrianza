@@ -27,7 +27,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/headerTemplate', $data)
-        . view('Shield/registro');
+        . view('Shield/registro')
+        . view('templates/footerTemplate');
     }
 
     public function iniciar_sesion()
@@ -38,7 +39,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/headerTemplate', $data)
-        . view('Shield/iniciar_sesion');
+        . view('Shield/iniciar_sesion')
+        . view('templates/footerTemplate');
     }
 
     public function perfil()
@@ -49,7 +51,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/headerTemplate', $data)
-            . view('general/perfil');
+            . view('general/perfil')
+            . view('templates/footerTemplate');
     }
 
     public function subcategoria()
@@ -60,7 +63,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/headerTemplate', $data)
-            . view('general/subcategoria');
+            . view('general/subcategoria')
+            . view('templates/footerTemplate');
     }
     public function tema()
     {
@@ -70,7 +74,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/headerTemplate', $data)
-            . view('general/tema');
+            . view('general/tema')
+            . view('templates/footerTemplate');
     }
 
     public function inicio()
@@ -81,7 +86,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/headerTemplate', $data)
-            . view('general/inicio');
+            . view('general/inicio')
+            . view('templates/footerTemplate');
     }
 
     public function admin()
@@ -92,6 +98,30 @@ class MainController extends BaseController
         ];
 
         return view('templates/headerTemplate', $data)
-            . view('general/admin');
+            . view('general/admin')
+            . view('templates/footerTemplate');
+    }
+
+    public function blog()
+    {
+
+        $data = [
+            'titulo'     => 'Vista general del blog',
+        ];
+
+        return view('templates/headerTemplate', $data)
+            . view('general/blog')
+            . view('templates/footerTemplate');
+    }
+    public function blog_post()
+    {
+
+        $data = [
+            'titulo'     => 'Vista de un post del blog',
+        ];
+
+        return view('templates/headerTemplate', $data)
+            . view('general/blog-post')
+            . view('templates/footerTemplate');
     }
 }

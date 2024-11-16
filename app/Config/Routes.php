@@ -22,5 +22,7 @@ $routes->get('subcategoria', [MainController::class, 'subcategoria']);
 $routes->get('tema', [MainController::class, 'tema']);
 $routes->get('perfil', [MainController::class, 'perfil']);
 $routes->get('admin', [MainController::class, 'admin']);
+$routes->get('blog', [MainController::class, 'blog']);
+$routes->get('blog-post', [MainController::class, 'blog_post']);
 
 service('auth')->routes($routes);
