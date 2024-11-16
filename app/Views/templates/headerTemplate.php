@@ -24,7 +24,7 @@
 
                 <nav>
                     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="inicio" class="nav-link px-2 link-secondary">Inicio</a></li>
+                        <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
                         <li><a href="subcategoria" class="nav-link px-2">Subcategoría</a></li>
                         <li><a href="tema" class="nav-link px-2">Tema</a></li>
                         <li><a href="blog" class="nav-link px-2">Blog</a></li>

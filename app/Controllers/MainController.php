@@ -7,18 +7,6 @@ namespace App\Controllers;
 class MainController extends BaseController
 {
 
-    public function proxecto()
-    {
-
-        $data = [
-            'titulo'     => 'Titulo',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('proxecto');
-        /* . view('templates/footerTemplate'); */
-    }
-
     public function registro()
     {
 
