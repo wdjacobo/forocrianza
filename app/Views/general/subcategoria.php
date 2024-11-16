@@ -287,7 +287,7 @@
             </article>
         </div>
 
-        <div class="col-md-2 p-0 ps-2 borde-rojo">
+        <div class="col-md-2 p-0 ps-2">
             <div class="position-sticky" style="top: 2rem;">
                 <img class="p-4 bg-body-tertiary rounded" style="background-color: gray !important" src="/images/logo/foro.png" alt="" srcset="" width="212" height="600">
             </div>

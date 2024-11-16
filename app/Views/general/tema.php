@@ -1,68 +1,102 @@
-    <h1><?= $titulo ?></h1>
-    <main role="main" class="container">
-    <div class="container d-flex justify-content-center p-5">
-        <div class="card col-12 col-md-5 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title mb-5"><?= lang('Auth.login') ?></h5>
+<div class="container">
+    <!-- EXEMPLO BLOG -->
+    <div class="row g-5">
 
-                <?php if (session('error') !== null) : ?>
-                    <div class="alert alert-danger" role="alert"><?= session('error') ?></div>
-                <?php elseif (session('errors') !== null) : ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php if (is_array(session('errors'))) : ?>
-                            <?php foreach (session('errors') as $error) : ?>
-                                <?= $error ?>
-                                <br>
-                            <?php endforeach ?>
-                        <?php else : ?>
-                            <?= session('errors') ?>
-                        <?php endif ?>
+        <div class="col-md-3 p-0 pe-3">
+            <aside>
+                <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="">
+                    <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
+                        <span class="fs-5 fw-semibold">Aside</span>
+                    </a>
+                    <div class="list-group list-group-flush border-bottom scrollarea">
+                        <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <strong class="mb-1">List group item heading</strong>
+                                <small>Wed</small>
+                            </div>
+                            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <strong class="mb-1">List group item heading</strong>
+                                <small class="text-body-secondary">Tues</small>
+                            </div>
+                            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <strong class="mb-1">List group item heading</strong>
+                                <small class="text-body-secondary">Tues</small>
+                            </div>
+                            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <strong class="mb-1">List group item heading</strong>
+                                <small class="text-body-secondary">Tues</small>
+                            </div>
+                            <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+                        </a>
                     </div>
-                <?php endif ?>
+                </div>
+            </aside>
+        </div>
 
-                <?php if (session('message') !== null) : ?>
-                <div class="alert alert-success" role="alert"><?= session('message') ?></div>
-                <?php endif ?>
+        <div class="col-md-7 px-1">
 
-                <form action="<?= url_to('login') ?>" method="post">
-                    <?= csrf_field() ?>
+            <article class="card mb-4">
+                <div class="card-header">
+                    <h4>Título del tema</h4>
+                    <li class="list-group-item d-flex justify-content-center">
+                        <h2 class="">
+                            << Paginado>>
+                        </h2>
+                    </li>
+                </div>
 
-                    <!-- Email -->
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingEmailInput" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" required>
-                        <label for="floatingEmailInput"><?= lang('Auth.email') ?></label>
+
+                <div class="list-group">
+                    <div class="list-group-item borde-rojo">
+                        <h5>Autor</h5>
+                        <p>Apertura</p>
+                        <p>Este mensaje, y quizás todos los del autor del tema, estarán resaltados de algún modo</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>
-
-                    <!-- Password -->
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPasswordInput" name="password" inputmode="text" autocomplete="current-password" placeholder="<?= lang('Auth.password') ?>" required>
-                        <label for="floatingPasswordInput"><?= lang('Auth.password') ?></label>
+                    <div class="list-group-item">
+                        <h5>Username</h5>
+                        <p>Mensaje</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>
-
-                    <!-- Remember me -->
-                    <?php if (setting('Auth.sessionConfig')['allowRemembering']): ?>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" name="remember" class="form-check-input" <?php if (old('remember')): ?> checked<?php endif ?>>
-                                <?= lang('Auth.rememberMe') ?>
-                            </label>
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="d-grid col-12 col-md-8 mx-auto m-3">
-                        <button type="submit" class="btn btn-primary btn-block"><?= lang('Auth.login')?></button>
+                    <div class="list-group-item">
+                        <h5>Username</h5>
+                        <p>Mensaje</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>
+                    <div class="list-group-item">
+                        <h5>Username</h5>
+                        <p>Mensaje</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
+                    </div>
+                    <div class="list-group-item">
+                        <h5>Username</h5>
+                        <p>Mensaje</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
+                    </div>
+                    <li class="list-group-item d-flex justify-content-center">
+                        <h2 class="">
+                            << Paginado>>
+                        </h2>
+                    </li>
 
-                    <?php if (setting('Auth.allowRegistration')) : ?>
-                        <p class="text-center"><?= lang('Auth.needAccount') ?> <a href="<?= url_to('registro') ?>"><?= lang('Auth.register') ?></a></p>
-                    <?php endif ?>
+                </div>
+            </article>
+        </div>
 
-                </form>
+        <div class="col-md-2 p-0 ps-2">
+            <div class="position-sticky" style="top: 2rem;">
+                <img class="p-4 bg-body-tertiary rounded" style="background-color: gray !important" src="/images/logo/foro.png" alt="" srcset="" width="212" height="600">
             </div>
         </div>
     </div>
-    </main>
-    <script src="/js/bootstrap.min.js"></script>
-</body>
-</html>
-
+    <!-- /EXEMPLO BLOG -->
+</div>

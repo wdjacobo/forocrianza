@@ -47,7 +47,7 @@ class MainController extends BaseController
     {
 
         $data = [
-            'titulo'     => 'Perfil de usuario',
+            'titulo'     => 'Perfil',
         ];
 
         return view('templates/headerTemplate', $data)
@@ -59,7 +59,7 @@ class MainController extends BaseController
     {
 
         $data = [
-            'titulo'     => 'Vista subcategoria',
+            'titulo'     => 'Subcategoria',
         ];
 
         return view('templates/headerTemplate', $data)
@@ -70,7 +70,7 @@ class MainController extends BaseController
     {
 
         $data = [
-            'titulo'     => 'Vista tema',
+            'titulo'     => 'Tema',
         ];
 
         return view('templates/headerTemplate', $data)
@@ -82,7 +82,7 @@ class MainController extends BaseController
     {
 
         $data = [
-            'titulo'     => 'Vista general de inicio',
+            'titulo'     => 'Inicio',
         ];
 
         return view('templates/headerTemplate', $data)
@@ -94,7 +94,7 @@ class MainController extends BaseController
     {
 
         $data = [
-            'titulo'     => 'Vista general del administrador',
+            'titulo'     => 'Panel de administración',
         ];
 
         return view('templates/headerTemplate', $data)
@@ -106,7 +106,7 @@ class MainController extends BaseController
     {
 
         $data = [
-            'titulo'     => 'Vista general del blog',
+            'titulo'     => 'Blog',
         ];
 
         return view('templates/headerTemplate', $data)
@@ -117,7 +117,7 @@ class MainController extends BaseController
     {
 
         $data = [
-            'titulo'     => 'Vista de un post del blog',
+            'titulo'     => 'Entrada blog',
         ];
 
         return view('templates/headerTemplate', $data)
