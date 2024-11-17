@@ -90,6 +90,16 @@ class MainController extends BaseController
             . view('templates/footerTemplate');
     }
 
+    public function admin_dash()
+    {
+
+        $data = [
+            'titulo'     => 'Panel de administración',
+        ];
+
+        return view('general/admin_dash');
+    }
+
     public function blog()
     {
 
@@ -110,6 +120,18 @@ class MainController extends BaseController
 
         return view('templates/headerTemplate', $data)
             . view('general/blog-post')
+            . view('templates/footerTemplate');
+    }
+
+    public function nuevo_tema()
+    {
+
+        $data = [
+            'titulo'     => 'Nuevo tema',
+        ];
+
+        return view('templates/headerTemplate', $data)
+            . view('general/nuevo-tema')
             . view('templates/footerTemplate');
     }
 }

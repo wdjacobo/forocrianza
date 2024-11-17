@@ -20,7 +20,7 @@
             <h1 class="ms-2">Forocrianza</h1> 
         </div>
         <div class="container p-0">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start py-3 mb-4 border-bottom">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-center py-3 mb-4 border-bottom">
 
                 <nav>
                     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -30,7 +30,7 @@
                         <li><a href="blog" class="nav-link px-2">Blog</a></li>
                         <li><a href="blog-post" class="nav-link px-2">Blog-post</a></li>
                         <li><a href="perfil" class="nav-link px-2">Perfil</a></li>
-                        <li><a href="admin" class="nav-link px-2">Panel admin</a></li>
+                        <li><a href="admin-dash" class="nav-link px-2">Panel admin</a></li>
                     </ul>
                 </nav>
                 <div class="d-flex align-items-center ms-auto">
@@ -54,6 +54,9 @@
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
             </div> -->
+                </div>
+                <div class="mt-3">
+                <a href="nuevo-tema"><button type="button" class="btn btn-primary">Crear nuevo tema</button></a>
                 </div>
             </div>
     </header>
