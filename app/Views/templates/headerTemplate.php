@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $titulo ?></title>
+    <link rel="icon" href="<?=base_url()?>/favicon.ico" type="image/ico">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <style>
         .borde-rojo {
@@ -39,6 +40,7 @@
                     </form>
                     <a href="iniciar-sesion"><button type="button" class="btn btn-outline-primary me-2">Iniciar sesión</button></a>
                     <a href="registro"><button type="button" class="btn btn-primary">Registro</button></a>
+                    <a href="/logout"><button type="button" class="btn btn-danger">Cerrar sesión</button></a>
                     <!--             Lo que sería el círculo de perfil del usuario -->
                     <!--             <div class="dropdown text-end">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
