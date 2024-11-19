@@ -27,8 +27,8 @@
                         <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
                         <li><a href="subcategoria" class="nav-link px-2">Subcategoría</a></li>
                         <li><a href="tema" class="nav-link px-2">Tema</a></li>
-                        <li><a href="blog" class="nav-link px-2">Blog</a></li>
-                        <li><a href="blog-post" class="nav-link px-2">Blog-post</a></li>
+<!--                         <li><a href="blog" class="nav-link px-2">Blog</a></li>
+                        <li><a href="blog-post" class="nav-link px-2">Blog-post</a></li> -->
                         <li><a href="perfil" class="nav-link px-2">Perfil</a></li>
                         <li><a href="admin-dash" class="nav-link px-2">Panel admin</a></li>
                     </ul>

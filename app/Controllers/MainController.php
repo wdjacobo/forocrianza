@@ -14,9 +14,9 @@ class MainController extends BaseController
             'titulo'     => 'Registro',
         ];
 
-        return view('templates/headerTemplate', $data)
+        return view('templates/basic-header-template', $data)
         . view('Shield/registro')
-        . view('templates/footerTemplate');
+        . view('templates/basic-footer-template');
     }
 
     public function iniciar_sesion()
@@ -26,9 +26,9 @@ class MainController extends BaseController
             'titulo'     => 'Iniciar sesión',
         ];
 
-        return view('templates/headerTemplate', $data)
+        return view('templates/basic-header-template', $data)
         . view('Shield/iniciar_sesion')
-        . view('templates/footerTemplate');
+        . view('templates/basic-footer-template');
     }
 
     public function perfil()
@@ -133,5 +133,21 @@ class MainController extends BaseController
         return view('templates/headerTemplate', $data)
             . view('general/nuevo-tema')
             . view('templates/footerTemplate');
+    }
+
+    public function quill()
+    {
+
+        $data = [
+            'titulo'     => 'Nuevo tema',
+        ];
+
+        return view('general/quill');
+    }
+
+    public function debug()
+    {
+
+        return view('general/debug');
     }
 }

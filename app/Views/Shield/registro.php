@@ -52,6 +52,7 @@
                         </div>
 
                         <p class="text-center"><?= lang('Auth.haveAccount') ?> <a href="<?= url_to('iniciar-sesion') ?>"><?= lang('Auth.login') ?></a></p>
+                        <p class="text-center"><a href="/">Volver a la página principal</a></p>
 
                     </form>
                 </div>

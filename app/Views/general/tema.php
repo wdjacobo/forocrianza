@@ -63,22 +63,22 @@
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>
                     <div class="list-group-item">
-                        <h5>Username</h5>
+                        <h5>Username (rol especial si tiene)</h5>
                         <p>Mensaje</p>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>
                     <div class="list-group-item">
-                        <h5>Username</h5>
+                    <h5>Username (rol especial si tiene)</h5>
                         <p>Mensaje</p>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>
                     <div class="list-group-item">
-                        <h5>Username</h5>
+                    <h5>Username (rol especial si tiene)</h5>
                         <p>Mensaje</p>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>
                     <div class="list-group-item">
-                        <h5>Username</h5>
+                    <h5>Username (rol especial si tiene)</h5>
                         <p>Mensaje</p>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro quis error corporis nesciunt dolorum reiciendis ex ducimus aspernatur quidem officiis? Ipsa consequuntur atque eum, facere quibusdam voluptatum. Ut corrupti recusandae cupiditate odit, animi, iusto neque ullam hic explicabo nostrum tempore!</p>
                     </div>

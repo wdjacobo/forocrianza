@@ -16,13 +16,18 @@ $routes->get('usuarios/<:segment>', [UsersController::class, 'mostrar']);
 $routes->get('registro', [MainController::class, 'registro']);
 $routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion']);
 $routes->get('/', [MainController::class, 'inicio']);
-$routes->get('/nuevo-tema', [MainController::class, 'nuevo_tema']);
+$routes->get('nuevo-tema', [MainController::class, 'nuevo_tema']);
 $routes->get('subcategoria', [MainController::class, 'subcategoria']);
 $routes->get('tema', [MainController::class, 'tema']);
 $routes->get('perfil', [MainController::class, 'perfil']);
 $routes->get('admin', [MainController::class, 'admin']);
 $routes->get('admin-dash', [MainController::class, 'admin_dash']);
-$routes->get('blog', [MainController::class, 'blog']);
-$routes->get('blog-post', [MainController::class, 'blog_post']);
+/* $routes->get('blog', [MainController::class, 'blog']);
+$routes->get('blog-post', [MainController::class, 'blog_post']); */
+$routes->get('quill', [MainController::class, 'quill']);
+$routes->get('debug', [MainController::class, 'debug']);
+
+#$routes->get('/iniciar-sesion', 'AuthController::login', ['as' => 'login']);
+#$routes->get('/registro', 'AuthController::register', ['as' => 'register']);
 
 service('auth')->routes($routes);
