@@ -3,7 +3,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 mt-5 border-top" style="background-color: #efefef;">
         <div class="col mb-3">
             <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
-                <img src="/images/logo/foro.png" alt="" srcset="" width="80" height="80">
+                <img src="<?= base_url()?>/images/logo/foro.png" alt="" srcset="" width="80" height="80">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>

@@ -17,7 +17,7 @@
 <body class="bg-light">
     <header>
         <div class="container d-flex flex-wrap align-items-center justify-content-start">
-        <img src="/images/logo/foro.png" alt="" srcset="" width="80" height="80">
+        <img src="<?= base_url()?>/images/logo/foro.png" alt="" srcset="" width="80" height="80">
             <h1 class="ms-2">Forocrianza</h1> 
         </div>
         <div class="container p-0">

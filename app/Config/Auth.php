@@ -46,7 +46,7 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      */
     public array $views = [
-        'login'                       => '\App\Views\Shield\iniciar-sesion', #'\App\Views\Shield\iniciar-sesion', #'\CodeIgniter\Shield\Views\login' #cambiar cuanto .twig?
+        'login'                       => '\App\Views\Shield\iniciar_sesion', #'\CodeIgniter\Shield\Views\login' #cambiar cuanto .twig?
         'register'                    => '\App\Views\Shield\registro', #'\CodeIgniter\Shield\Views\register', #cambiar 
         # 'layout'                      => '\App\Views\Shield\layout', # '\CodeIgniter\Shield\Views\layout', #cambiar?
         # 'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
@@ -77,7 +77,7 @@ class Auth extends ShieldAuth
     public array $redirects = [
         'register'          => '/', #cambiar /
         'login'             => '/', #cambiar /perfilusuario
-        'logout'            => '/', #'login', #cambiar /
+        'logout'            => '/login', #'login', #cambiar / # redirección tras logout debería ser a login
         'force_reset'       => '/',
         'permission_denied' => '/',
         'group_denied'      => '/', #cambiar  
