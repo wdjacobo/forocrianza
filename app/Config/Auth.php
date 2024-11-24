@@ -75,11 +75,11 @@ class Auth extends ShieldAuth
      * to apply any logic you may need.
      */
     public array $redirects = [
-        'register'          => '/', #cambiar /
-        'login'             => '/', #cambiar /perfilusuario
-        'logout'            => '/login', #'login', #cambiar / # redirección tras logout debería ser a login
+        'register'          => '/perfil',
+        'login'             => '/', #cambiar; no caso no que se inicie sesión nunha páxina, debería levar a esa mesma páxina... Iso vese en loginredirects
+        'logout'            => '/iniciar-sesion', // cambiar, case prefiro páxina de inicio con mensaxe modal de que se pechou sesión satisfactoriamente.
         'force_reset'       => '/',
-        'permission_denied' => '/',
+        'permission_denied' => '/', #cambiar  
         'group_denied'      => '/', #cambiar  
     ];
 
@@ -177,7 +177,7 @@ class Auth extends ShieldAuth
      * could be modified as the only method of login once an account
      * has been set up.
      */
-    public bool $allowMagicLinkLogins = true;
+    public bool $allowMagicLinkLogins = false;
 
     /**
      * --------------------------------------------------------------------
@@ -253,7 +253,7 @@ class Auth extends ShieldAuth
      * The minimum length that a password must be to be accepted.
      * Recommended minimum value by NIST = 8 characters.
      */
-    public int $minimumPasswordLength = 8; #cambiar 
+    public int $minimumPasswordLength = 8;
 
     /**
      * --------------------------------------------------------------------
@@ -344,7 +344,7 @@ class Auth extends ShieldAuth
      * - PASSWORD_ARGON2I  - As of PHP 7.2 only if compiled with support for it
      * - PASSWORD_ARGON2ID - As of PHP 7.3 only if compiled with support for it
      */
-    public string $hashAlgorithm = PASSWORD_DEFAULT; #cambiar 
+    public string $hashAlgorithm = PASSWORD_DEFAULT;
 
     /**
      * --------------------------------------------------------------------
@@ -437,6 +437,11 @@ class Auth extends ShieldAuth
      */
     public function loginRedirect(): string #cambiar 
     {
+
+        if (auth()->user()->can('admin.access')) {
+            return '/admin';
+        }
+
         $session = session();
         $url     = $session->getTempdata('beforeLoginUrl') ?? setting('Auth.redirects')['login'];
 

@@ -150,4 +150,9 @@ class MainController extends BaseController
 
         return view('general/debug');
     }
+    public function redirect()
+    {
+
+        return view('general/redirect');
+    }
 }

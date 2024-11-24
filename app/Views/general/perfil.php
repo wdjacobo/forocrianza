@@ -86,11 +86,14 @@
 
             <article class="card mb-4">
                 <div class="card-header">
-                    <h4>Datos del perfil</h4>
+                    <h4>Datos del perfil de <?php echo auth()->user() ? auth()->user()->username : "invitado" ?></h4>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
+                            <div class="alert alert-success" role="alert">
+                                Mensaje de registro correcto, o pantallazo de resgistro correcto con link a tu perfil.
+                            </div>
                             <p>Formularios con datos generales</p>
                             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                                 <input type="search" class="form-control form-control-dark mb-4" placeholder="" aria-label="Search">

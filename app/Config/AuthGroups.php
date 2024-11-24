@@ -41,25 +41,29 @@ class AuthGroups extends ShieldAuthGroups
      * @see https://codeigniter4.github.io/shield/quick_start_guide/using_authorization/#change-available-groups for more info
      */
     public array $groups = [ # cambiar
-        'superadmin' => [
+        /*         'superadmin' => [
             'title'       => 'Super Admin',
             'description' => 'Complete control of the site.',
-        ],
+        ], */
         'admin' => [
             'title'       => 'Admin',
             'description' => 'Day to day administrators of the site.',
         ],
-        'developer' => [
+        /*         'developer' => [
             'title'       => 'Developer',
             'description' => 'Site programmers.',
-        ],
+        ], */
         'user' => [
             'title'       => 'User',
             'description' => 'General users of the site. Often customers.',
         ],
-        'beta' => [
+        /*         'beta' => [
             'title'       => 'Beta User',
             'description' => 'Has access to beta-level features.',
+        ], */
+        'mod' => [
+            'title'       => 'Mod',
+            'description' => 'Moderators of the site.',
         ],
     ];
 
@@ -73,12 +77,22 @@ class AuthGroups extends ShieldAuthGroups
      */
     public array $permissions = [ # cambiar
         'admin.access'        => 'Can access the sites admin area',
-        'admin.settings'      => 'Can access the main site settings',
-        'users.manage-admins' => 'Can manage other admins',
+        //'admin.settings'      => 'Can access the main site settings',
+        //'users.manage-admins' => 'Can manage other admins',
         'users.create'        => 'Can create new non-admin users',
         'users.edit'          => 'Can edit existing non-admin users',
         'users.delete'        => 'Can delete existing non-admin users',
-        'beta.access'         => 'Can access beta-level features',
+        //'beta.access'         => 'Can access beta-level features',
+        'users.ban'          => 'Can ban existing non-admin and non-mod users',
+        'category.create'        => 'Can create new categories',
+        'category.edit'          => 'Can edit existing categories',
+        'category.delete'        => 'Can delete existing categories',
+        'subcategory.create'        => 'Can create new subcategories',
+        'subcategory.edit'          => 'Can edit existing subcategories',
+        'subcategory.delete'        => 'Can delete existing subcategories',
+        //'topic.create'        => 'Can create new topics',
+        'topic.edit'          => 'Can edit existing topics',
+        'topic.delete'        => 'Can delete existing topics',
     ];
 
     /**
@@ -90,28 +104,32 @@ class AuthGroups extends ShieldAuthGroups
      * This defines group-level permissions.
      */
     public array $matrix = [ # cambiar
-        'superadmin' => [
+        /*         'superadmin' => [
             'admin.*',
             'users.*',
             'beta.*',
-        ],
+        ], */
         'admin' => [
-            'admin.access',
-            'users.create',
-            'users.edit',
-            'users.delete',
-            'beta.access',
+            'admin.*',
+            'users.*',
+            'category.*',
+            'subcategory.*',
+            'topic.*',
         ],
-        'developer' => [
+        /*         'developer' => [
             'admin.access',
             'admin.settings',
             'users.create',
             'users.edit',
             'beta.access',
-        ],
+        ], */
         'user' => [],
-        'beta' => [
+        /*         'beta' => [
             'beta.access',
+        ], */
+        'mod' => [
+            'users.ban',
+            'topic.*',
         ],
     ];
 }

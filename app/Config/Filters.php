@@ -83,6 +83,7 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            // 'session' => ['only' => ['/admin']],
         ],
         'after' => [
             // 'honeypot',
