@@ -11,13 +11,15 @@ use App\Controllers\UsersController;
 use App\Controllers\MainController;
 
 
+// Primera!
+$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
+
 // prueba BD
 //$routes->get('usuarios', [UsersController::class, 'index']);
 //$routes->get('usuarios/<:segment>', [UsersController::class, 'mostrar']);
 
 $routes->get('registro', [MainController::class, 'registro'], ['as' => 'registro']);
 $routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']);
-$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
 $routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
 $routes->get('subcategoria', [MainController::class, 'subcategoria'], ['as' => 'subcategoria']);
 $routes->get('tema', [MainController::class, 'tema'], ['as' => 'tema']);
