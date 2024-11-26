@@ -15,7 +15,7 @@ class Security extends BaseConfig
      *
      * @var string 'cookie' or 'session'
      */
-    public string $csrfProtection = 'session'; # Necesario establecerlo como `session` para el correcto funcionamiento de Shield
+    public string $csrfProtection = 'session'; // Necesario establecerlo como `session` para el correcto funcionamiento de Shield
 
     /**
      * --------------------------------------------------------------------------

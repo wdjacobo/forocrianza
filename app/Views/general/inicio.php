@@ -74,119 +74,42 @@
 
         <div class="col-md-7 px-1">
 
-            <article class="card mb-4">
-                <div class="card-header">
-                    <h4>Bebés</h4>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <h5>Embarazo</h5>
-                            <p style="color: gray">Consejos y etapas del embarazo</p>
+            <?php if ($lista_categorias !== []): ?>
+                <?php foreach ($lista_categorias as $categoria): ?>
+                    <article class="card mb-4">
+                        <div class="card-header">
+                            <h4><?= esc($categoria['titulo']) ?></h4>
                         </div>
+                        <ul class="list-group">
+                            <?php foreach ($categoria['subcategorias'] as $subcategoria): ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <h5><?= esc($subcategoria['titulo']) ?></h5>
+                                        <p style="color: gray"><?= esc($subcategoria['descripcion']) ?></p>
+                                    </div>
 
-                        <div>
-                            <div class="ms-2 me-auto">
-                                <a href="#">
-                                    <h5>Título último tema</h5>
-                                </a>
-                                <p style="color: gray">A las [hora] del [fecha]</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <h5>Lactancia</h5>
-                            <p style="color: gray">Guía y apoyo para la lactancia</p>
-                        </div>
-                        <div>
-                            <div class="ms-2 me-auto">
-                                <a href="#">
-                                    <h5>Título último tema</h5>
-                                </a>
-                                <p style="color: gray">A las [hora] del [fecha]</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <h5>Cuidados generales</h5>
-                            <p style="color: gray">Recomendaciones de cuidado para el bebé</p>
-                        </div>
-                        <div>
-                            <div class="ms-2 me-auto">
-                                <a href="#">
-                                    <h5>Título último tema</h5>
-                                </a>
-                                <p style="color: gray">A las [hora] del [fecha]</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </article>
-            <article class="card mb-4">
-                <div class="card-header">
-                    <h4>Niños</h4>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <h5>Colegio</h5>
-                            <p style="color: gray">Información sobre la etapa escolar</p>
-
-                        </div>
-                        <div>
-                            <div class="ms-2 me-auto">
-                                <a href="#">
-                                    <h5>Título último tema</h5>
-                                </a>
-                                <p style="color: gray">A las [hora] del [fecha]</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-
-                        <div class="ms-2 me-auto">
-                            <h5>Actividades extraescolares y tiempo libre</h5>
-
-                            <p style="color: gray">Opciones para después del colegio</p>
-
-                        </div>
-
-                        <div>
-                            <div class="ms-2 me-auto">
-                                <a href="#">
-                                    <h5>Título último tema</h5>
-                                </a>
-                                <p style="color: gray">A las [hora] del [fecha]</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-
-                        <div class="ms-2 me-auto">
-                            <h5>2-3 años</h5>
-                            <p style="color: gray">Consejos para el desarrollo de niños de 2 a 3 años</p>
-
-                        </div>
-
-                        <div href="#2">
-                            <div class="ms-2 me-auto">
-                                <a href="#">
-                                    <h5>Título último tema</h5>
-                                </a>
-                                <p style="color: gray">A las [hora] del [fecha]</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </article>
-
+                                    <div>
+                                        <div class="ms-2 me-auto">
+                                            <a href="#">
+                                                <h5>Título último tema</h5>
+                                            </a>
+                                            <p style="color: gray">A las [hora] del [fecha]</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php endforeach ?>
+                        </ul>
+                    </article>
+                <?php endforeach ?>
+            <?php else: ?>
+                <h3>No hay categorias</h3>
+                <p>No se pudieron encontrar categorías.</p>
+            <?php endif ?>
         </div>
 
         <div class="col-md-2 p-0 ps-2">
             <div class="position-sticky p-0" style="top: 2rem;">
-                <img class="p-4 bg-body-tertiary rounded" style="background-color: gray !important" src="<?= base_url()?>/images/logo/foro.png" alt="" srcset="" width="212" height="800">
+                <img class="p-4 bg-body-tertiary rounded" style="background-color: gray !important" src="<?= base_url() ?>/images/logo/foro.png" alt="" srcset="" width="212" height="800">
             </div>
         </div>
     </div>

@@ -9,10 +9,12 @@ use CodeIgniter\Router\RouteCollection;
 //CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule. Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
 use App\Controllers\UsersController;
 use App\Controllers\MainController;
+use App\Controllers\InicioController;
 
 
 // Primera!
-$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
+$routes->get('/', [InicioController::class, 'inicio'], ['as' => 'inicio']);
+//$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
 
 // prueba BD
 //$routes->get('usuarios', [UsersController::class, 'index']);

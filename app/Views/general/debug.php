@@ -27,6 +27,17 @@
     <?php else: ?>
         <p>Hola usuario invitado</p>
     <?php endif ?>
+    <?php if ($lista_categorias !== []): ?>
+        exit(); <?php foreach ($lista_categorias as $categoria): ?>
+            <br>
+            <?php echo ($categoria['subcategorias'][0]['titulo']); ?>
+            <br>
+            <br>
+        <?php endforeach ?>
+    <?php else: ?>
+        <h3>No hay categorias</h3>
+        <p>No se pudieron encontrar categorías.</p>
+    <?php endif ?>
     <?php
     $user = auth()->user();
     var_dump($user);

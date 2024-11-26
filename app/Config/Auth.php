@@ -46,17 +46,17 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      */
     public array $views = [
-        'login'                       => '\App\Views\Shield\iniciar_sesion', #'\CodeIgniter\Shield\Views\login' #cambiar cuanto .twig?
-        'register'                    => '\App\Views\Shield\registro', #'\CodeIgniter\Shield\Views\register', #cambiar 
-        # 'layout'                      => '\App\Views\Shield\layout', # '\CodeIgniter\Shield\Views\layout', #cambiar?
-        # 'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
-        # 'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
-        # 'action_email_2fa_email'      => '\CodeIgniter\Shield\Views\Email\email_2fa_email',
-        #'action_email_activate_show'  => '\CodeIgniter\Shield\Views\email_activate_show',
-        # 'action_email_activate_email' => '\CodeIgniter\Shield\Views\Email\email_activate_email',
-        # 'magic-link-login'            => '\CodeIgniter\Shield\Views\magic_link_form',
-        # 'magic-link-message'          => '\CodeIgniter\Shield\Views\magic_link_message',
-        #'magic-link-email'            => '\CodeIgniter\Shield\Views\Email\magic_link_email',
+        'login'                       => '\App\Views\Shield\iniciar_sesion', //'\CodeIgniter\Shield\Views\login' //cambiar cuanto .twig?
+        'register'                    => '\App\Views\Shield\registro', //'\CodeIgniter\Shield\Views\register', ((cambiar 
+        // 'layout'                      => '\App\Views\Shield\layout', // '\CodeIgniter\Shield\Views\layout', //cambiar?
+        // 'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
+        // 'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
+        // 'action_email_2fa_email'      => '\CodeIgniter\Shield\Views\Email\email_2fa_email',
+        //'action_email_activate_show'  => '\CodeIgniter\Shield\Views\email_activate_show',
+        // 'action_email_activate_email' => '\CodeIgniter\Shield\Views\Email\email_activate_email',
+        // 'magic-link-login'            => '\CodeIgniter\Shield\Views\magic_link_form',
+        // 'magic-link-message'          => '\CodeIgniter\Shield\Views\magic_link_message',
+        //'magic-link-email'            => '\CodeIgniter\Shield\Views\Email\magic_link_email',
         // Se comentan todas las rutas que no se vayan a usar de Shield
     ];
 
@@ -76,11 +76,11 @@ class Auth extends ShieldAuth
      */
     public array $redirects = [
         'register'          => '/perfil',
-        'login'             => '/', #cambiar; no caso no que se inicie sesión nunha páxina, debería levar a esa mesma páxina... Iso vese en loginredirects
+        'login'             => '/', //cambiar; no caso no que se inicie sesión nunha páxina, debería levar a esa mesma páxina... Iso vese en loginredirects
         'logout'            => '/iniciar-sesion', // cambiar, case prefiro páxina de inicio con mensaxe modal de que se pechou sesión satisfactoriamente.
         'force_reset'       => '/',
-        'permission_denied' => '/', #cambiar  
-        'group_denied'      => '/', #cambiar  
+        'permission_denied' => '/', //cambiar  
+        'group_denied'      => '/', //cambiar  
     ];
 
     /**
@@ -202,7 +202,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, bool|int|string>
      */
-    public array $sessionConfig = [ # cambiar
+    public array $sessionConfig = [ // cambiar
         'field'              => 'user',
         'allowRemembering'   => true,
         'rememberCookieName' => 'remember',
@@ -218,7 +218,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, array<int, string>|string>
      */
-    public array $usernameValidationRules = [ #cambiar 
+    public array $usernameValidationRules = [ //cambiar 
         'label' => 'Auth.username',
         'rules' => [
             'required',
@@ -237,7 +237,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, array<int, string>|string>
      */
-    public array $emailValidationRules = [ #cambiar 
+    public array $emailValidationRules = [ //cambiar 
         'label' => 'Auth.email',
         'rules' => [
             'required',
@@ -407,7 +407,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, string>
      */
-    public array $tables = [ #cambiar (migracion?)
+    public array $tables = [ //cambiar (migracion?)
         'users'             => 'users',
         'identities'        => 'auth_identities',
         'logins'            => 'auth_logins',
@@ -429,13 +429,13 @@ class Auth extends ShieldAuth
      *
      * @var class-string<UserModel>
      */
-    public string $userProvider = UserModel::class; #cambiar ?
+    public string $userProvider = UserModel::class; //cambiar ?
 
     /**
      * Returns the URL that a user should be redirected
      * to after a successful login.
      */
-    public function loginRedirect(): string #cambiar 
+    public function loginRedirect(): string //cambiar 
     {
 
         if (auth()->user()->can('admin.access')) {
@@ -452,7 +452,7 @@ class Auth extends ShieldAuth
      * Returns the URL that a user should be redirected
      * to after they are logged out.
      */
-    public function logoutRedirect(): string #cambiar (todas las siguientes?)
+    public function logoutRedirect(): string //cambiar (todas las siguientes?)
     {
         $url = setting('Auth.redirects')['logout'];
 

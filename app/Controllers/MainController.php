@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Models\CategoriasModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
+//Usar este PageNotFoundException!
+
 class MainController extends BaseController
 {
 
@@ -15,8 +19,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/basic-header-template', $data)
-        . view('Shield/registro')
-        . view('templates/basic-footer-template');
+            . view('Shield/registro')
+            . view('templates/basic-footer-template');
     }
 
     public function iniciar_sesion()
@@ -27,8 +31,8 @@ class MainController extends BaseController
         ];
 
         return view('templates/basic-header-template', $data)
-        . view('Shield/iniciar_sesion')
-        . view('templates/basic-footer-template');
+            . view('Shield/iniciar_sesion')
+            . view('templates/basic-footer-template');
     }
 
     public function perfil()
@@ -69,8 +73,12 @@ class MainController extends BaseController
     public function inicio()
     {
 
+        $categoriasModel = model(CategoriasModel::class);
+
+
         $data = [
             'titulo'     => 'Inicio',
+            'lista_categorias' => $categoriasModel->getCategorias()
         ];
 
         return view('templates/headerTemplate', $data)
@@ -148,7 +156,15 @@ class MainController extends BaseController
     public function debug()
     {
 
-        return view('general/debug');
+        $categoriasModel = model(CategoriasModel::class);
+        
+
+
+        $data = [
+            'lista_categorias' => $categoriasModel->getCategoriasConSubcategorias()
+        ];
+
+        return view('general/debug', $data);
     }
     public function redirect()
     {
