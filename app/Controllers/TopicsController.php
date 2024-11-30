@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class MensajesController extends BaseController
+class TopicsController extends BaseController
 {
     public function index(): string
     {

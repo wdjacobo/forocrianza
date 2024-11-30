@@ -13,6 +13,8 @@ class DebugController extends BaseController
     public function debug()
     {
 
+
+
         $categoriesModel = model('CategoriesModel');
         $subcategoriesModel = model('SubcategoriesModel');
         $topicsModel = model('TopicsModel');

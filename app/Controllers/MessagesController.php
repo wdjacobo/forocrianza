@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class SubcategoriasController extends BaseController
+class MessagesController extends BaseController
 {
     public function index(): string
     {

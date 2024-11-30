@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class RolesController extends BaseController
+class SubcategoriesController extends BaseController
 {
     public function index(): string
     {

@@ -9,8 +9,42 @@ use App\Models\SubcategoriasModel;
 
 class UsersInfoModel extends Model
 {
-    protected $table = 'categorias';
-    protected $allowedFields = ['titulo'];
+    protected $table = 'users_info';
+    protected $primaryKey = 'id';
+
+    protected $useAutoIncrement = true;
+
+    protected $returnType     = 'array';
+    protected $useSoftDeletes = true;
+
+    protected $allowedFields = ['bio', 'status_message', 'highlight_topic'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    // Dates
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+
+    // Validation
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+    protected $skipValidation       = false;
+    protected $cleanValidationRules = true;
+
+    // Callbacks
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = [];
+    protected $afterInsert    = [];
+    protected $beforeUpdate   = [];
+    protected $afterUpdate    = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = [];
+    protected $beforeDelete   = [];
+    protected $afterDelete    = [];
 
 
     // Cargar el modelo de subcategorías en el constructor
@@ -20,7 +54,7 @@ class UsersInfoModel extends Model
     {
         parent::__construct();
         // Instanciamos el modelo de subcategorías
-        $this->subcategoriasModel = new SubcategoriasModel();
+        //$this->subcategoriasModel = new SubcategoriasModel();
     }
 
 

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class CategoriasController extends BaseController
+class CategoriesController extends BaseController
 {
     public function index(): string
     {

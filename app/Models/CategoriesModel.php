@@ -12,8 +12,39 @@ class CategoriesModel extends Model
     protected $table = 'categories';
     protected $primaryKey = 'id';
 
+    protected $useAutoIncrement = true;
+
+    protected $returnType     = 'array';
+    protected $useSoftDeletes = true;
+
     protected $allowedFields = ['title'];
 
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    // Dates
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+
+    // Validation
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+    protected $skipValidation       = false;
+    protected $cleanValidationRules = true;
+
+    // Callbacks
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = [];
+    protected $afterInsert    = [];
+    protected $beforeUpdate   = [];
+    protected $afterUpdate    = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = [];
+    protected $beforeDelete   = [];
+    protected $afterDelete    = [];
 
     // Cargar el modelo de subcategorías en el constructor
     protected $subcategoriesModel;
@@ -26,44 +57,45 @@ class CategoriesModel extends Model
     }
 
     /**
+     * Obtiene categorías.
+     * Puede realizar dos acciones:
+     *  - Búsqueda por ID si se pasa como parámetro
+     *  - Búsqueda de todas las categorías si no se pasa un ID como parámetro
      * 
-     * With this code, you can perform two different queries.
-     * You can get all news records, or get a news item by its id.
-     * You might have noticed that the $slug variable wasn’t escaped before running the query;
-     * Query Builder does this for you.
+     * @param int|null $category_id La ID de la categoría a obtener. Si es null, se obtendrán todas.
      * 
-     * @param false|int $id
-     *
-     * @return array|null
+     * @return array|null Devuelve un array de categorías si se encuentran o null si no se encuentran.
      */
-    public function getCategories(?int $category_id = null) : ?array
+    public function getCategories(?int $category_id = null): ?array
     {
         if ($category_id === null) {
             return $this->findAll();
         }
+
         return $this->find($category_id);
     }
 
-
     /**
-     * Obtener todas las categorías con sus subcategorías
+     * Obtiene categorías y sus subcategorías.
+     * Puede realizar dos acciones:
+     *  - Búsqueda por ID si se pasa como parámetro
+     *  - Búsqueda de todas las categorías si no se pasa un ID como parámetro
      * 
-     * @return array
+     * @param int|null $category_id La ID de la categoría a obtener. Si es null, se obtendrán todas.
+     * 
+     * @return array|null Devuelve un array de categorías junto con sus subcategorías si se encuentran o null si no se encuentran.
      */
-    public function getCategoriesWithSubcategories($category_id = false)
+    public function getCategoriesWithSubcategories(?int $category_id = null): ?array
     {
-
-        if ($category_id === false) {
-
-            // Obtener todas las categorías
+        if ($category_id === null) {
             $categories = $this->findAll();
 
-            // Para cada categoría, obtener sus subcategorías
+            // Usamos &category para modificar y guardar los cambios en el elemento original del array
             foreach ($categories as &$category) {
-                // Obtener subcategorías asociadas a esta categoría
+
+                // Se obtienen las subcategorías asociadas a esta categoría
                 $category['subcategories'] = $this->subcategoriesModel->getSubcategoriesByCategory($category['id']);
             }
-
 
             return $categories;
         }
@@ -71,14 +103,8 @@ class CategoriesModel extends Model
         $category = $this->find($category_id);
         $category['subcategories'] = $this->subcategoriesModel->getSubcategoriesByCategory($category_id);
 
-
         return $category;
     }
-
-
-
-
-
 
     //                      _ 
     //                     | |
@@ -88,27 +114,45 @@ class CategoriesModel extends Model
     //  \___|_|   \__,_|\__,_|
 
     /**
+     * Guarda una categoría en la base de datos.
+     * 
+     * Gracias al método save(), puede realizar dos acciones en función del si se pasa o no el parámetro `$category_id`:
+     * - Si se pasa actúa como un UPDATE.
+     * - Si no se pasa actúa como un INSERT.
+     * 
+     * @param string $title título de la categoría.
+     * @param int|null $category_id ID de la categoría a actualizar. Si es null, se inserta una nueva categoría.
+     * 
+     * @return void No devuelve nada.
+     */
+    public function saveCategory(string $title, ?int $category_id = null)
+    {
+        $category_fields = ['title' => $title];
+
+        if ($category_id !== null) {
+            $category_fields = ['id' => $category_id];
+            // Si hay category_id haría update, y sino hace insert
+        }
+        // Comprobar que se aplica
+        $this->save($category_fields);
+    }
+
+
+    
+    /**
      * @param false|string $slug
      *
      * @return array|null
      */
-    public function crearCategoria()
+    public function deleteCategory($category_id)
     {
-        /*         // Get the User Provider (UserModel by default)
-        $users = auth()->getProvider();
-
-        $user = new User([
-            'username' => 'foo-bar',
-            'email'    => '[email protected]',
-            'password' => 'secret plain text password',
-        ]);
-
-        $users->save($user);
-
-        // To get the complete user object with ID, we need to get from the database
-        $user = $users->findById($users->getInsertID());
-
-        // Add to default group
-        $users->addToDefaultGroup($user); */
+        //If the model’s $useSoftDeletes value is true, this will update the row to set deleted_at to the current date and time. You can force a permanent delete by setting the second parameter as true.
+        //An array of primary keys can be passed in as the first parameter to delete multiple records at once:
+        if ($category_id !== null) {
+            $category_fields = ['id' => $category_id];
+            // Si hay category_id haría update, y sino hace insert
+        }
+        // Comprobar que se aplica
+        $this->delete($category_id);
     }
 }

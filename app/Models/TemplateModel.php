@@ -12,6 +12,8 @@ class CategoriasModel extends Model
 {
 
     // See: https://www.codeigniter.com/user_guide/models/model.html
+// https://www.codeigniter.com/user_guide/database/query_builder.html
+// https://www.codeigniter.com/user_guide/libraries/validation.html#saving-validation-rules-to-config-file
 
     //The first two are used by all of the CRUD methods to determine what table to use and how we can find the required records:
 
@@ -125,9 +127,47 @@ onlyDeleted()
 
 SAVING DATA:
 
+insert()
+update()
+save() // wrapper around the insert() and update() methods
+Ver https://www.codeigniter.com/user_guide/models/model.html#saving-dates
+
+Se pueden insertar o editar varias filas a la vez
+
+
+DELETING DATA:
+
+delete() If the model’s $useSoftDeletes value is true, this will update the row to set deleted_at to the current date and time. You can force a permanent delete by setting the second parameter as true.
+purgeDeleted()
+
+Se pueden eliminar varias filas a la vez
+
+VALIDATING DATA:
+Setting Validation Rules https://www.codeigniter.com/user_guide/models/model.html#setting-validation-rules
+    protected $validationRules = [
+        'username'     => 'required|max_length[30]|alpha_numeric_space|min_length[3]',
+        'email'        => 'required|max_length[254]|valid_email|is_unique[users.email]',
+        'password'     => 'required|max_length[255]|min_length[8]',
+        'pass_confirm' => 'required_with[password]|max_length[255]|matches[password]',
+    ];
+    protected $validationMessages = [
+        'email' => [
+            'is_unique' => 'Sorry. That email has already been taken. Please choose another.',
+        ],
+    ];
+
+// Configurar en Validation Config File
+        protected $validationRules = 'users';
+
+
+        Getting Validation Errors
+        if ($model->save($data) === false) {
+    return view('updateUser', ['errors' => $model->errors()]);
+}
 
 
 
+        echo $this->countAll(); exit();
 
 */
 
