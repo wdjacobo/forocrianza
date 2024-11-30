@@ -5,78 +5,88 @@ declare(strict_types=1);
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Models\SubcategoriasModel;
 
 
-class CategoriasModel extends Model
+class SubcategoriesModel extends Model
 {
-    protected $table = 'categorias';
-    protected $allowedFields = ['titulo'];
+    protected $table = 'subcategories';
+    protected $primaryKey = 'id';
+
+    protected $allowedFields = ['title', 'description', 'category_id'];
 
 
-    // Cargar el modelo de subcategorías en el constructor
-    protected $subcategoriasModel;
+    // Cargar el modelo de temas en el constructor
+    protected $topicsModel;
 
     public function __construct()
     {
         parent::__construct();
-        // Instanciamos el modelo de subcategorías
-        $this->subcategoriasModel = model('SubcategoriasModel') ();
+        // Instanciamos el modelo de temas
+        $this->topicsModel = model('TopicsModel');
     }
+
 
     /**
      * 
      * With this code, you can perform two different queries.
-     * You can get all news records, or get a news item by its id.
+     * You can get all news records, or get a news item by its slug.
      * You might have noticed that the $slug variable wasn’t escaped before running the query;
      * Query Builder does this for you.
      * 
-     * @param false|int $id
+     * @param false|string $titulo
      *
      * @return array|null
      */
-    public function getCategorias($id = false)
+    public function getSubcategories($subcategory_id = false)
 
     {
-        if ($id === false) {
+        if ($subcategory_id === false) {
             return $this->findAll();
         }
-        return $this->where(['id' => $id])->first(); // Creo que first aqui sobra.
+        return $this->find($subcategory_id);
     }
 
-    //Esto podría adaptarlo para que busque en todas las categorias o solo la de la id proporcionada, como en getCategorias.
+    /**
+     * Obtener subcategorías por id_categoria
+     * 
+     * @param int $id_categoria
+     * @return array
+     */
+    public function getSubcategoriesByCategory($category_id)
+    {
+        return $this->where('category_id', $category_id)->findAll();
+    }
+
+
     /**
      * Obtener todas las categorías con sus subcategorías
      * 
      * @return array
      */
-    public function getCategoriasWithSubcategorias($id = false)
+    public function getSubcategoriesWithTopics($subcategory_id = false)
     {
-
-        if ($id === false) {
+        if ($subcategory_id === false) {
 
             // Obtener todas las categorías
-            $categorias = $this->findAll();
+            $subcategories = $this->findAll();
 
             // Para cada categoría, obtener sus subcategorías
-            foreach ($categorias as &$categoria) {
+            foreach ($subcategories as &$subcategory) {
                 // Obtener subcategorías asociadas a esta categoría
-                $categoria['subcategorias'] = $this->subcategoriasModel->getSubcategoriasByCategoria($categoria['id']);
+                $subcategory['topics'] = $this->topicsModel->getTopicsBySubcategory($subcategory['id']);
             }
 
 
-            return $categorias;
+            return $subcategories;
         }
 
-        $categoria = $this->where(['id' => $id])->first();
-        $categoria['subcategorias'] = $this->subcategoriasModel->getSubcategoriasByCategoria($categoria['id']);
+
+        $subcategory = $this->find($subcategory_id);
+        $subcategory['topics'] = $this->topicsModel->getTopicsBySubcategory($subcategory_id);
 
 
-        return $categoria;
+        return $subcategory;
     }
-
-
-
 
 
 
@@ -86,6 +96,8 @@ class CategoriasModel extends Model
     //  / __| '__| | | |/ _` |
     // | (__| |  | |_| | (_| |
     //  \___|_|   \__,_|\__,_|
+
+
 
     /**
      * @param false|string $slug

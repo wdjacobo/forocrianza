@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $titulo ?></title>
+    <title><?php if(isset($titulo)) echo $titulo ?></title>
+    <title><?php if(isset($title)) echo $title ?></title>
     <link rel="icon" href="<?=base_url()?>/favicon.ico" type="image/ico">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <style>

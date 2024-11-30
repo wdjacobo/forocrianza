@@ -10,11 +10,11 @@ use CodeIgniter\Router\RouteCollection;
 use App\Controllers\UsersController;
 use App\Controllers\MainController;
 use App\Controllers\DebugController;
-use App\Controllers\InicioController;
+use App\Controllers\IndexController;
 
 
 // Primera!
-$routes->get('/', [InicioController::class, 'inicio'], ['as' => 'inicio']);
+$routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
 //$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
 
 // prueba BD

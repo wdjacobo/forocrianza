@@ -74,18 +74,18 @@
 
         <div class="col-md-7 px-1">
 
-            <?php if ($lista_categorias !== []): ?>
-                <?php foreach ($lista_categorias as $categoria): ?>
+            <?php if ($categories_list !== []): ?>
+                <?php foreach ($categories_list as $category): ?>
                     <article class="card mb-4">
                         <div class="card-header">
-                            <h4><?= esc($categoria['titulo']) ?></h4>
+                            <h4><?= esc($category['title']) ?></h4>
                         </div>
                         <ul class="list-group">
-                            <?php foreach ($categoria['subcategorias'] as $subcategoria): ?>
+                            <?php foreach ($category['subcategories'] as $subcategory): ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <div class="ms-2 me-auto">
-                                        <h5><?= esc($subcategoria['titulo']) ?></h5>
-                                        <p style="color: gray"><?= esc($subcategoria['descripcion']) ?></p>
+                                        <h5><?= esc($subcategory['title']) ?></h5>
+                                        <p style="color: gray"><?= esc($subcategory['description']) ?></p>
                                     </div>
 
                                     <div>

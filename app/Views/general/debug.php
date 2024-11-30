@@ -27,20 +27,26 @@
     <?php else: ?>
         <p>Hola usuario invitado</p>
     <?php endif ?>
-    <?php if ($categoria_unica !== []): ?>
-        <?php foreach ($categoria_unica['subcategorias'] as $subcategorias): ?>
+    <?php if ($unic !== []): ?>
+        <?php var_dump($unic) ?>
+    <?php else: ?>
+        <h3>No hay categoria única</h3>
+    <?php endif ?>
+    <?php
+    if ($unic_category !== []): ?>
+        <?php foreach ($unic_category['subcategories'] as $subcategories): ?>
             <br>
-            <?php echo ($subcategorias['titulo']); ?>
+            <?php echo ($subcategories['title']); ?>
             <br>
             <br>
         <?php endforeach ?>
     <?php else: ?>
         <h3>No hay categoria única</h3>
     <?php endif ?>
-    <?php if ($lista_categorias !== []): exit();?>
-         <?php foreach ($lista_categorias as $categoria): ?>
+    <?php if ($categories_list !== []): exit(); ?>
+        <?php foreach ($categories_list as $category): ?>
             <br>
-            <?php echo ($categoria['subcategorias'][0]['titulo']); ?>
+            <?php echo ($category['subcategories'][0]['title']); ?>
             <br>
             <br>
         <?php endforeach ?>

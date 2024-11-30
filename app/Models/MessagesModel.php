@@ -6,11 +6,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-
-class MensajesModel extends Model
+class MessagesModel extends Model
 {
-    protected $table = 'categorias';
-    protected $allowedFields = ['contenido'];
+    protected $table = 'messages';
+    protected $primaryKey = 'id';
+
+    protected $allowedFields = ['content'];
 
 
     /**
@@ -24,38 +25,31 @@ class MensajesModel extends Model
      *
      * @return array|null
      */
-    public function getCategorias($id = false)
+    public function getMessages($message_id = false)
 
     {
-        if ($id === false) {
+        if ($message_id === false) {
             return $this->findAll();
         }
-        return $this->where(['id' => $id])->first();
+        return $this->find($message_id);
     }
 
 
-
-    //Esto podría adaptarlo para que busque en todas las categorias o solo la de la id proporcionada, como en getCategorias.
     /**
-     * Obtener todas las categorías con sus subcategorías
+     * Obtener subcategorías por id_categoria
      * 
+     * @param int $id_categoria
      * @return array
      */
-    public function getCategoriasConSubcategorias()
+    public function getMessagesByTopic(int $topic_id, ?int $limit = null): ?array
     {
-
-        // Obtener todas las categorías
-        $categorias = $this->findAll();
-
-        // Para cada categoría, obtener sus subcategorías
-        foreach ($categorias as &$categoria) {
-            // Obtener subcategorías asociadas a esta categoría
-            $categoria['subcategorias'] = $this->subcategoriasModel->getSubcategoriasByCategoriaId($categoria['id']);
+        if ($limit === null) {
+            return $this->where('topic_id', $topic_id)->findAll();
         }
 
-        return $categorias;
+        return $this->where('topic_id', $topic_id)->orderBy('created_at', 'DESC')
+            ->findAll($limit);
     }
-
 
     //                      _ 
     //                     | |
@@ -63,7 +57,6 @@ class MensajesModel extends Model
     //  / __| '__| | | |/ _` |
     // | (__| |  | |_| | (_| |
     //  \___|_|   \__,_|\__,_|
-
 
 
     /**

@@ -1,27 +1,29 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Models\MensajesModel;
 
 
-class TemasModel extends Model
+class TopicsModel extends Model
 {
-    protected $table = 'categorias';
+    protected $table = 'topics';
+    protected $primaryKey = 'id';
+
     // Solo admin y mod pueden modificar el id_subcategoria una vez creada el tema
-    protected $allowedFields = ['titulo', 'id_subcategoria'];
+    protected $allowedFields = ['title', 'subcategory_id'];
 
 
     // Cargar el modelo de mensajes en el constructor
-    protected $smensajesModel;
+    protected $messagesModel;
 
     public function __construct()
     {
         parent::__construct();
         // Instanciamos el modelo de mensajes
-        $this->smensajesModel = new MensajesModel();
+        $this->messagesModel = model('MessagessModel');
     }
 
 
@@ -36,13 +38,13 @@ class TemasModel extends Model
      *
      * @return array|null
      */
-    public function getTemas($id = false)
+    public function getTopics($topic_id = false)
 
     {
-        if ($id === false) {
+        if ($topic_id === false) {
             return $this->findAll();
         }
-        return $this->where(['id' => $id])->first();
+        return $this->find($topic_id);
     }
 
     /**
@@ -51,46 +53,55 @@ class TemasModel extends Model
      * @param int $id_categoria
      * @return array
      */
-    public function getTemasBySubcategoria($id_subcategoria)
+    public function getTopicsBySubcategory($subcategory_id)
     {
-        return $this->where('id_categoria', $id_subcategoria)->findAll();
+        return $this->where('subcategory_id', $subcategory_id)->findAll();
     }
 
-    //Esto podría adaptarlo para que busque en todas las categorias o solo la de la id proporcionada, como en getCategorias.
     /**
      * Obtener todas las categorías con sus subcategorías
      * 
      * @return array
      */
-    public function getTemasConMensajes()
+    public function getTopicsWithMessages($topic_id = false)
     {
+        if ($topic_id === false) {
 
-        // Obtener todas las categorías
-        $categorias = $this->findAll();
+            // Obtener todas las categorías
+            $topics = $this->findAll();
 
-        // Para cada categoría, obtener sus subcategorías
-        foreach ($categorias as &$categoria) {
-            // Obtener subcategorías asociadas a esta categoría
-            $categoria['subcategorias'] = $this->subcategoriasModel->getSubcategoriasByCategoriaId($categoria['id']);
+            // Para cada categoría, obtener sus subcategorías
+            foreach ($topics as &$topic) {
+                // Obtener subcategorías asociadas a esta categoría
+                $topic['messages'] = $this->messagesModel->getMessagesbyTopic($topic['id']);
+            }
+
+
+            return $topics;
         }
 
-        return $categorias;
+
+        $topic = $this->find($topic_id);
+        $topic['messages'] = $this->messagessModel->getTopicsBySubcategoryId($topic_id);
+
+
+        return $topic;
     }
 
 
     // Asegurarse que tienen el campo created_at, el código sería así de sencillo
-    public function getUltimosTemas($limite = 5)
-{
-    return $this->orderBy('created_at', 'DESC')
-                ->findAll($limite);
-}
+    public function getLastTopics($limit = 5)
+    {
+        return $this->orderBy('created_at', 'DESC')
+            ->findAll($limit);
+    }
 
-//                      _ 
-//                     | |
-//   ___ _ __ _   _  __| |
-//  / __| '__| | | |/ _` |
-// | (__| |  | |_| | (_| |
-//  \___|_|   \__,_|\__,_|
+    //                      _ 
+    //                     | |
+    //   ___ _ __ _   _  __| |
+    //  / __| '__| | | |/ _` |
+    // | (__| |  | |_| | (_| |
+    //  \___|_|   \__,_|\__,_|
 
 
     /**
