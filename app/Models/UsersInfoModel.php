@@ -1,60 +1,28 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Models\TemasModel;
+use App\Models\SubcategoriasModel;
 
 
-class SubcategoriasModel extends Model
+class UsersInfoModel extends Model
 {
-    protected $table = 'subcategorias';
-    protected $allowedFields = ['titulo', 'descripcion', 'id_categoria'];
+    protected $table = 'categorias';
+    protected $allowedFields = ['titulo'];
 
 
-    // Cargar el modelo de temas en el constructor
-    protected $temasModel;
+    // Cargar el modelo de subcategorías en el constructor
+    protected $subcategoriasModel;
 
     public function __construct()
     {
         parent::__construct();
-        // Instanciamos el modelo de temas
-        $this->temasModel = new TemasModel();
+        // Instanciamos el modelo de subcategorías
+        $this->subcategoriasModel = new SubcategoriasModel();
     }
 
-
-    /**
-     * 
-     * With this code, you can perform two different queries.
-     * You can get all news records, or get a news item by its slug.
-     * You might have noticed that the $slug variable wasn’t escaped before running the query;
-     * Query Builder does this for you.
-     * 
-     * @param false|string $titulo
-     *
-     * @return array|null
-     */
-    public function getSubcategorias($id = false)
-
-    {
-        if ($id === false) {
-            return $this->findAll();
-        }
-        return $this->where(['id' => $id])->first();
-    }
-
-    /**
-     * Obtener subcategorías por id_categoria
-     * 
-     * @param int $id_categoria
-     * @return array
-     */
-    public function getSubcategoriasByCategoria($id_categoria)
-    {
-        return $this->where('id_categoria', $id_categoria)->findAll();
-    }
 
     //Esto podría adaptarlo para que busque en todas las categorias o solo la de la id proporcionada, como en getCategorias.
     /**
@@ -62,7 +30,7 @@ class SubcategoriasModel extends Model
      * 
      * @return array
      */
-    public function getSubcategoriasWithTemas()
+    public function getCategoriasConSubcategorias()
     {
 
         // Obtener todas las categorías
@@ -78,14 +46,35 @@ class SubcategoriasModel extends Model
     }
 
 
+    /**
+     * 
+     * With this code, you can perform two different queries.
+     * You can get all news records, or get a news item by its slug.
+     * You might have noticed that the $slug variable wasn’t escaped before running the query;
+     * Query Builder does this for you.
+     * 
+     * @param false|string $titulo
+     *
+     * @return array|null
+     */
+    public function getCategorias($id = false)
 
-    //                      _ 
-    //                     | |
-    //   ___ _ __ _   _  __| |
-    //  / __| '__| | | |/ _` |
-    // | (__| |  | |_| | (_| |
-    //  \___|_|   \__,_|\__,_|
+    {
+        if ($id === false) {
+            return $this->findAll();
+        }
+        return $this->where(['id' => $id])->first();
+    }
 
+
+
+
+//                      _ 
+//                     | |
+//   ___ _ __ _   _  __| |
+//  / __| '__| | | |/ _` |
+// | (__| |  | |_| | (_| |
+//  \___|_|   \__,_|\__,_|
 
 
     /**

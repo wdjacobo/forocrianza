@@ -17,7 +17,7 @@ class InicioController extends BaseController
 
         $data = [
             'titulo'     => 'Inicio',
-            'lista_categorias' => $categoriasModel->getCategoriasConSubcategorias()
+            'lista_categorias' => $categoriasModel->getCategoriasWithSubcategorias()
         ];
 
         return view('templates/headerTemplate', $data)

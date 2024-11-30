@@ -9,6 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 //CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule. Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
 use App\Controllers\UsersController;
 use App\Controllers\MainController;
+use App\Controllers\DebugController;
 use App\Controllers\InicioController;
 
 
@@ -29,7 +30,7 @@ $routes->get('perfil', [MainController::class, 'perfil'], ['as' => 'perfil']);
 $routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
 $routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'adminazo', 'filter' => 'session']); # Añadirmos el filtro de sesión de este modo para requerir que el usuario deba estar logueado para acceder a la ruta.
 $routes->get('quill', [MainController::class, 'quill'], ['as' => 'quill']);
-$routes->get('debug', [MainController::class, 'debug'], ['as' => 'debug']);
+$routes->get('debug', [DebugController::class, 'debug'], ['as' => 'debug']);
 $routes->get('redirect', [MainController::class, 'redirect'], ['as' => 'redirect']);
 
 #$routes->get('/iniciar-sesion', 'AuthController::login', ['as' => 'login']);

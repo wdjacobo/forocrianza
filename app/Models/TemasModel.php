@@ -1,27 +1,27 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Models\TemasModel;
+use App\Models\MensajesModel;
 
 
-class SubcategoriasModel extends Model
+class TemasModel extends Model
 {
-    protected $table = 'subcategorias';
-    protected $allowedFields = ['titulo', 'descripcion', 'id_categoria'];
+    protected $table = 'categorias';
+    // Solo admin y mod pueden modificar el id_subcategoria una vez creada el tema
+    protected $allowedFields = ['titulo', 'id_subcategoria'];
 
 
-    // Cargar el modelo de temas en el constructor
-    protected $temasModel;
+    // Cargar el modelo de mensajes en el constructor
+    protected $smensajesModel;
 
     public function __construct()
     {
         parent::__construct();
-        // Instanciamos el modelo de temas
-        $this->temasModel = new TemasModel();
+        // Instanciamos el modelo de mensajes
+        $this->smensajesModel = new MensajesModel();
     }
 
 
@@ -36,7 +36,7 @@ class SubcategoriasModel extends Model
      *
      * @return array|null
      */
-    public function getSubcategorias($id = false)
+    public function getTemas($id = false)
 
     {
         if ($id === false) {
@@ -51,9 +51,9 @@ class SubcategoriasModel extends Model
      * @param int $id_categoria
      * @return array
      */
-    public function getSubcategoriasByCategoria($id_categoria)
+    public function getTemasBySubcategoria($id_subcategoria)
     {
-        return $this->where('id_categoria', $id_categoria)->findAll();
+        return $this->where('id_categoria', $id_subcategoria)->findAll();
     }
 
     //Esto podría adaptarlo para que busque en todas las categorias o solo la de la id proporcionada, como en getCategorias.
@@ -62,7 +62,7 @@ class SubcategoriasModel extends Model
      * 
      * @return array
      */
-    public function getSubcategoriasWithTemas()
+    public function getTemasConMensajes()
     {
 
         // Obtener todas las categorías
@@ -78,14 +78,19 @@ class SubcategoriasModel extends Model
     }
 
 
+    // Asegurarse que tienen el campo created_at, el código sería así de sencillo
+    public function getUltimosTemas($limite = 5)
+{
+    return $this->orderBy('created_at', 'DESC')
+                ->findAll($limite);
+}
 
-    //                      _ 
-    //                     | |
-    //   ___ _ __ _   _  __| |
-    //  / __| '__| | | |/ _` |
-    // | (__| |  | |_| | (_| |
-    //  \___|_|   \__,_|\__,_|
-
+//                      _ 
+//                     | |
+//   ___ _ __ _   _  __| |
+//  / __| '__| | | |/ _` |
+// | (__| |  | |_| | (_| |
+//  \___|_|   \__,_|\__,_|
 
 
     /**
