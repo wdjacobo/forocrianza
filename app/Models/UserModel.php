@@ -8,6 +8,8 @@ use CodeIgniter\Shield\Models\UserModel as ShieldUserModel;
 
 class UserModel extends ShieldUserModel
 {
+    // Creo que debería cambiar o UserProvider nalgures, na configuración
+
     protected function initialize(): void
     {
         parent::initialize();

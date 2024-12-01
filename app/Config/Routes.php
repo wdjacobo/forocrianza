@@ -6,12 +6,28 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+// Ver: https://codeigniter.com/user_guide/incoming/routing.html
+
+// Display routes : php spark routes
 //CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule. Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
 use App\Controllers\UsersController;
 use App\Controllers\MainController;
 use App\Controllers\DebugController;
 use App\Controllers\IndexController;
 
+//ejemplo de varias rutas
+//$routes->match(['GET', 'PUT'], 'products', 'Product::feature');
+//$routes->get('product/(:num)/(:num)', 'Product::index/$2/$1');
+//$routes->addPlaceholder('uuid', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+//$routes->get('users/(:uuid)', 'Users::show/$1');
+/* $routes->group('admin', ['filter' => 'myfilter1:config'], static function ($routes) {
+    $routes->get('/', 'Admin\Admin::index');
+
+    $routes->group('users', ['filter' => 'myfilter2:region'], static function ($routes) {
+        $routes->get('list', 'Admin\Users::list');
+    });
+}); */
+// 404 override: https://codeigniter.com/user_guide/incoming/routing.html#override
 
 // Primera!
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
@@ -20,6 +36,10 @@ $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
 // prueba BD
 //$routes->get('usuarios', [UsersController::class, 'index']);
 //$routes->get('usuarios/<:segment>', [UsersController::class, 'mostrar']);
+// Redirect to a named route
+//$routes->addRedirect('users/about', 'profile');
+// Redirect to a URI
+//$routes->addRedirect('users/about', 'users/profile');
 
 $routes->get('registro', [MainController::class, 'registro'], ['as' => 'registro']);
 $routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']);

@@ -169,6 +169,11 @@ Setting Validation Rules https://www.codeigniter.com/user_guide/models/model.htm
 
         echo $this->countAll(); exit();
 
+
+        PAGINATION: https://codeigniter.com/user_guide/libraries/pagination.html#paginating-with-models
+
+        In most cases, you will be using the Pager library in order to paginate results that you retrieve from the database. When using the Model class, you can use its built-in paginate() method to automatically retrieve the current batch of results, as well as set up the Pager library so it’s ready to use in your controllers. It even reads the current page it should display from the current URL via a page=X query variable.
+
 */
 
 }
