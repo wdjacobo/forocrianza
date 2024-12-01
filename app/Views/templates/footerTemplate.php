@@ -4,13 +4,13 @@
             <div class="col-md-6">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Aviso Legal</a>
+                        <a href="aviso-legal" class="nav-link">Aviso Legal</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Política de cookies</a>
+                        <a href="politica-de-cookies" class="nav-link">Política de cookies</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Política de privacidad</a>
+                        <a href="politica-de-privacidad" class="nav-link">Política de privacidad</a>
                     </li>
                 </ul>
             </div>
@@ -45,6 +45,7 @@ Be sure to include popper.min.js before Bootstrap’s JavaScript or use bootstra
 
 -->
 
+<!-- JS personalizado -->
 <script src="<?= base_url() ?>/js/script.js"></script>
 
 </body>

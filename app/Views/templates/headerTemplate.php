@@ -44,19 +44,19 @@
 
         </div>
         <div class="container p-0">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-center py-3 mb-4 border-bottom">
+             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-center py-3 mb-4 border-bottom">
                 <nav>
                     <form class="me-3" role="search">
                         <input type="search" class="form-control" placeholder="Buscar temas..." aria-label="Search">
                     </form>
                 </nav>
                 <div>
-                <a
-                            name=""
-                            id=""
-                            class="btn btn-primary"
-                            href="#"
-                            role="button">Crear tema</a>
+                    <a
+                        name=""
+                        id=""
+                        class="btn btn-primary"
+                        href="#"
+                        role="button">Crear tema</a>
                 </div>
                 <div class="d-flex align-items-center ms-auto">
 

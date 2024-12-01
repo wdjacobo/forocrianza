@@ -4,8 +4,21 @@ body {
     font-family: "Hind", sans-serif;
 }
 
+h4.card-header-category-title{
+    color: green;
+}
+
+a{
+    color: red;
+}
+
+a:hover{
+    color: green;
+}
+
+/* Para debug */
 .borde-rojo {
-    border: 2px solid red;
+    border: 2px solid violet;
 }
 .borde-verde {
     border: 2px solid green;

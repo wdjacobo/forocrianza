@@ -14,6 +14,7 @@ use App\Controllers\UsersController;
 use App\Controllers\MainController;
 use App\Controllers\DebugController;
 use App\Controllers\IndexController;
+use App\Controllers\LegalController;
 
 //ejemplo de varias rutas
 //$routes->match(['GET', 'PUT'], 'products', 'Product::feature');
@@ -52,6 +53,9 @@ $routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'admi
 $routes->get('quill', [MainController::class, 'quill'], ['as' => 'quill']);
 $routes->get('debug', [DebugController::class, 'debug'], ['as' => 'debug']);
 $routes->get('redirect', [MainController::class, 'redirect'], ['as' => 'redirect']);
+$routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'aviso-legal']);
+$routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'politica-de-cookies']);
+$routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'politica-de-privacidad']);
 
 $routes->get('(:segment)', [MainController::class, 'subcategoria'], ['as' => 'subcategoria']);
 $routes->get('(:segment)/(:num)', [MainController::class, 'tema'], ['as' => 'tema_personalizado']);
