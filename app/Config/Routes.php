@@ -31,7 +31,7 @@ use App\Controllers\IndexController;
 
 // Primera!
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
-$routes->get('/prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
+$routes->get('prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
 //$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
 
 // prueba BD
@@ -45,7 +45,6 @@ $routes->get('/prueba', [IndexController::class, 'index_backup'], ['as' => 'prue
 $routes->get('registro', [MainController::class, 'registro'], ['as' => 'registro']);
 $routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']);
 $routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
-$routes->get('subcategoria', [MainController::class, 'subcategoria'], ['as' => 'subcategoria']);
 $routes->get('tema', [MainController::class, 'tema'], ['as' => 'tema']);
 $routes->get('perfil', [MainController::class, 'perfil'], ['as' => 'perfil']);
 $routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
@@ -53,6 +52,9 @@ $routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'admi
 $routes->get('quill', [MainController::class, 'quill'], ['as' => 'quill']);
 $routes->get('debug', [DebugController::class, 'debug'], ['as' => 'debug']);
 $routes->get('redirect', [MainController::class, 'redirect'], ['as' => 'redirect']);
+
+$routes->get('(:segment)', [MainController::class, 'subcategoria'], ['as' => 'subcategoria']);
+$routes->get('(:segment)/(:num)', [MainController::class, 'tema'], ['as' => 'tema_personalizado']);
 
 #$routes->get('/iniciar-sesion', 'AuthController::login', ['as' => 'login']);
 #$routes->get('/registro', 'AuthController::register', ['as' => 'register']);
