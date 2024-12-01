@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: "Hind", sans-serif;
+}
+
+.borde-rojo {
+    border: 2px solid red;
+}
+.borde-verde {
+    border: 2px solid green;
+}
+.borde-azul {
+    border: 2px solid blue;
+}

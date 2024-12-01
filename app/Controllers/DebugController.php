@@ -15,9 +15,9 @@ class DebugController extends BaseController
     public function debug()
     {
 
-        return $this->request;
-        return $this->response;
-        return $this->logger;
+        // return print_r($this->request);
+        // return print_r($this->response);
+        // return print_r($this->logger);
 
         // Ver ejemplo de validate data en la función product
         //return $this->validateData($data, $rules); //https://codeigniter.com/user_guide/incoming/controllers.html#validating-data

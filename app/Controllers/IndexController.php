@@ -23,4 +23,19 @@ class IndexController extends BaseController
             . view('general/index')
             . view('templates/footerTemplate');
     }
+
+    public function index_backup()
+    {
+
+        $categoriesModel = model('CategoriesModel');
+
+        $data = [
+            'title'     => 'Inicio',
+            'categories_list' => $categoriesModel->getCategoriesWithSubcategories()
+        ];
+
+        return view('templates/headerTemplate_backup', $data)
+            . view('general/index_backup')
+            . view('templates/footerTemplate_backup');
+    }
 }

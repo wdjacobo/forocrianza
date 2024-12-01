@@ -31,6 +31,7 @@ use App\Controllers\IndexController;
 
 // Primera!
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
+$routes->get('/prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
 //$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
 
 // prueba BD
