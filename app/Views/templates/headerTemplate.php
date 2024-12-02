@@ -14,23 +14,30 @@
             }
             ?></title>
     <link rel="icon" href="<?= base_url() ?>/favicon.ico" type="image/ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- En caso de querer añadir fallback -->
-    <!--     <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
-    <!--     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" onerror="fallbackBootstrapcss()">    
-<script>
-        function fallbackBootstrapcss() {
-            console.error('CDN de Bootstrap no cargó. Usando recurso local.');
-            // Cargar el archivo CSS local
-            const fallbackLink = document.createElement('link');
+
+    <script>
+        /**
+         * Loads local Bootstrap CSS if CDN load fails.
+         * Creates a new link for local Bootstrap CSS and moves custom stylesheets to the end of head element to allow Bootstrap styles overriding.
+         */
+        function loadLocalBootstrapCss() {
+            console.warn("No se ha podido cargar el CSS de Bootstrap desde la CDN, se cargará el archivo local.");
+            let fallbackLink = document.createElement('link');
             fallbackLink.rel = 'stylesheet';
-            fallbackLink.href = '/css/bootstrap.min.css'; Habería que meter o base_url
+            fallbackLink.href = '<?= base_url() ?>css/bootstrap.min.css';
             document.head.appendChild(fallbackLink);
+
+            let customStyles = document.getElementById('customStyles');
+            document.head.appendChild(customStyles);
+
         }
-    </script> -->
+    </script>
+
+    <!-- CSS de Bootstrap con fallback -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
+
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="<?= base_url() ?>/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>css/style.css" id="customStyles">
 </head>
 
 <body>
@@ -44,7 +51,7 @@
 
         </div>
         <div class="container p-0">
-             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-center py-3 mb-4 border-bottom">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-center py-3 mb-4 border-bottom">
                 <nav>
                     <form class="me-3" role="search">
                         <input type="search" class="form-control" placeholder="Buscar temas..." aria-label="Search">

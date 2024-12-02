@@ -3,7 +3,7 @@
     <div class="row g-5">
 
         <aside class="col-md-3 p-0 pe-3">
-            <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary">
+            <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary borde-gris rounded">
 
                 <div class="list-group list-group-flush border-bottom scrollarea rounded">
                     <div class="list-group-item py-3 lh-sm">
@@ -94,7 +94,7 @@
             <?php if ($categories_list !== []): ?>
                 <?php foreach ($categories_list as $category): ?>
                     <article class="card mb-4">
-                        <div class="card-header">
+                        <div class="card-header fondo-color">
                             <h4 class="card-header-category-title borde-rojo"><?= esc($category['title']) ?></h4>
                         </div>
                         <ul class="list-group">

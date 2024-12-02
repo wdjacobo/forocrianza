@@ -2,10 +2,11 @@
 
 body {
     font-family: "Hind", sans-serif;
+    background-color: #FFFFFF;
 }
 
 h4.card-header-category-title{
-    color: green;
+    font-weight: 600;
 }
 
 a{
@@ -18,7 +19,7 @@ a:hover{
 
 /* Para debug */
 .borde-rojo {
-    border: 2px solid violet;
+/*     border: 2px solid violet; */
 }
 .borde-verde {
     border: 2px solid green;
@@ -26,3 +27,12 @@ a:hover{
 .borde-azul {
     border: 2px solid blue;
 }
+
+.borde-gris {
+    border: 2px solid #F8F8F8;
+}
+
+.fondo-color{
+    background-color: #699CC9;
+}
+
