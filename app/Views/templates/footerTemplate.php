@@ -38,7 +38,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" onerror="loadLocalBootstrapJs()"></script>
 
 <!-- JS personalizado -->
-<script src="<?= base_url() ?>/js/script.js" id="customScript"></script>
+<script src="<?= base_url() ?>js/script.js" id="customScript"></script>
 
 </body>
 

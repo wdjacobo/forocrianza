@@ -140,7 +140,7 @@ class CategoriesModel extends Model
      * 
      * @return array|null Devuelve un array de categorías junto con sus subcategorías si se encuentran o null si no se encuentran.
      */
-    public function oldgetCategoriesWithSubcategories(?int $category_id = null): ?array
+    public function _getCategoriesWithSubcategories(?int $category_id = null): ?array
     {
 
         if ($category_id === null) {

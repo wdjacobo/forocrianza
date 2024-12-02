@@ -16,11 +16,14 @@ class IndexController extends BaseController
 
         $data = [
             'title'     => 'Inicio',
-            'categories_list' => $categoriesModel->getCategoriesWithSubcategories()
+            'categories_list' => $categoriesModel->getCategoriesWithSubcategories(),
+            'ad_number' => rand(1, 4)
         ];
 
         return view('templates/headerTemplate', $data)
+            . view('templates/asideTemplate')
             . view('general/index')
+            . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
     }
 

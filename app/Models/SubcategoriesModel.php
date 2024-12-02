@@ -89,13 +89,47 @@ class SubcategoriesModel extends Model
         return $this->where('category_id', $category_id)->findAll();
     }
 
+    public function getTitle($slug): string
+    {
+        // Realizamos la consulta para obtener las categorías y subcategorías
+        $resultArray = $this->select('subcategories.title')
+            ->where('subcategories.slug', $slug)
+            ->get()
+            ->getResultArray();
+
+        return $resultArray[0]['title'];
+    }
+
+
+    /**
+     * Obtiene categorías y sus subcategorías.
+     * Puede realizar dos acciones:
+     *  - Búsqueda por ID si se pasa como parámetro
+     *  - Búsqueda de todas las categorías si no se pasa un ID como parámetro
+     * 
+     * @param int|null $category_id La ID de la categoría a obtener. Si es null, se obtendrán todas.
+     * 
+     * @return array|null Devuelve un array de categorías junto con sus subcategorías si se encuentran o null si no se encuentran.
+     */
+    public function getSubcategoryTopics($slug = "embarazo"): array
+    {
+        // Realizamos la consulta para obtener las categorías y subcategorías
+        $resultArray = $this->select('topics.title, topics.author_id, users.username AS author')
+            ->join('topics', 'subcategories.id = topics.subcategory_id', 'left')->orderBy('topics.id')
+            ->join('users', 'topics.author_id = users.id', 'left')  // JOIN con users usando author_id
+            ->where('subcategories.slug', $slug)
+            ->get()
+            ->getResultArray();
+
+        return $resultArray;
+    }
 
     /**
      * Obtener todas las categorías con sus subcategorías
      * 
      * @return array
      */
-    public function getSubcategoriesWithTopics($subcategory_id = false)
+    public function _getSubcategoriesWithTopics($subcategory_id = false)
     {
         if ($subcategory_id === false) {
 
@@ -119,6 +153,9 @@ class SubcategoriesModel extends Model
 
         return $subcategory;
     }
+
+
+
 
 
 

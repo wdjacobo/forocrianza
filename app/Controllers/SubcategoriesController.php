@@ -14,11 +14,19 @@ class SubcategoriesController extends BaseController
         $subcategoriesModel = model('SubcategoriesModel');
         //$subcategoriesModel->getSubcategory($slug)
 
+        $subcategoriesModel->getSubcategoryTopics();
+
+        $subcategory = [
+            'topics' => [],
+        ];
+
         $data = [
             'title'     => $slug, //$subcategoriesModel->getTitle($slug),
             'topics_list' => [],
             'slug' => $slug,
-            'news' => null
+            'news' => null,
+            'subcategory_title' => $subcategoriesModel->getTitle($slug),
+            'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics(),
         ];
 
         // Sería si no existe categoría asociada a ese slug
