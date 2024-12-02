@@ -75,6 +75,8 @@ class CategoriesModel extends Model
         return $this->find($category_id);
     }
 
+
+
     /**
      * Obtiene categorías y sus subcategorías.
      * Puede realizar dos acciones:
@@ -85,8 +87,62 @@ class CategoriesModel extends Model
      * 
      * @return array|null Devuelve un array de categorías junto con sus subcategorías si se encuentran o null si no se encuentran.
      */
-    public function getCategoriesWithSubcategories(?int $category_id = null): ?array
+    public function getCategoriesWithSubcategories(): array
     {
+        // Realizamos la consulta para obtener las categorías y subcategorías
+        $resultArray = $this->select('categories.id, categories.title AS category_title, subcategories.title AS subcategory_title, subcategories.description AS subcategory_description')
+                            ->join('subcategories', 'categories.id = subcategories.category_id', 'left')->orderBy('categories.id, subcategories.id')
+                            ->get()
+                            ->getResultArray();
+    
+        // Formateamos los resultados para anidar las subcategorías en las categorías
+
+        return $this->formatCategoriesWithSubcategories($resultArray);
+    }
+
+    protected function formatCategoriesWithSubcategories(array $data): array
+    {
+        $categories = [];
+
+        foreach ($data as $row) {
+            $categoryId = $row['id'];  // Usamos 'id' directamente sin alias
+
+            // Inicializamos la categoría si no existe en el array
+            if (!isset($categories[$categoryId])) {
+                $categories[$categoryId] = [
+                    'id' => $categoryId,
+                    'title' => $row['category_title'],
+                    'subcategories' => []  // Iniciamos un array para las subcategorías
+                ];
+            }
+
+            // Agregar subcategoría si existe
+            if ($row['subcategory_title'] !== null) {
+                $categories[$categoryId]['subcategories'][] = [
+                    'title' => $row['subcategory_title'],
+                    'description' => $row['subcategory_description'],
+                ];
+            }
+        }
+
+        // Retornamos el array con las categorías y sus subcategorías
+        return array_values($categories);
+    }
+
+
+    /**
+     * Obtiene categorías y sus subcategorías.
+     * Puede realizar dos acciones:
+     *  - Búsqueda por ID si se pasa como parámetro
+     *  - Búsqueda de todas las categorías si no se pasa un ID como parámetro
+     * 
+     * @param int|null $category_id La ID de la categoría a obtener. Si es null, se obtendrán todas.
+     * 
+     * @return array|null Devuelve un array de categorías junto con sus subcategorías si se encuentran o null si no se encuentran.
+     */
+    public function oldgetCategoriesWithSubcategories(?int $category_id = null): ?array
+    {
+
         if ($category_id === null) {
             $categories = $this->findAll();
 
@@ -138,7 +194,7 @@ class CategoriesModel extends Model
     }
 
 
-    
+
     /**
      * @param false|string $slug
      *

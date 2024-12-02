@@ -15,6 +15,7 @@ use App\Controllers\MainController;
 use App\Controllers\DebugController;
 use App\Controllers\IndexController;
 use App\Controllers\LegalController;
+use App\Controllers\SubcategoriesController;
 
 //ejemplo de varias rutas
 //$routes->match(['GET', 'PUT'], 'products', 'Product::feature');
@@ -33,6 +34,9 @@ use App\Controllers\LegalController;
 // Primera!
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
 $routes->get('prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
+$routes->get('registro', [MainController::class, 'registro'], ['as' => 'registro']); //cambiar por sign in
+$routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']); //cambiar por login
+$routes->get('(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategoria']);
 //$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
 
 // prueba BD
@@ -43,8 +47,7 @@ $routes->get('prueba', [IndexController::class, 'index_backup'], ['as' => 'prueb
 // Redirect to a URI
 //$routes->addRedirect('users/about', 'users/profile');
 
-$routes->get('registro', [MainController::class, 'registro'], ['as' => 'registro']);
-$routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']);
+
 $routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
 $routes->get('tema', [MainController::class, 'tema'], ['as' => 'tema']);
 $routes->get('perfil', [MainController::class, 'perfil'], ['as' => 'perfil']);
@@ -57,7 +60,7 @@ $routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' =
 $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'politica-de-cookies']);
 $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'politica-de-privacidad']);
 
-$routes->get('(:segment)', [MainController::class, 'subcategoria'], ['as' => 'subcategoria']);
+
 $routes->get('(:segment)/(:num)', [MainController::class, 'tema'], ['as' => 'tema_personalizado']);
 
 #$routes->get('/iniciar-sesion', 'AuthController::login', ['as' => 'login']);

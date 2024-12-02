@@ -1,30 +1,33 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controllers;
+
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class SubcategoriesController extends BaseController
 {
 
-    public function show(?string $slug = null)
+    public function show($slug)
     {
-        $model = model('SubcategoriesModel');
+        $subcategoriesModel = model('SubcategoriesModel');
+        //$subcategoriesModel->getSubcategory($slug)
 
-        $data['news'] = $model->getNews($slug);
+        $data = [
+            'title'     => $slug, //$subcategoriesModel->getTitle($slug),
+            'topics_list' => [],
+            'slug' => $slug,
+            'news' => null
+        ];
 
-        if ($data['news'] === null) {
-            throw new PageNotFoundException('Cannot find the news item: ' . $slug);
+        // Sería si no existe categoría asociada a ese slug
+        if (false) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $slug . '".');
         }
 
-        $data['title'] = $data['news']['title'];
-
-        return view('templates/header', $data)
-            . view('news/view')
-            . view('templates/footer');
-    }
-    public function index(): string
-    {
-        return view('welcome_message');
+        return view('templates/headerTemplate', $data)
+            . view('general/subcategory')
+            . view('templates/footerTemplate');
     }
 }

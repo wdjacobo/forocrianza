@@ -46,18 +46,6 @@ class MainController extends BaseController
             . view('general/perfil')
             . view('templates/footerTemplate');
     }
-
-    public function subcategoria()
-    {
-
-        $data = [
-            'titulo'     => 'Subcategoria',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/subcategoria')
-            . view('templates/footerTemplate');
-    }
     public function tema()
     {
 
