@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?php
-            if ($_SERVER['REQUEST_URI'] === '/prueba') {
+            if ($_SERVER['REQUEST_URI'] === '/') {
                 echo 'ForoCrianza';
             } else {
                 if (isset($title)) {
