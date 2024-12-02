@@ -36,3 +36,10 @@ a:hover{
     background-color: #699CC9;
 }
 
+#ad-container{
+    top: 2rem;
+}
+
+#close-ad-icon{
+    cursor: pointer;
+}

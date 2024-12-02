@@ -4,8 +4,56 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
+
 class TopicsController extends BaseController
 {
+
+    public function show($subcategory_slug, $topic_slug)
+    {
+
+        $topicsModel = model('TopicsModel');
+
+        if ($topicsModel->getTopicBySlug($topic_slug) === []) {
+            throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '".');
+        }
+
+        $data = [
+            'title'     => "Titulo del tema", //$topicsModel->getTitle($slug),
+            'slug' => $topic_slug,
+            'topics_messages' => "pass", //$topicsModel->getTopicMessages($slug),
+            'ad_number' => rand(1, 4)
+        ];
+
+        /*         return view('templates/headerTemplate', $data)
+            . view('general/topic')
+            . view('templates/footerTemplate'); */
+
+        return view('templates/headerTemplate', $data)
+            . view('templates/asideTemplate')
+            . view('general/topic')
+            . view('templates/adBannerTemplate')
+            . view('templates/footerTemplate');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function index()
     {

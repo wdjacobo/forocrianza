@@ -12,30 +12,29 @@ class SubcategoriesController extends BaseController
     public function show($slug)
     {
         $subcategoriesModel = model('SubcategoriesModel');
-        //$subcategoriesModel->getSubcategory($slug)
 
-        $subcategoriesModel->getSubcategoryTopics();
-
-        $subcategory = [
-            'topics' => [],
-        ];
-
-        $data = [
-            'title'     => $slug, //$subcategoriesModel->getTitle($slug),
-            'topics_list' => [],
-            'slug' => $slug,
-            'news' => null,
-            'subcategory_title' => $subcategoriesModel->getTitle($slug),
-            'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics(),
-        ];
-
-        // Sería si no existe categoría asociada a ese slug
-        if (false) {
+        if ($subcategoriesModel->getSubcategoryBySlug($slug) === []) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $slug . '".');
         }
+
+
+
+        $data = [
+            'title'     => $subcategoriesModel->getTitle($slug),
+            'slug' => $slug,
+            'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics($slug),
+            'ad_number' => rand(1, 4)
+        ];
+
 
         return view('templates/headerTemplate', $data)
             . view('general/subcategory')
             . view('templates/footerTemplate');
+
+        /*             return view('templates/headerTemplate', $data)
+            . view('templates/asideTemplate')
+            . view('general/subcategory')
+            . view('templates/adBannerTemplate')
+            . view('templates/footerTemplate'); */
     }
 }

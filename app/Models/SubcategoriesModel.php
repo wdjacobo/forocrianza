@@ -78,6 +78,29 @@ class SubcategoriesModel extends Model
         return $this->find($subcategory_id);
     }
 
+
+    /**
+     * 
+     * With this code, you can perform two different queries.
+     * You can get all news records, or get a news item by its slug.
+     * You might have noticed that the $slug variable wasn’t escaped before running the query;
+     * Query Builder does this for you.
+     * 
+     * @param false|string $titulo
+     *
+     * @return array|null
+     */
+    public function getSubcategoryBySlug($subcategory_slug)
+
+    {
+        $resultArray = $this->select('subcategories.*')
+            ->where('subcategories.slug', $subcategory_slug)
+            ->get()
+            ->getResultArray();
+
+        return $resultArray;
+    }
+
     /**
      * Obtener subcategorías por id_categoria
      * 
@@ -114,15 +137,19 @@ class SubcategoriesModel extends Model
     public function getSubcategoryTopics($slug = "embarazo"): array
     {
         // Realizamos la consulta para obtener las categorías y subcategorías
-        $resultArray = $this->select('topics.title, topics.author_id, users.username AS author')
+        $resultArray = $this->select('topics.title, topics.slug, users.username AS author')
             ->join('topics', 'subcategories.id = topics.subcategory_id', 'left')->orderBy('topics.id')
             ->join('users', 'topics.author_id = users.id', 'left')  // JOIN con users usando author_id
             ->where('subcategories.slug', $slug)
             ->get()
             ->getResultArray();
 
+            //var_dump($resultArray); exit();
+
         return $resultArray;
     }
+
+
 
     /**
      * Obtener todas las categorías con sus subcategorías

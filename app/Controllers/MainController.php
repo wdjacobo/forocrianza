@@ -46,17 +46,7 @@ class MainController extends BaseController
             . view('general/perfil')
             . view('templates/footerTemplate');
     }
-    public function tema()
-    {
 
-        $data = [
-            'titulo'     => 'Tema',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/tema')
-            . view('templates/footerTemplate');
-    }
 
     public function inicio()
     {

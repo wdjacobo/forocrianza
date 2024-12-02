@@ -90,11 +90,11 @@ class CategoriesModel extends Model
     public function getCategoriesWithSubcategories(): array
     {
         // Realizamos la consulta para obtener las categorías y subcategorías
-        $resultArray = $this->select('categories.id, categories.title AS category_title, subcategories.title AS subcategory_title, subcategories.description AS subcategory_description')
-                            ->join('subcategories', 'categories.id = subcategories.category_id', 'left')->orderBy('categories.id, subcategories.id')
-                            ->get()
-                            ->getResultArray();
-    
+        $resultArray = $this->select('categories.id, categories.title AS category_title, subcategories.title AS subcategory_title, subcategories.description AS subcategory_description, subcategories.slug AS subcategory_slug')
+            ->join('subcategories', 'categories.id = subcategories.category_id', 'left')->orderBy('categories.id, subcategories.id')
+            ->get()
+            ->getResultArray();
+
         // Formateamos los resultados para anidar las subcategorías en las categorías
 
         return $this->formatCategoriesWithSubcategories($resultArray);
@@ -121,6 +121,7 @@ class CategoriesModel extends Model
                 $categories[$categoryId]['subcategories'][] = [
                     'title' => $row['subcategory_title'],
                     'description' => $row['subcategory_description'],
+                    'slug' => $row['subcategory_slug'],
                 ];
             }
         }

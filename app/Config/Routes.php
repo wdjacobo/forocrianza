@@ -16,6 +16,7 @@ use App\Controllers\DebugController;
 use App\Controllers\IndexController;
 use App\Controllers\LegalController;
 use App\Controllers\SubcategoriesController;
+use App\Controllers\TopicsController;
 
 //ejemplo de varias rutas
 //$routes->match(['GET', 'PUT'], 'products', 'Product::feature');
@@ -36,20 +37,13 @@ $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
 $routes->get('prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
 $routes->get('registro', [MainController::class, 'registro'], ['as' => 'registro']); //cambiar por sign in
 $routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']); //cambiar por login
-$routes->get('(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategoria']);
-//$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
 
-// prueba BD
-//$routes->get('usuarios', [UsersController::class, 'index']);
-//$routes->get('usuarios/<:segment>', [UsersController::class, 'mostrar']);
-// Redirect to a named route
-//$routes->addRedirect('users/about', 'profile');
-// Redirect to a URI
-//$routes->addRedirect('users/about', 'users/profile');
+
+
+
 
 
 $routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
-$routes->get('tema', [MainController::class, 'tema'], ['as' => 'tema']);
 $routes->get('perfil', [MainController::class, 'perfil'], ['as' => 'perfil']);
 $routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
 $routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'adminazo', 'filter' => 'session']); # Añadirmos el filtro de sesión de este modo para requerir que el usuario deba estar logueado para acceder a la ruta.
@@ -61,7 +55,28 @@ $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'
 $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'politica-de-privacidad']);
 
 
-$routes->get('(:segment)/(:num)', [MainController::class, 'tema'], ['as' => 'tema_personalizado']);
+
+$routes->get('(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategoria']);
+$routes->get('(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' => 'tema']);
+
+
+
+
+//$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
+
+// prueba BD
+//$routes->get('usuarios', [UsersController::class, 'index']);
+//$routes->get('usuarios/<:segment>', [UsersController::class, 'mostrar']);
+// Redirect to a named route
+//$routes->addRedirect('users/about', 'profile');
+// Redirect to a URI
+//$routes->addRedirect('users/about', 'users/profile');
+
+
+
+
+
+
 
 #$routes->get('/iniciar-sesion', 'AuthController::login', ['as' => 'login']);
 #$routes->get('/registro', 'AuthController::register', ['as' => 'register']);

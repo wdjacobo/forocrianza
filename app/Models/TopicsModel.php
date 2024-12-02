@@ -70,6 +70,31 @@ class TopicsModel extends Model
      *
      * @return array|null
      */
+    public function getTopicBySlug($topic_slug)
+
+    {
+        $resultArray = $this->select('topics.*')
+            ->where('topics.slug', $topic_slug)
+            ->get()
+            ->getResultArray();
+
+        return $resultArray;
+    }
+
+
+
+
+    /**
+     * 
+     * With this code, you can perform two different queries.
+     * You can get all news records, or get a news item by its slug.
+     * You might have noticed that the $slug variable wasn’t escaped before running the query;
+     * Query Builder does this for you.
+     * 
+     * @param false|string $titulo
+     *
+     * @return array|null
+     */
     public function getTopics($topic_id = false)
 
     {
