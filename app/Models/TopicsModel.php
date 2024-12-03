@@ -128,15 +128,32 @@ class TopicsModel extends Model
 
         // ver ben diferencia entre usar inner ou left join
 
-
-        $resultArray = $this->select('messages.content, messages.author_id, messages.parent_message_id, messages.created_at, users.username AS author_username, users_info.status_message AS author_status, users.id AS author_id')
-            ->join('messages', 'topics.id = messages.topic_id', 'left')  // Relación entre topics y messages
-            ->join('users', 'messages.author_id = users.id', 'left')     // Relación entre messages y users
-            ->join('users_info', 'users_info.id = users.id', 'left') // Relación entre users y users_info
-            ->where('topics.slug', $topic_slug)                          // Filtro por slug del topic
-            ->orderBy('messages.created_at', 'ASC')                      // Asegura el orden por fecha de creación
+        // Aquí estou repetindo a mesma información en cada elemento do array, conviría ordealo como no caso de categories e subcategories
+        $resultArray = $this->select('
+ topics.opening_message AS topic_opening_message,
+ topic_author.username AS topic_author_username,
+ topics.title AS topic_title,
+ topics.author_id AS topic_author_id,
+ topic_author_info.status_message AS topic_author_status_message,
+ messages.content AS message_content,
+ messages.parent_message_id, 
+ messages.created_at AS message_creation_date,
+ messages.updated_at AS message_update_date,
+ message_author.username AS message_author_username, 
+ message_author_info.status_message AS message_author_status_message,
+ messages.author_id AS message_author_id,
+')
+            ->join('users AS topic_author', 'topic_author.id = topics.author_id', 'left')  // Relación entre topics y el autor del topic
+            ->join('users_info AS topic_author_info', 'topic_author_info.id = topic_author.id', 'left')             // Relación entre message_author y users_info
+            ->join('messages', 'topics.id = messages.topic_id', 'left')                   // Relación entre topics y messages
+            ->join('users AS message_author', 'message_author.id = messages.author_id', 'left') // Relación entre messages y el autor de cada mensaje
+            ->join('users_info AS message_author_info', 'message_author_info.id = message_author.id', 'left')             // Relación entre message_author y users_info
+            ->where('topics.slug', $topic_slug)                                           // Filtro por slug del topic
+            ->orderBy('messages.created_at', 'ASC')                                       // Asegura el orden por fecha de creación
             ->get()
             ->getResultArray();
+
+        //var_dump($resultArray); die();
 
         /*             $resultArray =  $this->select('topics.title, messages.content')
             ->where('topics.slug', $topic_slug)                         // Filtro por slug del topic

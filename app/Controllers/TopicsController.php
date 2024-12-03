@@ -17,10 +17,11 @@ class TopicsController extends BaseController
             throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '".');
         }
 
-        $topicsModel->getTopicMessagesBySlug($topic_slug);
+        $resultado = $topicsModel->getTopicMessagesBySlug($topic_slug);
+        $titulo = $resultado[0]['topic_title'];
 
         $data = [
-            'title'     => "Titulo del tema", //$topicsModel->getTitle($slug),
+            'title'     => $titulo, //$topicsModel->getTitle($slug),
             'slug' => $topic_slug,
             'topic_messages' => $topicsModel->getTopicMessagesBySlug($topic_slug), //['s'], //$topicsModel->getTopicMessages($slug),
             'ad_number' => rand(1, 4)
@@ -32,7 +33,7 @@ class TopicsController extends BaseController
 
         return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
-            . view('general/topic')
+            . view('topics/show')
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
     }
