@@ -54,16 +54,27 @@
                     </div>
 
 
-                    <div href="#" class="list-group-item py-3 lh-sm">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
-                            <strong class="mb-1">Categorías populares (+temas)</strong>
+
+
+                    <?php if ($trending_subcategories !== []): ?>
+
+                        <div href="#" class="list-group-item py-3 lh-sm">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <strong class="mb-1">Categorías populares (+temas)</strong>
+                            </div>
+                            <ul style="list-style-type: none;">
+                                <?php foreach ($trending_subcategories as $trending_subcategory): ?>
+                                    <li><a href="<?= base_url() . $trending_subcategory['slug'] ?>"><?= esc($trending_subcategory['title'])?></a></li>
+                                <?php endforeach ?>
+                            </ul>
                         </div>
-                        <ul style="list-style-type: none;">
-                            <li>Categoría 1</li>
-                            <li>Categoría 2</li>
-                            <li>Categoría 3</li>
-                        </ul>
-                    </div>
+                    <?php endif ?>
+
+
+
+
+
+
 
 
                     <div href="#" class="list-group-item py-3 lh-sm">

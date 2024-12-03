@@ -13,10 +13,15 @@ class IndexController extends BaseController
     {
 
         $categoriesModel = model('CategoriesModel');
+        $subcategoriesModel = model('SubcategoriesModel');
+
+
+        //var_dump($trending_subcategories); die();
 
         $data = [
             'title'     => 'Inicio',
             'categories_list' => $categoriesModel->getCategoriesWithSubcategories(),
+            'trending_subcategories' => $this->trendingSubcategories,
             'ad_number' => rand(1, 4)
         ];
 

@@ -21,6 +21,34 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+
+
+
+    protected $trendingSubcategories;
+
+    public function __construct()
+    {
+        //parent::__construct();
+
+        $subcategoriesModel = model('SubcategoriesModel');
+        $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**ox
     
      * Instance of the main Request object.
@@ -42,8 +70,6 @@ abstract class BaseController extends Controller
      * Almacenará la instancia de Twig
      */
     protected $twig;
-
-
 
     /**
      * Be sure to declare properties for any property fetch you initialized.

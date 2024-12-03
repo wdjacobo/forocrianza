@@ -47,17 +47,6 @@ class SubcategoriesModel extends Model
     protected $afterDelete    = [];
 
 
-    // Cargar el modelo de temas en el constructor
-    protected $topicsModel;
-
-    public function __construct()
-    {
-        parent::__construct();
-        // Instanciamos el modelo de temas
-        $this->topicsModel = model('TopicsModel');
-    }
-
-
     /**
      * 
      * With this code, you can perform two different queries.
@@ -144,44 +133,26 @@ class SubcategoriesModel extends Model
             ->get()
             ->getResultArray();
 
-            //var_dump($resultArray); exit();
+        //var_dump($resultArray); exit();
 
         return $resultArray;
     }
 
 
 
-    /**
-     * Obtener todas las categorías con sus subcategorías
-     * 
-     * @return array
-     */
-    public function _getSubcategoriesWithTopics($subcategory_id = false)
+
+
+    // Asegurarse que tienen el campo created_at, el código sería así de sencillo
+    public function getTrendingSubcategories($limit = 5)
     {
-        if ($subcategory_id === false) {
-
-            // Obtener todas las categorías
-            $subcategories = $this->findAll();
-
-            // Para cada categoría, obtener sus subcategorías
-            foreach ($subcategories as &$subcategory) {
-                // Obtener subcategorías asociadas a esta categoría
-                $subcategory['topics'] = $this->topicsModel->getTopicsBySubcategory($subcategory['id']);
-            }
-
-
-            return $subcategories;
-        }
-
-
-        $subcategory = $this->find($subcategory_id);
-        $subcategory['topics'] = $this->topicsModel->getTopicsBySubcategory($subcategory_id);
-
-
-        return $subcategory;
+        return $this->select('subcategories.title, subcategories.slug, COUNT(topics.id) AS topic_count')
+        ->join('topics', 'topics.subcategory_id = subcategories.id', 'left') // Unimos subcategories con topics
+        ->groupBy('subcategories.id') // Agrupamos por subcategoría
+        ->orderBy('topic_count', 'DESC') // Ordenamos por número de temas, descendente
+        ->limit($limit) // Limitar el número de resultados
+        ->get()
+        ->getResultArray();
     }
-
-
 
 
 
