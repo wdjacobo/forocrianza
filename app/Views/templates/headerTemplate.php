@@ -42,13 +42,10 @@
 
 <body>
     <header class="">
-        <div class="container d-flex flex-wrap align-items-center justify-content-start p-0">
+        <div class="container d-flex flex-wrap align-items-center justify-content-start p-0 mt-4 mb-3">
             <a href="/">
-                <img src="<?= base_url() ?>/images/logo/foro.png" alt="" srcset="" width="80" height="80">
+                <img src="<?= base_url() ?>/images/forocrianza/logo_forocrianza.png" alt="" srcset="">
             </a>
-
-            <h1 class="m-0 ms-2"><a href="/" class="text-reset text-decoration-none">ForoCrianza</a></h1>
-
         </div>
         <div class="container p-0">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-center py-3 mb-4 border-bottom">

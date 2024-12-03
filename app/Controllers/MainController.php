@@ -35,22 +35,6 @@ class MainController extends BaseController
             . view('templates/basic-footer-template');
     }
 
-    public function inicio()
-    {
-
-        $categoriasModel = model(CategoriasModel::class);
-
-
-        $data = [
-            'titulo'     => 'Inicio',
-            'lista_categorias' => $categoriasModel->getCategorias()
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/inicio')
-            . view('templates/footerTemplate');
-    }
-
     public function admin()
     {
 

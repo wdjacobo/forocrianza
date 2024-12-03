@@ -1,16 +1,6 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
-
-/**
- * @var RouteCollection $routes
- */
-
-// Ver: https://codeigniter.com/user_guide/incoming/routing.html
-
-// Display routes : php spark routes
-//CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule. Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
-use App\Controllers\UsersController;
 use App\Controllers\MainController;
 use App\Controllers\DebugController;
 use App\Controllers\IndexController;
@@ -19,6 +9,25 @@ use App\Controllers\SubcategoriesController;
 use App\Controllers\TopicsController;
 use App\Controllers\ProfileController;
 
+/**
+ * @var RouteCollection $routes
+ */
+
+
+
+
+// Ver: https://codeigniter.com/user_guide/incoming/routing.html
+
+// Display routes : php spark routes
+
+//CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule.
+//Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
+
+
+
+
+
+//Usar group() para cuando varias rutas comienzan por el mismo inicio.
 //ejemplo de varias rutas
 //$routes->match(['GET', 'PUT'], 'products', 'Product::feature');
 //$routes->get('product/(:num)/(:num)', 'Product::index/$2/$1');
@@ -33,26 +42,39 @@ use App\Controllers\ProfileController;
 }); */
 // 404 override: https://codeigniter.com/user_guide/incoming/routing.html#override
 
-// Primera!
-$routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
-$routes->get('/prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
+
+//TODO: ordenar por orden alfabetico de controlador.
+$routes->get('/', [IndexController::class, 'index'], ['as' => 'index']); //Esta debe ser la ruta inicial, al contener únicamente la '/'
 $routes->get('/registro', [MainController::class, 'registro'], ['as' => 'registro']); //cambiar por sign in
 $routes->get('/iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']); //cambiar por login
 
 
-
-
-
-
-$routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
-$routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
-$routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'adminazo', 'filter' => 'session']); # Añadirmos el filtro de sesión de este modo para requerir que el usuario deba estar logueado para acceder a la ruta.
-$routes->get('quill', [MainController::class, 'quill'], ['as' => 'quill']);
-$routes->get('debug', [DebugController::class, 'debug'], ['as' => 'debug']);
-$routes->get('redirect', [MainController::class, 'redirect'], ['as' => 'redirect']);
+//Bien
 $routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'aviso-legal']);
 $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'politica-de-cookies']);
 $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'politica-de-privacidad']);
+
+
+
+
+// Refactorizar
+$routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
+
+$routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
+
+$routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'adminazo', 'filter' => 'session']); # Añadirmos el filtro de sesión de este modo para requerir que el usuario deba estar logueado para acceder a la ruta. Y para estar logueado como admin en concreto?
+
+
+
+
+
+//Pruebas
+$routes->get('quill', [MainController::class, 'quill'], ['as' => 'quill']);
+$routes->get('debug', [DebugController::class, 'debug'], ['as' => 'debug']);
+$routes->get('redirect', [MainController::class, 'redirect'], ['as' => 'redirect']);
+
+
+
 
 
 //$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);

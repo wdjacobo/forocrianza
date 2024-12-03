@@ -27,14 +27,10 @@ class SubcategoriesController extends BaseController
         ];
 
 
-        return view('templates/headerTemplate', $data)
-            . view('general/subcategory')
-            . view('templates/footerTemplate');
-
-        /*             return view('templates/headerTemplate', $data)
+                    return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
             . view('general/subcategory')
             . view('templates/adBannerTemplate')
-            . view('templates/footerTemplate'); */
+            . view('templates/footerTemplate');
     }
 }

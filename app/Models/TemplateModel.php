@@ -10,6 +10,9 @@ use App\Models\SubcategoriasModel;
 
 class CategoriasModel extends Model
 {
+    //El query builder escapa los valores automáticamente.
+    // No se hacen necesarios los prepared statements, únicamente serían útiles en algunos casos en lo que se refiere al rednimiento.
+    // Pagination library: https://codeigniter4.github.io/userguide/libraries/pagination.html
 
     // See: https://www.codeigniter.com/user_guide/models/model.html
 // https://www.codeigniter.com/user_guide/database/query_builder.html
