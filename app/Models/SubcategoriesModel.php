@@ -134,7 +134,7 @@ class SubcategoriesModel extends Model
      * 
      * @return array|null Devuelve un array de categorías junto con sus subcategorías si se encuentran o null si no se encuentran.
      */
-    public function getSubcategoryTopics($slug = "embarazo"): array
+    public function getSubcategoryTopics($slug): array
     {
         // Realizamos la consulta para obtener las categorías y subcategorías
         $resultArray = $this->select('topics.title, topics.slug, users.username AS author')

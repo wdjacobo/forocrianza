@@ -11,17 +11,18 @@ class TopicsController extends BaseController
 
     public function show($subcategory_slug, $topic_slug)
     {
-
         $topicsModel = model('TopicsModel');
 
         if ($topicsModel->getTopicBySlug($topic_slug) === []) {
             throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '".');
         }
 
+        $topicsModel->getTopicMessagesBySlug($topic_slug);
+
         $data = [
             'title'     => "Titulo del tema", //$topicsModel->getTitle($slug),
             'slug' => $topic_slug,
-            'topics_messages' => "pass", //$topicsModel->getTopicMessages($slug),
+            'topic_messages' => $topicsModel->getTopicMessagesBySlug($topic_slug), //['s'], //$topicsModel->getTopicMessages($slug),
             'ad_number' => rand(1, 4)
         ];
 
@@ -93,7 +94,7 @@ class TopicsController extends BaseController
 
 
 
-    // Repasar estas funciones
+    // Repasar estas funciones para create
     protected function generateSlug(string $title): string
     {
         $slug = strtolower(trim($title));

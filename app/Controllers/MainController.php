@@ -35,19 +35,6 @@ class MainController extends BaseController
             . view('templates/basic-footer-template');
     }
 
-    public function perfil()
-    {
-
-        $data = [
-            'titulo'     => 'Perfil',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/perfil')
-            . view('templates/footerTemplate');
-    }
-
-
     public function inicio()
     {
 

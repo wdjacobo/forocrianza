@@ -17,6 +17,7 @@ use App\Controllers\IndexController;
 use App\Controllers\LegalController;
 use App\Controllers\SubcategoriesController;
 use App\Controllers\TopicsController;
+use App\Controllers\ProfileController;
 
 //ejemplo de varias rutas
 //$routes->match(['GET', 'PUT'], 'products', 'Product::feature');
@@ -34,9 +35,9 @@ use App\Controllers\TopicsController;
 
 // Primera!
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']);
-$routes->get('prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
-$routes->get('registro', [MainController::class, 'registro'], ['as' => 'registro']); //cambiar por sign in
-$routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']); //cambiar por login
+$routes->get('/prueba', [IndexController::class, 'index_backup'], ['as' => 'prueba']);
+$routes->get('/registro', [MainController::class, 'registro'], ['as' => 'registro']); //cambiar por sign in
+$routes->get('/iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']); //cambiar por login
 
 
 
@@ -44,7 +45,6 @@ $routes->get('iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' 
 
 
 $routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
-$routes->get('perfil', [MainController::class, 'perfil'], ['as' => 'perfil']);
 $routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
 $routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'adminazo', 'filter' => 'session']); # Añadirmos el filtro de sesión de este modo para requerir que el usuario deba estar logueado para acceder a la ruta.
 $routes->get('quill', [MainController::class, 'quill'], ['as' => 'quill']);
@@ -53,13 +53,6 @@ $routes->get('redirect', [MainController::class, 'redirect'], ['as' => 'redirect
 $routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'aviso-legal']);
 $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'politica-de-cookies']);
 $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'politica-de-privacidad']);
-
-
-
-$routes->get('(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategoria']);
-$routes->get('(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' => 'tema']);
-
-
 
 
 //$routes->get('/', [MainController::class, 'inicio'], ['as' => 'inicio']);
@@ -71,9 +64,6 @@ $routes->get('(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' =
 //$routes->addRedirect('users/about', 'profile');
 // Redirect to a URI
 //$routes->addRedirect('users/about', 'users/profile');
-
-
-
 
 
 
@@ -90,3 +80,7 @@ service('auth')->routes($routes, ['except' => ['magic-link']]); // Habría que m
 # En principio no voy a añadir el blog
 /* $routes->get('blog', [MainController::class, 'blog']);
 $routes->get('blog-post', [MainController::class, 'blog_post']); */
+
+$routes->get('/perfil/(:segment)', [ProfileController::class, 'show'], ['as' => 'profile']);
+$routes->get('/(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategory']);
+$routes->get('/(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' => 'topic']);

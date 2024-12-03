@@ -12,14 +12,12 @@
                     <?php if ($subcategory_topics !== []): ?>
                         <?php foreach ($subcategory_topics as $topic): ?>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <a href="<?= current_url() . '/' . $topic["slug"] ?>">
+                                <a href="<?= current_url() . "/{$topic['slug']}" ?>">
                                     <div class="ms-2 me-auto">
                                         <h5><?= $topic["title"]?></h5>
                                         <?= $topic["author"]?>
                                     </div>
                                 </a>
-
-
                                 <a href="#2">
                                     <div class="ms-2 me-auto">
                                         <h5>Nº mensajes</h5>
