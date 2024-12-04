@@ -4,13 +4,13 @@
             <div class="col-md-6">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
-                        <a href="<?= base_url() ?>aviso-legal" class="m-2">Aviso Legal</a>
+                        <a href="<?= $legal_info['notice']['link'] ?>" class="m-2"><?= $legal_info['notice']['text'] ?></a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url() ?>politica-de-cookies" class="m-2">Política de cookies</a>
+                        <a href="<?= $legal_info['cookies']['link'] ?>"><?= $legal_info['cookies']['text'] ?></a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url() ?>politica-de-privacidad" class="m-2">Política de privacidad</a>
+                        <a href="<?= $legal_info['privacy']['link'] ?>" class="m-2"><?= $legal_info['privacy']['text'] ?></a>
                     </li>
                 </ul>
             </div>

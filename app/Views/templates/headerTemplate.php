@@ -13,7 +13,7 @@
                 }
             }
             ?></title>
-    <link rel="icon" href="<?= base_url() ?>/favicon.ico" type="image/ico">
+    <link rel="icon" href="<?= base_url() ?>favicon.ico" type="image/ico">
 
     <script>
         /**
@@ -44,7 +44,7 @@
     <header class="">
         <div class="container d-flex flex-wrap align-items-center justify-content-start p-0 mt-4 mb-3">
             <a href="/">
-                <img src="<?= base_url() ?>/images/forocrianza/logo_forocrianza.png" alt="" srcset="">
+                <img src="<?= base_url() ?>images/forocrianza/logo_forocrianza.png" alt="" srcset="">
             </a>
         </div>
         <div class="container p-0">
@@ -59,7 +59,7 @@
                         name=""
                         id=""
                         class="btn btn-primary"
-                        href="#"
+                        href="<?= base_url() ?>tema-crear"
                         role="button">Crear tema</a>
                 </div>
                 <div class="d-flex align-items-center ms-auto">
@@ -87,7 +87,7 @@
                             </ul>
                         </div>
                     <?php else: ?>
-                        <a href="iniciar-sesion"><button type="button" class="btn btn-outline-primary me-2">Iniciar sesión</button></a>
+                        <a href="<?= base_url() ?>iniciar-sesion"><button type="button" class="btn btn-outline-primary me-2">Iniciar sesión</button></a>
                         <a href="registro"><button type="button" class="btn btn-primary">Registro</button></a>
                     <?php endif; ?>
 

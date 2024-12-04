@@ -1,0 +1,347 @@
+INFO - 2024-12-04 10:38:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:38:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-12-04 10:43:13 --> ErrorException: foreach() argument must be of type array|object, null given
+[Method: GET, Route: /]
+in APPPATH/Views/templates/asideTemplate.php on line 66.
+ 1 APPPATH/Views/templates/asideTemplate.php(66): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/user/proxecto/app/Views/templates/asideTemplate.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/IndexController.php(29): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\IndexController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+INFO - 2024-12-04 10:43:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:43:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:50:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:50:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:53:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-12-04 10:53:38 --> ErrorException: Undefined variable $legal_info
+[Method: GET, Route: /]
+in APPPATH/Views/templates/footerTemplate.php on line 7.
+ 1 APPPATH/Views/templates/footerTemplate.php(7): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/user/proxecto/app/Views/templates/footerTemplate.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/IndexController.php(32): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\IndexController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+INFO - 2024-12-04 10:53:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:53:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-12-04 10:54:54 --> ErrorException: Undefined variable $legal_info
+[Method: GET, Route: politica-de-cookies]
+in APPPATH/Views/templates/footerTemplate.php on line 7.
+ 1 APPPATH/Views/templates/footerTemplate.php(7): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/user/proxecto/app/Views/templates/footerTemplate.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/LegalController.php(21): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\LegalController->showCookiesPolicy()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+INFO - 2024-12-04 10:54:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 10:54:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:00:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:00:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-12-04 11:01:46 --> ErrorException: Undefined variable $trending_subcategories
+[Method: GET, Route: embarazo]
+in APPPATH/Views/templates/asideTemplate.php on line 59.
+ 1 APPPATH/Views/templates/asideTemplate.php(59): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/user/proxecto/app/Views/templates/asideTemplate.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/SubcategoriesController.php(31): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\SubcategoriesController->show()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+INFO - 2024-12-04 11:01:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:01:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:02:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:02:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:02:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:02:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:02:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-12-04 11:02:22 --> ErrorException: Undefined variable $trending_subcategories
+[Method: GET, Route: embarazo/preparacion-para-el-primer-trimestre-123]
+in APPPATH/Views/templates/asideTemplate.php on line 59.
+ 1 APPPATH/Views/templates/asideTemplate.php(59): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/user/proxecto/app/Views/templates/asideTemplate.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/TopicsController.php(35): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\TopicsController->show()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+INFO - 2024-12-04 11:02:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:02:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:03:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:03:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:03:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:03:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:04:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:04:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:04:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:04:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:05:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:05:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:06:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:06:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:08:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:08:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:09:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:09:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:10:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:10:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:10:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:10:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:10:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:10:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:12:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:12:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:13:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:13:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-12-04 11:13:19 --> Failed to set mode on cache file: ErrorException: chmod(): Operation not permitted in /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php:108
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php(108): chmod()
+#2 /home/user/proxecto/vendor/codeigniter4/framework/system/Throttle/Throttler.php(114): CodeIgniter\Cache\Handlers\FileHandler->save()
+#3 /home/user/proxecto/vendor/codeigniter4/shield/src/Filters/AuthRates.php(50): CodeIgniter\Throttle\Throttler->check()
+#4 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(203): CodeIgniter\Shield\Filters\AuthRates->before()
+#5 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(184): CodeIgniter\Filters\Filters->runBefore()
+#6 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(481): CodeIgniter\Filters\Filters->run()
+#7 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/user/proxecto/public/index.php(56): CodeIgniter\Boot::bootWeb()
+#11 {main}
+CRITICAL - 2024-12-04 11:13:19 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "templates/basic-header-template.php"
+[Method: GET, Route: iniciar-sesion]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/MainController.php(33): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\MainController->iniciar_sesion()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+DEBUG - 2024-12-04 11:14:03 --> Failed to set mode on cache file: ErrorException: chmod(): Operation not permitted in /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php:108
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php(108): chmod()
+#2 /home/user/proxecto/vendor/codeigniter4/framework/system/Throttle/Throttler.php(137): CodeIgniter\Cache\Handlers\FileHandler->save()
+#3 /home/user/proxecto/vendor/codeigniter4/shield/src/Filters/AuthRates.php(50): CodeIgniter\Throttle\Throttler->check()
+#4 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(203): CodeIgniter\Shield\Filters\AuthRates->before()
+#5 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(184): CodeIgniter\Filters\Filters->runBefore()
+#6 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(481): CodeIgniter\Filters\Filters->run()
+#7 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/user/proxecto/public/index.php(56): CodeIgniter\Boot::bootWeb()
+#11 {main}
+INFO - 2024-12-04 11:14:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-12-04 11:14:03 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "templates/basic-footer-template.php"
+[Method: GET, Route: iniciar-sesion]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1171): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/MainController.php(35): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\MainController->iniciar_sesion()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+DEBUG - 2024-12-04 11:14:14 --> Failed to set mode on cache file: ErrorException: chmod(): Operation not permitted in /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php:108
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php(108): chmod()
+#2 /home/user/proxecto/vendor/codeigniter4/framework/system/Throttle/Throttler.php(137): CodeIgniter\Cache\Handlers\FileHandler->save()
+#3 /home/user/proxecto/vendor/codeigniter4/shield/src/Filters/AuthRates.php(50): CodeIgniter\Throttle\Throttler->check()
+#4 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(203): CodeIgniter\Shield\Filters\AuthRates->before()
+#5 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(184): CodeIgniter\Filters\Filters->runBefore()
+#6 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(481): CodeIgniter\Filters\Filters->run()
+#7 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/user/proxecto/public/index.php(56): CodeIgniter\Boot::bootWeb()
+#11 {main}
+INFO - 2024-12-04 11:14:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:14:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-12-04 11:15:34 --> Failed to set mode on cache file: ErrorException: chmod(): Operation not permitted in /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php:108
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php(108): chmod()
+#2 /home/user/proxecto/vendor/codeigniter4/framework/system/Throttle/Throttler.php(114): CodeIgniter\Cache\Handlers\FileHandler->save()
+#3 /home/user/proxecto/vendor/codeigniter4/shield/src/Filters/AuthRates.php(50): CodeIgniter\Throttle\Throttler->check()
+#4 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(203): CodeIgniter\Shield\Filters\AuthRates->before()
+#5 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(184): CodeIgniter\Filters\Filters->runBefore()
+#6 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(481): CodeIgniter\Filters\Filters->run()
+#7 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/user/proxecto/public/index.php(56): CodeIgniter\Boot::bootWeb()
+#11 {main}
+INFO - 2024-12-04 11:15:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-12-04 11:15:37 --> Failed to set mode on cache file: ErrorException: chmod(): Operation not permitted in /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php:108
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php(108): chmod()
+#2 /home/user/proxecto/vendor/codeigniter4/framework/system/Throttle/Throttler.php(137): CodeIgniter\Cache\Handlers\FileHandler->save()
+#3 /home/user/proxecto/vendor/codeigniter4/shield/src/Filters/AuthRates.php(50): CodeIgniter\Throttle\Throttler->check()
+#4 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(203): CodeIgniter\Shield\Filters\AuthRates->before()
+#5 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(184): CodeIgniter\Filters\Filters->runBefore()
+#6 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(481): CodeIgniter\Filters\Filters->run()
+#7 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/user/proxecto/public/index.php(56): CodeIgniter\Boot::bootWeb()
+#11 {main}
+INFO - 2024-12-04 11:15:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-12-04 11:15:45 --> Failed to set mode on cache file: ErrorException: chmod(): Operation not permitted in /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php:108
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php(108): chmod()
+#2 /home/user/proxecto/vendor/codeigniter4/framework/system/Throttle/Throttler.php(137): CodeIgniter\Cache\Handlers\FileHandler->save()
+#3 /home/user/proxecto/vendor/codeigniter4/shield/src/Filters/AuthRates.php(50): CodeIgniter\Throttle\Throttler->check()
+#4 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(203): CodeIgniter\Shield\Filters\AuthRates->before()
+#5 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(184): CodeIgniter\Filters\Filters->runBefore()
+#6 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(481): CodeIgniter\Filters\Filters->run()
+#7 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/user/proxecto/public/index.php(56): CodeIgniter\Boot::bootWeb()
+#11 {main}
+INFO - 2024-12-04 11:15:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-12-04 11:15:46 --> Failed to set mode on cache file: ErrorException: chmod(): Operation not permitted in /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php:108
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/user/proxecto/vendor/codeigniter4/framework/system/Cache/Handlers/FileHandler.php(108): chmod()
+#2 /home/user/proxecto/vendor/codeigniter4/framework/system/Throttle/Throttler.php(137): CodeIgniter\Cache\Handlers\FileHandler->save()
+#3 /home/user/proxecto/vendor/codeigniter4/shield/src/Filters/AuthRates.php(50): CodeIgniter\Throttle\Throttler->check()
+#4 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(203): CodeIgniter\Shield\Filters\AuthRates->before()
+#5 /home/user/proxecto/vendor/codeigniter4/framework/system/Filters/Filters.php(184): CodeIgniter\Filters\Filters->runBefore()
+#6 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(481): CodeIgniter\Filters\Filters->run()
+#7 /home/user/proxecto/vendor/codeigniter4/framework/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 /home/user/proxecto/vendor/codeigniter4/framework/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 /home/user/proxecto/public/index.php(56): CodeIgniter\Boot::bootWeb()
+#11 {main}
+INFO - 2024-12-04 11:15:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:24:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:24:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:25:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:25:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:25:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-12-04 11:25:47 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "ad-{rand(1,4)}-png"
+[Method: GET, Route: images/ads/ad-%7Brand%281,4%29%7D-png]
+in SYSTEMPATH/Router/Router.php on line 737.
+ 1 SYSTEMPATH/Router/Router.php(204): CodeIgniter\Router\Router->checkDisallowedChars()
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle()
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 5 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+INFO - 2024-12-04 11:25:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:26:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:26:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:27:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:27:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:28:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 11:28:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

@@ -24,7 +24,13 @@ class TopicsController extends BaseController
             'title'     => $titulo, //$topicsModel->getTitle($slug),
             'slug' => $topic_slug,
             'topic_messages' => $topicsModel->getTopicMessagesBySlug($topic_slug), //['s'], //$topicsModel->getTopicMessages($slug),
-            'ad_number' => rand(1, 4)
+            'trending_subcategories' => $this->trendingSubcategories,
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->lastTopics,
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->todayTopic,
+            'legal_info' => $this->legalInfo,
+            'ad_url' => $this->adUrl,
         ];
 
         /*         return view('templates/headerTemplate', $data)

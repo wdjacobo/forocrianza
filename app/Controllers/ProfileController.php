@@ -11,7 +11,7 @@ class ProfileController extends BaseController
 {
 
 
-    public function show($profile_id)
+    public function show($profile_username)
     {
 
         // El proveedor de usuarios por defecto, UserModel
@@ -26,13 +26,13 @@ class ProfileController extends BaseController
         //var_dump($userArray['username']); exit();
         //var_dump($user); exit();
         
-        if ($users->findById($profile_id) === null) {
-            throw new PageNotFoundException('No se ha podido encontrar el perfil con id "' . $profile_id . '".');
+        if ($users->findById($profile_username) === null) {
+            throw new PageNotFoundException('No se ha podido encontrar el perfil "' . $profile_username . '".');
         }
 
         $data = [
             'title'     => "Perfil de username",
-            'user' => $users->findById($profile_id),
+            'user' => $users->findById($profile_username),
         ];
 
         return view('templates/headerTemplate', $data)

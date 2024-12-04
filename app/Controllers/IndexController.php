@@ -13,16 +13,19 @@ class IndexController extends BaseController
     {
 
         $categoriesModel = model('CategoriesModel');
-        $subcategoriesModel = model('SubcategoriesModel');
-
-
         //var_dump($trending_subcategories); die();
 
+        //Podría mandar un array con 'aside_info' que contuviese todas las infos, y así en la vista poder recorrer en un sólo bucle. Si no está la sesión iniciada, simplemente no se manda el de sesión.
         $data = [
             'title'     => 'Inicio',
             'categories_list' => $categoriesModel->getCategoriesWithSubcategories(),
             'trending_subcategories' => $this->trendingSubcategories,
-            'ad_number' => rand(1, 4)
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->lastTopics,
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->todayTopic,
+            'legal_info' => $this->legalInfo,
+            'ad_url' => $this->adUrl,
         ];
 
         return view('templates/headerTemplate', $data)

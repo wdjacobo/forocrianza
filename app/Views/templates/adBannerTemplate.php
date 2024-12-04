@@ -5,7 +5,7 @@
             <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
         </svg>
         <a href="https://www.fortnite.com/item-shop/v-bucks?lang=es-ES">
-        <img class="p-0 bg-body-tertiary" src="<?= base_url() ?>/images/ads/ad-<?= $ad_number ?>.png" alt="Imagen publicitaria">
+        <img class="p-0 bg-body-tertiary" src="<?= esc($ad_url) ?>" alt="Imagen publicitaria">
         </a>
     </div>
 </div>

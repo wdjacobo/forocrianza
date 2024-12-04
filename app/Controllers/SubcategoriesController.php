@@ -23,7 +23,13 @@ class SubcategoriesController extends BaseController
             'title'     => $subcategoriesModel->getTitle($slug),
             'slug' => $slug,
             'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics($slug),
-            'ad_number' => rand(1, 4)
+            'trending_subcategories' => $this->trendingSubcategories,
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->lastTopics,
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->todayTopic,
+            'legal_info' => $this->legalInfo,
+            'ad_url' => $this->adUrl,
         ];
 
 

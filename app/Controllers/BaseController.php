@@ -22,33 +22,6 @@ use Psr\Log\LoggerInterface;
 abstract class BaseController extends Controller
 {
 
-
-
-    protected $trendingSubcategories;
-
-    public function __construct()
-    {
-        //parent::__construct();
-
-        $subcategoriesModel = model('SubcategoriesModel');
-        $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**ox
     
      * Instance of the main Request object.
@@ -66,10 +39,21 @@ abstract class BaseController extends Controller
      */
     protected $helpers = [];
 
+
     /**
      * Almacenará la instancia de Twig
      */
     protected $twig;
+
+    // Aside info
+    protected $trendingSubcategories;
+    protected $mostVisitedTopics;
+    protected $lastTopics;
+    protected $todayTopic;
+
+    protected $adUrl;
+
+    protected $legalInfo;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -90,5 +74,29 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
 
         $this->twig = \Config\Services::twig(); // Cualquier controlador tendrá acceso a twig automáticamente
+
+        // Aside info
+        $subcategoriesModel = model('SubcategoriesModel');
+        $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories(2);
+        $this->mostVisitedTopics = $subcategoriesModel->getTrendingSubcategories();
+        $this->lastTopics = $subcategoriesModel->getTrendingSubcategories();
+        $this->todayTopic = $subcategoriesModel->getTrendingSubcategories();
+
+        $this->adUrl = base_url() . 'images/ads/ad-' . rand(1,4) . '.png';
+
+        $this->legalInfo = [
+            'cookies' => [
+                'text' => 'Política de cookies',
+                'link' => base_url() . 'politica-de-cookies',
+            ],
+            'notice' => [
+                'text' => 'Aviso legal',
+                'link' =>  base_url() . 'aviso-legal',
+            ],
+            'privacy' => [
+                'text' => 'Política de privacidad',
+                'link' => base_url() . 'politica-de-privacidad',
+            ],
+        ];
     }
 }
