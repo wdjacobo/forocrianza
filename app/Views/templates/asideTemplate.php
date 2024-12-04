@@ -1,6 +1,6 @@
-    <div class="row">
+    <div class="row d-flex justify-content-center">
 
-        <aside class="col-md-3 p-0 pe-3">
+        <aside class="col-md-3 p-0 pe-3 d-none d-lg-block">
             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary borde-gris rounded">
 
                 <div class="list-group list-group-flush border-bottom scrollarea rounded">

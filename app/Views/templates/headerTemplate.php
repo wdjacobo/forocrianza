@@ -43,22 +43,66 @@
 
 
 <body>
+    <!-- Inicio del container principal -->
     <div class="container">
         <header class="row d-flex mt-5 mb-4 pb-4 border-bottom">
-            <div class="col-auto">
+            <div class="col-auto d-flex">
+                <div name="menu hamburguesa">Burguer</div>
                 <a href="<?= url_to('index') ?>">
                     <picture>
                         <!-- Pantallas más pequeñas que el breackpoint 'md' (< 768px) -->
                         <source media="(max-width: 767px)" srcset="<?= base_url() ?>images/brand/isotipo-forocrianza.png">
                         <!-- Pantallas más pequeñas que el breackpoint 'lg' (< 992px) -->
-                        <source media="(max-width: 991px)" srcset="<?= base_url() ?>images/brand/logotipo-forocrianza.png">
+                        <source media="(max-width: 991px)" srcset="<?= base_url() ?>images/brand/logotipo-forocrianza.png" height="36px">
                         <!-- Para pantallas mayores o iguales a 'lg' (992px o más) -->
                         <img src="<?= base_url() ?>images/brand/imagotipo-forocrianza.png" alt="Imagotipo del sitio web ForoCrianza">
                     </picture>
                 </a>
             </div>
             <div class="col-auto ms-auto">
-                <a class="btn btn-outline-primary me-2" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
-                <a class="btn btn-primary" href="<?= url_to('registro') ?>" type="button" role="button">Registro</a>
+                <a class="btn btn-outline-primary me-2" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
+                <a class="btn btn-primary" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
             </div>
         </header>
+
+        <!-- https://mdbootstrap.com/docs/standard/extended/hamburger-menu/ -->
+        <!-- Sidenav -->
+<nav id="sidenav-1" data-mdb-sidenav-init class="sidenav" data-mdb-hidden="false">
+  <ul class="sidenav-menu">
+    <li class="sidenav-item">
+      <a class="sidenav-link">
+        <i class="far fa-smile fa-fw me-3"></i><span>Link 1</span></a>
+    </li>
+    <li class="sidenav-item">
+      <a class="sidenav-link"><i class="fas fa-grin fa-fw me-3"></i><span>Category 1</span></a>
+      <ul class="sidenav-collapse show">
+        <li class="sidenav-item">
+          <a class="sidenav-link">Link 2</a>
+        </li>
+        <li class="sidenav-item">
+          <a class="sidenav-link">Link 3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="sidenav-item">
+      <a class="sidenav-link"><i class="fas fa-grin-wink fa-fw me-3"></i><span>Category
+          2</span></a>
+      <ul class="sidenav-collapse">
+        <li class="sidenav-item">
+          <a class="sidenav-link">Link 4</a>
+        </li>
+        <li class="sidenav-item">
+          <a class="sidenav-link">Link 5</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<!-- Sidenav -->
+
+<!-- Toggler -->
+<button data-mdb-button-init data-mdb-toggle="sidenav" data-mdb-target="#sidenav-1"
+  data-mdb-ripple-init class="btn btn-primary" aria-controls="#sidenav-1" aria-haspopup="true">
+  <i class="fas fa-bars"></i>
+</button>
+<!-- Toggler -->
