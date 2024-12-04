@@ -1,0 +1,5 @@
+writable/
+vendor/
+.env
+.NOTES.txt
+.TODO.txt
