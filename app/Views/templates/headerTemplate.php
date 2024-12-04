@@ -44,7 +44,7 @@
     <header class="">
         <div class="container d-flex flex-wrap align-items-center justify-content-start p-0 mt-4 mb-3">
             <a href="/">
-                <img src="<?= base_url() ?>images/forocrianza/logo_forocrianza.png" alt="" srcset="">
+                <img src="<?= base_url() ?>images/brand/imagotipo-forocrianza.png" alt="" srcset="">
             </a>
         </div>
         <div class="container p-0">
