@@ -28,7 +28,7 @@
             fallbackLink.href = '<?= base_url() ?>css/bootstrap.min.css';
             document.head.appendChild(fallbackLink);
 
-            let customStyles = document.getElementById('customStyles');
+            let customStyles = document.getElementById('custom-styles');
             document.head.appendChild(customStyles);
 
         }
@@ -38,28 +38,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
 
     <!-- CSS personalizado -->
-    <link id="customStyles" rel="stylesheet" href="<?= base_url() ?>css/style.css">
+    <link id="custom-styles" rel="stylesheet" href="<?= base_url() ?>css/style.css">
 </head>
 
-<body>
-    <header class="container my-4 p-0 pb-2 border-bottom">
-        <div class="row mb-lg-4 d-flex" name="imagotype-container">
 
-            <div class="col-auto mb-4 mb-lg-0 col-lg-auto d-flex">
+<body>
+    <div class="container">
+        <header class="row d-flex mt-5 mb-4 pb-4 border-bottom">
+            <div class="col-auto">
                 <a href="<?= url_to('index') ?>">
                     <picture>
-                        <!-- Para pantallas más pequeñas que 'lg' (menores a 768px) -->
+                        <!-- Pantallas más pequeñas que el breackpoint 'md' (< 768px) -->
                         <source media="(max-width: 767px)" srcset="<?= base_url() ?>images/brand/isotipo-forocrianza.png">
-                        <!-- Para pantallas más pequeñas que 'lg' (menores a 992px) -->
+                        <!-- Pantallas más pequeñas que el breackpoint 'lg' (< 992px) -->
                         <source media="(max-width: 991px)" srcset="<?= base_url() ?>images/brand/logotipo-forocrianza.png">
                         <!-- Para pantallas mayores o iguales a 'lg' (992px o más) -->
                         <img src="<?= base_url() ?>images/brand/imagotipo-forocrianza.png" alt="Imagotipo del sitio web ForoCrianza">
                     </picture>
                 </a>
             </div>
-            <div class="col-auto ms-auto d-flex col-auto mb-4 mb-lg-0 col-lg-auto d-flex ">
+            <div class="col-auto ms-auto">
                 <a class="btn btn-outline-primary me-2" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
                 <a class="btn btn-primary" href="<?= url_to('registro') ?>" type="button" role="button">Registro</a>
             </div>
-        </div>
-    </header>
+        </header>

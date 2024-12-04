@@ -1,6 +1,4 @@
-<div class="container">
-    <!-- EXEMPLO BLOG -->
-    <div class="row g-5">
+    <div class="row">
 
         <aside class="col-md-3 p-0 pe-3">
             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary borde-gris rounded">

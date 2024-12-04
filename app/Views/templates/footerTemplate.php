@@ -1,19 +1,20 @@
-<footer class="bg-light py-3 mt-5 border-top">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                        <a href="<?= url_to('legal-notice')?>" class="m-2">Aviso legal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= url_to('cookies-policy') ?>">Política de cookies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= url_to('privacy-policy') ?>" class="m-2">Política de privacidad</a>
-                    </li>
-                </ul>
-            </div>
+<!-- Fin del container principal -->
+</div>
+
+<footer class="container-fluid bg-light py-3 mt-5 border-top">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a href="<?= url_to('legal-notice') ?>" class="m-2">Aviso legal</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= url_to('cookies-policy') ?>">Política de cookies</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= url_to('privacy-policy') ?>" class="m-2">Política de privacidad</a>
+                </li>
+            </ul>
         </div>
     </div>
 </footer>
@@ -29,7 +30,7 @@
         fallbackScript.src = '<?= base_url() ?>/js/bootstrap.bundle.min.js';
         document.body.appendChild(fallbackScript);
 
-        let customScript = document.getElementById('customScript');
+        let customScript = document.getElementById('custom-script');
         document.body.appendChild(customScript);
     }
 </script>
@@ -38,7 +39,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" onerror="loadLocalBootstrapJs()"></script>
 
 <!-- JS personalizado -->
-<script src="<?= base_url() ?>js/script.js" id="customScript"></script>
+<script id="custom-script" src="<?= base_url() ?>js/script.js"></script>
 
 </body>
 
