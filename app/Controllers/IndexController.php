@@ -13,7 +13,7 @@ class IndexController extends BaseController
     {
 
         $categoriesModel = model('CategoriesModel');
-        //var_dump($trending_subcategories); die();
+        //var_dump($this->legalInfo);die();
 
         //Podría mandar un array con 'aside_info' que contuviese todas las infos, y así en la vista poder recorrer en un sólo bucle. Si no está la sesión iniciada, simplemente no se manda el de sesión.
         $data = [

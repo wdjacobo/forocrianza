@@ -6,18 +6,13 @@
             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary position-sticky p-0" style="top: 2rem;">
                 <div class="list-group list-group-flush scrollarea rounded">
                     <div class="list-group-item py-3 lh-sm">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
-                            <strong class="mb-1">ÍNDICE CON ANCHOR LINKS</strong>
-
-                        </div>
+                    <div>Contenidos</div>
                         <ul style="list-style-type: none;">
-                            <li><a href="#enlace-1">Enlace 1</a></li>
-                            <li><a href="#enlace-2">Enlace 2</a></li>
-                            <li><a href="#enlace-3">Enlace 3</a></li>
-                            <li><a href="#enlace-4">Enlace 4</a></li>
-                            <li><a href="#enlace-5">Enlace 5</a></li>
-                            <li><a href="#enlace-6">Enlace 6</a></li>
-                            <li><a href="#enlace-7">Enlace 7</a></li>
+                            <li><a href="#que-son-las-cookies">¿Qué son las cookies?</a></li>
+                            <li><a href="#que-tipo-de-cookies-utilizamos">¿Qué tipo de cookies utilizamos?</a></li>
+                            <li><a href="#como-puedo-gestionar-las-cookies">¿Cómo puede gestionar las cookies?</a></li>
+                            <li><a href="#cambios-en-la-politica-de-cookies">Cambios en la política de cookies</a></li>
+                            <li><a href="#informacion-de-contacto">Informacion de contacto</a></li>
                         </ul>
                     </div>
                 </div>
@@ -25,36 +20,38 @@
         </aside>
 
         <div class="col-md-7 px-1">
-            <h1 class="text-center"><?php
-                                    if (isset($title)) {
-                                        echo $title;
-                                    }
-                                    ?></h1>
-            <h3 id="enlace-1">Título con enlace</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta placeat, aliquam illo ullam excepturi ipsum eos ipsam? Nobis eos nulla animi sequi, tempore dolor reiciendis iusto, alias tenetur aperiam amet.
-                Sapiente excepturi nihil eligendi illum ex minus, nemo modi repudiandae quae veniam qui eius delectus. Fuga, ad praesentium quos facere, corrupti repellat voluptate dolore, sit architecto cumque fugit suscipit odit?</p>
-            <h3 id="enlace-2">Título con enlace</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta placeat, aliquam illo ullam excepturi ipsum eos ipsam? Nobis eos nulla animi sequi, tempore dolor reiciendis iusto, alias tenetur aperiam amet.
-                Sapiente excepturi nihil eligendi illum ex minus, nemo modi repudiandae quae veniam qui eius delectus. Fuga, ad praesentium quos facere, corrupti repellat voluptate dolore, sit architecto cumque fugit suscipit odit?</p>
-            <h3 id="enlace-3">Título con enlace</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta placeat, aliquam illo ullam excepturi ipsum eos ipsam? Nobis eos nulla animi sequi, tempore dolor reiciendis iusto, alias tenetur aperiam amet.
-                Sapiente excepturi nihil eligendi illum ex minus, nemo modi repudiandae quae veniam qui eius delectus. Fuga, ad praesentium quos facere, corrupti repellat voluptate dolore, sit architecto cumque fugit suscipit odit?</p>
-            <h3 id="enlace-4">Título con enlace</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat, fugiat. In impedit aperiam minus qui? Adipisci eos porro rerum aspernatur eius! Exercitationem odio ratione repudiandae quaerat voluptatum quam numquam nesciunt?
-                Aspernatur placeat, nulla eius necessitatibus non molestias commodi neque quae, aliquam illo laborum id provident aut. Repudiandae assumenda sit eligendi perferendis autem quae sunt, vero nobis earum totam aliquam. Vero.
-                Nostrum debitis id dicta tenetur, aspernatur quod in delectus perspiciatis quasi officiis perferendis cumque consequuntur eos excepturi, consectetur enim sunt. Sit, modi facere adipisci voluptatibus eaque laboriosam asperiores ut animi?</p>
-            <h3 id="enlace-5">Título con enlace</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta placeat, aliquam illo ullam excepturi ipsum eos ipsam? Nobis eos nulla animi sequi, tempore dolor reiciendis iusto, alias tenetur aperiam amet.
-                Sapiente excepturi nihil eligendi illum ex minus, nemo modi repudiandae quae veniam qui eius delectus. Fuga, ad praesentium quos facere, corrupti repellat voluptate dolore, sit architecto cumque fugit suscipit odit?</p>
-            <h3 id="enlace-6">Título con enlace</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ab alias adipisci minima mollitia deserunt quae earum distinctio omnis iusto, sed blanditiis quidem voluptatibus obcaecati quasi labore inventore delectus voluptas.
-                Sint consequuntur non provident soluta, molestiae esse cum necessitatibus saepe, vel iusto dolorem praesentium sapiente veniam repellat! Ratione veritatis tenetur iure natus vel, aliquam, totam reprehenderit perferendis, esse hic tempora.
-                Quam soluta odit, voluptates, adipisci quas nisi obcaecati iste sequi explicabo similique repellendus corporis officia, necessitatibus dolorum vel itaque ex quo tenetur est praesentium alias nobis totam nemo illum. Rem.
-                Mollitia fugiat commodi velit autem quibusdam nulla iusto, dicta error quam illo necessitatibus quas magnam quod modi quidem amet quos numquam nemo provident qui corrupti temporibus perferendis ex aperiam! Explicabo.
-                Ipsa hic delectus culpa necessitatibus ad modi quia ab ut expedita. Necessitatibus consectetur eligendi optio laborum ducimus cupiditate deleniti rerum. Sit maiores similique voluptate, dicta veniam tempora magni odit iusto?</p>
-            <h3 id="enlace-7">Título con enlace</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta placeat, aliquam illo ullam excepturi ipsum eos ipsam? Nobis eos nulla animi sequi, tempore dolor reiciendis iusto, alias tenetur aperiam amet.
-                Sapiente excepturi nihil eligendi illum ex minus, nemo modi repudiandae quae veniam qui eius delectus. Fuga, ad praesentium quos facere, corrupti repellat voluptate dolore, sit architecto cumque fugit suscipit odit?</p>
+            <h1 class="text-center my-4"><?php
+                                            if (isset($title)) {
+                                                echo esc($title);
+                                            }
+                                            ?></h1>
+            <h3 id="que-son-las-cookies">¿Qué son las cookies?</h3>
+            <p>Las cookies son procedimientos automáticos de recogida de información relativa a las preferencias determinadas por el usuario durante su visita al sitio Web con el fin de reconocerlo como usuario, y personalizar su experiencia y el uso del sitio Web, y pueden también, por ejemplo, ayudar a identificar y resolver errores.</p>
+            <h3 id="que-tipo-de-cookies-utilizamos">¿Qué tipo de cookies utilizamos?</h3>
+            <h4>Cookies propias</h4>
+            <p>En ForoCrianza, utilizamos cookies de sesión. Estas cookies son temporales y se eliminan automáticamente una vez que cierra su navegador. La finalidad de estas cookies es gestionar su sesión en el foro y asegurarse de que puede navegar entre las distintas páginas de manera fluida sin tener que iniciar sesión continuamente. </p>
+            <h4>Cookies de terceros</h4>
+            <p>Son cookies utilizadas y gestionadas por entidades externas que proporcionan a ForoCrianza servicios solicitados por este mismo para mejorar el sitio web y la experiencia del usuario al navegar en el sitio web.</p>
+            <p>Puede obtener más información sobre las cookies de terceros empleadas en ForoCrianza, como información sobre la privacidad, descripción del tipo de cookies que se utiliza, sus principales características o periodo de expiración en los siguientes enlaces:</p>
+            <ul>
+                <li>Google Analytics: <a href="https://developers.google.com/analytics">https://developers.google.com/analytics/</a></li>
+            </ul>
+            <h3 id="como-puedo-gestionar-las-cookies">¿Cómo puede gestionar las cookies?</h3>
+            <p>Puede configurar su navegador para aceptar o rechazar todas las cookies, o bien para que le avise cada vez que se envíe una cookie. Si no acepta las cookies, algunas funciones del sitio web podrían no funcionar correctamente, como la funcionalidad de inicio de sesión.Para gestionar las cookies, siga las instrucciones de su navegador:
+            </p>
+            <ul>
+                <li>Google Chrome: <a href="https://support.google.com/chrome/answer/95647?hl=es">https://support.google.com/chrome/answer/95647?hl=es</a></li>
+                <li>Mozilla Firefox: <a href="https://support.mozilla.org/es/kb/borrar-cookies-para-eliminar-informacion-privada">https://support.mozilla.org/es/kb/borrar-cookies-para-eliminar-informacion-privada</a></li>
+                <li>Microsoft Edge: <a href="https://support.microsoft.com/es-es/microsoft-edge/delete-cookies">https://support.microsoft.com/es-es/microsoft-edge/delete-cookies</a></li>
+                <li>Safari: <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac">https://support.apple.com/es-es/guide/safari/sfri11471/mac</a></li>
+            </ul>
+            <h3 id="cambios-en-la-politica-de-cookies">Cambios en la política de cookies</h3>
+            <p class="mb-5">Podemos actualizar esta Política de Cookies para reflejar cambios en nuestra práctica o en la legislación vigente. Cuando realicemos modificaciones, se actualizará la fecha de la última revisión en la parte superior de este documento. Le recomendamos revisar esta página periódicamente para estar informado sobre cómo protegemos su privacidad al usar cookies.</p>
+            <h3 id="informacion-de-contacto">Informacion de contacto</h3>
+            <p>Si le surge cualquier tipo de duda o pregunta sobre nuestra Política de cookies, puede contactarnos a través de:</p>
+            <ul class="mb-5">
+                <li>Correo electrónico: <a href="mailto:legal@forocrianza.com">legal@forocrianza.com</a></li>
+            </ul>
         </div>
     </div>
 </div>
