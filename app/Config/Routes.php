@@ -50,9 +50,9 @@ $routes->get('/iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as'
 
 
 //Bien
-$routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'aviso-legal']);
-$routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'politica-de-cookies']);
-$routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'politica-de-privacidad']);
+$routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'legal-notice']);
+$routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'cookies-policy']);
+$routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'privacy-policy']);
 
 
 

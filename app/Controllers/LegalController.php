@@ -14,7 +14,6 @@ class LegalController extends BaseController
     {
         $data = [
             'title'     => 'Política de cookies',
-            'legal_info' => $this->legalInfo,
         ];
 
         return view('templates/headerTemplate', $data)
@@ -26,7 +25,6 @@ class LegalController extends BaseController
     {
         $data = [
             'title'     => 'Aviso legal',
-            'legal_info' => $this->legalInfo,
         ];
 
         return view('templates/headerTemplate', $data)
@@ -37,7 +35,6 @@ class LegalController extends BaseController
     {
         $data = [
             'title'     => 'Política de privacidad',
-            'legal_info' => $this->legalInfo,
         ];
 
         return view('templates/headerTemplate', $data)

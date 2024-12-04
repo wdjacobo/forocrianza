@@ -42,24 +42,63 @@
 </head>
 
 <body>
-    <header class="container my-4 p-0 pb-2 border-bottom">
-        <div class="row mb-lg-4 d-flex" name="imagotype-container">
-
-            <div class="col-auto mb-4 mb-lg-0 col-lg-auto d-flex">
+    <header class="container my-4 p-0 pb-4 border-bottom">
+        <div class="row mb-3" name="imagotype-container">
+            <div class="col-12 d-flex justify-content-center justify-content-lg-start">
                 <a href="<?= url_to('index') ?>">
-                    <picture>
-                        <!-- Para pantallas más pequeñas que 'lg' (menores a 768px) -->
-                        <source media="(max-width: 767px)" srcset="<?= base_url() ?>images/brand/isotipo-forocrianza.png">
-                        <!-- Para pantallas más pequeñas que 'lg' (menores a 992px) -->
-                        <source media="(max-width: 991px)" srcset="<?= base_url() ?>images/brand/logotipo-forocrianza.png">
-                        <!-- Para pantallas mayores o iguales a 'lg' (992px o más) -->
-                        <img src="<?= base_url() ?>images/brand/imagotipo-forocrianza.png" alt="Imagotipo del sitio web ForoCrianza">
-                    </picture>
+                    <img src="<?= base_url() ?>images/brand/imagotipo-forocrianza.png" alt="Imagotipo del sitio web ForoCrianza">
                 </a>
             </div>
-            <div class="col-auto ms-auto d-flex col-auto mb-4 mb-lg-0 col-lg-auto d-flex ">
-                <a class="btn btn-outline-primary me-2" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
-                <a class="btn btn-primary" href="<?= url_to('registro') ?>" type="button" role="button">Registro</a>
-            </div>
         </div>
+
+
+
+        <nav class="row d-flex flex-wrap justify-content-md-between">
+
+            <form class="d-flex" role="search">
+                <input type="search" class="form-control" placeholder="Buscar temas..." aria-label="Search">
+
+                <input class="btn btn-primary" type="submit" value="Submit">
+
+            </form>
+
+            <a class="btn btn-primary" href="<?= url_to('legal-notice') ?>" role="button">Crear tema</a>
+
+
+
+            <div class="d-flex align-items-center ms-auto">
+
+                <?php if (auth()->loggedIn()): ?>
+
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span><?= auth()->user()->username ?></span>
+                        </a>
+
+                        <ul class="dropdown-menu text-small pb-0">
+                            <li><a class="dropdown-item" href="/tema">Crear tema</a></li>
+                            <li>
+                                <hr class="dropdown-divider m-0">
+                            </li>
+                            <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
+                            <li><a class="dropdown-item" href="/perfil">Configuración</a></li>
+                            <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+
+
+                <?php else: ?>
+
+
+                        <a href="<?= base_url() ?>iniciar-sesion"><button type="button" class="btn btn-outline-primary me-2">Iniciar sesión</button></a>
+
+                        <a href="registro"><button type="button" class="btn btn-primary">Registro</button></a>
+
+
+                <?php endif; ?>
+
+
+
+            </div>
+        </nav>
     </header>

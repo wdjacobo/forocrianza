@@ -52,9 +52,7 @@ abstract class BaseController extends Controller
     protected $todayTopic;
 
     protected $adUrl;
-
-    protected $legalInfo;
-
+    
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -83,20 +81,5 @@ abstract class BaseController extends Controller
         $this->todayTopic = $subcategoriesModel->getTrendingSubcategories();
 
         $this->adUrl = base_url() . 'images/ads/ad-' . rand(1,4) . '.png';
-
-        $this->legalInfo = [
-            'cookies' => [
-                'text' => 'Política de cookies',
-                'link' => base_url() . 'politica-de-cookies',
-            ],
-            'notice' => [
-                'text' => 'Aviso legal',
-                'link' =>  base_url() . 'aviso-legal',
-            ],
-            'privacy' => [
-                'text' => 'Política de privacidad',
-                'link' => base_url() . 'politica-de-privacidad',
-            ],
-        ];
     }
 }
