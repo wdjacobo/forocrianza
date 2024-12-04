@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Forocrianza es el foro donde compartir y discutir con otros padres y madres experiencias sobre la crianza de nuestros hijos. Este foro contiene información útil para ayudar a las familias en el proceso de crianza de los niños y niñas.">
+    <meta name="keywords" content="forocrianza, foro, crianza, foro para padres, foro sobre familia, foro sobre niños, foro sobre educacion, opiniones crianza, opiniones educacion">
     <title> <?php
             if ($_SERVER['REQUEST_URI'] === '/') {
                 echo 'ForoCrianza';
@@ -14,11 +16,10 @@
             }
             ?></title>
     <link rel="icon" href="<?= base_url() ?>favicon.ico" type="image/ico">
-
     <script>
         /**
-         * Loads local Bootstrap CSS if CDN load fails.
-         * Creates a new link for local Bootstrap CSS and moves custom stylesheets to the end of head element to allow Bootstrap styles overriding.
+         * Carga el CSS local de Bootstrap si falla la CDN.
+         * Crea un nuevo link para el CSS de Bootstrap local y mueve los estilos personalizados al final del elemento `<>` para permitir la sobreescritura de estilos de Bootstrap.
          */
         function loadLocalBootstrapCss() {
             console.warn("No se ha podido cargar el CSS de Bootstrap desde la CDN, se cargará el archivo local.");

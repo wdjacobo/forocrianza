@@ -20,8 +20,8 @@
 
 <script>
     /**
-     * Loads local Bootstrap JS if CDN load fails.
-     * Creates a new script for local Bootstrap JS and moves custom scripts to the end of body element to avoid script dependencies errors.
+     * Carga el CSS local de Bootstrap si falla la CDN.
+     * Crea un nuevo script para el JS de Bootstrap local y mueve los scripts personalizados al final del elemento `<body>` para  evitar errores como los de dependencias de código.
      */
     function loadLocalBootstrapJs() {
         console.warn("No se ha podido cargar el JS de Bootstrap desde la CDN, se cargará el archivo local.");
