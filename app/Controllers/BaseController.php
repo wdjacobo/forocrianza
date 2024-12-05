@@ -51,7 +51,7 @@ abstract class BaseController extends Controller
     protected $lastTopics;
     protected $todayTopic;
 
-    protected $adUrl;
+    protected $adUrls;
     
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -73,6 +73,8 @@ abstract class BaseController extends Controller
 
         $this->twig = \Config\Services::twig(); // Cualquier controlador tendrá acceso a twig automáticamente
 
+        $ad_number = rand(1,4);
+
         // Aside info
         $subcategoriesModel = model('SubcategoriesModel');
         $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories(2);
@@ -80,6 +82,9 @@ abstract class BaseController extends Controller
         $this->lastTopics = $subcategoriesModel->getTrendingSubcategories();
         $this->todayTopic = $subcategoriesModel->getTrendingSubcategories();
 
-        $this->adUrl = base_url() . 'images/ads/ad-' . rand(1,4) . '.png';
+        $this->adUrls = [
+            'normal' => base_url() . "images/ads/ad-$ad_number.png",
+            'small' => base_url() . "images/ads/ad-$ad_number-sm.png",
+        ];
     }
 }

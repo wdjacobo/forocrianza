@@ -64,9 +64,36 @@ class DebugController extends BaseController
         }
     }
 
-    // Pasar parámetros de la URL
-    public function getShoes($sandals, $id)
+
+    public function breadcrumbs()
     {
-        return $sandals . $id;
+        return view('general/breadcrumbs');
     }
+
+    public function checkout()
+    {
+        return view('general/checkout');
+    }
+    public function buttons()
+    {
+        return view('general/buttons-alerts');
+    }
+    public function pagination()
+    {
+        return view('general/pagination');
+    }
+    public function user_form()
+    {
+        return view('general/user_form');
+    }
+    public function topic_form()
+    {
+        return view('general/topic_form');
+    }
+
+
+
+
+
+
 }

@@ -28,7 +28,7 @@ class SubcategoriesController extends BaseController
             'mostVisitedTopics' => $this->lastTopics,
             'mostVisitedTopics' => $this->mostVisitedTopics,
             'mostVisitedTopics' => $this->todayTopic,
-            'ad_url' => $this->adUrl,
+            'ad_urls' => $this->adUrls,
         ];
 
 

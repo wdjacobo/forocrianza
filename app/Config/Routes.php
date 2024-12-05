@@ -71,6 +71,12 @@ $routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'admi
 //Pruebas
 $routes->get('quill', [MainController::class, 'quill'], ['as' => 'quill']);
 $routes->get('debug', [DebugController::class, 'debug'], ['as' => 'debug']);
+$routes->get('breadcrumbs', [DebugController::class, 'breadcrumbs'], ['as' => 'breadcrumbs']);
+$routes->get('checkout', [DebugController::class, 'checkout'], ['as' => 'checkout']);
+$routes->get('buttons', [DebugController::class, 'buttons'], ['as' => 'buttons']);
+$routes->get('user_form', [DebugController::class, 'user_form'], ['as' => 'user_form']);
+$routes->get('topic_form', [DebugController::class, 'topic_form'], ['as' => 'topic_form']);
+$routes->get('pagination', [DebugController::class, 'pagination'], ['as' => 'pagination']);
 $routes->get('redirect', [MainController::class, 'redirect'], ['as' => 'redirect']);
 
 
