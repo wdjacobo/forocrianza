@@ -41,4 +41,12 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+
+
+    public $create_topic = [
+        'category' => 'required',
+        'subcategory' => 'required',
+        'topic-title' => 'required|min_length[10]',
+        'topic-opening-message' => 'required|min_length[20]',
+    ];
 }

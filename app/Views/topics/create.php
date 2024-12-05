@@ -25,6 +25,7 @@
                     class="form-select"
                     value="<?= old('category') ?>"
                     required>
+                                        <!-- Si coincide con el esc(old) marcar como selected -->
                     <option value="">Selecciona una categoría...</option>
                     <option value="id">Bebés</option>
                     <option value="id">Niños</option>
@@ -41,6 +42,7 @@
                     class="form-select"
                     value="<?= old('subcategory') ?>"
                     required>
+                    <!-- Si coincide con el esc(old) marcar como selected -->
                     <option value="">Selecciona una subcategoría...</option>
                     <option value="id">Embarazo</option>
                     <option value="id">Lactancia</option>

@@ -9,6 +9,45 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class TopicsController extends BaseController
 {
 
+    //Revisar para show.
+    public function index()
+    {
+        $model = model('topicsModel');
+
+        //Uso de paginate!
+        $data = [
+            'users' => $model->paginate(10),
+            'pager' => $model->pager,
+        ];
+
+        // If you want to add WHERE conditions
+        $data = [
+            'users' => $model->where('ban', 1)->paginate(10),
+            'pager' => $model->pager,
+        ];
+
+        // Ou pasar ao modelo isto:
+        /*         public function banned()
+        {
+            $this->builder()->where('ban', 1);
+    
+            return $this; // This will allow the call chain to be used.
+        } */
+        // E aquí facer
+        $data = [
+            'users' => $model->banned()->paginate(10),
+            'pager' => $model->pager,
+        ];
+
+        // En la vista usamos así los links:
+        /*<?= $pager->links() ?> */
+
+
+        return view('users/index', $data);
+    }
+
+
+
     public function show($subcategory_slug, $topic_slug)
     {
         $topicsModel = model('TopicsModel');
@@ -46,6 +85,9 @@ class TopicsController extends BaseController
 
     public function create()
     {
+
+
+
         //return $this->request->getMethod();
         //return "Hola";
         if ($this->request->getMethod() === HTTP_GET) {
@@ -58,10 +100,115 @@ class TopicsController extends BaseController
             // Obtener todos los datos enviados por POST en un array asociativo
             $data = $this->request->getPost();
 
-            // Mostrar el contenido de los datos recibidos
-            echo '<pre>';
-            print_r($data); // Esto te mostrará todos los datos en el formato de array
-            echo '</pre>';
+            //Una vez validados los datos...
+            $title = $this->request->getPost('topic-title');
+            //echo mb_url_title($title, '-', true);
+
+            try {
+                //Guardar tema con placeholder en el slug
+                //Update al tema con slug correcto esta vez
+                //redirigir al usuario a la página del tema recién creado
+
+            } catch (\Exception $e) { // Usamos \ para el namespace global de PHP
+
+            }
+
+            try {
+                // Iniciar una transacción para asegurar atomicidad
+                $db = \Config\Database::connect();
+                $db->transStart();
+
+                // Guardar tema con placeholder en el slug
+                $placeholderSlug = 'placeholder-slug';
+                $temaData = [
+                    'title' => $title,
+                    'content' => $content,
+                    'subcategory_id' => $subcategory_id,
+                    'slug' => $placeholderSlug, // Placeholder inicial
+                ];
+                $temaId = $temaModel->insert($temaData); // Obtener el ID recién creado
+
+                if (!$temaId) {
+                    throw new \Exception("No se pudo guardar el tema");
+                }
+
+                // Generar slug correcto basado en el título y el ID
+                $slug = url_title($title, '-', true) . '-' . $temaId;
+
+                // Actualizar el tema con el slug correcto
+                $updateResult = $temaModel->update($temaId, ['slug' => $slug]);
+                if (!$updateResult) {
+                    throw new \Exception("No se pudo actualizar el slug del tema");
+                }
+
+                // Confirmar transacción
+                $db->transComplete();
+
+                if ($db->transStatus() === false) {
+                    throw new \Exception("Hubo un error en la transacción");
+                }
+
+                // Redirigir al usuario a la página del tema creado
+                return redirect()->to('/foro/' . $slug);
+            } catch (\Exception $e) {
+                // En caso de error, revertir transacción
+                $db->transRollback();
+
+                // Manejar el error (log, mensaje al usuario, etc.)
+                log_message('error', $e->getMessage());
+                return redirect()->back()->with('error', 'Hubo un problema al crear el tema, por favor intente nuevamente.');
+            }
+
+            //TRansaction
+            /*             $this->db->transStart();
+$this->db->query('AN SQL QUERY...');
+$this->db->query('ANOTHER QUERY...');
+$this->db->query('AND YET ANOTHER QUERY...');
+$this->db->transComplete(); */
+
+
+            /*     $data = $this->request->getPost();
+    
+    // Inserta el registro inicial
+    $model = model('TopicsModel');
+    $id = $model->insert($data);
+
+    // Genera el slug único
+    $slug = url_title($data['title'], '-', true) . '-' . $id;
+
+    // Actualiza el registro con el slug
+    $model->update($id, ['slug' => $slug]);
+
+    return redirect()->to('/temas/' . $slug);
+ */
+
+            /* Versión mejor, con uso de un placeholder
+            $data['slug'] = url_title($data['title'], '-', true); // Slug inicial
+            $id = $model->insert($data); // Insertar con un slug provisional
+            
+            // Generar el slug final y actualizar
+            $slug = $data['slug'] . '-' . $id;
+            $model->update($id, ['slug' => $slug]);
+// Proceder con el slug
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             return view('/topics/create');
             // Lógica para guardar el tema
@@ -130,51 +277,8 @@ class TopicsController extends BaseController
 
 
 
-    public function index()
-    {
-        $model = model('topicsModel');
-
-        //Uso de paginate!
-        $data = [
-            'users' => $model->paginate(10),
-            'pager' => $model->pager,
-        ];
-
-        // If you want to add WHERE conditions
-        $data = [
-            'users' => $model->where('ban', 1)->paginate(10),
-            'pager' => $model->pager,
-        ];
-
-        // Ou pasar ao modelo isto:
-        /*         public function banned()
-        {
-            $this->builder()->where('ban', 1);
-    
-            return $this; // This will allow the call chain to be used.
-        } */
-        // E aquí facer
-        $data = [
-            'users' => $model->banned()->paginate(10),
-            'pager' => $model->pager,
-        ];
-
-        // En la vista usamos así los links:
-        /*<?= $pager->links() ?> */
 
 
-        return view('users/index', $data);
-    }
-
-
-
-    // Repasar estas funciones para create
-    protected function generateSlug(string $title): string
-    {
-        $slug = strtolower(trim($title));
-        $slug = preg_replace('/[^a-z0-9]+/i', '-', $slug); // Reemplaza espacios y caracteres especiales por "-"
-        return trim($slug, '-');
-    }
 
     public function showTopic(string $subcategorySlug, string $topicSlug)
     {
