@@ -44,6 +44,74 @@ class TopicsController extends BaseController
     }
 
 
+    public function create()
+    {
+        //return $this->request->getMethod();
+        //return "Hola";
+        if ($this->request->getMethod() === HTTP_GET) {
+            // Mostrar el formulario
+            return view('/topics/create');
+        }
+
+        if ($this->request->getMethod() === HTTP_POST) {
+
+            // Obtener todos los datos enviados por POST en un array asociativo
+            $data = $this->request->getPost();
+
+            // Mostrar el contenido de los datos recibidos
+            echo '<pre>';
+            print_r($data); // Esto te mostrará todos los datos en el formato de array
+            echo '</pre>';
+
+            return view('/topics/create');
+            // Lógica para guardar el tema
+            //return redirect()->to('/subcategoria-del-tema/');
+        }
+
+
+        // Acceder a los datos del formulario usando $this->request->getPost()
+        $category = $this->request->getPost('category');
+        $subcategory = $this->request->getPost('subcategory');
+        $topicTitle = $this->request->getPost('topic-title');
+        $topicOpeningMessage = $this->request->getPost('topic-opening-message');
+
+        // Validar los datos si es necesario (opcional)
+        if (!$category || !$subcategory || !$topicTitle || !$topicOpeningMessage) {
+            // Manejar el error si algún campo es obligatorio y no se completó
+            return redirect()->back()->withInput()->with('error', 'Por favor, completa todos los campos.');
+        }
+
+        // Ahora puedes hacer algo con estos datos, por ejemplo, guardarlos en la base de datos
+        // $model = new TopicModel();
+        // $model->save([
+        //     'category' => $category,
+        //     'subcategory' => $subcategory,
+        //     'title' => $topicTitle,
+        //     'message' => $topicOpeningMessage
+        // ]);
+
+        // O simplemente los muestras para ver qué datos recibiste:
+        echo "Categoría: " . $category . "<br>";
+        echo "Subcategoría: " . $subcategory . "<br>";
+        echo "Título: " . $topicTitle . "<br>";
+        echo "Contenido: " . $topicOpeningMessage . "<br>";
+
+        // Redirigir a otra vista después de procesar
+        return redirect()->to('/some-other-page');
+    }
+
+    /*Validación de creación de temas */
+
+    /* $validation->setRules([
+    'username' => [
+        'label' => 'Nombre de usuario',
+        'rules' => 'required|max_length[10]',
+        'errors' => [
+            'max_length' => 'El nombre de usuario no puede superar los 10 caracteres.',
+        ],
+    ],
+]); */
+
 
 
 

@@ -92,3 +92,16 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
+
+
+/*
+ |--------------------------------------------------------------------------
+ | Constantes de métodos HTTP
+ |--------------------------------------------------------------------------
+ |
+ | Establecidas para evitar errores tipográficos.
+ */
+defined('HTTP_GET') or define('HTTP_GET', 'GET');
+defined('HTTP_POST') or define('HTTP_POST', 'POST');
+defined('HTTP_PUT') or define('HTTP_PUT', 'PUT');
+defined('HTTP_DELETE') or define('HTTP_DELETE', 'DELETE');

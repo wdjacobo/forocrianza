@@ -81,7 +81,7 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             // 'honeypot',
-            // 'csrf',
+            'csrf', // Activado para el uso de csrf_field() en formularios por seguridad
             // 'invalidchars',
             // 'session' => ['only' => ['/admin']],
         ],

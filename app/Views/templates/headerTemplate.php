@@ -15,7 +15,7 @@
             }
           }
           ?></title>
-  <link rel="icon" href="<?= base_url() ?>favicon.ico" type="image/ico">
+  <link rel="icon" href="<?= base_url('favicon.ico') ?>" type="image/ico">
   <script>
     /**
      * Carga el CSS local de Bootstrap si falla la CDN.
@@ -25,7 +25,7 @@
       console.warn("No se ha podido cargar el código CSS de Bootstrap desde la CDN, se cargará el archivo local.");
       let fallbackLink = document.createElement('link');
       fallbackLink.rel = 'stylesheet';
-      fallbackLink.href = '<?= base_url() ?>css/bootstrap.min.css';
+      fallbackLink.href = '<?= base_url('css/bootstrap.min.css') ?>';
       document.head.appendChild(fallbackLink);
 
       let customStyles = document.getElementById('custom-styles');
@@ -38,7 +38,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
 
   <!-- CSS personalizado -->
-  <link id="custom-styles" rel="stylesheet" href="<?= base_url() ?>css/style.css">
+  <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 
 
@@ -49,7 +49,7 @@
 
       <div class="col-12 d-lg-none d-flex justify-content-center mb-4">
         <a href="<?= url_to('index') ?>"">
-          <img src=" <?= base_url() ?>images/brand/imagotipo-forocrianza.png" alt="Imagotipo del sitio web ForoCrianza" width="100%">
+          <img src=" <?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza" width="100%">
         </a>
       </div>
 
@@ -69,13 +69,13 @@
 
       <div class="col-auto d-none d-lg-block">
         <a href="<?= url_to('index') ?>">
-          <img src="<?= base_url() ?>images/brand/imagotipo-forocrianza.png" alt="Imagotipo del sitio web ForoCrianza">
+          <img src="<?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza">
         </a>
       </div>
 
 
       <div class="col-auto ms-auto">
-        <a class="btn btn-outline-primary me-2 responsive-btn" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
+        <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
         <a class="btn btn-primary responsive-btn" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
       </div>
 

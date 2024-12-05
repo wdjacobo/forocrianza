@@ -79,6 +79,13 @@
                             <div class="alert alert-success" role="alert">
                                 Mensaje de registro correcto, o pantallazo de resgistro correcto con link a tu perfil.
                             </div>
+                            <div>
+                                <p>No caso de meter imaxes...</p>
+                                <div class="mb-3">
+            <label class="form-label" for="customFile">Upload</label>
+            <input type="file" class="form-control" id="customFile">
+          </div>
+                            </div>
                             <p>Formularios con datos generales</p>
                             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                                 <input type="search" class="form-control form-control-dark mb-4" placeholder="" aria-label="Search">
