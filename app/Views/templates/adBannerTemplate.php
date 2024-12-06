@@ -11,6 +11,8 @@
                 <!-- Para pantallas mayores o iguales a 'lg' (992px o más) -->
                 <img class="p-0 bg-body-tertiary" src="<?= esc($ad_urls['normal']) ?>" alt="Imagen publicitaria" width="100%">
             </picture>
+            <!-- Las fotos utilizadas en los carteles publicitarios han sido obtenidas en Unsplash (https://unsplash.com/) o en Freepik (http://www.freepik.com) a través de una licencia gratuita. Todas han sido editadas. -->
+            <a href=""></a>
         </a>
     </div>
 </aside>

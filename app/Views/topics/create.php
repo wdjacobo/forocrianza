@@ -10,13 +10,13 @@
 
 <body>
 
-    <!-- If you use the form helper, then form_open() will automatically insert a hidden csrf field in your forms. -->
-    <!-- Uso de reglas html y invalid-feedback en login y registro tb (pattern="[a-zA-Z9]{10,}" para constraseñas) -->
-    <!-- Revisar values, validation bootstrap... -->
-
+    <?php  ?>
     <div class="container pb-5">
         <form action="<?= base_url() . "crear-tema" ?>" method="post" class="row needs-validation my-5 g-3" novalidate>
             <?= csrf_field() ?>
+            <div class="col-12">
+                <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
+            </div>
             <div class="col-md-6 form-group">
                 <label for="category" class="form-label">Categoría *</label>
                 <select
@@ -25,13 +25,20 @@
                     class="form-select"
                     value="<?= old('category') ?>"
                     required>
-                                        <!-- Si coincide con el esc(old) marcar como selected -->
+                    <!-- Si coincide con el esc(old) marcar como selected -->
                     <option value="">Selecciona una categoría...</option>
-                    <option value="id">Bebés</option>
-                    <option value="id">Niños</option>
+                    <?php if (isset($categories)) : ?>
+                        <?php foreach ($categories as $category) : ?>
+                            <option value="<?= esc($category['id']) ?>"> <?php
+                                                                            if (set_value('subcategory') === $category['id']) {
+                                                                                echo "selected";
+                                                                            }
+                                                                            ?><?= esc($category['title']) ?></option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </select>
                 <div class="invalid-feedback">
-                    Por favor, selecciona una categoría válida
+                    Por favor, selecciona una categoría
                 </div>
             </div>
             <div class="col-md-6 form-group">
@@ -42,13 +49,19 @@
                     class="form-select"
                     value="<?= old('subcategory') ?>"
                     required>
-                    <!-- Si coincide con el esc(old) marcar como selected -->
                     <option value="">Selecciona una subcategoría...</option>
-                    <option value="id">Embarazo</option>
-                    <option value="id">Lactancia</option>
+                    <?php if (isset($subcategories)) : ?>
+                        <?php foreach ($subcategories as $subcategory) : ?>
+                            <option value="<?= esc($subcategory['id']) ?>" <?php
+                                                                            if (set_value('subcategory') === $subcategory['id']) {
+                                                                                echo "selected";
+                                                                            }
+                                                                            ?>><?= esc($subcategory['title']) ?></option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </select>
                 <div class="invalid-feedback">
-                    Por favor, selecciona una subcategoría válida
+                    Por favor, selecciona una subcategoría
                 </div>
             </div>
             <div class="col-sm-12 form-group">
@@ -58,7 +71,7 @@
                     name="topic-title"
                     type="text"
                     class="form-control"
-                    value="<?= old('topic-title') ?>"
+                    value="<?= set_value('topic-title') ?>"
                     placeholder="Introduce un título para el tema..."
                     minlength="10"
                     maxlength="250"
@@ -74,24 +87,46 @@
                     id="topic-opening-message"
                     name="topic-opening-message"
                     class="form-control"
-                    value="<?= old('topic-title') ?>"
                     placeholder="Incluir edición con Quill"
                     rows="8"
                     minlength="40"
-                    required></textarea>
+                    required><?= set_value('topic-opening-message') ?></textarea>
                 <small class="text-body-secondary">Debe contener al menor 40 caracteres</small>
                 <div class="invalid-feedback">
                     Introduce un contenido válido. Asegúrate de cumplir las reglas para el contenido.
                 </div>
             </div>
+            <?php if (isset($errors)) : ?>
+                <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                        <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
+                        <ul>
+                            <?php foreach ($errors as $error) : ?>
+                                <li><?= esc($error) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($data)) : ?>
+                <div class="col-12">
+                    <div class="alert alert-warning" role="alert">
+                        <p>Campos data</p>
+                        <ul>
+                            <?php foreach ($data as $data) : ?>
+                                <li><?= esc($data) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php endif; ?>
             <div class="col-3 d-flex ms-auto gap-1">
                 <!-- Sobre document:referrer https://developer.mozilla.org/en-US/docs/Web/API/Document/referrer -->
-                <a href="javascript:window.location.href=document.referrer" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
+                <!--                 <a href="javascript:window.location.href=document.referrer" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a> -->
+
+                <a href="<?= previous_url() ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
             </div>
-
-
-
         </form>
     </div>
 
@@ -127,6 +162,8 @@
     <div class="p-1 my-5" width="100vw" heigth="20vw" style="background-color: red;">
         <p>Fin</p>
     </div>
+
+
 
     <ul>
         <li>VALIDAR Y AUTOGENERAR</li>

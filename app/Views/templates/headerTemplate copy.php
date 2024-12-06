@@ -90,9 +90,9 @@
                 <?php else: ?>
 
 
-                        <a href="<?= base_url() ?>iniciar-sesion"><button type="button" class="btn btn-outline-primary me-2">Iniciar sesión</button></a>
+                    <a href="<?= base_url() ?>iniciar-sesion"><button type="button" class="btn btn-outline-primary me-2">Iniciar sesión</button></a>
 
-                        <a href="registro"><button type="button" class="btn btn-primary">Registro</button></a>
+                    <a href="registro"><button type="button" class="btn btn-primary">Registro</button></a>
 
 
                 <?php endif; ?>

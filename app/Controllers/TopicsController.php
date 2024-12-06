@@ -83,91 +83,177 @@ class TopicsController extends BaseController
     }
 
 
+
+
     public function create()
     {
 
+        // Necesario si usamos el form helper, aunque podríamos cargarlo en la clase con protected $helpers = ['form'];
+        // Es necesario para el uso de set_value()!
+        helper('form');
+
+        $categoriesModel = model('CategoriesModel');
+        $subcategoriesModel = model('SubcategoriesModel');
+        $data['categories'] = $categoriesModel->getCategories();
+        $data['subcategories'] = $subcategoriesModel->getSubcategories();
+        // $categorieswith = $categoriesModel->getCategoriesWithSubcategories();
+        //var_dump($categorieswith);
 
 
-        //return $this->request->getMethod();
-        //return "Hola";
-        if ($this->request->getMethod() === HTTP_GET) {
-            // Mostrar el formulario
-            return view('/topics/create');
+
+
+
+
+        if ($this->request->is('get')) {
+            return view('/topics/create', $data);
         }
 
-        if ($this->request->getMethod() === HTTP_POST) {
+        if ($this->request->is('post')) {
 
-            // Obtener todos los datos enviados por POST en un array asociativo
             $data = $this->request->getPost();
 
-            //Una vez validados los datos...
-            $title = $this->request->getPost('topic-title');
-            //echo mb_url_title($title, '-', true);
+            // Consultar reglas: https://codeigniter4.github.io/userguide/libraries/validation.html#rules-for-general-use
+            $rules = [
+                // Faltaría añadir que esté su id en la BD como usar in_list así?
+                'category' => 'required|in_list[5,6]',
+                'subcategory' => 'required|in_list[1,2,3]',
+                'topic-title' => 'required|min_length[10]|max_length[250]|trim',
+                'topic-opening-message'    => 'required|min_length[40]|trim',
+            ];
 
-            try {
-                //Guardar tema con placeholder en el slug
-                //Update al tema con slug correcto esta vez
-                //redirigir al usuario a la página del tema recién creado
+            $errors = [
+                'category' => [
+                    'required' => 'Debes seleccionar una categoría.',
+                    'in_list' => 'Debes seleccionar una categoría válida.',
+                ],
+                'subcategory' => [
+                    'required' => 'Debes seleccionar una subcategoría.',
+                    'in_list' => 'Debes seleccionar una subcategoría válida.',
+                ],
+                'topic-title' => [
+                    'required' => 'Debes introducir un título.',
+                    'min_length' => 'El título debe tener al menos 10 caracteres.',
+                    'max_length' => 'El título no puede tener más de 250 caracteres.',
+                ],
+                'topic-opening-message' => [
+                    'required' => 'Debes introducir contenido.',
+                    'min_length' => 'El contenido debe tener al menos 40 caracteres.',
+                ],
+            ];
 
-            } catch (\Exception $e) { // Usamos \ para el namespace global de PHP
+            //1. Validar
+            if ($this->validateData($data, $rules, $errors)) {
+                echo "Datos validados!";
 
+                $validData = $this->validator->getValidated();
+
+                var_dump($validData);
+                exit();
+
+                // 3. Sanitizar
+                //Usar esc()
+
+
+                // 4. Acción en la BD
+
+                // Ver abajo en create_()
+
+
+                // 5. Redirigir al tema recién creado
+
+
+
+            } else { // 2. Devolver errores
+                $data['data'] = $data;
+                $data['errors'] = $this->validator->getErrors();
+                return view('/topics/create', $data);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public function create_()
+    {
+
+        // $model = new TopicModel();
+        // $model->save([
+        //     'category' => $category,
+        //     'subcategory' => $subcategory,
+        //     'title' => $topicTitle,
+        //     'message' => $topicOpeningMessage
+        // ]);
+
+        try {
+            //Guardar tema con placeholder en el slug
+            //Update al tema con slug correcto esta vez
+            //redirigir al usuario a la página del tema recién creado
+
+        } catch (\Exception $e) { // Usamos \ para el namespace global de PHP
+
+        }
+
+        try {
+            // Iniciar una transacción para asegurar atomicidad
+            $db = \Config\Database::connect();
+            $db->transStart();
+
+            // Guardar tema con placeholder en el slug
+            $placeholderSlug = 'placeholder-slug';
+            $temaData = [
+                'title' => $title,
+                'content' => $content,
+                'subcategory_id' => $subcategory_id,
+                'slug' => $placeholderSlug, // Placeholder inicial
+            ];
+            $temaId = $temaModel->insert($temaData); // Obtener el ID recién creado
+
+            if (!$temaId) {
+                throw new \Exception("No se pudo guardar el tema");
             }
 
-            try {
-                // Iniciar una transacción para asegurar atomicidad
-                $db = \Config\Database::connect();
-                $db->transStart();
+            // Generar slug correcto basado en el título y el ID
+            $slug = url_title($title, '-', true) . '-' . $temaId;
 
-                // Guardar tema con placeholder en el slug
-                $placeholderSlug = 'placeholder-slug';
-                $temaData = [
-                    'title' => $title,
-                    'content' => $content,
-                    'subcategory_id' => $subcategory_id,
-                    'slug' => $placeholderSlug, // Placeholder inicial
-                ];
-                $temaId = $temaModel->insert($temaData); // Obtener el ID recién creado
-
-                if (!$temaId) {
-                    throw new \Exception("No se pudo guardar el tema");
-                }
-
-                // Generar slug correcto basado en el título y el ID
-                $slug = url_title($title, '-', true) . '-' . $temaId;
-
-                // Actualizar el tema con el slug correcto
-                $updateResult = $temaModel->update($temaId, ['slug' => $slug]);
-                if (!$updateResult) {
-                    throw new \Exception("No se pudo actualizar el slug del tema");
-                }
-
-                // Confirmar transacción
-                $db->transComplete();
-
-                if ($db->transStatus() === false) {
-                    throw new \Exception("Hubo un error en la transacción");
-                }
-
-                // Redirigir al usuario a la página del tema creado
-                return redirect()->to('/foro/' . $slug);
-            } catch (\Exception $e) {
-                // En caso de error, revertir transacción
-                $db->transRollback();
-
-                // Manejar el error (log, mensaje al usuario, etc.)
-                log_message('error', $e->getMessage());
-                return redirect()->back()->with('error', 'Hubo un problema al crear el tema, por favor intente nuevamente.');
+            // Actualizar el tema con el slug correcto
+            $updateResult = $temaModel->update($temaId, ['slug' => $slug]);
+            if (!$updateResult) {
+                throw new \Exception("No se pudo actualizar el slug del tema");
             }
 
-            //TRansaction
-            /*             $this->db->transStart();
+            // Confirmar transacción
+            $db->transComplete();
+
+            if ($db->transStatus() === false) {
+                throw new \Exception("Hubo un error en la transacción");
+            }
+
+            // Redirigir al usuario a la página del tema creado
+            return redirect()->to('/foro/' . $slug);
+        } catch (\Exception $e) {
+            // En caso de error, revertir transacción
+            $db->transRollback();
+
+            // Manejar el error (log, mensaje al usuario, etc.)
+            log_message('error', $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un problema al crear el tema, por favor intente nuevamente.');
+        }
+    }
+    //TRansaction : https://www.codeigniter.com/user_guide/database/transactions.html
+    /*             $this->db->transStart();
 $this->db->query('AN SQL QUERY...');
 $this->db->query('ANOTHER QUERY...');
 $this->db->query('AND YET ANOTHER QUERY...');
 $this->db->transComplete(); */
-
-
-            /*     $data = $this->request->getPost();
+    /*
     
     // Inserta el registro inicial
     $model = model('TopicsModel');
@@ -180,9 +266,8 @@ $this->db->transComplete(); */
     $model->update($id, ['slug' => $slug]);
 
     return redirect()->to('/temas/' . $slug);
- */
 
-            /* Versión mejor, con uso de un placeholder
+    Versión mejor, con uso de un placeholder
             $data['slug'] = url_title($data['title'], '-', true); // Slug inicial
             $id = $model->insert($data); // Insertar con un slug provisional
             
@@ -191,110 +276,4 @@ $this->db->transComplete(); */
             $model->update($id, ['slug' => $slug]);
 // Proceder con el slug
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            return view('/topics/create');
-            // Lógica para guardar el tema
-            //return redirect()->to('/subcategoria-del-tema/');
-        }
-
-
-        // Acceder a los datos del formulario usando $this->request->getPost()
-        $category = $this->request->getPost('category');
-        $subcategory = $this->request->getPost('subcategory');
-        $topicTitle = $this->request->getPost('topic-title');
-        $topicOpeningMessage = $this->request->getPost('topic-opening-message');
-
-        // Validar los datos si es necesario (opcional)
-        if (!$category || !$subcategory || !$topicTitle || !$topicOpeningMessage) {
-            // Manejar el error si algún campo es obligatorio y no se completó
-            return redirect()->back()->withInput()->with('error', 'Por favor, completa todos los campos.');
-        }
-
-        // Ahora puedes hacer algo con estos datos, por ejemplo, guardarlos en la base de datos
-        // $model = new TopicModel();
-        // $model->save([
-        //     'category' => $category,
-        //     'subcategory' => $subcategory,
-        //     'title' => $topicTitle,
-        //     'message' => $topicOpeningMessage
-        // ]);
-
-        // O simplemente los muestras para ver qué datos recibiste:
-        echo "Categoría: " . $category . "<br>";
-        echo "Subcategoría: " . $subcategory . "<br>";
-        echo "Título: " . $topicTitle . "<br>";
-        echo "Contenido: " . $topicOpeningMessage . "<br>";
-
-        // Redirigir a otra vista después de procesar
-        return redirect()->to('/some-other-page');
-    }
-
-    /*Validación de creación de temas */
-
-    /* $validation->setRules([
-    'username' => [
-        'label' => 'Nombre de usuario',
-        'rules' => 'required|max_length[10]',
-        'errors' => [
-            'max_length' => 'El nombre de usuario no puede superar los 10 caracteres.',
-        ],
-    ],
-]); */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function showTopic(string $subcategorySlug, string $topicSlug)
-    {
-        // Extraer el ID del tema del slug
-        $slugParts = explode('-', $topicSlug);
-        $topicId = array_pop($slugParts); // El ID está al final del slug
-
-        // Buscar el tema por ID
-        $topicModel = model('TopicsModel');
-        $topic = $topicModel->find($topicId);
-
-        if (!$topic || $topic['subcategory_slug'] !== $subcategorySlug) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Tema no encontrado.");
-        }
-
-        // Retornar la vista con el tema
-        return view('topics/show', ['topic' => $topic]);
-    }
 }

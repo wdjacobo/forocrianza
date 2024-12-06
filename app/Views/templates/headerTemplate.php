@@ -73,11 +73,35 @@
         </a>
       </div>
 
+      <?php if (auth()->loggedIn()): ?>
 
-      <div class="col-auto ms-auto">
-        <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
-        <a class="btn btn-primary responsive-btn" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
-      </div>
+        <!-- Revisar bootstrap etc -->
+        <div class="col-auto ms-auto">
+        <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Topic</a>
+          <div class="dropdown text-end">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <span><?= auth()->user()->username ?></span>
+            </a>
+            <ul class="dropdown-menu text-small pb-0">
+              <li><a class="dropdown-item" href="/tema">Crear tema</a></li>
+              <li>
+                <hr class="dropdown-divider m-0">
+              </li>
+              <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
+              <li><a class="dropdown-item" href="/perfil">Configuración</a></li>
+              <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+            </ul>
+          </div>
+        </div>
 
+      <?php else: ?>
+
+        <div class="col-auto ms-auto">
+          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
+          <a class="btn btn-primary responsive-btn" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
+
+        </div>
+
+      <?php endif; ?>
 
     </header>

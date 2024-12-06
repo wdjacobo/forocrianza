@@ -59,9 +59,10 @@ $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPoli
 
 // Refactorizar
 
-$routes->get('/crear-tema', [TopicsController::class, 'create'], ['as' => 'create_topic']);
-$routes->post('/crear-tema', [TopicsController::class, 'create'], ['as' => 'create_topic']);
+$routes->get('/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
+$routes->post('/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
 //$routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'crear_tema'], ['as' => 'crear_tema']);
+
 
 
 

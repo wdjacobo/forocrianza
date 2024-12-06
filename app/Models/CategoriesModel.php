@@ -71,10 +71,21 @@ class CategoriesModel extends Model
         if ($category_id === null) {
             return $this->findAll();
         }
-
         return $this->find($category_id);
     }
 
+
+    public function getSubcategories(int $category_id): ?array
+    {
+        $resultArray = $this->select('subcategories.id AS subcategory_id, subcategories.title AS subcategory_title')
+            ->join('subcategories', 'categories.id = subcategories.category_id', 'left')
+            ->where('categories.id', $category_id)
+            ->orderBy('subcategories.title')
+            ->get()
+            ->getResultArray();
+
+        return $resultArray;
+    }
 
 
     /**
@@ -90,7 +101,7 @@ class CategoriesModel extends Model
     public function getCategoriesWithSubcategories(): array
     {
         // Realizamos la consulta para obtener las categorías y subcategorías
-        $resultArray = $this->select('categories.id, categories.title AS category_title, subcategories.title AS subcategory_title, subcategories.description AS subcategory_description, subcategories.slug AS subcategory_slug')
+        $resultArray = $this->select('categories.id AS category_id, categories.title AS category_title, subcategories.id AS subcategory_id, subcategories.title AS subcategory_title, subcategories.description AS subcategory_description, subcategories.slug AS subcategory_slug')
             ->join('subcategories', 'categories.id = subcategories.category_id', 'left')->orderBy('categories.id, subcategories.id')
             ->get()
             ->getResultArray();
@@ -105,7 +116,7 @@ class CategoriesModel extends Model
         $categories = [];
 
         foreach ($data as $row) {
-            $categoryId = $row['id'];  // Usamos 'id' directamente sin alias
+            $categoryId = $row['category_id'];
 
             // Inicializamos la categoría si no existe en el array
             if (!isset($categories[$categoryId])) {
@@ -117,8 +128,9 @@ class CategoriesModel extends Model
             }
 
             // Agregar subcategoría si existe
-            if ($row['subcategory_title'] !== null) {
+            if ($row['subcategory_id'] !== null) {
                 $categories[$categoryId]['subcategories'][] = [
+                    'id' => $row['subcategory_id'],
                     'title' => $row['subcategory_title'],
                     'description' => $row['subcategory_description'],
                     'slug' => $row['subcategory_slug'],
