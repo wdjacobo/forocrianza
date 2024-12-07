@@ -88,8 +88,32 @@ class TopicsController extends BaseController
     public function create()
     {
 
+        //Pulir, tener en cuenta en el login la redirect_url sería lo deseable
+        if (!auth()->loggedIn()) {
+            session()->set('redirect_url', current_url());
+            //Flashdata a coger en login error para crear un tema debes tener una cuenta de usuario.
+            return redirect()->to('iniciar-sesion')->with('warn', 'Debes iniciar sesión para publicar un tema');
+        }
+
         // Es necesario para el uso de set_value() en las vistas!
         helper('form');
+
+
+        $data = [
+            'trending_subcategories' => $this->trendingSubcategories,
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->lastTopics,
+            'mostVisitedTopics' => $this->mostVisitedTopics,
+            'mostVisitedTopics' => $this->todayTopic,
+            'ad_urls' => $this->adUrls,
+        ];
+
+
+
+
+
+
+
 
         $categoriesModel = model('CategoriesModel');
         $subcategoriesModel = model('SubcategoriesModel');
@@ -101,6 +125,20 @@ class TopicsController extends BaseController
 
 
         if ($this->request->is('get')) {
+
+
+
+
+
+
+
+            return view('templates/headerTemplate', $data)
+                . view('templates/asideTemplate')
+                . view('topics/create')
+                . view('templates/adBannerTemplate')
+                . view('templates/footerTemplate');
+
+
             return view('/topics/create', $data);
         }
 
@@ -143,6 +181,8 @@ class TopicsController extends BaseController
             //1. Validar
             if ($this->validateData($data, $rules, $errors)) {
 
+                //ENGADIR TRY CATCH??
+
                 $validData = $this->validator->getValidated();
                 $validData['author-id'] = user_id();
 
@@ -160,8 +200,10 @@ class TopicsController extends BaseController
                     $topicSlug = $topicsModel->find($topicId)['slug'];
                     $subcategorySlug = $subcategoriesModel->find($topicsModel->find($topicId)['subcategory_id'])['slug'];
                     $ruta = base_url("$subcategorySlug/$topicSlug");
-/*                     echo "Todo salió bien, id del tema insertado: $topicId<br>Slug del tema: $topicSlug<br>Slug de la subcategoría del tema: $subcategorySlug<br>Ruta hacia el tema: $ruta";
+                    /*                     echo "Todo salió bien, id del tema insertado: $topicId<br>Slug del tema: $topicSlug<br>Slug de la subcategoría del tema: $subcategorySlug<br>Ruta hacia el tema: $ruta";
                     exit(); */
+
+                    // 5. Redirigir al tema recién creado
                     return redirect()->to(base_url("$subcategorySlug/$topicSlug"));
                 } else {
                     return redirect()->back()->with('error', 'Se produjo un error al guardar el tema');
@@ -171,7 +213,6 @@ class TopicsController extends BaseController
 
                 try {
                     $transactionStatus = $topicsmodel->create($validData);
-
                     if ($transactionStatus) {
                         $id = $topicsModel->getInsertID();
                         $newTopicSlug = $topicsModel->find($id)['slug'];
@@ -182,7 +223,6 @@ class TopicsController extends BaseController
                         echo "Algo salió mal";
                         exit();
                     }
-
 
                     // Redirigir si todo sale bien             //redirigir al usuario a la página del tema recién creado
                     //return redirect()->to('/success-page');
@@ -197,25 +237,6 @@ class TopicsController extends BaseController
                     // Si hay un error, mostrarlo y hacer un rollback si fuera necesario
                     return redirect()->back()->with('error', $e->getMessage());
                 }
-
-                // $model->save([
-                //     'category' => $category,
-                //     'subcategory' => $subcategory,
-                //     'title' => $topicTitle,
-                //     'message' => $topicOpeningMessage
-                // ]);
-
-
-
-                // 5. Redirigir al tema recién creado
-
-
-
-
-                echo "Datos validados!";
-                $validData = $this->validator->getValidated();
-                var_dump($validData);
-                exit();
             } else { // 2. Devolver errores
                 // Debería usar with()????
                 $data['data'] = $data;
@@ -223,5 +244,11 @@ class TopicsController extends BaseController
                 return view('/topics/create', $data);
             }
         }
+    }
+
+
+    // Devuelve un listado con los temas que contienen una palabra de las introducidas en el título
+    public function search(){
+
     }
 }

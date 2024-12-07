@@ -47,7 +47,7 @@
   <div class="container-lg px-4">
     <header class="row d-flex mt-4 mt-md-5 mb-4 pb-4 border-bottom">
 
-      <div class="col-12 d-lg-none d-flex justify-content-center mb-4">
+      <div class="col-12 d-lg-none d-flex justify-content-center mb-4 p-0">
         <a href="<?= url_to('index') ?>"">
           <img src=" <?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza" width="100%">
         </a>
@@ -55,7 +55,7 @@
 
 
 
-      <div class="col-auto d-block d-lg-none">
+      <div class="col-auto d-block d-lg-none p-0">
         <button
           class="btn btn-outline-primary responsive-btn"
           data-bs-toggle="modal"
@@ -73,11 +73,16 @@
         </a>
       </div>
 
-      <?php if (auth()->loggedIn()): ?>
 
+      <div class="col-auto p-0 ms-auto">
+        <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
+      </div>
+
+
+
+      <?php if (auth()->loggedIn()): ?>
         <!-- Revisar bootstrap etc -->
-        <div class="col-auto ms-auto">
-        <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Topic</a>
+        <div class="col-auto p-0 ms-auto">
           <div class="dropdown text-end">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
               <span><?= auth()->user()->username ?></span>
@@ -98,7 +103,8 @@
 
         <div class="col-auto ms-auto">
           <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
-          <a class="btn btn-primary responsive-btn" href="<?= url_to('login') ?>" type="button" role="button">Iniciar sesión</a>
+          <a class="btn btn-primary responsive-btn" href="<?= url_to('iniciar-sesion') //Cambiar por login 
+                                                          ?>" type="button" role="button">Iniciar sesión</a>
 
         </div>
 

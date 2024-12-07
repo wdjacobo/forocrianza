@@ -8,6 +8,7 @@ use App\Controllers\LegalController;
 use App\Controllers\SubcategoriesController;
 use App\Controllers\TopicsController;
 use App\Controllers\ProfileController;
+use App\Controllers\Auth\LoginController;
 
 /**
  * @var RouteCollection $routes
@@ -46,6 +47,7 @@ use App\Controllers\ProfileController;
 //TODO: ordenar por orden alfabetico de controlador.
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']); //Esta debe ser la ruta inicial, al contener únicamente la '/'
 $routes->get('/registro', [MainController::class, 'registro'], ['as' => 'registro']); //cambiar por sign in
+//$routes->get('iniciar-sesion', [LoginController::class, 'loginView'], ['as' => 'iniciar-sesion']);
 $routes->get('/iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']); //cambiar por login
 
 

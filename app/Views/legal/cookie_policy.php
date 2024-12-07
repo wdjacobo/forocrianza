@@ -6,7 +6,7 @@
             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary position-sticky p-0" style="top: 2rem;">
                 <div class="list-group list-group-flush scrollarea rounded">
                     <div class="list-group-item py-3 lh-sm">
-                    <div>Contenidos</div>
+                        <div>Contenidos</div>
                         <ul style="list-style-type: none;">
                             <li><a href="#que-son-las-cookies">¿Qué son las cookies?</a></li>
                             <li><a href="#que-tipo-de-cookies-utilizamos">¿Qué tipo de cookies utilizamos?</a></li>
@@ -34,23 +34,23 @@
             <p>Son cookies utilizadas y gestionadas por entidades externas que proporcionan a ForoCrianza servicios solicitados por este mismo para mejorar el sitio web y la experiencia del usuario al navegar en el sitio web.</p>
             <p>Puede obtener más información sobre las cookies de terceros empleadas en ForoCrianza, como información sobre la privacidad, descripción del tipo de cookies que se utiliza, sus principales características o periodo de expiración en los siguientes enlaces:</p>
             <ul>
-                <li>Google Analytics: <a href="https://developers.google.com/analytics">https://developers.google.com/analytics/</a></li>
+                <li><?= auto_link("Google Analytics: https://developers.google.com/analytics") ?></li>
             </ul>
             <h3 id="como-puedo-gestionar-las-cookies">¿Cómo puede gestionar las cookies?</h3>
             <p>Puede configurar su navegador para aceptar o rechazar todas las cookies, o bien para que le avise cada vez que se envíe una cookie. Si no acepta las cookies, algunas funciones del sitio web podrían no funcionar correctamente, como la funcionalidad de inicio de sesión.Para gestionar las cookies, siga las instrucciones de su navegador:
             </p>
             <ul>
-                <li>Google Chrome: <a href="https://support.google.com/chrome/answer/95647?hl=es">https://support.google.com/chrome/answer/95647?hl=es</a></li>
-                <li>Mozilla Firefox: <a href="https://support.mozilla.org/es/kb/borrar-cookies-para-eliminar-informacion-privada">https://support.mozilla.org/es/kb/borrar-cookies-para-eliminar-informacion-privada</a></li>
-                <li>Microsoft Edge: <a href="https://support.microsoft.com/es-es/microsoft-edge/delete-cookies">https://support.microsoft.com/es-es/microsoft-edge/delete-cookies</a></li>
-                <li>Safari: <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac">https://support.apple.com/es-es/guide/safari/sfri11471/mac</a></li>
+                <li><?= auto_link("Google Chrome: https://support.google.com/chrome/answer/95647?hl=es") ?></li>
+                <li><?= auto_link("Mozilla Firefox: https://support.mozilla.org/es/kb/Borrar%20cookies") ?></li>
+                <li><?= auto_link("Microsoft Edge: https://support.microsoft.com/es-es/windows/administrar-cookies-en-microsoft-edge-ver-permitir-bloquear-eliminar-y-usar-168dab11-0753-043d-7c16-ede5947fc64d") ?></li>
+                <li><?= auto_link("Safari: https://support.apple.com/es-es/guide/safari/sfri11471/mac") ?></li>
             </ul>
             <h3 id="cambios-en-la-politica-de-cookies">Cambios en la política de cookies</h3>
             <p class="mb-5">Podemos actualizar esta Política de Cookies para reflejar cambios en nuestra práctica o en la legislación vigente. Cuando realicemos modificaciones, se actualizará la fecha de la última revisión en la parte superior de este documento. Le recomendamos revisar esta página periódicamente para estar informado sobre cómo protegemos su privacidad al usar cookies.</p>
             <h3 id="informacion-de-contacto">Informacion de contacto</h3>
             <p>Si le surge cualquier tipo de duda o pregunta sobre nuestra Política de cookies, puede contactarnos a través de:</p>
             <ul class="mb-5">
-                <li>Correo electrónico: <a href="mailto:legal@forocrianza.com">legal@forocrianza.com</a></li>
+                <li>Correo electrónico: <?= mailto('contacto@forocrianza.com', 'contacto@forocrianza.com'); ?></li>
             </ul>
         </div>
     </div>

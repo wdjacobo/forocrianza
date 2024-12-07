@@ -58,7 +58,7 @@
             <h3 id="informacion-de-contacto">Informacion de contacto</h3>
             <p>Si le surge cualquier tipo de duda o pregunta sobre nuestra Política de privacidad, puede contactarnos a través de:</p>
             <ul class="mb-5">
-                <li>Correo electrónico: <a href="mailto:legal@forocrianza.com">legal@forocrianza.com</a></li>
+                <li>Correo electrónico: <?= mailto('contacto@forocrianza.com', 'contacto@forocrianza.com'); ?></li>
             </ul>
         </div>
     </div>

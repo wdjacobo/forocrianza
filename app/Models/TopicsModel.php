@@ -102,8 +102,7 @@ class TopicsModel extends Model
                 'opening_message' => $data['topic-opening-message'],
                 'slug' => $data['topic-title'] . rand(0, 1000),
                 'subcategory_id' => $data['subcategory'],
-                'author_id' => 1,
-                //'author_id' => $data['author-id'],
+                'author_id' => $data['author-id'],
             ]
         );
         $topic = $this->find($topicId);

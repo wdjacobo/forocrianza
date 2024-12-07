@@ -1,6 +1,6 @@
     <div class="row d-flex justify-content-center">
 
-        <aside class="col-md-3 order-1 p-0 pe-3 d-none d-lg-block">
+        <aside class="col-md-3 order-1 p-0 pe-1 d-none d-lg-block">
             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary borde-gris rounded">
 
                 <div class="list-group list-group-flush border-bottom scrollarea rounded">
@@ -11,7 +11,7 @@
                         </div>
                         <form class="" role="search">
                             <input class="form-control me-2" placeholder="Buscar temas..." type="search" aria-label="Search">
-                            <input class="btn btn-primary" type="submit" value="Buscar temas">
+                            <input class="btn btn-outline-primary responsive-btn" type="submit" value="Buscar temas">
                         </form>
                     </div>
                     <?php if (auth()->loggedIn()): ?>

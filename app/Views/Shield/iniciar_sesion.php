@@ -18,6 +18,20 @@
                             <?php endif ?>
                         </div>
                     <?php endif ?>
+                    <?php if (session('warn') !== null) : ?>
+                        <div class="alert alert-warning" role="alert"><?= session('warn') ?></div>
+                    <?php elseif (session('warns') !== null) : ?>
+                        <div class="alert alert-warning" role="alert">
+                            <?php if (is_array(session('warns'))) : ?>
+                                <?php foreach (session('warn') as $warn) : ?>
+                                    <?= $warn ?>
+                                    <br>
+                                <?php endforeach ?>
+                            <?php else : ?>
+                                <?= session('warns') ?>
+                            <?php endif ?>
+                        </div>
+                    <?php endif ?>
 
                     <?php if (session('message') !== null) : ?>
                         <div class="alert alert-success" role="alert"><?= session('message') ?></div>
@@ -28,7 +42,8 @@
 
                         <!-- Email -->
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingEmailInput" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="jonny@prueba.com<?php //echo old('email') ?>" required>
+                            <input type="email" class="form-control" id="floatingEmailInput" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="jonny@prueba.com<?php //echo old('email') 
+                                                                                                                                                                                                                ?>" required>
                             <label for="floatingEmailInput"><?= lang('Auth.email') ?></label>
                         </div>
 

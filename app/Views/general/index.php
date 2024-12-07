@@ -1,4 +1,4 @@
-        <main class="col-md-9 col-lg-7 order-2 px-1 mb-3">
+        <main class="col-md-9 col-lg-7 order-2 px-1">
 
             <?php if ($categories_list !== []): ?>
                 <?php foreach ($categories_list as $category): ?>
