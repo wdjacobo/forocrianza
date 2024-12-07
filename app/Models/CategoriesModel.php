@@ -69,7 +69,7 @@ class CategoriesModel extends Model
     public function getCategories(?int $category_id = null): ?array
     {
         if ($category_id === null) {
-            return $this->findAll();
+            return $this->orderBy('title', 'ASC')->findAll();
         }
         return $this->find($category_id);
     }
@@ -101,8 +101,8 @@ class CategoriesModel extends Model
     public function getCategoriesWithSubcategories(): array
     {
         // Realizamos la consulta para obtener las categorías y subcategorías
-        $resultArray = $this->select('categories.id AS category_id, categories.title AS category_title, subcategories.id AS subcategory_id, subcategories.title AS subcategory_title, subcategories.description AS subcategory_description, subcategories.slug AS subcategory_slug')
-            ->join('subcategories', 'categories.id = subcategories.category_id', 'left')->orderBy('categories.id, subcategories.id')
+        $resultArray = $this->select('categories.id AS category_id, categories.title AS category_title, subcategories.id AS subcategory_id, subcategories.title AS subcategory_title, subcategories.description AS subcategory_description, subcategories.slug AS subcategory_slug, subcategories.category_id AS subcategories_category_id')
+            ->join('subcategories', 'categories.id = subcategories.category_id', 'left')->orderBy('categories.title, subcategories.title')
             ->get()
             ->getResultArray();
 
@@ -134,6 +134,7 @@ class CategoriesModel extends Model
                     'title' => $row['subcategory_title'],
                     'description' => $row['subcategory_description'],
                     'slug' => $row['subcategory_slug'],
+                    'categoryId' => $row['subcategories_category_id'],
                 ];
             }
         }

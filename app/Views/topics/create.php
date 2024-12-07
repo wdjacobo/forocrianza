@@ -9,8 +9,6 @@
 </head>
 
 <body>
-
-    <?php  ?>
     <div class="container pb-5">
         <form action="<?= base_url() . "crear-tema" ?>" method="post" class="row needs-validation my-5 g-3" novalidate>
             <?= csrf_field() ?>
@@ -23,17 +21,16 @@
                     id="category"
                     name="category"
                     class="form-select"
-                    value="<?= old('category') ?>"
                     required>
                     <!-- Si coincide con el esc(old) marcar como selected -->
                     <option value="">Selecciona una categoría...</option>
                     <?php if (isset($categories)) : ?>
                         <?php foreach ($categories as $category) : ?>
-                            <option value="<?= esc($category['id']) ?>"> <?php
-                                                                            if (set_value('subcategory') === $category['id']) {
-                                                                                echo "selected";
-                                                                            }
-                                                                            ?><?= esc($category['title']) ?></option>
+                            <option value="<?= $category['id'] ?>" <?php
+                                                                    if (esc(set_value('category')) === $category['id']) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>><?= $category['title'] ?></option>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </select>
@@ -47,18 +44,9 @@
                     id="subcategory"
                     name="subcategory"
                     class="form-select"
-                    value="<?= old('subcategory') ?>"
+                    data-selected-value="<?= esc(set_value('subcategory')) ?>"
                     required>
                     <option value="">Selecciona una subcategoría...</option>
-                    <?php if (isset($subcategories)) : ?>
-                        <?php foreach ($subcategories as $subcategory) : ?>
-                            <option value="<?= esc($subcategory['id']) ?>" <?php
-                                                                            if (set_value('subcategory') === $subcategory['id']) {
-                                                                                echo "selected";
-                                                                            }
-                                                                            ?>><?= esc($subcategory['title']) ?></option>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
                 </select>
                 <div class="invalid-feedback">
                     Por favor, selecciona una subcategoría
@@ -71,7 +59,7 @@
                     name="topic-title"
                     type="text"
                     class="form-control"
-                    value="<?= set_value('topic-title') ?>"
+                    value="<?= esc(set_value('topic-title')) ?>"
                     placeholder="Introduce un título para el tema..."
                     minlength="10"
                     maxlength="250"
@@ -90,7 +78,7 @@
                     placeholder="Incluir edición con Quill"
                     rows="8"
                     minlength="40"
-                    required><?= set_value('topic-opening-message') ?></textarea>
+                    required><?= esc(set_value('topic-opening-message')) ?></textarea>
                 <small class="text-body-secondary">Debe contener al menor 40 caracteres</small>
                 <div class="invalid-feedback">
                     Introduce un contenido válido. Asegúrate de cumplir las reglas para el contenido.
@@ -102,7 +90,7 @@
                         <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
                         <ul>
                             <?php foreach ($errors as $error) : ?>
-                                <li><?= esc($error) ?></li>
+                                <li><?= $error ?></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -114,7 +102,8 @@
                         <p>Campos data</p>
                         <ul>
                             <?php foreach ($data as $data) : ?>
-                                <li><?= esc($data) ?></li>
+                                <li><?= var_dump($data)
+                                    ?></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -123,7 +112,6 @@
             <div class="col-3 d-flex ms-auto gap-1">
                 <!-- Sobre document:referrer https://developer.mozilla.org/en-US/docs/Web/API/Document/referrer -->
                 <!--                 <a href="javascript:window.location.href=document.referrer" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a> -->
-
                 <a href="<?= previous_url() ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
             </div>
@@ -134,6 +122,8 @@
 
 
     <script>
+        // Pasar a script externo una vez lo tenga listo
+        // Código de ejemplo de la documentación de Bootstrap : https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
         //Hace quese muestren los errores de invalid o valid feedback
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {
@@ -154,6 +144,50 @@
                 }, false)
             })
         })()
+    </script>
+
+
+    <script>
+        // Pasar a script externo una vez lo tenga listo!!
+        document.addEventListener('DOMContentLoaded', () => {
+            const categories = <?= json_encode($categoriesWithSubcategories) ?>;
+            const categorySelect = document.getElementById('category');
+            const subcategorySelect = document.getElementById('subcategory');
+
+            // Función para cargar subcategorías
+            const loadSubcategories = (selectedCategory, selectedSubcategory) => {
+                subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
+                if (selectedCategory) {
+                    const subcategories = categories.find(cat => cat.id == selectedCategory).subcategories || [];
+                    subcategories.forEach(subcat => {
+                        const option = document.createElement('option');
+                        option.value = subcat.id;
+                        option.textContent = subcat.title;
+                        // Marcar como seleccionado si coincide con el valor anterior
+                        if (selectedSubcategory == subcat.id) {
+                            option.selected = true;
+                        }
+                        subcategorySelect.appendChild(option);
+                    });
+                    subcategorySelect.disabled = false;
+                } else {
+                    subcategorySelect.disabled = true;
+                }
+            };
+
+            // Al cargar la página, verificar si ya hay una categoría seleccionada
+            const selectedCategory = categorySelect.value;
+            const selectedSubcategory = subcategorySelect.dataset.selectedValue; // Recuperar el valor seleccionado previamente
+            if (selectedCategory) {
+                loadSubcategories(selectedCategory, selectedSubcategory);
+            }
+
+            // Al cambiar la categoría, cargar las subcategorías correspondientes
+            categorySelect.addEventListener('change', () => {
+                const selectedCategory = categorySelect.value;
+                loadSubcategories(selectedCategory, null);
+            });
+        });
     </script>
 
 

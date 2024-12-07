@@ -88,20 +88,16 @@ class TopicsController extends BaseController
     public function create()
     {
 
-        // Necesario si usamos el form helper, aunque podríamos cargarlo en la clase con protected $helpers = ['form'];
-        // Es necesario para el uso de set_value()!
+        // Es necesario para el uso de set_value() en las vistas!
         helper('form');
 
         $categoriesModel = model('CategoriesModel');
         $subcategoriesModel = model('SubcategoriesModel');
         $data['categories'] = $categoriesModel->getCategories();
-        $data['subcategories'] = $subcategoriesModel->getSubcategories();
-        // $categorieswith = $categoriesModel->getCategoriesWithSubcategories();
-        //var_dump($categorieswith);
+        $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
 
-
-
-
+        $categoriesIds = $categoriesModel->findColumn('id');
+        $subcategoriesIds = $subcategoriesModel->findColumn('id');
 
 
         if ($this->request->is('get')) {
@@ -111,12 +107,14 @@ class TopicsController extends BaseController
         if ($this->request->is('post')) {
 
             $data = $this->request->getPost();
+            $data['categories'] = $categoriesModel->getCategories();
+            $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
 
             // Consultar reglas: https://codeigniter4.github.io/userguide/libraries/validation.html#rules-for-general-use
             $rules = [
-                // Faltaría añadir que esté su id en la BD como usar in_list así?
-                'category' => 'required|in_list[5,6]',
-                'subcategory' => 'required|in_list[1,2,3]',
+                // La regla in_list espera una lista de valores separados por comas entre los corchetes
+                'category' => 'required|in_list[' . implode(',', $categoriesIds) . ']',
+                'subcategory' => 'required|in_list[' . implode(',', $subcategoriesIds) . ']',
                 'topic-title' => 'required|min_length[10]|max_length[250]|trim',
                 'topic-opening-message'    => 'required|min_length[40]|trim',
             ];
@@ -143,26 +141,48 @@ class TopicsController extends BaseController
 
             //1. Validar
             if ($this->validateData($data, $rules, $errors)) {
-                echo "Datos validados!";
 
                 $validData = $this->validator->getValidated();
 
-                var_dump($validData);
-                exit();
-
                 // 3. Sanitizar
-                //Usar esc()
-
+                //No se aplica sanitización concreta ya que el query builder escapa los datos
+                // Aplicar sanitización de Quill usando clean_html de HTML Purifier; strip_tags() no es seguro, no sanitiza los atributos.
 
                 // 4. Acción en la BD
 
                 // Ver abajo en create_()
+
+                $topicsmodel = model('TopicsModel');
+
+                try {
+                    // Llamamos al método del modelo para guardar el tema con la transacción
+                    $topicsmodel->createTopic($validData);
+
+                    // Redirigir si todo sale bien
+                    return redirect()->to('/success-page');
+                } catch (\RuntimeException $e) {
+                    // Si hay un error, mostrarlo y hacer un rollback si fuera necesario
+                    return redirect()->back()->with('error', $e->getMessage());
+                }
+
+                // $model->save([
+                //     'category' => $category,
+                //     'subcategory' => $subcategory,
+                //     'title' => $topicTitle,
+                //     'message' => $topicOpeningMessage
+                // ]);
+
 
 
                 // 5. Redirigir al tema recién creado
 
 
 
+
+                echo "Datos validados!";
+                $validData = $this->validator->getValidated();
+                var_dump($validData);
+                exit();
             } else { // 2. Devolver errores
                 $data['data'] = $data;
                 $data['errors'] = $this->validator->getErrors();
@@ -184,13 +204,6 @@ class TopicsController extends BaseController
     public function create_()
     {
 
-        // $model = new TopicModel();
-        // $model->save([
-        //     'category' => $category,
-        //     'subcategory' => $subcategory,
-        //     'title' => $topicTitle,
-        //     'message' => $topicOpeningMessage
-        // ]);
 
         try {
             //Guardar tema con placeholder en el slug

@@ -78,7 +78,31 @@ class TopicsModel extends Model
             ->get()
             ->getResultArray();
 
+
+
         return $resultArray;
+    }
+
+    public function create($data)
+
+    {
+
+        // Inicia la transacción
+        $this->db->transStart();
+
+        // Inserta el dato
+        $this->save($data);
+
+        // Completa la transacción
+        $this->db->transComplete();
+
+        // Verifica si la transacción fue exitosa
+        if ($this->db->transStatus() === false) {
+            // Si la transacción falla, lanzar una excepción
+            throw new \RuntimeException('Error al guardar el tema');
+        }
+
+        return true;
     }
 
 
