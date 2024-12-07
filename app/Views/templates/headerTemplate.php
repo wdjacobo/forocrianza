@@ -19,7 +19,7 @@
   <script>
     /**
      * Carga el CSS local de Bootstrap si falla la CDN.
-     * Crea un nuevo link para el CSS de Bootstrap local y mueve los estilos personalizados al final del elemento `<>` para permitir la sobreescritura de estilos de Bootstrap.
+     * Crea un nuevo link para el CSS de Bootstrap local y mueve los estilos personalizados al final del elemento `<head>` para permitir la sobreescritura de estilos de Bootstrap.
      */
     function loadLocalBootstrapCss() {
       console.warn("No se ha podido cargar el código CSS de Bootstrap desde la CDN, se cargará el archivo local.");
@@ -89,7 +89,7 @@
             </a>
             <ul class="dropdown-menu text-small pb-0">
               <?php if (auth()->user()->can('admin.access')): ?>
-                <li><a class="dropdown-item" href="/panel-de-administracion">Panel de administración</a></li>
+                <li><a class="dropdown-item" href="<?= base_url('admin')?>">Panel de administración</a></li>
               <?php endif; ?>
               <?php if (!auth()->user()->can('admin.access')): ?>
                 <li><a class="dropdown-item" href="/admin-access">Obtener admin access</a></li>

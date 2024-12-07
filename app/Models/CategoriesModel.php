@@ -190,7 +190,7 @@ class CategoriesModel extends Model
 
     {
         //Falta obtener el author_id
-/*         echo "Datos validados pasados al modelo:<br><br>";
+        /*         echo "Datos validados pasados al modelo:<br><br>";
         var_dump($data);
         exit();
  */

@@ -71,16 +71,13 @@ $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create
 $routes->get('/admin-access', [MainController::class, 'giveAdminAccess'], ['as' => 'admin-access']);
 $routes->get('admin', [AdminController::class, 'show'], ['as' => 'admin']);
 
-$routes->match(['get', 'put'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-categorie']);
-$routes->match(['get', 'put'], 'admin/editar-categoria', [CategoriesController::class, 'edit'], ['as' => 'edit-categorie']);
-$routes->delete('admin/eliminar-categoria', [CategoriesController::class, 'delete'], ['as' => 'delete-categorie']);
+$routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category']);
+$routes->match(['get', 'put'], 'admin/editar-categoria', [CategoriesController::class, 'edit'], ['as' => 'edit-category']);
+$routes->delete('admin/eliminar-category', [CategoriesController::class, 'delete'], ['as' => 'delete-categorie']);
 
-$routes->match(['get', 'put'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategoria']);
-$routes->match(['get', 'put'], 'admin/editar-subcategoria', [SubcategoriesController::class, 'edit'], ['as' => 'edit-subcategoria']);
-$routes->delete('admin/eliminar-subcategoria', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategoria']);
-
-$routes->get('admin/crear-subcategoria', [CategoriesController::class, 'create'], ['as' => 'create-categorie']);
-$routes->get('admin/eliminar-subcategoria', [CategoriesController::class, 'create'], ['as' => 'create-categorie']);
+$routes->match(['get', 'post'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory']);
+$routes->match(['get', 'put'], 'admin/editar-subcategoria', [SubcategoriesController::class, 'edit'], ['as' => 'edit-subcategory']);
+$routes->delete('admin/eliminar-subcategoria', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategory']);
 
 //Usuarios:
 //$routes->delete('/eliminar-usuario', [¿?::class, 'delete¿?'], ['as' => 'delete-user']);

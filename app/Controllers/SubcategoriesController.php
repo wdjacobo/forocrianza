@@ -32,7 +32,7 @@ class SubcategoriesController extends BaseController
         ];
 
 
-                    return view('templates/headerTemplate', $data)
+        return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
             . view('subcategories/show')
             . view('templates/adBannerTemplate')
@@ -146,7 +146,7 @@ class SubcategoriesController extends BaseController
                     // 5. Redirigir al tema recién creado
                     return redirect()->to(base_url("$subcategorySlug/$topicSlug"));
                 } else {
-                    return redirect()->back()->with('error', 'Se produjo un error al guardar el tema');
+                    return redirect()->back()->withInput()->with('error', 'Se produjo un error al guardar el tema');
                 }
 
 

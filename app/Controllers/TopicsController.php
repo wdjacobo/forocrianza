@@ -100,6 +100,7 @@ class TopicsController extends BaseController
 
 
         $data = [
+            'title' => 'Crear tema',
             'trending_subcategories' => $this->trendingSubcategories,
             'mostVisitedTopics' => $this->mostVisitedTopics,
             'mostVisitedTopics' => $this->lastTopics,
@@ -143,6 +144,10 @@ class TopicsController extends BaseController
         }
 
         if ($this->request->is('post')) {
+
+
+
+
 
             //Falta obtener el author_id!
             $data = $this->request->getPost();
@@ -206,7 +211,7 @@ class TopicsController extends BaseController
                     // 5. Redirigir al tema recién creado
                     return redirect()->to(base_url("$subcategorySlug/$topicSlug"));
                 } else {
-                    return redirect()->back()->with('error', 'Se produjo un error al guardar el tema');
+                    return redirect()->back()->withInput()->with('error', 'Se produjo un error al guardar el tema');
                 }
 
 
@@ -238,17 +243,30 @@ class TopicsController extends BaseController
                     return redirect()->back()->with('error', $e->getMessage());
                 }
             } else { // 2. Devolver errores
-                // Debería usar with()????
+                // Debería usar with()???? Y cambiar por redirect!!!=???
                 $data['data'] = $data;
                 $data['errors'] = $this->validator->getErrors();
-                return view('/topics/create', $data);
+                $data = [
+                    'title'     =>  'Crear tema', //$topicsModel->getTitle($slug),
+                    //['s'], //$topicsModel->getTopicMessages($slug),
+                    'trending_subcategories' => $this->trendingSubcategories,
+                    'mostVisitedTopics' => $this->mostVisitedTopics,
+                    'mostVisitedTopics' => $this->lastTopics,
+                    'mostVisitedTopics' => $this->mostVisitedTopics,
+                    'mostVisitedTopics' => $this->todayTopic,
+                    'ad_urls' => $this->adUrls,
+                ];
+                $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
+                return view('templates/headerTemplate', $data)
+                    . view('templates/asideTemplate')
+                    . view('topics/create')
+                    . view('templates/adBannerTemplate')
+                    . view('templates/footerTemplate');
             }
         }
     }
 
 
     // Devuelve un listado con los temas que contienen una palabra de las introducidas en el título
-    public function search(){
-
-    }
+    public function search() {}
 }
