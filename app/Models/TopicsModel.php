@@ -18,7 +18,7 @@ class TopicsModel extends Model
     protected $useSoftDeletes = true;
 
     // Solo admin y mod pueden modificar el id_subcategoria una vez creada el tema
-    protected $allowedFields = ['title', 'subcategory_id'];
+    protected $allowedFields = ['title', 'opening_message', 'slug', 'subcategory_id', 'author_id'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -86,23 +86,55 @@ class TopicsModel extends Model
     public function create($data)
 
     {
-
-        // Inicia la transacción
+        //Falta obtener el author_id
+/*         echo "Datos validados pasados al modelo:<br><br>";
+        var_dump($data);
+        exit();
+ */
+        // Se inicia una transacción para asegurarnos de que todo sale correctamente con la generación del slug y el update
         $this->db->transStart();
 
-        // Inserta el dato
-        $this->save($data);
+        //Guardamos el tema con un placeholder en el slug
+        // Insertamos el registro y almacenamos su ID
+        $topicId = $this->insert(
+            [
+                'title' => $data['topic-title'],
+                'opening_message' => $data['topic-opening-message'],
+                'slug' => $data['topic-title'] . rand(0, 1000),
+                'subcategory_id' => $data['subcategory'],
+                'author_id' => 1,
+                //'author_id' => $data['author-id'],
+            ]
+        );
+        $topic = $this->find($topicId);
+
+        /*         $topic = $this->find($topicId);
+        echo "<br><br><br><br>Tema insertado:<br><br>";
+        var_dump($topic); //exit(); */
+
+        // Generamos slug a partir del título eliminando espacios y caracteres especiales, separado por guiones, en minúscula, junto con el ID del tema, garantizando unicidad
+        $slug = mb_url_title($topic['title'], '-', true) . "-$topicId";
+
+        // Actualizamos el tema con el slug correcto
+        $this->update($topicId, ['slug' => $slug]);
+
+        //$topic = $this->find($topicId);
+
+        /*         echo "<br><br><br><br>Tema insertado con slug nueva:<br><br>";
+        $topic = $this->find($topicId);
+        var_dump($topic); exit(); */
+
 
         // Completa la transacción
         $this->db->transComplete();
 
-        // Verifica si la transacción fue exitosa
-        if ($this->db->transStatus() === false) {
-            // Si la transacción falla, lanzar una excepción
-            throw new \RuntimeException('Error al guardar el tema');
-        }
+        //Se realiza un rollback automático si falla.
 
-        return true;
+        //retornar el transStatus mejor, indicando si hubo fallo o éxito.
+
+        // Verifica si la transacción fue exitosa
+
+        return $this->db->transStatus();
     }
 
 
