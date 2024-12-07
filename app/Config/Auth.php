@@ -46,9 +46,9 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      */
     public array $views = [
-        'login'                       => '\App\Views\Shield\iniciar_sesion', //'\CodeIgniter\Shield\Views\login' //cambiar cuanto .twig?
-        'register'                    => '\App\Views\Shield\registro', //'\CodeIgniter\Shield\Views\register', ((cambiar 
-        // 'layout'                      => '\App\Views\Shield\layout', // '\CodeIgniter\Shield\Views\layout', //cambiar?
+        'login'                       => '\App\Views\Shield\login', //'\CodeIgniter\Shield\Views\login'
+        'register'                    => '\App\Views\Shield\register', //'\CodeIgniter\Shield\Views\register',
+        // 'layout'                      => '\App\Views\Shield\layout', // '\CodeIgniter\Shield\Views\layout',
         // 'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
         // 'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
         // 'action_email_2fa_email'      => '\CodeIgniter\Shield\Views\Email\email_2fa_email',
@@ -57,7 +57,6 @@ class Auth extends ShieldAuth
         // 'magic-link-login'            => '\CodeIgniter\Shield\Views\magic_link_form',
         // 'magic-link-message'          => '\CodeIgniter\Shield\Views\magic_link_message',
         //'magic-link-email'            => '\CodeIgniter\Shield\Views\Email\magic_link_email',
-        // Se comentan todas las rutas que no se vayan a usar de Shield
     ];
 
     /**
@@ -77,7 +76,7 @@ class Auth extends ShieldAuth
     public array $redirects = [
         'register'          => '/perfil',
         'login'             => '/', //cambiar; no caso no que se inicie sesión nunha páxina, debería levar a esa mesma páxina... Iso vese en loginredirects
-        'logout'            => '/iniciar-sesion', // cambiar, case prefiro páxina de inicio con mensaxe modal de que se pechou sesión satisfactoriamente.
+        'logout'            => '/iniciar-sesion',//'/login', // cambiar, case prefiro páxina de inicio con mensaxe modal de que se pechou sesión satisfactoriamente.
         'force_reset'       => '/',
         'permission_denied' => '/', //cambiar  
         'group_denied'      => '/', //cambiar  
@@ -115,9 +114,9 @@ class Auth extends ShieldAuth
      * @var array<string, class-string<AuthenticatorInterface>>
      */
     public array $authenticators = [
-        'tokens'  => AccessTokens::class,
+        //'tokens'  => AccessTokens::class,
         'session' => Session::class,
-        'hmac'    => HmacSha256::class,
+        //'hmac'    => HmacSha256::class,
         // 'jwt'     => JWT::class,
     ];
 
@@ -142,8 +141,8 @@ class Auth extends ShieldAuth
      */
     public array $authenticationChain = [
         'session',
-        'tokens',
-        'hmac',
+        //'tokens',
+        //'hmac',
         // 'jwt',
     ];
 

@@ -6,9 +6,11 @@ use App\Controllers\DebugController;
 use App\Controllers\IndexController;
 use App\Controllers\LegalController;
 use App\Controllers\SubcategoriesController;
+use App\Controllers\CategoriesController;
 use App\Controllers\TopicsController;
 use App\Controllers\ProfileController;
 use App\Controllers\Auth\LoginController;
+use App\Controllers\AdminController;
 
 /**
  * @var RouteCollection $routes
@@ -46,12 +48,13 @@ use App\Controllers\Auth\LoginController;
 
 //TODO: ordenar por orden alfabetico de controlador.
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']); //Esta debe ser la ruta inicial, al contener únicamente la '/'
-$routes->get('/registro', [MainController::class, 'registro'], ['as' => 'registro']); //cambiar por sign in
+$routes->get('/registro', [MainController::class, 'showRegister'], ['as' => 'registro']); //cambiar por sign in
 //$routes->get('iniciar-sesion', [LoginController::class, 'loginView'], ['as' => 'iniciar-sesion']);
-$routes->get('/iniciar-sesion', [MainController::class, 'iniciar_sesion'], ['as' => 'iniciar-sesion']); //cambiar por login
+$routes->get('/iniciar-sesion', [MainController::class, 'showLogin'], ['as' => 'iniciar-sesion']); //cambiar por login
 
 
 //Bien
+//if (auth()->loggedIn()) {}
 $routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'legal-notice']);
 $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'cookies-policy']);
 $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'privacy-policy']);
@@ -61,17 +64,36 @@ $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPoli
 
 // Refactorizar
 
-$routes->get('/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
-$routes->post('/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
-//$routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'crear_tema'], ['as' => 'crear_tema']);
+//Temas
+$routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
+
+//Admin
+$routes->get('/admin-access', [MainController::class, 'giveAdminAccess'], ['as' => 'admin-access']);
+$routes->get('admin', [AdminController::class, 'show'], ['as' => 'admin']);
+
+$routes->match(['get', 'put'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-categorie']);
+$routes->match(['get', 'put'], 'admin/editar-categoria', [CategoriesController::class, 'edit'], ['as' => 'edit-categorie']);
+$routes->delete('admin/eliminar-categoria', [CategoriesController::class, 'delete'], ['as' => 'delete-categorie']);
+
+$routes->match(['get', 'put'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategoria']);
+$routes->match(['get', 'put'], 'admin/editar-subcategoria', [SubcategoriesController::class, 'edit'], ['as' => 'edit-subcategoria']);
+$routes->delete('admin/eliminar-subcategoria', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategoria']);
+
+$routes->get('admin/crear-subcategoria', [CategoriesController::class, 'create'], ['as' => 'create-categorie']);
+$routes->get('admin/eliminar-subcategoria', [CategoriesController::class, 'create'], ['as' => 'create-categorie']);
+
+//Usuarios:
+//$routes->delete('/eliminar-usuario', [¿?::class, 'delete¿?'], ['as' => 'delete-user']);
 
 
 
 
 
 $routes->get('nuevo-tema', [MainController::class, 'nuevo_tema'], ['as' => 'nuevo-tema']);
+$routes->get('/01001101-01101001-01110011-01101000-01101001-01101101-01101001-01110011-01101000-01101001', [MainController::class, 'interview']);
 
-$routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
+//Con filter session es el modo de redirigir si no hay sesion iniciada; y filter groups si pertenece al grupo necesario, ver en https://shield.codeigniter.com/references/controller_filters/
+//$routes->get('admin', [MainController::class, 'admin'], ['as' => 'admin', 'filter' => 'session']);
 
 $routes->get('admin-dash', [MainController::class, 'admin_dash'], ['as' => 'adminazo', 'filter' => 'session']); # Añadirmos el filtro de sesión de este modo para requerir que el usuario deba estar logueado para acceder a la ruta. Y para estar logueado como admin en concreto?
 

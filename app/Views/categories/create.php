@@ -1,4 +1,4 @@
-    <main class="col-md-9 col-lg-7 order-2 p-3 border rounded ">
+<main class="col-md-9 col-lg-7 order-2 p-3 border rounded ">
         <form action="<?= base_url() . "crear-tema" ?>" method="post" class="row needs-validation g-3" novalidate>
             <?= csrf_field() ?>
             <div class="col-12">

@@ -42,8 +42,8 @@
 
                         <!-- Email -->
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingEmailInput" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="jonny@prueba.com<?php //echo old('email') 
-                                                                                                                                                                                                                ?>" required>
+                            <input type="email" class="form-control" id="floatingEmailInput" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="usuario@usuario.com<?php //echo old('email') 
+                                                                                                                                                                                                                    ?>" required>
                             <label for="floatingEmailInput"><?= lang('Auth.email') ?></label>
                         </div>
 

@@ -88,6 +88,12 @@
               <span><?= auth()->user()->username ?></span>
             </a>
             <ul class="dropdown-menu text-small pb-0">
+              <?php if (auth()->user()->can('admin.access')): ?>
+                <li><a class="dropdown-item" href="/panel-de-administracion">Panel de administración</a></li>
+              <?php endif; ?>
+              <?php if (!auth()->user()->can('admin.access')): ?>
+                <li><a class="dropdown-item" href="/admin-access">Obtener admin access</a></li>
+              <?php endif; ?>
               <li><a class="dropdown-item" href="/tema">Crear tema</a></li>
               <li>
                 <hr class="dropdown-divider m-0">
