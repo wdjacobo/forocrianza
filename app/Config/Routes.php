@@ -48,9 +48,9 @@ use App\Controllers\AdminController;
 
 //TODO: ordenar por orden alfabetico de controlador.
 $routes->get('/', [IndexController::class, 'index'], ['as' => 'index']); //Esta debe ser la ruta inicial, al contener únicamente la '/'
-$routes->get('/registro', [MainController::class, 'showRegister'], ['as' => 'registro']); //cambiar por sign in
+$routes->get('/registro', [MainController::class, 'register'], ['as' => 'registro']); //cambiar por sign in
 //$routes->get('iniciar-sesion', [LoginController::class, 'loginView'], ['as' => 'iniciar-sesion']);
-$routes->get('/iniciar-sesion', [MainController::class, 'showLogin'], ['as' => 'iniciar-sesion']); //cambiar por login
+$routes->get('/iniciar-sesion', [MainController::class, 'login'], ['as' => 'iniciar-sesion']); //cambiar por login
 
 
 //Bien

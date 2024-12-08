@@ -74,12 +74,12 @@ class Auth extends ShieldAuth
      * to apply any logic you may need.
      */
     public array $redirects = [
-        'register'          => '/perfil',
-        'login'             => '/', //cambiar; no caso no que se inicie sesión nunha páxina, debería levar a esa mesma páxina... Iso vese en loginredirects
-        'logout'            => '/iniciar-sesion',//'/login', // cambiar, case prefiro páxina de inicio con mensaxe modal de que se pechou sesión satisfactoriamente.
+        'register'          => '/',
+        'login'             => '/',
+        'logout'            => '/iniciar-sesion',//'/login',
         'force_reset'       => '/',
-        'permission_denied' => '/', //cambiar  
-        'group_denied'      => '/', //cambiar  
+        'permission_denied' => '/', 
+        'group_denied'      => '/',  
     ];
 
     /**
@@ -203,7 +203,7 @@ class Auth extends ShieldAuth
      */
     public array $sessionConfig = [ // cambiar
         'field'              => 'user',
-        'allowRemembering'   => true,
+        'allowRemembering'   => false, //true,
         'rememberCookieName' => 'remember',
         'rememberLength'     => 30 * DAY,
     ];
@@ -217,7 +217,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, array<int, string>|string>
      */
-    public array $usernameValidationRules = [ //cambiar 
+    public array $usernameValidationRules = [
         'label' => 'Auth.username',
         'rules' => [
             'required',
@@ -236,7 +236,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, array<int, string>|string>
      */
-    public array $emailValidationRules = [ //cambiar 
+    public array $emailValidationRules = [
         'label' => 'Auth.email',
         'rules' => [
             'required',
@@ -428,13 +428,13 @@ class Auth extends ShieldAuth
      *
      * @var class-string<UserModel>
      */
-    public string $userProvider = UserModel::class; //cambiar ?
+    public string $userProvider = UserModel::class;
 
     /**
      * Returns the URL that a user should be redirected
      * to after a successful login.
      */
-    public function loginRedirect(): string //cambiar 
+    public function loginRedirect(): string
     {
 
         if (auth()->user()->can('admin.access')) {

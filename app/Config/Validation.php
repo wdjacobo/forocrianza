@@ -42,7 +42,7 @@ class Validation extends BaseConfig
     // Rules
     // --------------------------------------------------------------------
 
-
+    
     public $create_topic = [
         'category' => 'required',
         'subcategory' => 'required',

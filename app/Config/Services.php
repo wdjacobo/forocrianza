@@ -19,6 +19,7 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
+    // Actualmente no se está utilizando Twig
     /*
      * public static function example($getShared = true)
      * {

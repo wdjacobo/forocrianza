@@ -11,28 +11,30 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class MainController extends BaseController
 {
 
-    public function showRegister()
+    public function register()
     {
-
         $data = [
-            'titulo'     => 'Registro',
+            'title'     => 'Registro',
         ];
+
+
+        return view('Shield/register', $data);
+
 
         return view('templates/basic-header-template', $data)
             . view('Shield/register')
             . view('templates/basic-footer-template');
     }
 
-    public function showLogin()
+    public function login()
     {
 
         $data = [
-            'titulo'     => 'Iniciar sesión',
+            'title'     => 'Iniciar sesión',
         ];
 
-        return view('templates/basic-header-template', $data)
-            . view('Shield/login')
-            . view('templates/basic-footer-template');
+
+        return view('Shield/login', $data);
     }
 
     public function admin()

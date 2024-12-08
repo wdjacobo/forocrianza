@@ -89,7 +89,7 @@
             </a>
             <ul class="dropdown-menu text-small pb-0">
               <?php if (auth()->user()->can('admin.access')): ?>
-                <li><a class="dropdown-item" href="<?= base_url('admin')?>">Panel de administración</a></li>
+                <li><a class="dropdown-item" href="<?= base_url('admin') ?>">Panel de administración</a></li>
               <?php endif; ?>
               <?php if (!auth()->user()->can('admin.access')): ?>
                 <li><a class="dropdown-item" href="/admin-access">Obtener admin access</a></li>
@@ -98,8 +98,7 @@
               <li>
                 <hr class="dropdown-divider m-0">
               </li>
-              <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-              <li><a class="dropdown-item" href="/perfil">Configuración</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Administrar cuenta</a></li>
               <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
             </ul>
           </div>
