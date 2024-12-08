@@ -42,14 +42,14 @@
     </head>
 
     <body class="bg-light">
-        <main role="main" class="container">
-            <div class="row d-flex flex-column align-content-center p-5 gap-5">
-                <div class="col-12 col-md-5 d-flex justify-content-center">
+        <main role="main" class="container-md">
+            <div class="row d-flex flex-column align-content-center p-sm-5 gap-5">
+                <div class="col-12 col-md-8 col-lg-5 d-flex justify-content-center mt-5 mt-sm-1">
                     <a href="<?= url_to('index') ?>">
                         <img src=" <?= base_url('images/brand/isotipo-forocrianza.png') ?>" alt="Isotipo del sitio web ForoCrianza">
                     </a>
                 </div>
-                <div class="card col-12 col-md-5 shadow-sm">
+                <div class="card col-12 col-md-8 col-lg-5 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title mb-5"><strong><?= lang('Auth.login') ?></strong></h5>
                         <!-- Errores -->
