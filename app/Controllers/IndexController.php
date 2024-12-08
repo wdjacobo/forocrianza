@@ -22,6 +22,7 @@ class IndexController extends BaseController
 
         return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
+            . view('templates/asideModalTemplate')
             . view('general/index')
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');

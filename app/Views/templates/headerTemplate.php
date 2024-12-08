@@ -56,9 +56,10 @@
 
       <div class="col-auto d-block d-lg-none p-0">
         <button
+          type="button"
           class="btn btn-outline-primary responsive-btn"
           data-bs-toggle="modal"
-          data-bs-target="#menuModal"
+          data-bs-target="#aside-modal"
           aria-label="Toggle menu">
           &#9776;
         </button>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Página no encontrada | ForoCrianza</title>
+    <title><?= lang('Errors.pageNotFound') ?></title>
 
     <style>
         div.logo {
@@ -70,12 +70,8 @@
 </head>
 <body>
     <div class="wrap">
-    <div class="col-12 d-lg-none d-flex justify-content-center mb-4 p-0">
-        <a href="<?= url_to('index') ?>"">
-          <img src=" <?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza">
-        </a>
-      </div>
-        <h1>Ups! 404</h1>
+        <h1>404</h1>
+
         <p>
             <?php if (ENVIRONMENT !== 'production') : ?>
                 <?= nl2br(esc($message)) ?>
@@ -83,7 +79,6 @@
                 <?= lang('Errors.sorryCannotFind') ?>
             <?php endif; ?>
         </p>
-        <p class="text-center"><a href="<?= url_to('index') ?>">Volver a la página principal</a></p>
     </div>
 </body>
 </html>

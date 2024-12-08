@@ -61,6 +61,19 @@
                     <?php endif ?>
                 </div>
             <?php endif ?>
+            <div class="list-group-item topic-author-message">
+                <h5><a href="#">Autor</a></h5>
+                <p>Contenido</p>
+                <!-- Comprobar el id del autor del mensaje y comparar con el id del autor del tema, si coinciden, poner una clase que le da color distinto al mensaje -->
+                <a href="<?= previous_url() ?>" class="btn btn-danger btn-lg text-center">Eliminar mensaje</a>
+            </div>
+            <div class="list-group-item topic-author-message">
+                <form action="" class="d-flex flex-column">
+                    <textarea name="" id=""></textarea>
+                    <label for="">Aquí va un formulario si estás logueado</label>
+                    <button type="submit">Publicar</button>
+                </form>
+            </div>
 
             <!-- Paginado de Bootstrap no implementado -->
             <!--             <li class="list-group-item d-flex justify-content-center">

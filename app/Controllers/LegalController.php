@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use CodeIgniter\Exceptions\PageNotFoundException;
-//Usar este PageNotFoundException!
 
 class LegalController extends BaseController
 {
@@ -16,9 +14,7 @@ class LegalController extends BaseController
             'title'     => 'Política de cookies',
         ];
 
-        return view('templates/headerTemplate', $data)
-            . view('legal/cookie_policy')
-            . view('templates/footerTemplate');
+        return view('legal/cookie_policy', $data);
     }
 
     public function showLegalNotice()
@@ -27,9 +23,7 @@ class LegalController extends BaseController
             'title'     => 'Aviso legal',
         ];
 
-        return view('templates/headerTemplate', $data)
-            . view('legal/legal_notice')
-            . view('templates/footerTemplate');
+        return view('legal/legal_notice', $data);
     }
     public function showPrivacyPolicy()
     {
@@ -37,8 +31,6 @@ class LegalController extends BaseController
             'title'     => 'Política de privacidad',
         ];
 
-        return view('templates/headerTemplate', $data)
-            . view('legal/privacy_policy')
-            . view('templates/footerTemplate');
+        return view('legal/privacy_policy', $data);
     }
 }
