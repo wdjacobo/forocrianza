@@ -64,10 +64,8 @@ class TopicsController extends BaseController
             'slug' => $topic_slug,
             'topic_messages' => $topicsModel->getTopicMessagesBySlug($topic_slug), //['s'], //$topicsModel->getTopicMessages($slug),
             'trending_subcategories' => $this->trendingSubcategories,
-            'mostVisitedTopics' => $this->mostVisitedTopics,
-            'mostVisitedTopics' => $this->lastTopics,
-            'mostVisitedTopics' => $this->mostVisitedTopics,
-            'mostVisitedTopics' => $this->todayTopic,
+            'last_topics' => $this->lastTopics,
+            'topics_with_most_messages' => $this->topicsWithMostMessages,
             'ad_urls' => $this->adUrls,
         ];
 
@@ -102,10 +100,9 @@ class TopicsController extends BaseController
         $data = [
             'title' => 'Crear tema',
             'trending_subcategories' => $this->trendingSubcategories,
-            'mostVisitedTopics' => $this->mostVisitedTopics,
-            'mostVisitedTopics' => $this->lastTopics,
-            'mostVisitedTopics' => $this->mostVisitedTopics,
-            'mostVisitedTopics' => $this->todayTopic,
+            'trending_subcategories' => $this->trendingSubcategories,
+            'last_topics' => $this->lastTopics,
+            'topics_with_most_messages' => $this->topicsWithMostMessages,
             'ad_urls' => $this->adUrls,
         ];
 
@@ -250,10 +247,9 @@ class TopicsController extends BaseController
                     'title'     =>  'Crear tema', //$topicsModel->getTitle($slug),
                     //['s'], //$topicsModel->getTopicMessages($slug),
                     'trending_subcategories' => $this->trendingSubcategories,
-                    'mostVisitedTopics' => $this->mostVisitedTopics,
-                    'mostVisitedTopics' => $this->lastTopics,
-                    'mostVisitedTopics' => $this->mostVisitedTopics,
-                    'mostVisitedTopics' => $this->todayTopic,
+                    'trending_subcategories' => $this->trendingSubcategories,
+                    'last_topics' => $this->lastTopics,
+                    'topics_with_most_messages' => $this->topicsWithMostMessages,
                     'ad_urls' => $this->adUrls,
                 ];
                 $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();

@@ -45,14 +45,13 @@
 <body>
   <!-- Inicio del container principal -->
   <div class="container-lg px-4">
-    <header class="row d-flex mt-4 mt-md-5 mb-4 pb-4 border-bottom">
+    <header class="row d-flexmt-4 mt-4 mt-md-5 mb-4 pb-4 border-bottom">
 
       <div class="col-12 d-lg-none d-flex justify-content-center mb-4 p-0">
         <a href="<?= url_to('index') ?>"">
           <img src=" <?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza" width="100%">
         </a>
       </div>
-
 
 
       <div class="col-auto d-block d-lg-none p-0">
@@ -74,15 +73,21 @@
       </div>
 
 
-      <div class="col-auto p-0 ms-auto">
-        <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
-      </div>
+      <?php if (!auth()->loggedIn()): ?>
+        <div class="col-auto d-none d-sm-flex align-items-center p-0 ms-auto">
+          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
+        </div>
+      <?php else: ?>
+        <div class="col-auto d-flex align-items-center p-0 ms-auto">
+          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
+        </div>
+      <?php endif; ?>
 
 
 
       <?php if (auth()->loggedIn()): ?>
         <!-- Revisar bootstrap etc -->
-        <div class="col-auto p-0 ms-auto">
+        <div class="col-auto d-flex align-items-center p-0 ms-auto">
           <div class="dropdown text-end">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
               <span><?= auth()->user()->username ?></span>
@@ -94,11 +99,7 @@
               <?php if (!auth()->user()->can('admin.access')): ?>
                 <li><a class="dropdown-item" href="/admin-access">Obtener admin access</a></li>
               <?php endif; ?>
-              <li><a class="dropdown-item" href="/tema">Crear tema</a></li>
-              <li>
-                <hr class="dropdown-divider m-0">
-              </li>
-              <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Administrar cuenta</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Configuración</a></li>
               <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
             </ul>
           </div>
@@ -106,13 +107,20 @@
 
       <?php else: ?>
 
-        <div class="col-auto ms-auto">
+        <div class="col-auto ms-auto d-flex align-items-center gap-1 p-0">
           <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
-          <a class="btn btn-primary responsive-btn" href="<?= url_to('iniciar-sesion') //Cambiar por login 
+          <a class="btn btn-primary responsive-btn" href="<?= url_to('iniciar-sesion')
                                                           ?>" type="button" role="button">Iniciar sesión</a>
 
         </div>
 
       <?php endif; ?>
+
+      <?php if (!auth()->loggedIn()): ?>
+        <div class="col-12 d-block d-sm-none text-center mt-2 p-0">
+          <a class="btn btn-outline-primary responsive-btn w-100" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
+        </div>
+      <?php endif; ?>
+
 
     </header>

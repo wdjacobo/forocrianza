@@ -17,37 +17,4 @@ use CodeIgniter\Config\BaseService;
  * method format you should use for your service methods. For more examples,
  * see the core Services file at system/Config/Services.php.
  */
-class Services extends BaseService
-{
-    // Actualmente no se está utilizando Twig
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
-
-    public static function twig($viewDir = null, $getShared = true)
-    {
-        if ($getShared) {
-            return static::getSharedInstance('twig', $viewDir);
-        }
-
-        $appPaths = new \Config\Paths();
-        $appViewPaths = $viewDir ?? $appPaths->viewDirectory;
-
-        // Comprobueba si estamos en entorno de desarrollo
-        $isDevelopment = getenv('CI_ENVIRONMENT') === 'development';
-
-        $loader = new \Twig\Loader\FilesystemLoader($appViewPaths);
-
-        return new \Twig\Environment($loader, [
-            'cache' => $isDevelopment ? false : WRITEPATH . '/cache/twig',  // Si estamos en entornos de desarrollo se desactiva la caché
-            'auto_reload' => $isDevelopment,  // Para que Twig recargue las plantillas al detectar cambios
-        ]);
-    }
-}
+class Services extends BaseService {}

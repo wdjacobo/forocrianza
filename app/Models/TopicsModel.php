@@ -48,6 +48,7 @@ class TopicsModel extends Model
     protected $afterDelete    = [];
 
 
+    // NO!
     // Cargar el modelo de mensajes en el constructor
     protected $messagesModel;
 
@@ -87,7 +88,7 @@ class TopicsModel extends Model
 
     {
         //Falta obtener el author_id
-/*         echo "Datos validados pasados al modelo:<br><br>";
+        /*         echo "Datos validados pasados al modelo:<br><br>";
         var_dump($data);
         exit();
  */
@@ -158,6 +159,8 @@ class TopicsModel extends Model
         }
         return $this->find($topic_id);
     }
+
+
 
 
     /**
@@ -271,12 +274,39 @@ class TopicsModel extends Model
     }
 
 
-    // Asegurarse que tienen el campo created_at, el código sería así de sencillo
+
     public function getLastTopics($limit = 5)
+    {
+        return $this->select('topics.title, topics.slug AS topic_slug, topics.created_at, subcategories.slug AS subcategory_slug')
+            ->join('subcategories', 'topics.subcategory_id = subcategories.id', 'left')
+            ->orderBy('topics.created_at', 'DESC')
+            ->limit($limit)
+            ->get()
+            ->getResultArray();
+    }
+
+
+    public function getMostCommentedTopics($limit = 5)
     {
         return $this->orderBy('created_at', 'DESC')
             ->findAll($limit);
     }
+
+    public function getTopicsWithMostMessages($limit = 5)
+    {
+        return $this->select('topics.title, topics.slug AS topic_slug, subcategories.slug AS subcategory_slug, COUNT(messages.id) as message_count')
+            ->join('messages', 'topics.id = messages.topic_id', 'left')
+            ->join('subcategories', 'topics.subcategory_id = subcategories.id', 'left')
+            ->groupBy('topics.id')
+            ->orderBy('message_count', 'DESC')
+            ->limit($limit)
+            ->get()
+            ->getResultArray();
+    }
+
+
+
+
 
     //                      _ 
     //                     | |

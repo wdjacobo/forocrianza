@@ -37,7 +37,7 @@ abstract class BaseController extends Controller
      *
      * @var list<string>
      */
-    protected $helpers = [];
+    protected $helpers = ['text'];
 
 
     /**
@@ -47,12 +47,11 @@ abstract class BaseController extends Controller
 
     // Aside info
     protected $trendingSubcategories;
-    protected $mostVisitedTopics;
+    protected $topicsWithMostMessages;
     protected $lastTopics;
-    protected $todayTopic;
 
     protected $adUrls;
-    
+
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -71,17 +70,15 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
 
-        $this->twig = \Config\Services::twig(); // Cualquier controlador tendrá acceso a twig automáticamente
-
-        $ad_number = rand(1,4);
-
         // Aside info
         $subcategoriesModel = model('SubcategoriesModel');
-        $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories(2);
-        $this->mostVisitedTopics = $subcategoriesModel->getTrendingSubcategories();
-        $this->lastTopics = $subcategoriesModel->getTrendingSubcategories();
-        $this->todayTopic = $subcategoriesModel->getTrendingSubcategories();
+        $topicsModel = model('TopicsModel');
+        $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories();
+        $this->topicsWithMostMessages = $topicsModel->getTopicsWithMostMessages();
+        $this->lastTopics = $topicsModel->getLastTopics();
 
+        // Selección aleatoria de una imagen para el cartel publicitario
+        $ad_number = rand(1, 4);
         $this->adUrls = [
             'normal' => base_url() . "images/ads/ad-$ad_number.png",
             'small' => base_url() . "images/ads/ad-$ad_number-sm.png",

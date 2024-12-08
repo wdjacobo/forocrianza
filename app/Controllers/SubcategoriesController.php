@@ -24,10 +24,8 @@ class SubcategoriesController extends BaseController
             'slug' => $slug,
             'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics($slug),
             'trending_subcategories' => $this->trendingSubcategories,
-            'mostVisitedTopics' => $this->mostVisitedTopics,
-            'mostVisitedTopics' => $this->lastTopics,
-            'mostVisitedTopics' => $this->mostVisitedTopics,
-            'mostVisitedTopics' => $this->todayTopic,
+            'last_topics' => $this->lastTopics,
+            'topics_with_most_messages' => $this->topicsWithMostMessages,
             'ad_urls' => $this->adUrls,
         ];
 
