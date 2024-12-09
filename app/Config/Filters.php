@@ -34,17 +34,17 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
-        # A continuación están todos los filtros que permite usar Shield para proteger rutas:
+        // A continuación están todos los filtros que permite usar Shield para proteger rutas:
         'session'     => \CodeIgniter\Shield\Filters\SessionAuth::class,
-        #'tokens'      => \CodeIgniter\Shield\Filters\TokenAuth::class,
-        #'hmac'        => \CodeIgniter\Shield\Filters\HmacAuth::class,
-        #'chain'       => \CodeIgniter\Shield\Filters\ChainAuth::class,
-        #'auth-rates'  => \CodeIgniter\Shield\Filters\AuthRates::class,
+        //'tokens'      => \CodeIgniter\Shield\Filters\TokenAuth::class,
+        //'hmac'        => \CodeIgniter\Shield\Filters\HmacAuth::class,
+        //'chain'       => \CodeIgniter\Shield\Filters\ChainAuth::class,
+        //'auth-rates'  => \CodeIgniter\Shield\Filters\AuthRates::class,
         'group'       => \CodeIgniter\Shield\Filters\GroupFilter::class,
-        #'permission'  => \CodeIgniter\Shield\Filters\PermissionFilter::class,
-        #'force-reset' => \CodeIgniter\Shield\Filters\ForcePasswordResetFilter::class,
-        #'jwt'         => \CodeIgniter\Shield\Filters\JWTAuth::class,
-        # Fin de filtros proporcionados por Shield
+        'permission'  => \CodeIgniter\Shield\Filters\PermissionFilter::class,
+        //'force-reset' => \CodeIgniter\Shield\Filters\ForcePasswordResetFilter::class,
+        //'jwt'         => \CodeIgniter\Shield\Filters\JWTAuth::class,
+        // Fin de filtros proporcionados por Shield
     ];
 
     /**
@@ -56,7 +56,7 @@ class Filters extends BaseFilters
      * Filters set by default provide framework functionality. If removed,
      * those functions will no longer work.
      *
-     * @see https://codeigniter.com/user_guide/incoming/filters.html#provided-filters
+     * @see https://codeigniter.com/user_guide/incoming/filters.html//provided-filters
      *
      * @var array{before: list<string>, after: list<string>}
      */
@@ -116,7 +116,7 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        // Aplicamos un límite de recargas de la página a las páginas específicadas. TODO: manejarlo bien.
+        // Aplicamos un límite de recargas de la página a las páginas específicadas. Pendiente manejarlo correctamente.
         'auth-rates' => [
             'before' => [
                 'iniciar-sesion',

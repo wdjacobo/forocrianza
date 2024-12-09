@@ -39,24 +39,18 @@ abstract class BaseController extends Controller
      */
     protected $helpers = ['text'];
 
-
-    /**
-     * Almacenará la instancia de Twig
-     */
-    protected $twig;
-
-    // Aside info
-    protected $trendingSubcategories;
-    protected $topicsWithMostMessages;
-    protected $lastTopics;
-
-    protected $adUrls;
-
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
     // protected $session;
+
+    // Información de la barra lateral
+    protected $lastTopics;
+    protected $topicsWithMostMessages;
+    protected $trendingSubcategories;
+
+    protected $adUrls;
 
     /**
      * @return void
@@ -70,12 +64,12 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
 
-        // Aside info
+        // Información de la barra lateral
         $subcategoriesModel = model('SubcategoriesModel');
         $topicsModel = model('TopicsModel');
-        $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories();
-        $this->topicsWithMostMessages = $topicsModel->getTopicsWithMostMessages();
         $this->lastTopics = $topicsModel->getLastTopics();
+        $this->topicsWithMostMessages = $topicsModel->getTopicsWithMostMessages();
+        $this->trendingSubcategories = $subcategoriesModel->getTrendingSubcategories();
 
         // Selección aleatoria de una imagen para el cartel publicitario
         $ad_number = rand(1, 4);

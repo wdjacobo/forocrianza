@@ -6,6 +6,15 @@ namespace App\Controllers;
 
 class CategoriesController extends BaseController
 {
+
+
+        /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function create()
     {
         // No se permite el acceso a usuarios no autenticados y no autorizados

@@ -48,6 +48,13 @@ class TopicsController extends BaseController
 
 
 
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function show($subcategory_slug, $topic_slug)
     {
         $topicsModel = model('TopicsModel');
@@ -262,7 +269,4 @@ class TopicsController extends BaseController
         }
     }
 
-
-    // Devuelve un listado con los temas que contienen una palabra de las introducidas en el título
-    public function search() {}
 }

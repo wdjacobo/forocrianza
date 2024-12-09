@@ -12,7 +12,14 @@ class UsersController extends BaseController
 {
 
 
-    public function create()
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
+    public function update()
     {
         $users = auth()->getProvider();
 
@@ -29,6 +36,37 @@ class UsersController extends BaseController
     }
 
 
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
+    public function delete()
+    {
+        $users = auth()->getProvider();
+
+        $user = new User([
+            'username' => 'nuevoUsuario',
+            'email'    => 'correo@ejemplo.com',
+            'password' => 'contraseña123',
+        ]);
+
+        $users->save($user);
+        $user = $users->findById($users->getInsertID());
+
+        $users->addToDefaultGroup($user);
+    }
+
+
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function index()
     {
 
@@ -48,9 +86,17 @@ class UsersController extends BaseController
             . view('templates/footerTemplate');
     }
 
+
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function mostrar(?string $id = null)
     {
-        $model = model(UsuariosModel::class);
+/*         $model = model(UsuariosModel::class);
 
         $data['usuario'] = $model->getUsuario($id);
 
@@ -62,6 +108,6 @@ class UsersController extends BaseController
 
         return view('templates/headerTemplate', $data)
             . view('usuarios/view')
-            . view('templates/footerTemplate');
+            . view('templates/footerTemplate'); */
     }
 }

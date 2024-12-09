@@ -11,6 +11,13 @@ class ProfileController extends BaseController
 {
 
 
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function show($profile_username)
     {
 
@@ -25,7 +32,7 @@ class ProfileController extends BaseController
 
         //var_dump($userArray['username']); exit();
         //var_dump($user); exit();
-        
+
         if ($users->findById($profile_username) === null) {
             throw new PageNotFoundException('No se ha podido encontrar el perfil "' . $profile_username . '".');
         }
@@ -44,7 +51,6 @@ class ProfileController extends BaseController
             . view('general/profile')
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
-
     }
 
 
@@ -65,24 +71,4 @@ class ProfileController extends BaseController
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
     }
-
-    public function index_backup()
-    {
-
-        $categoriesModel = model('CategoriesModel');
-
-        $data = [
-            'title'     => 'Inicio',
-            'categories_list' => $categoriesModel->getCategoriesWithSubcategories()
-        ];
-
-        return view('templates/headerTemplate_backup', $data)
-            . view('general/index_backup')
-            . view('templates/footerTemplate_backup');
-    }
 }
-
-
-/* <a class="text-decoration-none" href="<?= // Se usa iconv() para evitar problemas de caracteres en la URL: https://www.php.net/manual/es/function.iconv.php
-                                        base_url() . str_replace(' ', '-', strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $subcategory['title']))); ?>"><?= esc($subcategory['title']) ?></a>
- */

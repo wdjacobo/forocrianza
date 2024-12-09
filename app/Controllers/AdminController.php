@@ -4,16 +4,33 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Models\CategoriasModel;
-use CodeIgniter\Exceptions\PageNotFoundException;
-//Usar este PageNotFoundException!
-
 class AdminController extends BaseController
 {
 
+
+        //Ver este redirect para admin
+        public function debug()
+        {
+    
+            //$categoriasModel = model(CategoriasModel::class);
+    
+    
+    
+            $data = [
+                //'lista_categorias' => $categoriasModel->getCategoriasConSubcategorias()
+            ];
+    
+            return view('general/debug', $data);
+        }
+        public function redirect()
+        {
+    
+            return view('general/redirect');
+        }
+
+
     public function show()
     {
-
         // Es necesario para el uso de set_value() en las vistas!
         helper('form');
 
@@ -28,4 +45,7 @@ class AdminController extends BaseController
         . view('templates/footerTemplate'); */
         //return redirect()->to(base_url());
     }
+
+
+
 }

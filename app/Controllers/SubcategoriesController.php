@@ -9,6 +9,13 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class SubcategoriesController extends BaseController
 {
 
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function show($slug)
     {
         $subcategoriesModel = model('SubcategoriesModel');
@@ -34,10 +41,18 @@ class SubcategoriesController extends BaseController
             . view('templates/asideTemplate')
             . view('subcategories/show')
             . view('templates/adBannerTemplate')
+            . view('templates/asideModalTemplate')
             . view('templates/footerTemplate');
     }
 
 
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function create()
     {
         //Pulir, tener en cuenta en el login la redirect_url sería lo deseable

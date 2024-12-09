@@ -86,21 +86,6 @@
                     </div>
                 </div>
             <?php endif; ?>
-
-            <?php if (isset($data)) : ?>
-                <div class="col-12">
-                    <div class="alert alert-warning" role="alert">
-                        <p>Campos data</p>
-                        <ul>
-                            <?php foreach ($data as $data) : ?>
-                                <li><?= var_dump($data)
-                                    ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            <?php endif; ?>
-
             <div class="col-sm-12 d-flex ms-auto gap-1">
                 <a href="<?= previous_url() ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
@@ -171,7 +156,7 @@
             const selectedCategory = categorySelect.value;
             const selectedSubcategory = subcategorySelect.dataset.selectedValue; // Recuperar el valor seleccionado previamente
 
-           subcategorySelect.disabled = !selectedCategory; // Deshabilita si no hay categoría seleccionada
+            subcategorySelect.disabled = !selectedCategory; // Deshabilita si no hay categoría seleccionada
 
             if (selectedCategory) {
                 loadSubcategories(selectedCategory, selectedSubcategory);

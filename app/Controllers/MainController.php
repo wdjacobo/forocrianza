@@ -4,13 +4,75 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Models\CategoriasModel;
-use CodeIgniter\Exceptions\PageNotFoundException;
-//Usar este PageNotFoundException!
-
 class MainController extends BaseController
 {
+    //Comentarios a corregir
 
+
+    // Eliminar
+    public function giveAdminAccess()
+    {
+        $user = auth()->user();
+        $user->addPermission('admin.access');
+        return redirect()->to(base_url());
+    }
+
+
+    /**
+     * Muestra la página de inicio.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
+    public function index()
+    {
+        // Corregir
+        $categoriesModel = model('CategoriesModel');
+
+        $data = [
+            'title'     => 'Inicio',
+            'categories_list' => $categoriesModel->getCategoriesWithSubcategories(), // Corregir esto
+            'trending_subcategories' => $this->trendingSubcategories,
+            'last_topics' => $this->lastTopics,
+            'topics_with_most_messages' => $this->topicsWithMostMessages,
+            'ad_urls' => $this->adUrls,
+        ];
+
+        return view('templates/headerTemplate', $data)
+            . view('templates/asideTemplate')
+            . view('templates/asideModalTemplate')
+            . view('general/index')
+            . view('templates/adBannerTemplate')
+            . view('templates/footerTemplate');
+    }
+
+    /**
+     * Muestra la página de inicio de sesión.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
+    public function login()
+    {
+
+        $data = [
+            'title'     => 'Iniciar sesión',
+        ];
+
+
+        return view('Shield/login', $data);
+    }
+
+
+    /**
+     * Muestra la página de registro.
+     * 
+     * Prepara los datos necesarios y renderiza la vista de la página.
+     * 
+     * @return string la renderización de la vista correspondiente.
+     */
     public function register()
     {
         $data = [
@@ -26,112 +88,420 @@ class MainController extends BaseController
             . view('templates/basic-footer-template');
     }
 
-    public function login()
-    {
-
-        $data = [
-            'title'     => 'Iniciar sesión',
-        ];
-
-
-        return view('Shield/login', $data);
-    }
-
-    public function admin()
-    {
-
-        $data = [
-            'titulo'     => 'Panel de administración',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/admin')
-            . view('templates/footerTemplate');
-    }
-
-    public function admin_dash()
-    {
-
-        $data = [
-            'titulo'     => 'Panel de administración',
-        ];
-
-        return view('general/admin_dash');
-    }
-
-    public function blog()
-    {
-
-        $data = [
-            'titulo'     => 'Blog',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/blog')
-            . view('templates/footerTemplate');
-    }
-    public function blog_post()
-    {
-
-        $data = [
-            'titulo'     => 'Entrada blog',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/blog-post')
-            . view('templates/footerTemplate');
-    }
-
-    public function nuevo_tema()
-    {
-
-        $data = [
-            'titulo'     => 'Nuevo tema',
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('general/nuevo-tema')
-            . view('templates/footerTemplate');
-    }
-
-    public function quill()
-    {
-
-        $data = [
-            'titulo'     => 'Nuevo tema',
-        ];
-
-        return view('general/quill');
-    }
-
-    public function debug()
-    {
-
-        $categoriasModel = model(CategoriasModel::class);
 
 
 
-        $data = [
-            'lista_categorias' => $categoriasModel->getCategoriasConSubcategorias()
-        ];
-
-        return view('general/debug', $data);
-    }
-    public function redirect()
-    {
-
-        return view('general/redirect');
-    }
 
 
-    public function giveAdminAccess()
-    {
-        $user = auth()->user();
-        $user->addPermission('admin.access');
-        return redirect()->to(base_url());
-    }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * ???
+     * 
+     * @return string ???
+     */
     public function interview()
     {
         return view('errors/show.html');

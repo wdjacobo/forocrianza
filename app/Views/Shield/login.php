@@ -87,9 +87,8 @@
                         <?php if (session('message') !== null) : ?>
                             <div class="alert alert-success" role="alert"><?= session('message') ?></div>
                         <?php endif ?>
-                        <form action="<?= url_to('login') ?>" method="post" class="_needs-validation" novalidate>
+                        <form action="<?= url_to('login') ?>" method="post" class="needs-validation" novalidate>
                             <?= csrf_field() ?>
-                            <!-- Para guardar los inputs introducidos en este caso se usaría old('[name]') -->
                             <!-- Email -->
                             <div class="form-group mb-3">
                                 <label for="EmailInput" class="form-label"><strong><?= lang('Auth.email') ?></strong></label>
@@ -130,6 +129,16 @@
                 </div>
             </div>
         </main>
+
+
+
+
+
+
+
+
+
+
         <script>
             // Pasar a script externo una vez lo tenga listo
             // Código de ejemplo de la documentación de Bootstrap : https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles

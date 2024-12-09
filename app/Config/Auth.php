@@ -201,7 +201,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, bool|int|string>
      */
-    public array $sessionConfig = [ // cambiar
+    public array $sessionConfig = [
         'field'              => 'user',
         'allowRemembering'   => false, //true,
         'rememberCookieName' => 'remember',
@@ -280,7 +280,7 @@ class Auth extends ShieldAuth
      */
     public array $validFields = [
         'email',
-        'username',
+        //'username',
     ];
 
     /**
@@ -406,7 +406,7 @@ class Auth extends ShieldAuth
      *
      * @var array<string, string>
      */
-    public array $tables = [ //cambiar (migracion?)
+    public array $tables = [
         'users'             => 'users',
         'identities'        => 'auth_identities',
         'logins'            => 'auth_logins',
@@ -451,7 +451,7 @@ class Auth extends ShieldAuth
      * Returns the URL that a user should be redirected
      * to after they are logged out.
      */
-    public function logoutRedirect(): string //cambiar (todas las siguientes?)
+    public function logoutRedirect(): string
     {
         $url = setting('Auth.redirects')['logout'];
 
