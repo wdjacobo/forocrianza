@@ -55,7 +55,12 @@ $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPoli
 
 
 // Refactorizar
-
+//USAR PATCH NO CANTO DE PUT!
+/**
+ * <form action="/subcategories/<?= $subcategory_id ?>" method="POST">
+    <!-- Este campo oculto es lo que hace el "truco" de PATCH -->
+    <input type="hidden" name="_method" value="PATCH">
+ */
 //Temas
 $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
 
@@ -64,11 +69,11 @@ $routes->get('/admin-access', [MainController::class, 'giveAdminAccess'], ['as' 
 $routes->get('admin', [AdminController::class, 'show'], ['as' => 'admin']);
 
 $routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category']);
-$routes->match(['get', 'put'], 'admin/editar-categoria', [CategoriesController::class, 'edit'], ['as' => 'edit-category']);
+$routes->match(['get', 'patch'], 'admin/editar-categoria', [CategoriesController::class, 'edit'], ['as' => 'edit-category']);
 $routes->delete('admin/eliminar-category', [CategoriesController::class, 'delete'], ['as' => 'delete-categorie']);
 
 $routes->match(['get', 'post'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory']);
-$routes->match(['get', 'put'], 'admin/editar-subcategoria', [SubcategoriesController::class, 'edit'], ['as' => 'edit-subcategory']);
+$routes->match(['get', 'patch'], 'admin/editar-subcategoria', [SubcategoriesController::class, 'edit'], ['as' => 'edit-subcategory']);
 $routes->delete('admin/eliminar-subcategoria', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategory']);
 
 //Usuarios:

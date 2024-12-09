@@ -82,6 +82,7 @@ class TopicsController extends BaseController
 
         return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
+            . view('templates/asideModalTemplate')
             . view('topics/show')
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
@@ -139,6 +140,7 @@ class TopicsController extends BaseController
 
             return view('templates/headerTemplate', $data)
                 . view('templates/asideTemplate')
+                . view('templates/asideModalTemplate')
                 . view('topics/create')
                 . view('templates/adBannerTemplate')
                 . view('templates/footerTemplate');
@@ -262,6 +264,7 @@ class TopicsController extends BaseController
                 $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
                 return view('templates/headerTemplate', $data)
                     . view('templates/asideTemplate')
+                    . view('templates/asideModalTemplate')
                     . view('topics/create')
                     . view('templates/adBannerTemplate')
                     . view('templates/footerTemplate');

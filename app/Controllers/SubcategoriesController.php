@@ -39,6 +39,7 @@ class SubcategoriesController extends BaseController
 
         return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
+            . view('templates/asideModalTemplate')
             . view('subcategories/show')
             . view('templates/adBannerTemplate')
             . view('templates/asideModalTemplate')
@@ -87,6 +88,7 @@ class SubcategoriesController extends BaseController
 
             return view('templates/headerTemplate', $data)
                 . view('templates/asideTemplate')
+                . view('templates/asideModalTemplate')
                 . view('topics/create')
                 . view('templates/adBannerTemplate')
                 . view('templates/footerTemplate');
