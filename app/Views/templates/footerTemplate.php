@@ -1,7 +1,7 @@
 <!-- Fin del container principal -->
 </div>
 
-<footer class="container-fluid bg-light py-5 py-md-3 mt-5 border-top">
+<footer class="container-fluid py-5 py-md-3 mt-5 border-top bg-primary-lower">
     <div class="row d-flex justify-content-center">
         <div class="col-12 text-center mt-md-3 mb-md-4 mb-3">
             <img src=" <?= base_url('images/brand/isotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza">

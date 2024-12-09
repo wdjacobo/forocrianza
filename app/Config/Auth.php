@@ -76,10 +76,10 @@ class Auth extends ShieldAuth
     public array $redirects = [
         'register'          => '/',
         'login'             => '/',
-        'logout'            => '/iniciar-sesion',//'/login',
+        'logout'            => '/login',
         'force_reset'       => '/',
-        'permission_denied' => '/', 
-        'group_denied'      => '/',  
+        'permission_denied' => '/',
+        'group_denied'      => '/',
     ];
 
     /**
@@ -462,7 +462,7 @@ class Auth extends ShieldAuth
      * Returns the URL the user should be redirected to
      * after a successful registration.
      */
-    public function registerRedirect(): string 
+    public function registerRedirect(): string
     {
         $url = setting('Auth.redirects')['register'];
 
@@ -473,7 +473,7 @@ class Auth extends ShieldAuth
      * Returns the URL the user should be redirected to
      * if force_reset identity is set to true.
      */
-    public function forcePasswordResetRedirect(): string 
+    public function forcePasswordResetRedirect(): string
     {
         $url = setting('Auth.redirects')['force_reset'];
 
@@ -484,7 +484,7 @@ class Auth extends ShieldAuth
      * Returns the URL the user should be redirected to
      * if permission denied.
      */
-    public function permissionDeniedRedirect(): string 
+    public function permissionDeniedRedirect(): string
     {
         $url = setting('Auth.redirects')['permission_denied'];
 

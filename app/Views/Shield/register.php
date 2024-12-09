@@ -41,7 +41,7 @@
     <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
-<body class="bg-light">
+<body class="bg-primary-lower">
     <main role="main" class="container-lg">
         <div class="row d-flex flex-column align-content-center p-sm-5 gap-5">
             <div class="col-12 col-lg-6 d-flex justify-content-center mt-5 mt-sm-1">

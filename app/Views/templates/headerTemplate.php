@@ -42,7 +42,7 @@
 </head>
 
 
-<body>
+<body class="bg-primary-lower">
   <!-- Inicio del container principal -->
   <div class="container-lg px-4">
     <header class="row d-flexmt-4 mt-4 mt-md-5 mb-4 pb-4 border-bottom">

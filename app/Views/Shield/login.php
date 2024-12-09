@@ -33,7 +33,7 @@
         <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
     </head>
 
-    <body class="bg-light">
+    <body class="bg-primary-lower">
         <main role="main" class="container-md">
             <div class="row d-flex flex-column align-content-center p-sm-5 gap-5">
                 <div class="col-12 col-md-8 col-lg-5 d-flex justify-content-center mt-5 mt-sm-1">
