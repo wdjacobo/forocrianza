@@ -13,9 +13,13 @@ const closeAdIcon = document.getElementById("close-ad-icon");
 const adContainer = document.getElementById("ad-container");
 
 // Permitimos ocultar la publicidad al hacer clic en el icono "X"
-closeAdIcon.addEventListener("click", function () {
-  adContainer.classList.add("d-none");
-});
+if (closeAdIcon && adContainer) {
+  closeAdIcon.addEventListener("click", function () {
+    adContainer.classList.add("d-none");
+  });
+}
+
+
 
 /**
  * Ajusta el tamaño de los botones con la clase `responsive-btn` en función del ancho de la ventana.
@@ -44,3 +48,30 @@ function updateButtonsSize() {
 // Sobre el evento resize: https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
 document.addEventListener("DOMContentLoaded", updateButtonsSize);
 window.addEventListener("resize", updateButtonsSize);
+
+
+
+
+// Muestra feedback de errores en los formularios con clase `needs-valdiation` y desactiva el formulario para su envío mientras no se corrijan: https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
+(() => {
+  "use strict";
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll(".needs-validation");
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach((form) => {
+    form.addEventListener(
+      "submit",
+      (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();

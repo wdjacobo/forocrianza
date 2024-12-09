@@ -38,7 +38,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
 
     <!-- CSS personalizado -->
-    <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
 
@@ -75,16 +75,16 @@
 
         <div class="row g-5">
 
-        <aside class="col-12 col-md-3 p-0">
+            <aside class="col-12 col-md-3 p-0">
                 <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary position-sticky p-0" style="top: 2rem;">
                     <div class="list-group list-group-flush scrollarea rounded">
                         <div class="list-group-item py-3 lh-sm">
-                        <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#que-son-las-cookies">¿Qué son las cookies?</a></li>
-                        <li class="mb-2"><a href="#que-tipo-de-cookies-utilizamos">¿Qué tipo de cookies utilizamos?</a></li>
-                        <li class="mb-2"><a href="#como-puedo-gestionar-las-cookies">¿Cómo puede gestionar las cookies?</a></li>
-                        <li class="mb-2"><a href="#cambios-en-la-politica-de-cookies">Cambios en la política de cookies</a></li>
-                        <li class="mb-2"><a href="#informacion-de-contacto">Informacion de contacto</a></li>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#que-son-las-cookies">¿Qué son las cookies?</a></li>
+                                <li class="mb-2"><a href="#que-tipo-de-cookies-utilizamos">¿Qué tipo de cookies utilizamos?</a></li>
+                                <li class="mb-2"><a href="#como-puedo-gestionar-las-cookies">¿Cómo puede gestionar las cookies?</a></li>
+                                <li class="mb-2"><a href="#cambios-en-la-politica-de-cookies">Cambios en la política de cookies</a></li>
+                                <li class="mb-2"><a href="#informacion-de-contacto">Informacion de contacto</a></li>
                             </ul>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
 
     <script>
         /**
-         * Carga el CSS local de Bootstrap si falla la CDN.
+         * Carga el JS local de Bootstrap si falla la CDN.
          * Crea un nuevo script para el JS de Bootstrap local y mueve los scripts personalizados al final del elemento `<body>` para  evitar errores como los de dependencias de código.
          */
         function loadLocalBootstrapJs() {
@@ -175,7 +175,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" onerror="loadLocalBootstrapJs()"></script>
 
     <!-- JS personalizado -->
-    <script id="custom-script" src="<?= base_url('js/script.js') ?>"></script>
+    <script id="custom-script" src="<?= base_url('js/forocrianza.js') ?>"></script>
 
 </body>
 

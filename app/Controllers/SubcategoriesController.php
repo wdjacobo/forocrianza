@@ -60,7 +60,7 @@ class SubcategoriesController extends BaseController
         if (!auth()->loggedIn()) {
             session()->set('redirect_url', current_url());
             //Flashdata a coger en login error para crear un tema debes tener una cuenta de usuario.
-            return redirect()->to('iniciar-sesion')->with('warn', 'Debes iniciar sesión para publicar un tema');
+            return redirect()->to('index');
         }
 
         // Es necesario para el uso de set_value() en las vistas!

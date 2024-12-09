@@ -108,36 +108,6 @@
         </form>
     </main>
 
-
-
-
-    <script>
-        //Estilo a las form labels en negrita
-        // Pasar a script externo una vez lo tenga listo
-        // Código de ejemplo de la documentación de Bootstrap : https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
-        //Hace quese muestren los errores de invalid o valid feedback
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
-
-
     <script>
         // Pasar a script externo una vez lo tenga listo!!
         document.addEventListener('DOMContentLoaded', () => {

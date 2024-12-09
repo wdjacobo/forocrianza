@@ -38,7 +38,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
 
     <!-- CSS personalizado -->
-    <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
 <body class="bg-light">
@@ -144,7 +144,7 @@
                             <button type="submit" class="btn btn-primary btn-block"><?= lang('Auth.register') ?></button>
                         </div>
 
-                        <p class="text-center"><?= lang('Auth.haveAccount') ?> <a href="<?= url_to('iniciar-sesion') ?>"><?= lang('Auth.login') ?></a></p>
+                        <p class="text-center"><?= lang('Auth.haveAccount') ?> <a href="<?= url_to('login') ?>"><?= lang('Auth.login') ?></a></p>
                         <p class="text-center"><a href="/">Volver a la página principal</a></p>
 
                     </form>
@@ -152,73 +152,9 @@
             </div>
         </div>
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script>
-        // Pasar a script externo una vez lo tenga listo
-        // Código de ejemplo de la documentación de Bootstrap : https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
-        //Hace quese muestren los errores de invalid o valid feedback
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
     <script>
         /**
-         * Carga el CSS local de Bootstrap si falla la CDN.
+         * Carga el JS local de Bootstrap si falla la CDN.
          * Crea un nuevo script para el JS de Bootstrap local y mueve los scripts personalizados al final del elemento `<body>` para  evitar errores como los de dependencias de código.
          */
         function loadLocalBootstrapJs() {
@@ -236,7 +172,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" onerror="loadLocalBootstrapJs()"></script>
 
     <!-- JS personalizado -->
-    <script id="custom-script" src="<?= base_url('js/script.js') ?>"></script>
+    <script id="custom-script" src="<?= base_url('js/forocrianza.js') ?>"></script>
 </body>
 
 </html>

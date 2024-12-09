@@ -38,7 +38,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
 
     <!-- CSS personalizado -->
-    <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
 
@@ -164,7 +164,7 @@
 
     <script>
         /**
-         * Carga el CSS local de Bootstrap si falla la CDN.
+         * Carga el JS local de Bootstrap si falla la CDN.
          * Crea un nuevo script para el JS de Bootstrap local y mueve los scripts personalizados al final del elemento `<body>` para  evitar errores como los de dependencias de código.
          */
         function loadLocalBootstrapJs() {
@@ -182,7 +182,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" onerror="loadLocalBootstrapJs()"></script>
 
     <!-- JS personalizado -->
-    <script id="custom-script" src="<?= base_url('js/script.js') ?>"></script>
+    <script id="custom-script" src="<?= base_url('js/forocrianza.js') ?>"></script>
 
 </body>
 

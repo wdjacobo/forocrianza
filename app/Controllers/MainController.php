@@ -61,7 +61,6 @@ class MainController extends BaseController
             'title'     => 'Iniciar sesión',
         ];
 
-
         return view('Shield/login', $data);
     }
 

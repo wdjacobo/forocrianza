@@ -38,7 +38,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
 
   <!-- CSS personalizado -->
-  <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+  <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
 
@@ -109,8 +109,8 @@
       <?php else: ?>
 
         <div class="col-auto ms-auto d-flex align-items-center gap-1 p-0">
-          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('registro') ?>" type="button" role="button">Registrarse</a>
-          <a class="btn btn-primary responsive-btn" href="<?= url_to('iniciar-sesion')
+          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('register') ?>" type="button" role="button">Registrarse</a>
+          <a class="btn btn-primary responsive-btn" href="<?= url_to('login')
                                                           ?>" type="button" role="button">Iniciar sesión</a>
 
         </div>

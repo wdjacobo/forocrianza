@@ -6,15 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Forocrianza es el foro donde compartir y discutir con otros padres y madres experiencias sobre la crianza de nuestros hijos. Este foro contiene información útil para ayudar a las familias en el proceso de crianza de los niños y niñas.">
         <meta name="keywords" content="forocrianza, foro, crianza, foro para padres, foro sobre familia, foro sobre niños, foro sobre educacion, opiniones crianza, opiniones educacion">
-        <title> <?php
-                if ($_SERVER['REQUEST_URI'] === '/') {
-                    echo 'ForoCrianza';
-                } else {
-                    if (isset($title)) {
-                        echo $title . ' | ForoCrianza';
-                    }
-                }
-                ?></title>
+        <title>Iniciar sesión | ForoCrianza</title>
         <link rel="icon" href="<?= base_url('favicon.ico') ?>" type="image/ico">
         <script>
             /**
@@ -38,7 +30,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" onerror="loadLocalBootstrapCss()">
 
         <!-- CSS personalizado -->
-        <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+        <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
     </head>
 
     <body class="bg-light">
@@ -121,7 +113,7 @@
                             </div>
 
                             <?php if (setting('Auth.allowRegistration')) : ?>
-                                <p class="text-center"><?= lang('Auth.needAccount') ?> <a href="<?= url_to('registro') ?>"><?= lang('Auth.register') ?></a></p>
+                                <p class="text-center"><?= lang('Auth.needAccount') ?> <a href="<?= url_to('register') ?>"><?= lang('Auth.register') ?></a></p>
                             <?php endif ?>
                             <p class="text-center"><a href="<?= url_to('index') ?>">Volver a la página principal</a></p>
                         </form>
@@ -130,42 +122,9 @@
             </div>
         </main>
 
-
-
-
-
-
-
-
-
-
-        <script>
-            // Pasar a script externo una vez lo tenga listo
-            // Código de ejemplo de la documentación de Bootstrap : https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
-            //Hace quese muestren los errores de invalid o valid feedback
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (() => {
-                'use strict'
-
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.querySelectorAll('.needs-validation')
-
-                // Loop over them and prevent submission
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-            })()
-        </script>
         <script>
             /**
-             * Carga el CSS local de Bootstrap si falla la CDN.
+             * Carga el JS local de Bootstrap si falla la CDN.
              * Crea un nuevo script para el JS de Bootstrap local y mueve los scripts personalizados al final del elemento `<body>` para  evitar errores como los de dependencias de código.
              */
             function loadLocalBootstrapJs() {
@@ -183,7 +142,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" onerror="loadLocalBootstrapJs()"></script>
 
         <!-- JS personalizado -->
-        <script id="custom-script" src="<?= base_url('js/script.js') ?>"></script>
+        <script id="custom-script" src="<?= base_url('js/forocrianza.js') ?>"></script>
+        
     </body>
 
     </html>
