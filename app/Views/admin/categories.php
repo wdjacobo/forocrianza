@@ -61,7 +61,7 @@
                     </a>
                     <ul class="dropdown-menu text-small pb-0">
                         <li><a class="dropdown-item" href="<?= url_to('index') ?>">Ir a ForoCrianza</a></li>
-                        <li><a class="dropdown-item" href="/perfil">Configuración</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Perfil</a></li>
                         <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                     </ul>
                 </div>
@@ -172,7 +172,15 @@
                                 <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
                             </div>
                         </form>
-                        <div class="">Cargar aquí listado</div>
+                        <div>
+                            <?php if ($categories !== []): ?>
+                                <?php foreach ($categories as $category) : ?>
+                                    <p><?= $category['title'] ?></p>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>No hay categorías</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>

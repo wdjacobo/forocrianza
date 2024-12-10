@@ -9,47 +9,38 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 
 class ProfileController extends BaseController
 {
-
-
     /**
-     * Muestra la página de inicio.
+     * Muestra la página de perfil de un usuario en base a su nombre de usuario.
      * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
+     * @param string El nombre de usuario del perfil que queremos ver.
      * 
-     * @return string la renderización de la vista correspondiente.
+     * @return string La renderización de la vista correspondiente.
      */
-    public function show($profile_username)
+    public function show($username)
     {
-
-        // El proveedor de usuarios por defecto, UserModel
         $users = auth()->getProvider();
+        $user = $users->findByCredentials(['username' => $username]);
 
-        // Formas de acceder a la información
-        $user = $users->findById(1);
-        $user = $users->findByCredentials(['email' => 'jacobo@admin.com']);
-        $userArray = $user->toArray();
-        $user->email;
-
-        //var_dump($userArray['username']); exit();
-        //var_dump($user); exit();
-
-        if ($users->findById($profile_username) === null) {
-            throw new PageNotFoundException('No se ha podido encontrar el perfil "' . $profile_username . '".');
+        if (!$user) {
+            throw new PageNotFoundException('No se ha podido encontrar el perfil de "' . $username . '".');
         }
 
-        $data = [
-            'title'     => "Perfil de username",
-            'user' => $users->findById($profile_username),
-        ];
+        $user = $user->toArray();
 
-        return view('templates/headerTemplate', $data)
-            . view('general/profile')
-            . view('templates/footerTemplate');
+
+        $data = [
+            'title'     => $username,
+            'user' => $user,
+            'trending_subcategories' => $this->trendingSubcategories,
+            'last_topics' => $this->lastTopics,
+            'topics_with_most_messages' => $this->topicsWithMostMessages,
+            'ad_urls' => $this->adUrls,
+        ];
 
         return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
             . view('templates/asideModalTemplate')
-            . view('general/profile')
+            . view('profile/show')
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
     }

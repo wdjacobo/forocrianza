@@ -31,7 +31,7 @@
     <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
-<body>
+<body class="bg-primary-lower">
     <!-- Inicio del container principal -->
     <div class="container-fluid px-4">
         <header class="row d-flex mt-4 mt-md-5 mb-4 pb-4 border-bottom">
@@ -61,7 +61,7 @@
                     </a>
                     <ul class="dropdown-menu text-small pb-0">
                         <li><a class="dropdown-item" href="<?= url_to('index') ?>">Ir a ForoCrianza</a></li>
-                        <li><a class="dropdown-item" href="/perfil">Configuración</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Perfil</a></li>
                         <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                     </ul>
                 </div>
@@ -172,17 +172,43 @@
                                 <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
                             </div>
                         </form>
-                        <div class="">Cargar aquí listado</div>
+                        <div>
+                        <?php if ($topics !== []): ?>
+                            <?php foreach ($topics as $topic) : ?>
+                                <p><?= $topic['title'] ?></p>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>No hay temas</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+        <script>
+            /**
+             * Carga el JS local de Bootstrap si falla la CDN.
+             * Crea un nuevo script para el JS de Bootstrap local y mueve los scripts personalizados al final del elemento `<body>` para  evitar errores como los de dependencias de código.
+             */
+            function loadLocalBootstrapJs() {
+                console.warn("No se ha podido cargar el código JS de Bootstrap desde la CDN, se cargará el archivo local.");
+                let fallbackScript = document.createElement('script');
+                fallbackScript.src = '<?= base_url('js/bootstrap.bundle.min.js') ?>';
+                document.body.appendChild(fallbackScript);
+
+                let customScript = document.getElementById('custom-script');
+                document.body.appendChild(customScript);
+            }
+        </script>
+
+        <!-- JS de Bootstrap con fallback -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" onerror="loadLocalBootstrapJs()"></script>
+
+        <!-- JS personalizado -->
+        <script id="custom-script" src="<?= base_url('js/forocrianza.js') ?>"></script>
+
 </body>
 
 </html>

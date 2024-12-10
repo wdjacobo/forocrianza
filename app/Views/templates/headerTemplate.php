@@ -97,7 +97,7 @@
               <?php if (auth()->user()->inGroup('admin')): ?>
                 <li><a class="dropdown-item" href="<?= url_to('admin-categories') ?>">Panel de administración</a></li>
               <?php endif; ?>
-              <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Configuración</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Perfil</a></li>
               <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
             </ul>
           </div>
