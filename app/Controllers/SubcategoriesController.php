@@ -21,7 +21,7 @@ class SubcategoriesController extends BaseController
         $subcategoriesModel = model('SubcategoriesModel');
 
         if ($subcategoriesModel->getSubcategoryBySlug($slug) === []) {
-            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $slug . '"¿Se habrá ido a por tabaco?');
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $slug . '", ¿se habrá ido a por tabaco?');
         }
 
 

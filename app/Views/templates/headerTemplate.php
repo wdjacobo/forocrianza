@@ -76,11 +76,11 @@
 
       <?php if (!auth()->loggedIn()): ?>
         <div class="col-auto d-none d-sm-flex align-items-center p-0 ms-auto">
-          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
+          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
         </div>
       <?php else: ?>
         <div class="col-auto d-flex align-items-center p-0 ms-auto">
-          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
+          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
         </div>
       <?php endif; ?>
 
@@ -94,11 +94,8 @@
               <span><?= auth()->user()->username ?></span>
             </a>
             <ul class="dropdown-menu text-small pb-0">
-              <?php if (auth()->user()->can('admin.access')): ?>
+              <?php if (auth()->user()->inGroup('admin')): ?>
                 <li><a class="dropdown-item" href="<?= base_url('admin') ?>">Panel de administración</a></li>
-              <?php endif; ?>
-              <?php if (!auth()->user()->can('admin.access')): ?>
-                <li><a class="dropdown-item" href="/admin-access">Obtener admin access</a></li>
               <?php endif; ?>
               <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Configuración</a></li>
               <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>

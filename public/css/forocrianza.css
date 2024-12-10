@@ -7,6 +7,7 @@
   --primary-color-6: rgba(105, 156, 201, 0.6);
   --primary-color-3: rgba(105, 156, 201, 0.3);
   --primary-color-1: rgba(105, 156, 201, 0.1);
+  --primary-color-0: rgba(105, 156, 201, 0);
   --black: #0c120c;
   --gray-strong: #6c7486;
 
@@ -47,7 +48,7 @@ body {
   font-family: var(--fc-font);
   font-size: var(--font-size-base);
   background-color: #fffaff;
-  color: #c99669;
+  color: var(--gray-strong);
 }
 
 h4.card-header-category-title {
@@ -60,6 +61,10 @@ h4.card-header-category-title {
 
 .bg-primary-fc {
   background-color: var(--primary-color-10);
+}
+
+.bg-primary-none {
+  background-color: #eff4f9;
 }
 
 .bg-primary-less {
@@ -80,6 +85,12 @@ h4.card-header-category-title {
 h2.card-header-category-title {
   color: var(--black);
   font-size: var(--font-size-header);
+}
+
+.legal h1,
+.legal h2,
+.legal h3 {
+  color: var(--black);
 }
 
 aside h4 {

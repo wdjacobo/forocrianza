@@ -60,17 +60,7 @@
                         <span><?= auth()->user()->username ?></span>
                     </a>
                     <ul class="dropdown-menu text-small pb-0">
-                        <?php if (auth()->user()->can('admin.access')): ?>
-                            <li><a class="dropdown-item" href="/panel-de-administracion">Panel de administración</a></li>
-                        <?php endif; ?>
-                        <?php if (!auth()->user()->can('admin.access')): ?>
-                            <li><a class="dropdown-item" href="/admin-access">Obtener admin access</a></li>
-                        <?php endif; ?>
-                        <li><a class="dropdown-item" href="/tema">Crear tema</a></li>
-                        <li>
-                            <hr class="dropdown-divider m-0">
-                        </li>
-                        <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('admin')?>">Panel de administración</a></li>
                         <li><a class="dropdown-item" href="/perfil">Configuración</a></li>
                         <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                     </ul>
@@ -154,84 +144,44 @@
             <a href="/"><button class="btn btn-primary mt-5">Volver a ForoCrianza</button></a>
             <div class="row mt-4" style="height: 70vh;">
                 <div class="col-2" style="border: 1px solid black;">
-                    <div class="">Aside
+                    <div class="">
                         <aside>
                             <main class="d-flex flex-nowrap">
                                 <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
-                                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                                        <svg class="bi pe-none me-2" width="40" height="32">
-                                            <use xlink:href="#bootstrap" />
-                                        </svg>
-                                        <span class="fs-4">Sidebar</span>
-                                    </a>
-                                    <hr>
                                     <ul class="nav nav-pills flex-column mb-auto">
-                                        <li class="nav-item">
+                                        <li class="d-flex nav-item">
                                             <a href="#" class="nav-link active" aria-current="page">
-                                                <svg class="bi pe-none me-2" width="16" height="16">
-                                                    <use xlink:href="#home" />
-                                                </svg>
-                                                Meter iconas aquí
+                                                Categorías
                                             </a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="32px" fill="#e8eaed">
+                                                <path d="M120-120v-720h720v720H120Zm60-60h600v-600H180v600Zm0 0v-600 600Z" />
+                                            </svg>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="d-flex nav-item">
                                             <a href="#" class="nav-link active" aria-current="page">
-                                                <svg class="bi pe-none me-2" width="16" height="16">
-                                                    <use xlink:href="#home" />
-                                                </svg>
-                                                Usuarios
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="<? base_url('admin/crear-categoria') ?>" class="nav-link link-body-emphasis">
-                                                <svg class="bi pe-none me-2" width="16" height="16">
-                                                    <use xlink:href="#speedometer2" />
-                                                </svg>
-                                                Categorias
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="nav-link link-body-emphasis">
-                                                <svg class="bi pe-none me-2" width="16" height="16">
-                                                    <use xlink:href="#table" />
-                                                </svg>
                                                 Subcategorias
                                             </a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="32px" fill="#e8eaed">
+                                                <path d="M120-510v-330h330v330H120Zm0 390v-330h330v330H120Zm390-390v-330h330v330H510Zm0 390v-330h330v330H510ZM180-570h210v-210H180v210Zm390 0h210v-210H570v210Zm0 390h210v-210H570v210Zm-390 0h210v-210H180v210Zm390-390Zm0 180Zm-180 0Zm0-180Z" />
+                                            </svg>
                                         </li>
-                                        <li>
-                                            <a href="#" class="nav-link link-body-emphasis">
-                                                <svg class="bi pe-none me-2" width="16" height="16">
-                                                    <use xlink:href="#grid" />
-                                                </svg>
+                                        <li class="d-flex nav-item">
+                                            <a href="<? base_url('admin/crear-categoria') ?>" class="nav-link link-body-emphasis">
                                                 Temas
                                             </a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="32px" fill="#e8eaed">
+                                                <path d="M120-120v-720h720v720H120Zm640-143H200v78h560v-78Zm-560-41h560v-78H200v78Zm0-129h560v-327H200v327Zm0 170v78-78Zm0-41v-78 78Zm0-129v-327 327Zm0 51v-51 51Zm0 119v-41 41Z" />
+                                            </svg>
                                         </li>
-                                        <li>
+                                        <li class="d-flex nav-item">
                                             <a href="#" class="nav-link link-body-emphasis">
-                                                <svg class="bi pe-none me-2" width="16" height="16">
-                                                    <use xlink:href="#people-circle" />
-                                                </svg>
-                                                Cerrar sesión
+                                                Usuarios
                                             </a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="32px" fill="#e8eaed">
+                                                <path d="M38-160v-94q0-35 18-63.5t50-42.5q73-32 131.5-46T358-420q62 0 120 14t131 46q32 14 50.5 42.5T678-254v94H38Zm700 0v-94q0-63-32-103.5T622-423q69 8 130 23.5t99 35.5q33 19 52 47t19 63v94H738ZM358-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42Zm360-150q0 66-42 108t-108 42q-11 0-24.5-1.5T519-488q24-25 36.5-61.5T568-631q0-45-12.5-79.5T519-774q11-3 24.5-5t24.5-2q66 0 108 42t42 108ZM98-220h520v-34q0-16-9.5-31T585-306q-72-32-121-43t-106-11q-57 0-106.5 11T130-306q-14 6-23 21t-9 31v34Zm260-321q39 0 64.5-25.5T448-631q0-39-25.5-64.5T358-721q-39 0-64.5 25.5T268-631q0 39 25.5 64.5T358-541Zm0 321Zm0-411Z" />
+                                            </svg>
                                         </li>
                                     </ul>
-                                    <hr>
-                                    <div class="dropdown">
-                                        <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                                            <strong>username</strong>
-                                        </a>
-                                        <ul class="dropdown-menu text-small shadow">
-                                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </main>
                         </aside>
 
@@ -241,9 +191,6 @@
                     <div class="row" style="height: 70vh;">
                         <div class="col" style="border: 1px solid black;">
                             <div class="">Donde hacer todo</div>
-                        </div>
-                        <div class="col-2" style="border: 1px solid black;">
-                            <div class="">Margen?</div>
                         </div>
                     </div>
                 </div>

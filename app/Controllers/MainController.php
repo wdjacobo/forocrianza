@@ -13,6 +13,7 @@ class MainController extends BaseController
     public function giveAdminAccess()
     {
         $user = auth()->user();
+        $user->addGroup('admin');
         $user->addPermission('admin.access');
         return redirect()->to(base_url());
     }

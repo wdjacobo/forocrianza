@@ -59,8 +59,14 @@ class TopicsController extends BaseController
     {
         $topicsModel = model('TopicsModel');
 
+
+        $subcategoriesModel = model('SubcategoriesModel');
+
+        if ($subcategoriesModel->getSubcategoryBySlug($subcategory_slug) === []) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $subcategory_slug . '", ¿se habrá ido a por tabaco?');
+        }
         if ($topicsModel->getTopicBySlug($topic_slug) === []) {
-            throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '".');
+            throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '". Podrías crearlo tú, ¡da menos trabajo que tener un bebé!');
         }
 
         $resultado = $topicsModel->getTopicMessagesBySlug($topic_slug);
@@ -271,5 +277,4 @@ class TopicsController extends BaseController
             }
         }
     }
-
 }
