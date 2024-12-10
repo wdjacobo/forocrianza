@@ -8,8 +8,14 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 
 class AdminController extends BaseController
 {
+
+
+
+
     public function categories()
     {
+
+
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
         }

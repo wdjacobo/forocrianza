@@ -14,9 +14,6 @@ use App\Controllers\AdminController;
  */
 
 
-
-
-// Ver: https://codeigniter.com/user_guide/incoming/routing.html
 // Display routes : php spark routes
 //CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule.
 //Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
@@ -65,17 +62,28 @@ $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create
 
 //Admin
 $routes->get('admin/categorias', [AdminController::class, 'categories'], ['as' => 'admin-categories']);
+
+$routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category']);
+$routes->match(['get', 'patch'], 'admin/editar-categoria/(:segment)', [CategoriesController::class, 'patch'], ['as' => 'edit-category']);
+
+$routes->delete('admin/eliminar-categoria/(:segment)', [CategoriesController::class, 'delete'], ['as' => 'delete-category']);
+
+
 $routes->get('admin/subcategorias', [AdminController::class, 'subcategories'], ['as' => 'admin-subcategories']);
+
+
+
+
 $routes->get('admin/temas', [AdminController::class, 'topics'], ['as' => 'admin-topics']);
+
 $routes->get('admin/usuarios', [AdminController::class, 'users'], ['as' => 'admin-users']);
+
 $routes->get('admin/(:segment)', [AdminController::class, 'adminNotFound']);
 
 
 
 
-$routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category']);
-$routes->match(['get', 'patch'], 'admin/editar-categoria', [CategoriesController::class, 'edit'], ['as' => 'edit-category']);
-$routes->delete('admin/eliminar-category', [CategoriesController::class, 'delete'], ['as' => 'delete-categorie']);
+
 
 $routes->match(['get', 'post'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory']);
 $routes->match(['get', 'patch'], 'admin/editar-subcategoria', [SubcategoriesController::class, 'edit'], ['as' => 'edit-subcategory']);
