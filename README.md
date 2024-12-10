@@ -5,4 +5,5 @@ Proxecto final para o ciclo formativo superior de desenvolvemento de aplicación
 ## CodeIgniter + CodeIgniter Shield
 ## Bootstrap
 ## Figma
-## ...
+## MySQL
+## PHP JS HTML CSS

@@ -105,6 +105,9 @@
             <main class="col-lg-9 col-xl-9 col-xxl-10 ">
                 <div class="row ">
                     <div class="col-12">
+                        <h1><?= $title ?></h1>
+                    </div>
+                    <div class="col-12">
                         <?php if (session()->has('errors')): ?>
                             <div class="alert alert-danger">
                                 <?php foreach (session()->get('errors') as $error): ?>

@@ -66,7 +66,7 @@
         <div class="row">
             <aside class="col-lg-3 col-xl-3 col-xxl-2 d-flex flex-column align-items-stretch flex-shrink-0 mb-3 mb-lg-0">
                 <div class="list-group list-group-flush scrollarea border rounded">
-                    <a href="<?= url_to('admin-categories') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Categorías' ? 'active' : '' ?>"" aria-current=" true">
+                    <a href="<?= url_to('categories') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Categorías' ? 'active' : '' ?>"" aria-current=" true">
                         <div class="d-flex w-100 align-items-center justify-content-between px-1">
                             <strong>Categorías</strong>
                             <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="32px" fill="#e8eaed">
@@ -74,7 +74,7 @@
                             </svg>
                         </div>
                     </a>
-                    <a href="<?= url_to('admin-subcategories') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Subcategorías' ? 'active' : '' ?>"" aria-current=" true">
+                    <a href="<?= url_to('subcategories') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Subcategorías' ? 'active' : '' ?>"" aria-current=" true">
                         <div class="d-flex w-100 align-items-center justify-content-between px-1">
                             <strong>Subcategorías</strong>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="32px" fill="#e8eaed">
@@ -83,7 +83,7 @@
                             </svg>
                         </div>
                     </a>
-                    <a href="<?= url_to('admin-topics') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Temas' ? 'active' : '' ?>"" aria-current=" true">
+                    <a href="<?= url_to('topics') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Temas' ? 'active' : '' ?>"" aria-current=" true">
                         <div class="d-flex w-100 align-items-center justify-content-between px-1">
                             <strong>Temas</strong>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="32px" fill="#e8eaed">
@@ -91,7 +91,7 @@
                             </svg>
                         </div>
                     </a>
-                    <a href="<?= url_to('admin-users') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Usuarios' ? 'active' : '' ?>"" aria-current=" true">
+                    <a href="<?= url_to('users') ?>" class="list-group-item list-group-item-action border-0 <?php echo $title == 'Usuarios' ? 'active' : '' ?>"" aria-current=" true">
                         <div class="d-flex w-100 align-items-center justify-content-between px-1">
                             <strong>Usuarios</strong>
 

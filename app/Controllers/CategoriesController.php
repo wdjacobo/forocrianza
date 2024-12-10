@@ -9,6 +9,52 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class CategoriesController extends BaseController
 {
 
+
+    public function index()
+    {
+
+
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
+        }
+        // Es necesario para el uso de set_value() en las vistas!
+        helper('form');
+
+
+        $categoriesModel = model('CategoriesModel');
+
+        $data = [
+            'title' => 'Categorías',
+            'categories' => $categoriesModel->orderBy('title')->findAll(),
+        ];
+
+
+        return view('categories/index', $data);
+        /*         return view('templates/headerTemplate', $data)
+        . view('general/nuevo-tema')
+        . view('templates/footerTemplate'); */
+        //return redirect()->to(base_url());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Muestra la página de inicio.
      * 
@@ -18,14 +64,9 @@ class CategoriesController extends BaseController
      */
     public function create()
     {
-        // No se permite el acceso a usuarios no autenticados y no autorizados
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
         }
-
-        // Es necesario para el uso de set_value() en las vistas!
-        helper('form');
-
 
         if ($this->request->is('get')) {
             $data = [
@@ -104,7 +145,7 @@ class CategoriesController extends BaseController
         $categoriesModel = model('CategoriesModel');
 
         $data = [
-            'title' => 'Temas',
+            'title' => 'Editar categoría',
             'category' => $categoriesModel->find($category_id),
         ];
 
