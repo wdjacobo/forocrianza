@@ -7,10 +7,10 @@
                         <div class="card-header d-flex align-content-center bg-primary-fc">
                             <h2 class="card-header-category-title m-0"><?= esc($category['title']) ?></h2>
                         </div>
-                        <ul class="list-group">
+                        <ul class="list-group rounded-0 rounded-bottom">
                             <?php if ($category['subcategories'] !== []): ?>
                                 <?php foreach ($category['subcategories'] as $subcategory): ?>
-                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start ">
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                                         <div class="me-auto mb-0">
                                             <h3><a href="<?=
                                                                                         current_url() . esc($subcategory['slug'], 'url') ?>"><?= esc($subcategory['title']) ?></a></h3>

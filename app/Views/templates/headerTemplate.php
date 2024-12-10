@@ -74,16 +74,9 @@
       </div>
 
 
-      <?php if (!auth()->loggedIn()): ?>
-        <div class="col-auto d-none d-sm-flex align-items-center p-0 ms-auto">
-          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
-        </div>
-      <?php else: ?>
-        <div class="col-auto d-flex align-items-center p-0 ms-auto">
-          <a class="btn btn-outline-primary responsive-btn" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
-        </div>
-      <?php endif; ?>
-
+      <div class="col-4 col-md-5 col-lg-2 col-xl-3 col-xxl-4 d-none d-sm-flex align-items-center p-0 ms-auto">
+        <a class="btn btn-outline-primary responsive-btn w-100" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
+      </div>
 
 
       <?php if (auth()->loggedIn()): ?>
@@ -116,7 +109,7 @@
 
       <?php if (!auth()->loggedIn()): ?>
         <div class="col-12 d-block d-sm-none text-center mt-2 p-0">
-          <a class="btn btn-outline-primary responsive-btn w-100" href="<?= url_to('create-topic') ?>" type="button" role="button">Nuevo tema +</a>
+          <a class="btn btn-outline-primary responsive-btn w-100" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
         </div>
       <?php endif; ?>
 

@@ -123,3 +123,7 @@ a:hover {
 #close-ad-icon {
   cursor: pointer;
 }
+
+.borde-rojo{
+  border: 2px solid red;
+}
