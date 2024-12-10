@@ -116,6 +116,7 @@
                                 name="password"
                                 placeholder="<?= lang('Auth.password') ?>"
                                 minlength="8"
+                                value="daw2pass"
                                 required>
                             <small class="text-body-secondary">Debe contener al menos 8 caracteres</small>
                             <div class="invalid-feedback">
@@ -132,6 +133,7 @@
                                 id="PasswordConfirmInput"
                                 name="password_confirm"
                                 placeholder="<?= lang('Auth.passwordConfirm') ?>"
+                                value="daw2pass"
                                 minlength="8"
                                 required>
                             <small class="text-body-secondary">Debe coincidir con la contraseña del campo anterior</small>

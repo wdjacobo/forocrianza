@@ -31,4 +31,35 @@
     <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
-<body  class="bg-primary-lower">
+<body class="bg-primary-lower">
+    <!-- Inicio del container principal -->
+    <div class="container-fluid px-4">
+        <header class="row d-flex align-items-center mt-4 mt-md-5 mb-4 pb-4 border-bottom">
+
+            <div class="col-12 d-sm-none d-flex justify-content-center mb-4 p-0">
+                <a href="<?= url_to('index') ?>"">
+          <img src=" <?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza" width="100%">
+                </a>
+            </div>
+
+            <div class="col-auto d-none d-sm-block">
+                <a href="<?= url_to('index') ?>">
+                    <img src="<?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza">
+                </a>
+            </div>
+
+            <!-- Revisar bootstrap -->
+            <div class="col-auto p-0 ms-auto">
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span><?= auth()->user()->username ?></span>
+                    </a>
+                    <ul class="dropdown-menu text-small pb-0">
+                        <li><a class="dropdown-item" href="<?= url_to('index') ?>">Ir a ForoCrianza</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('perfil/' . auth()->user()->username) ?>">Perfil</a></li>
+                        <li class="bg-danger"><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </header>

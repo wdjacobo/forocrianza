@@ -12,13 +12,9 @@ class CategoriesController extends BaseController
 
     public function index()
     {
-
-
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
         }
-        // Es necesario para el uso de set_value() en las vistas!
-        helper('form');
 
 
         $categoriesModel = model('CategoriesModel');
@@ -28,27 +24,11 @@ class CategoriesController extends BaseController
             'categories' => $categoriesModel->orderBy('title')->findAll(),
         ];
 
-
-        return view('categories/index', $data);
-        /*         return view('templates/headerTemplate', $data)
-        . view('general/nuevo-tema')
-        . view('templates/footerTemplate'); */
-        //return redirect()->to(base_url());
+        return view('templates/adminHeaderTemplate', $data)
+            . view('templates/adminAsideTemplate')
+            . view('categories/index')
+            . view('templates/adminFooterTemplate');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -64,6 +44,7 @@ class CategoriesController extends BaseController
      */
     public function create()
     {
+
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
         }
@@ -73,7 +54,10 @@ class CategoriesController extends BaseController
                 'title' => 'Crear categoría'
             ];
 
-            return view('categories/create', $data);
+            return view('templates/adminHeaderTemplate', $data)
+                . view('templates/adminAsideTemplate')
+                . view('categories/create')
+                . view('templates/adminFooterTemplate');
         }
 
         if ($this->request->is('post')) {
@@ -109,7 +93,7 @@ class CategoriesController extends BaseController
                         ]
                     );
 
-                    return redirect()->to("/admin/categorias")->with('message', "Se ha creado la categoría $categoryTitle.");
+                    return redirect()->to('admin/categorias')->with('success', 'Categoría creada correctamente.');
                 } catch (\Exception $e) {
                     return redirect()->back()->withInput()->with('error', 'Se produjo un error al crear la categoría y no se pudo realizar la acción. Inténtalo de nuevo.');
                 }
@@ -127,7 +111,7 @@ class CategoriesController extends BaseController
         $categoriesModel = model('CategoriesModel');
         try {
             $categoriesModel->delete($category_id);
-            return redirect()->to('admin/categorias');
+            return redirect()->to('admin/categorias')->with('success', 'Categoría eliminada correctamente.');
         } catch (\Exception $e) {
             return redirect()->to('admin/categorias')->with('error', 'Se produjo un error al eliminar la categoría y no se pudo realizar la acción. Inténtalo de nuevo.');
         }
@@ -181,6 +165,6 @@ class CategoriesController extends BaseController
             return redirect()->back()->with('error', 'Se produjo un error al eliminar la categoría y no se pudo realizar la acción.');
         }
 
-        redirect()->to('admin-categories');
+        //redirect()->to('admin-categories');
     }
 }

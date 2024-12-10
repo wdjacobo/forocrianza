@@ -9,41 +9,25 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class TopicsController extends BaseController
 {
 
-    //Revisar para show.
     public function index()
     {
-        $model = model('topicsModel');
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
+        }
 
-        //Uso de paginate!
+
+        $topicsModel = model('TopicsModel');
+
         $data = [
-            'users' => $model->paginate(10),
-            'pager' => $model->pager,
+            'title' => 'Temas',
+            'topics' => $topicsModel->orderBy('title')->findAll(),
         ];
 
-        // If you want to add WHERE conditions
-        $data = [
-            'users' => $model->where('ban', 1)->paginate(10),
-            'pager' => $model->pager,
-        ];
 
-        // Ou pasar ao modelo isto:
-        /*         public function banned()
-        {
-            $this->builder()->where('ban', 1);
-    
-            return $this; // This will allow the call chain to be used.
-        } */
-        // E aquí facer
-        $data = [
-            'users' => $model->banned()->paginate(10),
-            'pager' => $model->pager,
-        ];
-
-        // En la vista usamos así los links:
-        /*<?= $pager->links() ?> */
-
-
-        return view('users/index', $data);
+        return view('templates/adminHeaderTemplate', $data)
+            . view('templates/adminAsideTemplate')
+            . view('topics/index')
+            . view('templates/adminFooterTemplate');
     }
 
 

@@ -75,11 +75,11 @@
             color: #999;
         }
 
-        a:active,
+/*         a:active,
         a:link,
         a:visited {
             color: #dd4814;
-        }
+        } */
     </style>
 
 
@@ -109,7 +109,7 @@
     <link id="custom-styles" rel="stylesheet" href="<?= base_url('css/forocrianza.css') ?>">
 </head>
 
-<body>
+<body class="bg-primary-lower">
     <div class="wrap">
         <div class="col-12 d-flex justify-content-center mb-4 p-0">
             <a href="<?= url_to('index') ?>">
@@ -124,7 +124,7 @@
                 <?= lang('Errors.sorryCannotFind') ?>
             <?php endif; ?>
         </p>
-        <p class="text-center"><a href="<?= url_to('index') ?>">Volver a la página principal</a></p>
+        <a href="<?= url_to('index') ?>">Volver a la página principal</a>
     </div>
 
     <script>

@@ -9,6 +9,32 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class SubcategoriesController extends BaseController
 {
 
+
+    public function index()
+    {
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
+        }
+
+
+        $subcategoriesModel = model('SubcategoriesModel');
+
+        $data = [
+            'title' => 'Subcategorías',
+            'subcategories' => $subcategoriesModel->orderBy('title')->findAll(),
+        ];
+
+
+        return view('templates/adminHeaderTemplate', $data)
+            . view('templates/adminAsideTemplate')
+            . view('subcategories/index')
+            . view('templates/adminFooterTemplate');
+    }
+
+
+
+
+
     /**
      * Muestra la página de inicio.
      * 

@@ -1,13 +1,15 @@
 <?php
 
-use CodeIgniter\Router\RouteCollection;
-use App\Controllers\MainController;
-use App\Controllers\LegalController;
-use App\Controllers\SubcategoriesController;
-use App\Controllers\CategoriesController;
-use App\Controllers\TopicsController;
-use App\Controllers\ProfileController;
 use App\Controllers\AdminController;
+use App\Controllers\CategoriesController;
+use App\Controllers\LegalController;
+use App\Controllers\MainController;
+use App\Controllers\ProfileController;
+use App\Controllers\SubcategoriesController;
+use App\Controllers\TopicsController;
+use App\Controllers\UsersController;
+use CodeIgniter\Router\RouteCollection;
+
 
 /**
  * @var RouteCollection $routes
@@ -16,7 +18,7 @@ use App\Controllers\AdminController;
 $routes->get('/', [MainController::class, 'index'], ['as' => 'index']);
 
 
-
+// Refactorizar
 //Bien
 //if (auth()->loggedIn()) {}
 $routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'legal-notice']);
@@ -26,7 +28,7 @@ $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPoli
 
 
 
-// Refactorizar
+
 
 //Temas
 $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
@@ -40,18 +42,18 @@ $routes->delete('admin/eliminar-categoria/(:segment)', [CategoriesController::cl
 
 // Subcategorías
 $routes->get('admin/subcategorias', [SubcategoriesController::class, 'index'], ['as' => 'subcategories']);
-$routes->match(['get', 'post'], 'admin/crear-categoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory']);
-$routes->match(['get', 'patch'], 'admin/editar-categoria/(:segment)', [SubcategoriesController::class, 'patch'], ['as' => 'edit-subcategory']);
-$routes->delete('admin/eliminar-categoria/(:segment)', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategory']);
+$routes->match(['get', 'post'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory']);
+$routes->match(['get', 'patch'], 'admin/editar-subcategoria/(:segment)', [SubcategoriesController::class, 'patch'], ['as' => 'edit-subcategory']);
+$routes->delete('admin/eliminar-subcategoria/(:segment)', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategory']);
 
 // Temas
 $routes->get('admin/temas', [TopicsController::class, 'index'], ['as' => 'topics']);
 $routes->delete('admin/eliminar-tema/(:segment)', [TopicsController::class, 'delete'], ['as' => 'delete-topic']);
 
 // Usuarios
-$routes->get('admin/usuarios', [AdminController::class, 'showUsers'], ['as' => 'users']);
-$routes->match(['get', 'patch'], 'admin/editar-usuario/(:segment)', [AdminController::class, 'patchUser'], ['as' => 'edit-user']);
-$routes->delete('admin/eliminar-usuario/(:segment)', [AdminController::class, 'deleteUser'], ['as' => 'delete-user']);
+$routes->get('admin/usuarios', [UsersController::class, 'index'], ['as' => 'users']);
+$routes->match(['get', 'patch'], 'admin/editar-usuario/(:segment)', [UsersController::class, 'patch'], ['as' => 'edit-user']);
+$routes->delete('admin/eliminar-usuario/(:segment)', [UsersController::class, 'delete'], ['as' => 'delete-user']);
 
 
 $routes->get('admin/(:segment)', [AdminController::class, 'adminNotFound']);
@@ -65,7 +67,7 @@ service('auth')->routes($routes, ['except' => ['magic-link']]);
 /* $routes->get('blog', [MainController::class, 'blog']);
 $routes->get('blog-post', [MainController::class, 'blog_post']); */
 
-$routes->get('/perfil/(:segment)', [ProfileController::class, 'show'], ['as' => 'profile']);
+$routes->get('/perfil/(:segment)', [ProfileController::class, 'index'], ['as' => 'profile']);
 $routes->get('/01001101-01101001-01110011-01101000-01101001-01101101-01101001-01110011-01101000-01101001', [MainController::class, 'interview']);
 $routes->get('/(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategory']);
 $routes->get('/(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' => 'topic']);

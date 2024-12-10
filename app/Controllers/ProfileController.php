@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
-//Usar este PageNotFoundException!
 
 class ProfileController extends BaseController
 {
@@ -16,7 +15,7 @@ class ProfileController extends BaseController
      * 
      * @return string La renderización de la vista correspondiente.
      */
-    public function show($username)
+    public function index($username)
     {
         $users = auth()->getProvider();
         $user = $users->findByCredentials(['username' => $username]);
@@ -26,11 +25,16 @@ class ProfileController extends BaseController
         }
 
         $user = $user->toArray();
+        // Pasamos la fecha a un formato más adecuado (F no funciona en español por algún motivo)
+        $user['created_at'] = $user['created_at']->format('d \d\e\l m \d\e Y');
+
+
 
 
         $data = [
             'title'     => $username,
             'user' => $user,
+            'user_topics' => $users->getUserTopics($user['id']),
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,
@@ -40,13 +44,13 @@ class ProfileController extends BaseController
         return view('templates/headerTemplate', $data)
             . view('templates/asideTemplate')
             . view('templates/asideModalTemplate')
-            . view('profile/show')
+            . view('profile/index')
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
     }
 
 
-    public function index()
+    public function _index()
     {
 
         $categoriesModel = model('CategoriesModel');
