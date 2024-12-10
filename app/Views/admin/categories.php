@@ -147,34 +147,6 @@
                                 <?php endif ?>
                             </ul>
                         </div>
-
-
-                        <form action="<?= base_url('admin/crear-categoria') ?>" method="post" class="row needs-validation g-3 mt-4" novalidate>
-                            <?= csrf_field() ?>
-                            <div class="col-12">
-                                <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
-                            </div>
-                            <div class="col-sm-12 form-group">
-                                <label for="category-title" class="form-label">Título *</label>
-                                <input
-                                    id="category-title"
-                                    name="category-title"
-                                    type="text"
-                                    class="form-control"
-                                    value="<?= esc(set_value('category-title')) ?>"
-                                    placeholder="Introduce un título para la categoría..."
-                                    maxlength="100"
-                                    required>
-                                <small class="text-body-secondary">Puede contener 100 caracteres como máximo</small>
-                                <div class="invalid-feedback">
-                                    Introduce un título válido. Asegúrate de cumplir las reglas para el título.
-                                </div>
-                            </div>
-                            <div class="col-sm-12 d-flex ms-auto gap-1">
-                                <a href="<?= previous_url() ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
-                                <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </main>

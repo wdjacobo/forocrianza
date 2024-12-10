@@ -64,6 +64,7 @@ $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create
 $routes->get('admin/categorias', [AdminController::class, 'categories'], ['as' => 'admin-categories']);
 
 $routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category']);
+
 $routes->match(['get', 'patch'], 'admin/editar-categoria/(:segment)', [CategoriesController::class, 'patch'], ['as' => 'edit-category']);
 
 $routes->delete('admin/eliminar-categoria/(:segment)', [CategoriesController::class, 'delete'], ['as' => 'delete-category']);
