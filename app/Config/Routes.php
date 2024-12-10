@@ -62,18 +62,14 @@ $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPoli
 //Temas
 $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
 
+
 //Admin
-$routes->get('/admin-access', [MainController::class, 'giveAdminAccess'], ['as' => 'admin-access']);
-$routes->get('admin', [AdminController::class, 'index'], ['as' => 'admin']);
 $routes->get('admin/categorias', [AdminController::class, 'categories'], ['as' => 'admin-categories']);
 $routes->get('admin/subcategorias', [AdminController::class, 'subcategories'], ['as' => 'admin-subcategories']);
 $routes->get('admin/temas', [AdminController::class, 'topics'], ['as' => 'admin-topics']);
 $routes->get('admin/usuarios', [AdminController::class, 'users'], ['as' => 'admin-users']);
-$routes->get('admin', [AdminController::class, 'show'], ['as' => 'admin']);
-$routes->get('admin', [AdminController::class, 'show'], ['as' => 'admin']);
-$routes->get('admin', [AdminController::class, 'show'], ['as' => 'admin']);
 $routes->get('admin/usuarios', [AdminController::class, 'users'], ['as' => 'admin-users']);
-$routes->get('admin/(:any)', [AdminController::class, 'adminNotFound']);
+$routes->get('admin/(:segment)', [AdminController::class, 'adminNotFound']);
 
 
 
@@ -118,4 +114,4 @@ $routes->get('/perfil/(:segment)', [ProfileController::class, 'show'], ['as' => 
 $routes->get('/01001101-01101001-01110011-01101000-01101001-01101101-01101001-01110011-01101000-01101001', [MainController::class, 'interview']);
 $routes->get('/(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategory']);
 $routes->get('/(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' => 'topic']);
-$routes->get('/(:segment)/(:segment)/(:any)', [AdminController::class, 'otherNotFound']);
+$routes->get('/(:segment)/(:segment)/(:any)', [AdminController::class, 'notFound']);

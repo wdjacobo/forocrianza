@@ -437,8 +437,8 @@ class Auth extends ShieldAuth
     public function loginRedirect(): string
     {
 
-        if (auth()->user()->can('admin.access')) {
-            return '/admin';
+        if (auth()->user()->inGroup('admin')) {
+            return '/admin/categorias';
         }
 
         $session = session();

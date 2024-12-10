@@ -8,10 +8,10 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 
 class AdminController extends BaseController
 {
-    public function index()
+    public function categories()
     {
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
-            throw new PageNotFoundException('Lo siento, no hemos podido encontrar lo que estabas buscando.');
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
         }
 
 
@@ -25,23 +25,6 @@ class AdminController extends BaseController
 
 
         return view('admin/categories', $data);
-        /*         return view('templates/headerTemplate', $data)
-        . view('general/nuevo-tema')
-        . view('templates/footerTemplate'); */
-        //return redirect()->to(base_url());
-    }
-
-    public function categories()
-    {
-        // Es necesario para el uso de set_value() en las vistas!
-        helper('form');
-
-        $data = [
-            'title' => 'Panel de administración'
-        ];
-
-
-        return view('admin/show', $data);
         /*         return view('templates/headerTemplate', $data)
         . view('general/nuevo-tema')
         . view('templates/footerTemplate'); */
@@ -108,6 +91,10 @@ class AdminController extends BaseController
 
     public function adminNotFound()
     {
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
+        }
+
         throw new PageNotFoundException('No se ha podido encontrar esta dirección en el area de administración, ¡Que venga el encargao!');
     }
 }
