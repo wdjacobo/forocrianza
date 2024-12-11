@@ -107,9 +107,9 @@
 
       <?php endif; ?>
 
-        <div class="col-12 d-block d-sm-none text-center mt-2 p-0">
-          <a class="btn btn-outline-primary responsive-btn w-100" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
-        </div>
+      <div class="col-12 d-block d-sm-none text-center mt-2 p-0">
+        <a class="btn btn-outline-primary responsive-btn w-100" href="<?= url_to('create-topic') ?>" type="button" role="button">Crear tema <strong>+</strong></a>
+      </div>
 
 
     </header>

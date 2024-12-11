@@ -25,7 +25,7 @@ class ProfileController extends BaseController
         }
 
         $user = $user->toArray();
-        // Pasamos la fecha a un formato más adecuado (F no funciona en español por algún motivo)
+        // Pasamos la fecha a un formato más adecuado (F no está funcionando en español por algún motivo)
         $user['created_at'] = $user['created_at']->format('d \d\e\l m \d\e Y');
 
 

@@ -84,17 +84,9 @@ class TopicsController extends BaseController
 
     public function create()
     {
-
-        //Pulir, tener en cuenta en el login la redirect_url sería lo deseable
         if (!auth()->loggedIn()) {
-            session()->set('redirect_url', current_url());
-            //Flashdata a coger en login error para crear un tema debes tener una cuenta de usuario.
             return redirect()->to('login')->with('warn', 'Debes iniciar sesión para publicar un tema');
         }
-
-        // Es necesario para el uso de set_value() en las vistas!
-        helper('form');
-
 
         $data = [
             'title' => 'Crear tema',
@@ -105,29 +97,17 @@ class TopicsController extends BaseController
             'ad_urls' => $this->adUrls,
         ];
 
-
-
-
-
-
-
-
         $categoriesModel = model('CategoriesModel');
         $subcategoriesModel = model('SubcategoriesModel');
         $data['categories'] = $categoriesModel->getCategories();
         $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
+        //return var_dump($categoriesModel->getCategoriesWithSubcategories());
 
         $categoriesIds = $categoriesModel->findColumn('id');
         $subcategoriesIds = $subcategoriesModel->findColumn('id');
 
 
         if ($this->request->is('get')) {
-
-
-
-
-
-
 
             return view('templates/headerTemplate', $data)
                 . view('templates/asideTemplate')

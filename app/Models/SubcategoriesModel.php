@@ -51,16 +51,25 @@ class SubcategoriesModel extends Model
      * 
      * @return array Array de temas con los campos 'title', 'topic_slug', 'author', 'message_number', 'last_message_date' y 'subcategory_slug'
      */
-    public function getSubcategoryTopics(string $subcategory_slug): array
+    /**
+     * 
+     */
+    public function getSubcategoryTopics(string $subcategory_id): array
     {
-        return $this->select('topics.title, topics.slug AS topic_slug, users.username AS author, 
-        COUNT(messages.id) AS message_number, MAX(messages.created_at) AS last_message_date, 
-        subcategories.slug AS subcategory_slug')
-            ->join('subcategories', 'subcategories.id = topics.subcategory_id', 'left')
-            ->join('users', 'users.id = topics.author_id', 'left')
-            ->join('messages', 'messages.topic_id = topics.id', 'left')
-            ->where('subcategories.slug', $subcategory_slug)
-            ->groupBy('topics.id')  // Agrupación en función del tema para poder contar los mensajes
+
+        // Comprobar que devuelve bien... todo, y ver por que uso inner y no left!
+        return $this->select('
+        topics.title, 
+        topics.slug, 
+        users.username AS author, 
+        COUNT(messages.id) AS total_messages, 
+        MAX(messages.created_at) AS last_message_date
+    ')
+            ->join('topics', 'subcategories.id = topics.subcategory_id', 'inner')
+            ->join('users', 'topics.author_id = users.id', 'inner')
+            ->join('messages', 'topics.id =messages.topic_id', 'left')
+            ->where('subcategories.id', $subcategory_id)
+            ->groupBy('topics.id') // Agrupación para el uso de COUNT y MAX
             ->orderBy('topics.created_at', 'DESC')
             ->get()
             ->getResultArray();

@@ -28,12 +28,11 @@ class MainController extends BaseController
      */
     public function index()
     {
-        // Corregir
         $categoriesModel = model('CategoriesModel');
 
         $data = [
             'title'     => 'Inicio',
-            'categories_list' => $categoriesModel->getCategoriesWithSubcategories(), // Corregir esto
+            'categories_list' => $categoriesModel->getCategoriesWithSubcategoriesAndLastTopic(),
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,

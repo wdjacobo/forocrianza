@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Models\SubcategoriesModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use \CodeIgniter\HTTP\RedirectResponse;
 
@@ -283,13 +284,6 @@ class SubcategoriesController extends BaseController
 
 
 
-    /**
-     * Muestra la página de inicio.
-     * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
-     * 
-     * @return string la renderización de la vista correspondiente.
-     */
     public function show($slug)
     {
         $subcategoriesModel = model('SubcategoriesModel');
@@ -298,12 +292,13 @@ class SubcategoriesController extends BaseController
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $slug . '", ¿se habrá ido a por tabaco?');
         }
 
-
+        $subcategory = $subcategoriesModel->where('slug', $slug)->first();
+        //return var_dump($subcategoriesModel->getSubcategoryTopics($subcategory['id']));
 
         $data = [
-            'title'     => $subcategoriesModel->getTitle($slug),
-            'slug' => $slug,
-            'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics($slug),
+            'title'     => $subcategory['title'],
+            'slug' => $subcategory['slug'],
+            'subcategory_topics' => [],
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,
@@ -316,7 +311,6 @@ class SubcategoriesController extends BaseController
             . view('templates/asideModalTemplate')
             . view('subcategories/show')
             . view('templates/adBannerTemplate')
-            . view('templates/asideModalTemplate')
             . view('templates/footerTemplate');
     }
 }

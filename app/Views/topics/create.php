@@ -1,5 +1,5 @@
-    <main class="col-md-9 col-lg-7 order-2 p-3 border rounded ">
-        <form action="<?= base_url() . "crear-tema" ?>" method="post" class="row needs-validation g-3" novalidate>
+    <main class="col-md-9 col-lg-7 order-2 p-3">
+        <form action="<?= base_url() . "crear-tema" ?>" method="post" class="row needs-validation g-3 p-2 pb-4 border rounded bg-white" novalidate>
             <?= csrf_field() ?>
             <div class="col-12">
                 <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
@@ -85,32 +85,21 @@
             <?php endif; ?>
             <?php if (session()->has('errors')): ?>
                 <div class="alert alert-danger">
-                    <?php foreach (session()->get('errors') as $error): ?>
-                        <?= $error ?>
-                    <?php endforeach; ?>
-                    <?= session('error') ?>
+                    <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
+                    <ul>
+                        <?php foreach (session()->get('errors') as $error): ?>
+                            <li><?= $error ?></li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             <?php elseif (session()->has('error')): ?>
                 <div class="alert alert-danger">
-                    <?= session('error') ?>
+                    <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
+                    <ul>
+                        <li> <?= session('error') ?></li>
+                    </ul>
                 </div>
             <?php endif; ?>
-
-            <!-- Cambiar este bloque por todo lo anterior adecuadamente -->
-            <?php if (isset($errors)) : ?>
-                <div class="col-12">
-                    <div class="alert alert-danger" role="alert">
-                        <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
-                        <ul>
-                            <?php foreach ($errors as $error) : ?>
-                                <li><?= $error ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            <?php endif; ?>
-
-
             <div class="col-sm-12 d-flex ms-auto gap-1">
                 <a href="<?= previous_url() ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
@@ -119,48 +108,67 @@
     </main>
 
     <script>
-        // Pasar a script externo una vez lo tenga listo!!
         document.addEventListener('DOMContentLoaded', () => {
-            const categories = <?= json_encode($categoriesWithSubcategories) ?>;
-            const categorySelect = document.getElementById('category');
-            const subcategorySelect = document.getElementById('subcategory');
+            // Array de categorías que se pasa desde PHP a JS
+            const categories = <?= json_encode($categories) ?>;
 
+            const categorySelect = document.getElementById('category'); // Select de categorías
+            const subcategorySelect = document.getElementById('subcategory'); // Select de subcategorías
 
-            // Función para cargar subcategorías
-            const loadSubcategories = (selectedCategory, selectedSubcategory) => {
+            // Función para cargar las subcategorías según la categoría seleccionada
+            const loadSubcategories = (selectedCategory) => {
+                console.log("selectedCategory:", selectedCategory); // Verifica el valor de selectedCategory
+
+                // Limpiar las opciones actuales de subcategorías
                 subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
-                if (selectedCategory) {
-                    const subcategories = categories.find(cat => cat.id == selectedCategory).subcategories || [];
-                    subcategories.forEach(subcat => {
-                        const option = document.createElement('option');
-                        option.value = subcat.id;
-                        option.textContent = subcat.title;
-                        // Marcar como seleccionado si coincide con el valor anterior
-                        if (selectedSubcategory == subcat.id) {
-                            option.selected = true;
-                        }
-                        subcategorySelect.appendChild(option);
-                    });
-                    subcategorySelect.disabled = false;
+
+                // Deshabilitar el select de subcategorías si no hay categoría seleccionada
+                if (!selectedCategory) {
+                    subcategorySelect.disabled = true;
+                    return;
+                }
+
+                // Buscar la categoría seleccionada en el array de categorías
+                const category = categories.find(cat => cat['id'] == selectedCategory); // Accede con corchetes, no con punto
+                console.log("Category:", category); // Verifica si se encontró la categoría
+
+                // Verificar si la categoría tiene la propiedad 'subcategories' y si tiene subcategorías
+                if (category && Array.isArray(category['subcategories'])) {
+                    if (category['subcategories'].length > 0) {
+                        // Cargar las subcategorías en el select
+                        category['subcategories'].forEach(subcat => {
+                            const option = document.createElement('option');
+                            option.value = subcat['id']; // Accede con corchetes
+                            option.textContent = subcat['title']; // Accede con corchetes
+
+                            // Añadir la opción de subcategoría al select
+                            subcategorySelect.appendChild(option);
+                        });
+
+                        // Habilitar el select de subcategorías
+                        subcategorySelect.disabled = false;
+                    } else {
+                        // Si no hay subcategorías, deshabilitar el select
+                        subcategorySelect.disabled = true;
+                    }
                 } else {
+                    // Si la categoría no tiene subcategorías, deshabilitar el select
                     subcategorySelect.disabled = true;
                 }
             };
 
-            // Al cargar la página, verificar si ya hay una categoría seleccionada
+            // Obtener el valor seleccionado de la categoría
             const selectedCategory = categorySelect.value;
-            const selectedSubcategory = subcategorySelect.dataset.selectedValue; // Recuperar el valor seleccionado previamente
+            console.log("Initial selectedCategory:", selectedCategory); // Verifica el valor de selectedCategory
 
-            subcategorySelect.disabled = !selectedCategory; // Deshabilita si no hay categoría seleccionada
+            // Si ya hay una categoría seleccionada, cargar las subcategorías correspondientes
+            loadSubcategories(selectedCategory);
 
-            if (selectedCategory) {
-                loadSubcategories(selectedCategory, selectedSubcategory);
-            }
-
-            // Al cambiar la categoría, cargar las subcategorías correspondientes
+            // Event listener para cuando cambie la categoría seleccionada
             categorySelect.addEventListener('change', () => {
                 const selectedCategory = categorySelect.value;
-                loadSubcategories(selectedCategory, null);
+                console.log("Category changed, selectedCategory:", selectedCategory); // Verifica el cambio de categoría
+                loadSubcategories(selectedCategory); // Recarga las subcategorías
             });
         });
     </script>

@@ -108,6 +108,7 @@ aside h4 {
 
 a {
   text-decoration: none;
+  font-weight: 600;
   color: var(--primary-color-8);
 }
 
