@@ -17,7 +17,31 @@ class SubcategoriesModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['title', 'description', 'category_id'];
+    protected $allowedFields = ['title', 'description', 'category_id', 'slug'];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
@@ -80,7 +104,6 @@ class SubcategoriesModel extends Model
             ->get()
             ->getResultArray();
     }
-
 
 
 
@@ -181,76 +204,5 @@ class SubcategoriesModel extends Model
             ->getResultArray();
 
         return $resultArray[0]['title'];
-    }
-
-
-
-
-
-
-
-
-
-    //                      _ 
-    //                     | |
-    //   ___ _ __ _   _  __| |
-    //  / __| '__| | | |/ _` |
-    // | (__| |  | |_| | (_| |
-    //  \___|_|   \__,_|\__,_|
-
-
-
-
-    public function create($data)
-
-    {
-        //Falta obtener el author_id
-        /*         echo "Datos validados pasados al modelo:<br><br>";
-        var_dump($data);
-        exit();
- */
-        // Se inicia una transacción para asegurarnos de que todo sale correctamente con la generación del slug y el update
-        $this->db->transStart();
-
-        //Guardamos el tema con un placeholder en el slug
-        // Insertamos el registro y almacenamos su ID
-        $topicId = $this->insert(
-            [
-                'title' => $data['topic-title'],
-                'opening_message' => $data['topic-opening-message'],
-                'slug' => $data['topic-title'] . rand(0, 1000),
-                'subcategory_id' => $data['subcategory'],
-                'author_id' => $data['author-id'],
-            ]
-        );
-        $topic = $this->find($topicId);
-
-        /*         $topic = $this->find($topicId);
-        echo "<br><br><br><br>Tema insertado:<br><br>";
-        var_dump($topic); //exit(); */
-
-        // Generamos slug a partir del título eliminando espacios y caracteres especiales, separado por guiones, en minúscula, junto con el ID del tema, garantizando unicidad
-        $slug = mb_url_title($topic['title'], '-', true) . "-$topicId";
-
-        // Actualizamos el tema con el slug correcto
-        $this->update($topicId, ['slug' => $slug]);
-
-        //$topic = $this->find($topicId);
-
-        /*         echo "<br><br><br><br>Tema insertado con slug nueva:<br><br>";
-        $topic = $this->find($topicId);
-        var_dump($topic); exit(); */
-
-
-        // Completa la transacción
-        $this->db->transComplete();
-
-        //Se realiza un rollback automático si falla.
-
-        //retornar el transStatus mejor, indicando si hubo fallo o éxito.
-
-        // Verifica si la transacción fue exitosa
-
-        return $this->db->transStatus();
     }
 }

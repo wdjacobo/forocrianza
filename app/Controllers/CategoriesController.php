@@ -5,20 +5,28 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
+use \CodeIgniter\HTTP\RedirectResponse;
 
 class CategoriesController extends BaseController
 {
-
-
-    public function index()
+    /**
+     * 
+     * Muestra la página de categorías (listado de categorías ordenadas por título) del panel de administración si el usuario autenticado pertenece al grupo 'admin'.
+     * 
+     * Si el usuario no está autenticado o no pertenece al grupo 'admin' se lanza una excepción de página no encontrada.
+     * 
+     * 
+     * @return string Renderización de la vista correspondiente.
+     * 
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
+     */
+    public function index(): string
     {
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
         }
 
-
         $categoriesModel = model('CategoriesModel');
-
         $data = [
             'title' => 'Categorías',
             'categories' => $categoriesModel->orderBy('title')->findAll(),
@@ -30,19 +38,18 @@ class CategoriesController extends BaseController
             . view('templates/adminFooterTemplate');
     }
 
-
-
-
-
-
     /**
-     * Muestra la página de inicio.
+     * Muestra la vista del formulario de creación de categoría o procesa la creación de una categoría.
      * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
+     * Si el usuario no está autenticado o no pertenece al grupo 'admin' se lanza una excepción de página no encontrada.
      * 
-     * @return string la renderización de la vista correspondiente.
+     * Si la solicitud es GET, muestra el formulario, y si es POST procesa los datos, creando una nueva categoría y redirigiendo a la página de categorías o redirigiendo nuevamente al formulario junto con los errores encontrados en caso de haberlos.
+     * 
+     * @return string|RedirectResponse Renderización de la vista correspondiente para las solicitudes GET o redirección para las solicitudes POST.
+     * 
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
      */
-    public function create()
+    public function create(): string|RedirectResponse
     {
 
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
@@ -63,11 +70,9 @@ class CategoriesController extends BaseController
         if ($this->request->is('post')) {
 
             $data = $this->request->getPost();
-
             $rules = [
                 'category-title' => 'required|max_length[100]|trim'
             ];
-
             $errors = [
                 'category-title' => [
                     'required' => 'Debes introducir un título.',
@@ -79,12 +84,13 @@ class CategoriesController extends BaseController
             if ($this->validateData($data, $rules, $errors)) {
 
                 $validData = $this->validator->getValidated();
-                $categoryTitle = $validData['category-title'];
+
                 // 3. Sanitizar
                 //No se aplica sanitización concreta ya que el query builder escapa los datos
 
                 // 4. Acción en la BD
                 $categoriesModel = model('CategoriesModel');
+                $categoryTitle = $validData['category-title'];
 
                 try {
                     $categoriesModel->insert(
@@ -93,78 +99,130 @@ class CategoriesController extends BaseController
                         ]
                     );
 
-                    return redirect()->to('admin/categorias')->with('success', 'Categoría creada correctamente.');
+                    return redirect()->to('admin/categorias')->with('success', 'Categoría "' . $categoryTitle . '" creada correctamente.');
                 } catch (\Exception $e) {
-                    return redirect()->back()->withInput()->with('error', 'Se produjo un error al crear la categoría y no se pudo realizar la acción. Inténtalo de nuevo.');
+
+                    // 5. Manejo de excepciones
+                    return redirect()->back()->withInput()->with('error', 'Se produjo un error al crear la categoría "' . $categoryTitle . '" y no se pudo realizar la acción, inténtalo de nuevo.');
                 }
-            } else { // 2. Devolver errores
-                return redirect()->to('admin/crear-categoria')->withInput()->with('errors', $this->validator->getErrors());
+            } else {
+                // 2. Devolver errores
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
         }
     }
 
-
-
-
-    public function delete($category_id)
+    /**
+     * Elimina una categoría específica en base a su ID.
+     * 
+     * Redirige a la página de categorías junto con un mensaje de éxito o de error si se producen errores durante la acción.
+     * 
+     * @param int $category_id ID de la categoría a eliminar.
+     * 
+     * @return RedirectResponse Redirección a la página de categorías.
+     */
+    public function delete(int $category_id): RedirectResponse
     {
         $categoriesModel = model('CategoriesModel');
+        $category = $categoriesModel->find($category_id);
+
+        // 1. Acción en la BD
         try {
+
             $categoriesModel->delete($category_id);
-            return redirect()->to('admin/categorias')->with('success', 'Categoría eliminada correctamente.');
+
+            return redirect()->to('admin/categorias')->with('success', 'Categoría "' . $category['title'] . '" eliminada correctamente.');
         } catch (\Exception $e) {
-            return redirect()->to('admin/categorias')->with('error', 'Se produjo un error al eliminar la categoría y no se pudo realizar la acción. Inténtalo de nuevo.');
+
+            // 2. Manejo de excepciones
+            return redirect()->back()->with('error', 'Se produjo un error al eliminar la categoría "' . $category['title'] . '" y no se pudo realizar la acción, inténtalo de nuevo.');
         }
     }
 
-
-    public function patch($category_id)
+    /**
+     * Muestra la vista del formulario de edición de categoría o procesa la edición de una categoría en base a su ID.
+     * 
+     * Si el usuario no está autenticado o no pertenece al grupo 'admin', o si la ID de la categoría no existe se lanza una excepción de página no encontrada.
+     * 
+     * Si la solicitud es GET, muestra el formulario, y si es PATCH procesa los datos, editando la  categoría y redirigiendo a la página de categorías o redirigiendo nuevamente al formulario junto con los errores encontrados en caso de haberlos.
+     * 
+     * @param int $category_id ID de la categoría a editar.
+     * 
+     * @return string|RedirectResponse Renderización de la vista correspondiente para las solicitudes GET o redirección para las solicitudes PATCH.
+     * 
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin', o si la categoría no existe.
+     */
+    public function patch(int $category_id): string|RedirectResponse
     {
-
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
             throw new PageNotFoundException('Lo siento, no hemos podido encontrar lo que estabas buscando.');
         }
 
-
         $categoriesModel = model('CategoriesModel');
+        $category = $categoriesModel->find($category_id);
 
-        $data = [
-            'title' => 'Editar categoría',
-            'category' => $categoriesModel->find($category_id),
-        ];
+        if (!$category) {
+            throw new PageNotFoundException('Parece que intentas editar una categoría que no existe.');
+        }
+
+
 
         if ($this->request->is('get')) {
 
-            $category = $categoriesModel->find($category_id);
-            return "vas al formulario de parchear " . $category['title'];
+            $data = [
+                'title' => 'Editando categoría ' . $category['title'],
+                'category' => $category,
+            ];
 
-            return view('categories/patch', $data);
-
-            return view('templates/headerTemplate', $data)
-                . view('templates/asideTemplate')
-                . view('templates/asideModalTemplate')
-                . view('topics/create')
-                . view('templates/adBannerTemplate')
-                . view('templates/footerTemplate');
-
-
-            return view('/topics/create', $data);
+            return view('templates/adminHeaderTemplate', $data)
+                . view('templates/adminAsideTemplate')
+                . view('categories/patch')
+                . view('templates/adminFooterTemplate');
         }
 
         if ($this->request->is('patch')) {
 
-            return "Ejecución del parcheo";
+            $data = $this->request->getRawInput();
+            $rules = [
+                'category-title' => 'required|max_length[100]|trim'
+            ];
+            $errors = [
+                'category-title' => [
+                    'required' => 'Debes introducir un título.',
+                    'max_length' => 'El título es demasiado largo.',
+                ],
+            ];
+
+            //1. Validar
+            if ($this->validateData($data, $rules, $errors)) {
+
+                $validData = $this->validator->getValidated();
+
+                // 3. Sanitizar
+                //No se aplica sanitización concreta ya que el query builder escapa los datos
+
+                // 4. Acción en la BD
+                $categoryTitleUpdated = $validData['category-title'];
+                $category = $categoriesModel->find($category_id);
+
+                try {
+
+                    $categoriesModel->update(
+                        $category_id,
+                        [
+                            'title' => $categoryTitleUpdated
+                        ]
+                    );
+
+                    return redirect()->to('admin/categorias')->with('success', 'Categoría "' . $categoryTitleUpdated . '" editada correctamente.');
+                } catch (\Exception $e) {
+                    // 5. Manejo de excepciones
+                    return redirect()->back()->withInput()->with('error', 'Se produjo un error al editar la categoría "' . $category['title'] . '" y no se pudo realizar la acción, inténtalo de nuevo.');
+                }
+            } else {
+                // 2. Devolver errores 
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            }
         }
-
-        $categoryModel = model('CategoryModel');
-
-        try {
-            //$e=$a;
-            $categoryModel->delete($category_id);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Se produjo un error al eliminar la categoría y no se pudo realizar la acción.');
-        }
-
-        //redirect()->to('admin-categories');
     }
 }

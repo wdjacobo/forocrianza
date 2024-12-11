@@ -70,11 +70,6 @@ class TopicsModel extends Model
     public function create($data)
 
     {
-        //Falta obtener el author_id
-        /*         echo "Datos validados pasados al modelo:<br><br>";
-        var_dump($data);
-        exit();
- */
         // Se inicia una transacción para asegurarnos de que todo sale correctamente con la generación del slug y el update
         $this->db->transStart();
 
@@ -91,32 +86,18 @@ class TopicsModel extends Model
         );
         $topic = $this->find($topicId);
 
-        /*         $topic = $this->find($topicId);
-        echo "<br><br><br><br>Tema insertado:<br><br>";
-        var_dump($topic); //exit(); */
-
         // Generamos slug a partir del título eliminando espacios y caracteres especiales, separado por guiones, en minúscula, junto con el ID del tema, garantizando unicidad
         $slug = mb_url_title($topic['title'], '-', true) . "-$topicId";
 
         // Actualizamos el tema con el slug correcto
         $this->update($topicId, ['slug' => $slug]);
 
-        //$topic = $this->find($topicId);
-
-        /*         echo "<br><br><br><br>Tema insertado con slug nueva:<br><br>";
-        $topic = $this->find($topicId);
-        var_dump($topic); exit(); */
-
-
         // Completa la transacción
         $this->db->transComplete();
 
         //Se realiza un rollback automático si falla.
 
-        //retornar el transStatus mejor, indicando si hubo fallo o éxito.
-
         // Verifica si la transacción fue exitosa
-
         return $this->db->transStatus();
     }
 

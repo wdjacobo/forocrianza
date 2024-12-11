@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
+use \CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\Shield\Entities\User;
 
 class UsersController extends BaseController

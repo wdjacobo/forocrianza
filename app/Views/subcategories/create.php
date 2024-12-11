@@ -1,156 +1,99 @@
-<main class="col-md-9 col-lg-7 order-2 p-3 border rounded ">
-        <form action="<?= base_url() . "crear-tema" ?>" method="post" class="row needs-validation g-3" novalidate>
-            <?= csrf_field() ?>
-            <div class="col-12">
-                <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
-            </div>
-            <div class="col-md-6 form-group">
-                <label for="category" class="form-label">Categoría *</label>
-                <select
-                    id="category"
-                    name="category"
-                    class="form-select"
-                    required>
-                    <!-- Si coincide con el esc(old) marcar como selected -->
-                    <option value="">Selecciona una categoría...</option>
-                    <?php if (isset($categories)) : ?>
-                        <?php foreach ($categories as $category) : ?>
-                            <option value="<?= $category['id'] ?>" <?php
-                                                                    if (esc(set_value('category')) === $category['id']) {
-                                                                        echo "selected";
-                                                                    }
-                                                                    ?>><?= $category['title'] ?></option>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </select>
-                <div class="invalid-feedback">
-                    Por favor, selecciona una categoría
-                </div>
-            </div>
-            <div class="col-md-6 form-group">
-                <label for="subcategory" class="form-label">Subcategoría *</label>
-                <select
-                    id="subcategory"
-                    name="subcategory"
-                    class="form-select"
-                    data-selected-value="<?= esc(set_value('subcategory')) ?>"
-                    required>
-                    <option value="">Selecciona una subcategoría...</option>
-                </select>
-                <div class="invalid-feedback">
-                    Por favor, selecciona una subcategoría
-                </div>
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="topic-title" class="form-label">Título *</label>
-                <input
-                    id="topic-title"
-                    name="topic-title"
-                    type="text"
-                    class="form-control"
-                    value="<?= esc(set_value('topic-title')) ?>"
-                    placeholder="Introduce un título para el tema..."
-                    minlength="10"
-                    maxlength="250"
-                    required>
-                <small class="text-body-secondary">Debe contener al menor 10 caracteres</small>
-                <div class="invalid-feedback">
-                    Introduce un título válido. Asegúrate de cumplir las reglas para el título.
-                </div>
-            </div>
-            <div class="col-sm-12 topic-opening-message">
-                <label for="topic-opening-message" class="form-label">Contenido *</label>
-                <textarea
-                    id="topic-opening-message"
-                    name="topic-opening-message"
-                    class="form-control"
-                    placeholder="Incluir edición con Quill"
-                    rows="8"
-                    minlength="40"
-                    required><?= esc(set_value('topic-opening-message')) ?></textarea>
-                <small class="text-body-secondary">Debe contener al menor 40 caracteres</small>
-                <div class="invalid-feedback">
-                    Introduce un contenido válido. Asegúrate de cumplir las reglas para el contenido.
-                </div>
-            </div>
-
-            <?php if (isset($errors)) : ?>
-                <div class="col-12">
-                    <div class="alert alert-danger" role="alert">
-                        <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
-                        <ul>
-                            <?php foreach ($errors as $error) : ?>
-                                <li><?= $error ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
+<main class="col-lg-9 col-xl-9 col-xxl-10 ">
+    <div class="row ">
+        <div class="col-12">
+            <h1><?= $title ?></h1>
+        </div>
+        <div class="col-12">
+            <?php if (session()->has('success')): ?>
+                <div class="alert alert-success">
+                    <?= session('success') ?>
                 </div>
             <?php endif; ?>
-
-            <?php if (isset($data)) : ?>
-                <div class="col-12">
-                    <div class="alert alert-warning" role="alert">
-                        <p>Campos data</p>
-                        <ul>
-                            <?php foreach ($data as $data) : ?>
-                                <li><?= var_dump($data)
-                                    ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
+            <?php if (session()->has('warn')): ?>
+                <div class="alert alert-warning">
+                    <?= session('warn') ?>
                 </div>
             <?php endif; ?>
-
-            <div class="col-sm-12 d-flex ms-auto gap-1">
-                <a href="<?= previous_url() ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
+            <?php if (session()->has('errors')): ?>
+                <div class="alert alert-danger">
+                    <?php foreach (session()->get('errors') as $error): ?>
+                        <p><?= $error ?></p>
+                    <?php endforeach; ?>
+                    <?= session('error') ?>
+                </div>
+            <?php elseif (session()->has('error')): ?>
+                <div class="alert alert-danger">
+                    <?= session('error') ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <form action="<?= base_url('admin/crear-subcategoria') ?>" method="post" class="col-12 needs-validation g-3" novalidate>
+            <div class="row">
+                <?= csrf_field() ?>
+                <div class="col-12">
+                    <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
+                </div>
+                <div class="col-12 col-xl-6 form-group">
+                    <label for="category" class="form-label">Categoría *</label>
+                    <select
+                        id="category"
+                        name="category"
+                        class="form-select"
+                        required>
+                        <option value="">Selecciona una categoría...</option>
+                        <?php if (isset($categories)) : ?>
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?= $category['id'] ?>" <?php
+                                                                        if (esc(set_value('category')) === $category['id']) {
+                                                                            echo "selected";
+                                                                        }
+                                                                        ?>><?= $category['title'] ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor, selecciona una categoría
+                    </div>
+                </div>
+                <div class="col-12 col-xl-6 form-group ">
+                    <label for="subcategory-title" class="form-label"><strong>Título *</strong></label>
+                    <input
+                        id="subcategory-title"
+                        name="subcategory-title"
+                        type="text"
+                        class="form-control"
+                        value="<?= esc(set_value('subcategory-title')) ?>"
+                        placeholder="Introduce un título para la subcategoría..."
+                        maxlength="100"
+                        required>
+                    <small class="text-body-secondary">No debe estar vacío, puede contener 100 caracteres como máximo y no puede estar en uso por otra subcategoría.</small>
+                    <div class="invalid-feedback">
+                        Introduce un título con una longitud válida.
+                    </div>
+                </div>
+                <div class="col-12 col-xl-6 form-group">
+                    <label for="subcategory-description" class="form-label"><strong>Descripción *</strong></label>
+                    <input
+                        id="subcategory-description"
+                        name="subcategory-description"
+                        type="text"
+                        class="form-control"
+                        value="<?= esc(set_value('subcategory-description')) ?>"
+                        placeholder="Introduce una descripción para la subcategoría..."
+                        maxlength="255"
+                        required>
+                    <small class="text-body-secondary">No debe estar vacía y puede contener 255 caracteres como máximo.</small>
+                    <div class="invalid-feedback">
+                        Introduce una descripción con una longitud válida.
+                    </div>
+                </div>
+                <div class="col-12 d-flex align-items-center gap-1 mt-4">
+                    <a href="<?= previous_url() ?>" class="w-50 btn btn-danger btn-lg text-center">Cancelar</a>
+                    <button class="w-50 btn btn-primary btn-lg" type="submit">Crear</button>
+                </div>
             </div>
         </form>
-    </main>
-
-    <script>
-        // Pasar a script externo una vez lo tenga listo!!
-        document.addEventListener('DOMContentLoaded', () => {
-            const categories = <?= json_encode($categoriesWithSubcategories) ?>;
-            const categorySelect = document.getElementById('category');
-            const subcategorySelect = document.getElementById('subcategory');
-
-
-            // Función para cargar subcategorías
-            const loadSubcategories = (selectedCategory, selectedSubcategory) => {
-                subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
-                if (selectedCategory) {
-                    const subcategories = categories.find(cat => cat.id == selectedCategory).subcategories || [];
-                    subcategories.forEach(subcat => {
-                        const option = document.createElement('option');
-                        option.value = subcat.id;
-                        option.textContent = subcat.title;
-                        // Marcar como seleccionado si coincide con el valor anterior
-                        if (selectedSubcategory == subcat.id) {
-                            option.selected = true;
-                        }
-                        subcategorySelect.appendChild(option);
-                    });
-                    subcategorySelect.disabled = false;
-                } else {
-                    subcategorySelect.disabled = true;
-                }
-            };
-
-            // Al cargar la página, verificar si ya hay una categoría seleccionada
-            const selectedCategory = categorySelect.value;
-            const selectedSubcategory = subcategorySelect.dataset.selectedValue; // Recuperar el valor seleccionado previamente
-
-           subcategorySelect.disabled = !selectedCategory; // Deshabilita si no hay categoría seleccionada
-
-            if (selectedCategory) {
-                loadSubcategories(selectedCategory, selectedSubcategory);
-            }
-
-            // Al cambiar la categoría, cargar las subcategorías correspondientes
-            categorySelect.addEventListener('change', () => {
-                const selectedCategory = categorySelect.value;
-                loadSubcategories(selectedCategory, null);
-            });
-        });
-    </script>
+    </div>
+    </div>
+</main>
+</div>
