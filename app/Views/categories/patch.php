@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-12 d-flex align-items-center gap-1 mt-4">
                     <a href="<?= previous_url() ?>" class="w-50 btn btn-danger btn-lg text-center">Cancelar</a>
-                    <button class="w-50 btn btn-outline-primary btn-lg" type="submit">Confirmar</button>
+                    <button class="w-50 btn btn-outline-primary btn-lg" type="submit">Actualizar</button>
                 </div>
             </div>
         </form>

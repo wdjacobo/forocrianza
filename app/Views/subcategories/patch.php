@@ -27,33 +27,70 @@
                 </div>
             <?php endif; ?>
         </div>
-        <form action="<?= base_url('admin/editar-categoria/' . $category['id']) ?>" method="post" class="col-12 needs-validation g-3" novalidate>
+        <form action="<?= base_url('admin/editar-subcategoria/') . $subcategory['id']  ?>" method="post" class="col-12 _needs-validation g-3" novalidate>
             <div class="row">
                 <input type="hidden" name="_method" value="PATCH">
-                <?= csrf_field() ?>
                 <?= csrf_field() ?>
                 <div class="col-12">
                     <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
                 </div>
+                <div class="col-12 col-xl-6 form-group">
+                    <label for="category" class="form-label">Categoría *</label>
+                    <select
+                        id="category"
+                        name="category"
+                        class="form-select"
+                        required>
+                        <option value="">Selecciona una categoría...</option>
+                        <?php if (isset($categories)) : ?>
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?= $category['id'] ?>" <?php
+                                                                        if (esc(set_value('category', $subcategory['category_id'])) === $category['id']) {
+                                                                            echo "selected";
+                                                                        }
+                                                                        ?>><?= $category['title'] ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor, selecciona una categoría
+                    </div>
+                </div>
                 <div class="col-12 col-xl-6 form-group ">
-                    <label for="category-title" class="form-label"><strong>Título *</strong></label>
+                    <label for="subcategory-title" class="form-label"><strong>Título *</strong></label>
                     <input
-                        id="category-title"
-                        name="category-title"
+                        id="subcategory-title"
+                        name="subcategory-title"
                         type="text"
                         class="form-control"
-                        value="<?= esc(set_value('category-title', $category['title'])) ?>"
-                        placeholder="Introduce un título para la categoría..."
+                        value="<?= esc(set_value('subcategory-title', $subcategory['title'])) ?>"
+                        placeholder="Introduce un título para la subcategoría..."
                         maxlength="100"
                         required>
-                    <small class="text-body-secondary">No debe estar vacío y puede contener 100 caracteres como máximo.</small>
+                    <small class="text-body-secondary">No debe estar vacío, puede contener 100 caracteres como máximo y no puede estar en uso por otra subcategoría.</small>
                     <div class="invalid-feedback">
                         Introduce un título con una longitud válida.
                     </div>
                 </div>
+                <div class="col-12 col-xl-6 form-group">
+                    <label for="subcategory-description" class="form-label"><strong>Descripción *</strong></label>
+                    <input
+                        id="subcategory-description"
+                        name="subcategory-description"
+                        type="text"
+                        class="form-control"
+                        value="<?= esc(set_value('subcategory-description', $subcategory['description'])) ?>"
+                        placeholder="Introduce una descripción para la subcategoría..."
+                        maxlength="255"
+                        required>
+                    <small class="text-body-secondary">No debe estar vacía y puede contener 255 caracteres como máximo.</small>
+                    <div class="invalid-feedback">
+                        Introduce una descripción con una longitud válida.
+                    </div>
+                </div>
                 <div class="col-12 d-flex align-items-center gap-1 mt-4">
                     <a href="<?= previous_url() ?>" class="w-50 btn btn-danger btn-lg text-center">Cancelar</a>
-                    <button class="w-50 btn btn-outline-primary btn-lg" type="submit">Confirmar</button>
+                    <button class="w-50 btn btn-primary btn-lg" type="submit">Actualizar</button>
                 </div>
             </div>
         </form>
