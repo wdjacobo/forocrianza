@@ -26,7 +26,7 @@
         <div class="list-group">
             <div class="list-group-item bg-author">
                 <p><?= $topic['created_at'] ?></p>
-                <h5 class="red-border"><a href="<?= base_url() . "perfil/" . esc($topic['author_username']) ?>"><?= $topic['author_username'] ?></a></h5>
+                <h5><a href="<?= base_url() . "perfil/" . esc($topic['author_username']) ?>"><?= $topic['author_username'] ?></a></h5>
                 <p><?= $topic['opening_message'] ?></p>
                 <?php if (user_id() == $topic['author_id']) : ?>
                     <form action="<?= base_url('eliminar-tema/') . $topic['id'] ?>" method="post" class="col-sm-12 d-flex ms-auto gap-1">

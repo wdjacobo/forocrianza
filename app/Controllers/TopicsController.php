@@ -107,18 +107,20 @@ class TopicsController extends BaseController
     }
 
 
+    public function adminDelete(int $topic_id): RedirectResponse
+    {
+        $topicsModel = model('TopicsModel');
+        $topic = $topicsModel->find($topic_id);
 
-
-
-
-
-
-
-
-
-
-
-
+        // 1. Acción en la BD
+        try {
+            $topicsModel->delete($topic);
+            return redirect()->to('admin/temas')->with('success', 'Tema eliminado correctamente.');
+        } catch (\Exception $e) {
+            // 2. Manejo de excepciones
+            return redirect()->back()->with('error', 'Se produjo un error eliminando el tema.');
+        }
+    }
 
 
     public function create()

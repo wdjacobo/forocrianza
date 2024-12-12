@@ -23,6 +23,13 @@ class UsersController extends BaseController
         // Tranformamos cada instancia de usuario a arrays para mantener la coherencia con el resto de la aplicación
         // Ver Example #2 https://www.php.net/manual/en/function.array-map.php
         $usersArray = array_map(fn($user) => $user->toArray(), $users);
+        foreach($usersArray as &$user){
+            $user['isAdmin'] = false;
+            $currentUser = $usersModel->find($user['id']);
+            if($currentUser->inGroup('admin')){
+                $user['isAdmin'] = true;
+            }
+        }
 
         $data = [
             'title' => 'Usuarios',

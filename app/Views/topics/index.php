@@ -36,10 +36,9 @@
                                                     <h3 class="m-0"><?= $topic['title'] ?></h3>
                                                 </div>
                                                 <div class="col-12 col-md-6">
-                                                    <form action="<?= url_to('delete-topic', $topic['id']) ?>" method="post" class="d-flex justify-content-end gap-2">
+                                                    <form action="<?= url_to('admin-delete-topic', $topic['id']) ?>" method="post" class="d-flex justify-content-end gap-2">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <?= csrf_field() ?>
-                                                        <a href="<?= url_to('edit-topic', $topic['id']) ?>" class="btn btn-outline-primary btn-lg">Editar</a>
                                                         <button class="btn btn-danger btn-lg" type="submit">Eliminar</button>
                                                     </form>
                                                 </div>

@@ -33,15 +33,22 @@
                             <li class="list-group-item list-group-item-action">
                                 <div class="row">
                                     <div class="col-12 col-md-6">
-                                        <h3 class="m-0"><?= $user['username'] ?></h3>
+                                        <h3 class="m-0 <?= $user['isAdmin'] ? 'admin-color' : '' ?>"><?= $user['username'] ?></h3>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <form action="<?= url_to('delete-user', $user['id']) ?>" method="post" class="d-flex justify-content-end gap-2">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <?= csrf_field() ?>
-                                            <a href="<?= url_to('edit-user', $user['id']) ?>" class="btn btn-outline-primary btn-lg">Editar</a>
-                                            <button class="btn btn-danger btn-lg" type="submit">Eliminar</button>
-                                        </form>
+                                        <?php if ($user['id'] !== user_id()) : ?>
+                                            <form action="<?= url_to('delete-user', $user['id']) ?>" method="post" class="d-flex justify-content-end gap-2">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <?= csrf_field() ?>
+                                                <?php if ($user['isAdmin']): ?>
+                                                    <a href="<?= url_to('remove-admin', $user['id']) ?>" class="btn btn-warning btn-lg">Eliminar de admin</a>
+                                                <?php else: ?>
+                                                    <a href="<?= url_to('include-admin', $user['id']) ?>" class="btn btn-outline-primary btn-lg">Añadir a admin</a>
+
+                                                <?php endif; ?>
+                                                <button class="btn btn-danger btn-lg" type="submit">Eliminar</button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </li>

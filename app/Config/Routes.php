@@ -39,24 +39,25 @@ $routes->delete('/eliminar-tema/(:segment)', [TopicsController::class, 'delete']
 
 
 // Categorías
-$routes->get('admin/categorias', [CategoriesController::class, 'index'], ['as' => 'categories']);
+$routes->get('admin/categorias', [CategoriesController::class, 'index'], ['as' => 'categories', 'filter' => 'group:admin']);
 $routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category']);
 $routes->match(['get', 'patch'], 'admin/editar-categoria/(:segment)', [CategoriesController::class, 'patch'], ['as' => 'edit-category']);
 $routes->delete('admin/eliminar-categoria/(:segment)', [CategoriesController::class, 'delete'], ['as' => 'delete-category']);
 
 // Subcategorías
-$routes->get('admin/subcategorias', [SubcategoriesController::class, 'index'], ['as' => 'subcategories']);
+$routes->get('admin/subcategorias', [SubcategoriesController::class, 'index'], ['as' => 'subcategories', 'filter' => 'group:admin']);
 $routes->match(['get', 'post'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory']);
 $routes->match(['get', 'patch'], 'admin/editar-subcategoria/(:segment)', [SubcategoriesController::class, 'patch'], ['as' => 'edit-subcategory']);
 $routes->delete('admin/eliminar-subcategoria/(:segment)', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategory']);
 
 // Temas
 $routes->get('admin/temas', [TopicsController::class, 'index'], ['as' => 'topics']);
-$routes->delete('admin/eliminar-tema/(:segment)', [TopicsController::class, 'delete'], ['as' => 'delete-topic']);
+$routes->delete('admin/eliminar-tema/(:segment)', [TopicsController::class, 'adminDelete'], ['as' => 'admin-delete-topic']);
 
 // Usuarios
 $routes->get('admin/usuarios', [UsersController::class, 'index'], ['as' => 'users']);
-$routes->match(['get', 'patch'], 'admin/editar-usuario/(:segment)', [UsersController::class, 'patch'], ['as' => 'edit-user']);
+$routes->get('admin/incluir-admin/(:segment)', [AdminController::class, 'includeInAdminGroup'], ['as' => 'include-admin']);
+$routes->get('admin/eliminar-admin/(:segment)', [AdminController::class, 'removeFromAdminGroup'], ['as' => 'remove-admin']);
 $routes->delete('admin/eliminar-usuario/(:segment)', [UsersController::class, 'delete'], ['as' => 'delete-user']);
 
 
