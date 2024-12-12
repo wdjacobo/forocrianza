@@ -60,33 +60,8 @@ h4.card-header-category-title {
   background-color: var(--topic-author-color);
 }
 
-.card,
-.card-header,
-.list-group {
-  border: none;
-}
-
-.card p,
-.card span {
-  color: var(--gray-strong);
-}
-
-.card h3 {
-  font-size: var(--font-size-title);
-}
-
-.legal h1,
-.legal h2,
-.legal h3 {
-  color: var(--black);
-}
-
 .bg-primary-fc {
   background-color: var(--primary-color-10);
-}
-
-.bg-primary-none {
-  background-color: #eff4f9;
 }
 
 .bg-primary-less {
@@ -97,6 +72,31 @@ h4.card-header-category-title {
   background-color: var(--primary-color-1);
 }
 
+.bg-primary-none {
+  background-color: #eff4f9;
+}
+
+.card,
+.card-header,
+.list-group {
+  border: none;
+}
+
+.card h3 {
+  font-size: var(--font-size-title);
+}
+
+.card p,
+.card span {
+  color: var(--gray-strong);
+}
+
+.legal h1,
+.legal h2,
+.legal h3 {
+  color: var(--black);
+}
+
 .list-group-item-action {
   transition: background-color 0.3s ease-in-out;
 }
@@ -104,16 +104,15 @@ h4.card-header-category-title {
   background-color: var(--primary-color-3);
 }
 
-/* Estilos cartel publicitario e icono de "X"*/
+/* Estilo utilizado para pruebas */
+.red-border {
+  border: 2px solid red;
+}
+
 #ad-container {
   top: 2rem;
 }
 
 #close-ad-icon {
   cursor: pointer;
-}
-
-/* Estilo utilizado para pruebas */
-.red-border {
-  border: 2px solid red;
 }

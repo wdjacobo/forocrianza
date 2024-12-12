@@ -9,15 +9,6 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class MainController extends BaseController
 {
 
-
-
-
-    public function notFound()
-    {
-        throw new PageNotFoundException('Lo siento, no hemos podido encontrar lo que estabas buscando.');
-    }
-
-
     /**
      * Muestra la página de inicio.
      * 
@@ -46,46 +37,18 @@ class MainController extends BaseController
             . view('templates/footerTemplate');
     }
 
-    /**
-     * Muestra la página de inicio de sesión.
-     * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
-     * 
-     * @return string la renderización de la vista correspondiente.
-     */
-    public function login()
-    {
-
-        $data = [
-            'title'     => 'Iniciar sesión',
-        ];
-
-        return view('Shield/login', $data);
-    }
-
 
     /**
-     * Muestra la página de registro.
+     * Lanza una excepciones de página de error 404.
+     *
+     * @throws PageNotFoundException 
      * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
-     * 
-     * @return string la renderización de la vista correspondiente.
+     * @return void No retorna nada
      */
-    public function register()
+    public function notFound(): void
     {
-        $data = [
-            'title'     => 'Registro',
-        ];
-
-
-        return view('Shield/register', $data);
-
-
-        return view('templates/basic-header-template', $data)
-            . view('Shield/register')
-            . view('templates/basic-footer-template');
+        throw new PageNotFoundException('Lo siento, no hemos podido encontrar lo que estabas buscando.');
     }
-
 
 
 
@@ -500,7 +463,7 @@ class MainController extends BaseController
      * 
      * @return string ???
      */
-    public function interview()
+    public function interview(): string
     {
         return view('errors/show.html');
     }

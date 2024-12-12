@@ -9,34 +9,9 @@ use \CodeIgniter\HTTP\RedirectResponse;
 
 class CategoriesController extends BaseController
 {
-    /**
-     * 
-     * Muestra la página de categorías (listado de categorías ordenadas por título) del panel de administración si el usuario autenticado pertenece al grupo 'admin'.
-     * 
-     * Si el usuario no está autenticado o no pertenece al grupo 'admin' se lanza una excepción de página no encontrada.
-     * 
-     * 
-     * @return string Renderización de la vista correspondiente.
-     * 
-     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
-     */
-    public function index(): string
-    {
-        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
-            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
-        }
 
-        $categoriesModel = model('CategoriesModel');
-        $data = [
-            'title' => 'Categorías',
-            'categories' => $categoriesModel->orderBy('title')->findAll(),
-        ];
 
-        return view('templates/adminHeaderTemplate', $data)
-            . view('templates/adminAsideTemplate')
-            . view('categories/index')
-            . view('templates/adminFooterTemplate');
-    }
+
 
     /**
      * Muestra la vista del formulario de creación de categoría o procesa la creación de una categoría.
@@ -138,6 +113,51 @@ class CategoriesController extends BaseController
             return redirect()->back()->with('error', 'Se produjo un error al eliminar la categoría "' . $category['title'] . '" y no se pudo realizar la acción, inténtalo de nuevo.');
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 
+     * Muestra la página de categorías (listado de categorías ordenadas por título) del panel de administración si el usuario autenticado pertenece al grupo 'admin'.
+     * 
+     * Si el usuario no está autenticado o no pertenece al grupo 'admin' se lanza una excepción de página no encontrada.
+     * 
+     * 
+     * @return string Renderización de la vista correspondiente.
+     * 
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
+     */
+    public function index(): string
+    {
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
+        }
+
+        $categoriesModel = model('CategoriesModel');
+        $data = [
+            'title' => 'Categorías',
+            'categories' => $categoriesModel->orderBy('title')->findAll(),
+        ];
+
+        return view('templates/adminHeaderTemplate', $data)
+            . view('templates/adminAsideTemplate')
+            . view('categories/index')
+            . view('templates/adminFooterTemplate');
+    }
+
+
 
     /**
      * Muestra la vista del formulario de edición de categoría o procesa la edición de una categoría en base a su ID.

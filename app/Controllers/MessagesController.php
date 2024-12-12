@@ -10,6 +10,16 @@ use \CodeIgniter\HTTP\RedirectResponse;
 class MessagesController extends BaseController
 {
 
+
+    /**
+     * Permite crear un nuevo mensaje en un tema si el usuario está autenticado.
+     * 
+     * @param int|string $topicId ID del tema donde se creará el mensaje.
+     * 
+     * @return RedirectResponse Redirige a la página correspondiente junto con mensajes
+     * 
+     * @throws \Exception Si surge algún problema durante la inserción del mensaje en la BBDD
+     */
     public function create($topicId)
     {
         if (!auth()->loggedIn()) {
@@ -69,11 +79,23 @@ class MessagesController extends BaseController
         }
     }
 
-    //: RedirectResponse
-    public function delete(int $message_id)
+    /**
+     * Elimina un mensaje específico por su ID.
+     * 
+     * Este método permite eliminar un mensaje de la base de datos. Si la eliminación es exitosa,
+     * redirige al usuario con un mensaje de confirmación. En caso de error, redirige con un mensaje
+     * de error indicando el problema.
+     * 
+     * @param int $messageId ID del tema a eliminar.
+     * 
+     * @return RedirectResponse Redirige a la página correspondiente junto con mensajes
+     * 
+     * @throws \Exception Si surge algún problema durante la eliminación del mensaje en la BBDD
+     */
+    public function delete(int $messageId): RedirectResponse
     {
         $messagesModel = model('MessagesModel');
-        $message = $messagesModel->find($message_id);
+        $message = $messagesModel->find($messageId);
 
         // 1. Acción en la BD
         try {
@@ -84,6 +106,4 @@ class MessagesController extends BaseController
             return redirect()->back()->with('error', 'Se produjo un error al eliminar el mensaje, inténtalo de nuevo.');
         }
     }
-
-
 }
