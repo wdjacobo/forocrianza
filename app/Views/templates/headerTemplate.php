@@ -80,11 +80,10 @@
 
 
       <?php if (auth()->loggedIn()): ?>
-        <!-- Revisar bootstrap etc -->
         <div class="col-auto d-flex align-items-center p-0 ms-auto">
           <div class="dropdown text-end">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <span><?= auth()->user()->username ?></span>
+              <span class="<?= auth()->user()->inGroup('admin') ? 'admin-color' : '' ?>"><?= auth()->user()->username ?></span>
             </a>
             <ul class="dropdown-menu text-small pb-0">
               <?php if (auth()->user()->inGroup('admin')): ?>

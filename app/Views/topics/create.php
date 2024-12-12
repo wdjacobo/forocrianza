@@ -108,67 +108,7 @@
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Array de categorías que se pasa desde PHP a JS
-            const categories = <?= json_encode($categories) ?>;
+      
 
-            const categorySelect = document.getElementById('category'); // Select de categorías
-            const subcategorySelect = document.getElementById('subcategory'); // Select de subcategorías
-
-            // Función para cargar las subcategorías según la categoría seleccionada
-            const loadSubcategories = (selectedCategory) => {
-                console.log("selectedCategory:", selectedCategory); // Verifica el valor de selectedCategory
-
-                // Limpiar las opciones actuales de subcategorías
-                subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
-
-                // Deshabilitar el select de subcategorías si no hay categoría seleccionada
-                if (!selectedCategory) {
-                    subcategorySelect.disabled = true;
-                    return;
-                }
-
-                // Buscar la categoría seleccionada en el array de categorías
-                const category = categories.find(cat => cat['id'] == selectedCategory); // Accede con corchetes, no con punto
-                console.log("Category:", category); // Verifica si se encontró la categoría
-
-                // Verificar si la categoría tiene la propiedad 'subcategories' y si tiene subcategorías
-                if (category && Array.isArray(category['subcategories'])) {
-                    if (category['subcategories'].length > 0) {
-                        // Cargar las subcategorías en el select
-                        category['subcategories'].forEach(subcat => {
-                            const option = document.createElement('option');
-                            option.value = subcat['id']; // Accede con corchetes
-                            option.textContent = subcat['title']; // Accede con corchetes
-
-                            // Añadir la opción de subcategoría al select
-                            subcategorySelect.appendChild(option);
-                        });
-
-                        // Habilitar el select de subcategorías
-                        subcategorySelect.disabled = false;
-                    } else {
-                        // Si no hay subcategorías, deshabilitar el select
-                        subcategorySelect.disabled = true;
-                    }
-                } else {
-                    // Si la categoría no tiene subcategorías, deshabilitar el select
-                    subcategorySelect.disabled = true;
-                }
-            };
-
-            // Obtener el valor seleccionado de la categoría
-            const selectedCategory = categorySelect.value;
-            console.log("Initial selectedCategory:", selectedCategory); // Verifica el valor de selectedCategory
-
-            // Si ya hay una categoría seleccionada, cargar las subcategorías correspondientes
-            loadSubcategories(selectedCategory);
-
-            // Event listener para cuando cambie la categoría seleccionada
-            categorySelect.addEventListener('change', () => {
-                const selectedCategory = categorySelect.value;
-                console.log("Category changed, selectedCategory:", selectedCategory); // Verifica el cambio de categoría
-                loadSubcategories(selectedCategory); // Recarga las subcategorías
-            });
-        });
+      
     </script>

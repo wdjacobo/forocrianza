@@ -47,12 +47,10 @@
                     <img src="<?= base_url('images/brand/imagotipo-forocrianza.png') ?>" alt="Imagotipo del sitio web ForoCrianza">
                 </a>
             </div>
-
-            <!-- Revisar bootstrap -->
             <div class="col-auto p-0 ms-auto">
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span><?= auth()->user()->username ?></span>
+                    <span class="<?= auth()->user()->inGroup('admin') ? 'admin-color' : '' ?>"><?= auth()->user()->username ?></span>
                     </a>
                     <ul class="dropdown-menu text-small pb-0">
                         <li><a class="dropdown-item" href="<?= url_to('index') ?>">Ir a ForoCrianza</a></li>
