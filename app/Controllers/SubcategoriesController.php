@@ -290,13 +290,16 @@ class SubcategoriesController extends BaseController
         }
 
         $subcategory = $subcategoriesModel->where('slug', $slug)->first();
+
+
         $subcategoryTopics = $topicsModel->getTopicsBySubcategory($subcategory['id']);
+
         //return var_dump($subcategoryTopics);
 
         $data = [
             'title'     => $subcategory['title'],
             'slug' => $subcategory['slug'],
-            'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics($subcategory['id']),
+            'subcategory_topics' => $topicsModel->getTopicsBySubcategory($subcategory['id']),
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,

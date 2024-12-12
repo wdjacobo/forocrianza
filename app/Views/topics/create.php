@@ -108,48 +108,61 @@
     </main>
 
     <script>
-        const subcategories = <?= json_encode($subcategories) ?>;
+const subcategories = <?= json_encode($subcategories) ?>;
 
-        // Función para cargar subcategorías según la categoría seleccionada
-        function loadSubcategories(categoryId) {
-            const subcategorySelect = document.getElementById('subcategory');
+// Función para cargar subcategorías según la categoría seleccionada
+function loadSubcategories(categoryId, selectedSubcategoryId = null) {
+    const subcategorySelect = document.getElementById('subcategory');
 
-            // Limpiar las opciones actuales
-            subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
+    // Limpiar las opciones actuales
+    subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
 
-            // Si no hay categoría seleccionada, deshabilitar el select de subcategorías
-            if (!categoryId || !subcategories[categoryId]) {
-                subcategorySelect.disabled = true;
-                return;
-            }
+    // Si no hay categoría seleccionada, deshabilitar el select de subcategorías
+    if (!categoryId || !subcategories[categoryId]) {
+        subcategorySelect.disabled = true;
+        return;
+    }
 
-            // Si hay subcategorías disponibles, habilitar el selector y llenarlo
-            subcategories[categoryId].forEach(subcat => {
-                const option = document.createElement('option');
-                option.value = subcat.id; // Usar el ID de la subcategoría como valor
-                option.textContent = subcat.title; // Usar el título de la subcategoría como texto
-                subcategorySelect.appendChild(option);
-            });
+    // Si hay subcategorías disponibles, habilitar el selector y llenarlo
+    subcategories[categoryId].forEach(subcat => {
+        const option = document.createElement('option');
+        option.value = subcat.id; // Usar el ID de la subcategoría como valor
+        option.textContent = subcat.title; // Usar el título de la subcategoría como texto
 
-            subcategorySelect.disabled = false; // Habilitar el selector
+        // Seleccionar la subcategoría previamente guardada
+        if (subcat.id === selectedSubcategoryId) {
+            option.selected = true;
         }
 
-        // Función para inicializar las interacciones del formulario
-        function initializeFormInteractions() {
-            const categorySelect = document.getElementById('category');
+        subcategorySelect.appendChild(option);
+    });
 
-            // Escuchar cambios en el select de categoría
-            categorySelect.addEventListener('change', () => {
-                const selectedCategory = categorySelect.value;
-                loadSubcategories(selectedCategory); // Llamar a la función independiente
-            });
+    subcategorySelect.disabled = false; // Habilitar el selector
+}
 
-            // Desactivar subcategorías inicialmente si no hay categoría seleccionada
-            if (!categorySelect.value) {
-                document.getElementById('subcategory').disabled = true;
-            }
-        }
+// Función para inicializar las interacciones del formulario
+function initializeFormInteractions() {
+    const categorySelect = document.getElementById('category');
+    const subcategorySelect = document.getElementById('subcategory');
 
-        // Ejecutar la función de inicialización cuando el DOM esté cargado
-        document.addEventListener('DOMContentLoaded', initializeFormInteractions);
+    // Leer el valor previamente seleccionado de las subcategorías
+    const selectedSubcategoryId = subcategorySelect.dataset.selectedValue;
+
+    // Escuchar cambios en el select de categoría
+    categorySelect.addEventListener('change', () => {
+        const selectedCategory = categorySelect.value;
+        loadSubcategories(selectedCategory); // Cargar subcategorías sin valor seleccionado
+    });
+
+    // Al cargar la página, inicializar el select de subcategorías si ya hay una categoría seleccionada
+    if (categorySelect.value) {
+        loadSubcategories(categorySelect.value, selectedSubcategoryId);
+    } else {
+        subcategorySelect.disabled = true; // Desactivar subcategorías si no hay categoría seleccionada
+    }
+}
+
+// Ejecutar la función de inicialización cuando el DOM esté cargado
+document.addEventListener('DOMContentLoaded', initializeFormInteractions);
+
     </script>

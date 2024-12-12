@@ -84,4 +84,6 @@ class MessagesController extends BaseController
             return redirect()->back()->with('error', 'Se produjo un error al eliminar el mensaje, inténtalo de nuevo.');
         }
     }
+
+
 }

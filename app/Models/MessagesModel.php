@@ -25,25 +25,6 @@ class MessagesModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    /**
-     * 
-     * With this code, you can perform two different queries.
-     * You can get all news records, or get a news item by its slug.
-     * You might have noticed that the $slug variable wasn’t escaped before running the query;
-     * Query Builder does this for you.
-     * 
-     * @param false|string $titulo
-     *
-     * @return array|null
-     */
-    public function getMessages($message_id = false)
-
-    {
-        if ($message_id === false) {
-            return $this->findAll();
-        }
-        return $this->find($message_id);
-    }
 
 
     /**
@@ -61,5 +42,15 @@ class MessagesModel extends Model
             ->orderBy('messages.created_at', 'ASC') // Ordenamos los mensajes por fecha de creación (puedes cambiar el orden si lo prefieres)
             ->get()
             ->getResultArray(); // Devuelve todos los mensajes asociados al tema como un array
+    }
+
+
+    public function getUserMessages(int $userId)
+    {
+        return $this->select('messages.id, messages.content, messages.created_at, messages.topic_id')
+            ->where('messages.author_id', $userId) // Filtrar por ID de autor
+            ->orderBy('messages.created_at', 'DESC') // Ordenar por fecha de creación descendente
+            ->get()
+            ->getResultArray();
     }
 }

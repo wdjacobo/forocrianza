@@ -19,8 +19,6 @@ if (closeAdIcon && adContainer) {
   });
 }
 
-
-
 /**
  * Ajusta el tamaño de los botones con la clase `responsive-btn` en función del ancho de la ventana.
  *
@@ -50,8 +48,6 @@ document.addEventListener("DOMContentLoaded", updateButtonsSize);
 window.addEventListener("resize", updateButtonsSize);
 
 
-
-
 // Muestra feedback de errores en los formularios con clase `needs-valdiation` y desactiva el formulario para su envío mientras no se corrijan: https://getbootstrap.com/docs/5.3/forms/validation/#custom-styles
 (() => {
   "use strict";
@@ -75,8 +71,6 @@ window.addEventListener("resize", updateButtonsSize);
     );
   });
 })();
-
-
 
 
 // Formulario creación tema:

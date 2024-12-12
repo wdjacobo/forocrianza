@@ -208,7 +208,7 @@ class TopicsModel extends Model
      */
     public function getTopicsBySubcategory(string $subcategory_id): array
     {
-        return $this->select('topics.title AS topic_title, topics.slug AS topic_slug, users.username AS author_username, COUNT(messages.id) AS message_count, MAX(messages.created_at) AS last_message_time')
+        return $this->select('topics.title, topics.slug, users.username AS author, COUNT(messages.id) AS message_count, MAX(messages.created_at) AS last_message_date')
             ->join('subcategories', 'subcategories.id = topics.subcategory_id', 'left') // Relación de temas con subcategorías
             ->join('users', 'users.id = topics.author_id', 'left') // Relación de temas con usuarios (autores)
             ->join('messages', 'messages.topic_id = topics.id', 'left') // Relación de temas con mensajes
@@ -226,6 +226,20 @@ class TopicsModel extends Model
             ->where('topics.id', $topic_id) // Filtro por el ID del tema
             ->get()
             ->getRowArray();
+    }
+
+
+
+
+
+    public function getTopicsbyUser(int $userId): array
+    {
+        return $this->select('topics.id, topics.title, topics.slug AS topic_slug, topics.created_at, subcategories.slug AS subcategory_slug')
+            ->join('subcategories', 'subcategories.id = topics.subcategory_id', 'left') // Relación temas -> subcategorías
+            ->where('topics.author_id', $userId) // Filtrar por ID del autor
+            ->orderBy('topics.created_at', 'DESC') // Ordenar por fecha de creación descendente
+            ->get()
+            ->getResultArray();
     }
 
 

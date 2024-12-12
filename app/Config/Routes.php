@@ -20,7 +20,9 @@ $routes->get('/', [MainController::class, 'index'], ['as' => 'index']);
 
 
 // Refactorizar
+//TODO: ordenar por orden alfabetico de controlador.
 //Bien
+//Usar filtros session e group!
 //if (auth()->loggedIn()) {}
 $routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'legal-notice']);
 $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'cookies-policy']);
@@ -75,25 +77,3 @@ $routes->get('/01001101-01101001-01110011-01101000-01101001-01101101-01101001-01
 $routes->get('/(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategory']);
 $routes->get('/(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' => 'topic']);
 $routes->get('/(:segment)/(:segment)/(:any)', [AdminController::class, 'notFound']);
-
-
-
-
-//TODO: ordenar por orden alfabetico de controlador.
-// Display routes : php spark routes
-//CodeIgniter reads its routing rules from top to bottom and routes the request to the first matching rule.
-//Each rule is a regular expression (left-side) mapped to a controller and method name (right-side). When a request comes in, CodeIgniter looks for the first match, and calls the appropriate controller and method, possibly with arguments.
-//Usar group() para cuando varias rutas comienzan por el mismo inicio.
-//ejemplo de varias rutas
-//$routes->match(['GET', 'PUT'], 'products', 'Product::feature');
-//$routes->get('product/(:num)/(:num)', 'Product::index/$2/$1');
-//$routes->addPlaceholder('uuid', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
-//$routes->get('users/(:uuid)', 'Users::show/$1');
-/* $routes->group('admin', ['filter' => 'myfilter1:config'], static function ($routes) {
-    $routes->get('/', 'Admin\Admin::index');
-    $routes->group('users', ['filter' => 'myfilter2:region'], static function ($routes) {
-        $routes->get('list', 'Admin\Users::list');
-    });
-}); */
-// Redirect to a named route
-//$routes->addRedirect('/ruta', 'ruta a ir');

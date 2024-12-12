@@ -100,7 +100,7 @@
                                 maxlength="30"
                                 pattern="^[a-zA-Z0-9\.]+$"
                                 required>
-                            <small class="text-body-secondary">Sólo puede contener letras, números y puntos (.), debe tener entre 3 y 30 caracteres y no puede estar asociado a otra cuenta</small>
+                            <small class="text-body-secondary">Sólo puede contener letras que no sean "ñ" sin acentos, números y puntos (.), debe tener entre 3 y 30 caracteres y no puede estar asociado a otra cuenta</small>
                             <div class="invalid-feedback">
                                 El nombre de usuario debe cumplir todas las reglas
                             </div>

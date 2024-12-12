@@ -57,6 +57,7 @@ class TopicsController extends BaseController
         $topic = $topicsModel->where('slug', $topic_slug)->first();
         $topicInfo = $topicsModel->getTopicInfo($topic['id']);
         $messages = $messagesModel->getMessagesByTopic($topic['id']);
+
         //return var_dump($topicInfo);
         //return var_dump($topic);
         //return var_dump($messages);
@@ -174,18 +175,15 @@ class TopicsController extends BaseController
 
         if ($this->request->is('post')) {
 
-
-
-
-
             //Falta obtener el author_id!
             $data = $this->request->getPost();
-            $data['categories'] = $categoriesModel->getCategories();
-            $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
+
+
             $categoriesIds = $categoriesModel->findColumn('id');
             $subcategoriesIds = $subcategoriesModel->findColumn('id');
 
             // Consultar reglas: https://codeigniter4.github.io/userguide/libraries/validation.html#rules-for-general-use
+            // trim únicamente no es suficiente para evitar 'a            ' (ver \S "no whitespace")
             $rules = [
                 // La regla in_list espera una lista de valores separados por comas entre los corchetes
                 'category' => 'required|in_list[' . implode(',', $categoriesIds) . ']',
@@ -274,25 +272,8 @@ class TopicsController extends BaseController
                     return redirect()->back()->with('error', $e->getMessage());
                 }
             } else { // 2. Devolver errores
-                // Debería usar with()???? Y cambiar por redirect!!!=???
-                $data['data'] = $data;
-                $data['errors'] = $this->validator->getErrors();
-                $data = [
-                    'title'     =>  'Crear tema', //$topicsModel->getTitle($slug),
-                    //['s'], //$topicsModel->getTopicMessages($slug),
-                    'trending_subcategories' => $this->trendingSubcategories,
-                    'trending_subcategories' => $this->trendingSubcategories,
-                    'last_topics' => $this->lastTopics,
-                    'topics_with_most_messages' => $this->topicsWithMostMessages,
-                    'ad_urls' => $this->adUrls,
-                ];
-                $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
-                return view('templates/headerTemplate', $data)
-                    . view('templates/asideTemplate')
-                    . view('templates/asideModalTemplate')
-                    . view('topics/create')
-                    . view('templates/adBannerTemplate')
-                    . view('templates/footerTemplate');
+                // 2. Devolver errores
+                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
         }
     }

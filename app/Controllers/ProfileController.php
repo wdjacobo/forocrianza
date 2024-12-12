@@ -28,13 +28,17 @@ class ProfileController extends BaseController
         // Pasamos la fecha a un formato más adecuado (F no está funcionando en español por algún motivo)
         $user['created_at'] = $user['created_at']->format('d \d\e\l m \d\e Y');
 
-
+        $topicsModel = model('TopicsModel');
+        $messagesModel = model('MessagesModel');
+        //return var_dump($topicsModel->getTopicsbyUser($user['id']));
+        //return var_dump($messagesModel->getUserMessages($user['id']));
 
 
         $data = [
             'title'     => $username,
             'user' => $user,
-            'user_topics' => $users->getUserTopics($user['id']),
+            'user_topics' => $topicsModel->getTopicsbyUser($user['id']),
+            'user_messages' => $messagesModel->getUserMessages($user['id']),
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,
@@ -45,26 +49,6 @@ class ProfileController extends BaseController
             . view('templates/asideTemplate')
             . view('templates/asideModalTemplate')
             . view('profile/index')
-            . view('templates/adBannerTemplate')
-            . view('templates/footerTemplate');
-    }
-
-
-    public function _index()
-    {
-
-        $categoriesModel = model('CategoriesModel');
-
-        $data = [
-            'title'     => 'Inicio',
-            'categories_list' => $categoriesModel->getCategoriesWithSubcategories(),
-            'ad_number' => rand(1, 4)
-        ];
-
-        return view('templates/headerTemplate', $data)
-            . view('templates/asideTemplate')
-            . view('templates/asideModalTemplate')
-            . view('general/index')
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
     }

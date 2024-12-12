@@ -116,12 +116,11 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        // Aplicamos un límite de recargas de la página a las páginas específicadas. Pendiente manejarlo correctamente.
-        'auth-rates' => [
+
+        // Sería lo óptimo pero hay que personalizar el filtro
+        /*         'session' => [
             'before' => [
-                'iniciar-sesion',
-                'registro',
-            ],
-        ]
-    ];
+                'crear-tema',
+            ]
+        ], */];
 }
