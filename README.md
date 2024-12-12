@@ -6,4 +6,8 @@ Proxecto final para o ciclo formativo superior de desenvolvemento de aplicación
 ## Bootstrap
 ## Figma
 ## MySQL
+## Git
+## Composer
 ## PHP JS HTML CSS
+## DBeaver
+## Apache

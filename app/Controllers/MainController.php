@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
+
 class MainController extends BaseController
 {
-    //Comentarios a corregir
 
 
-    // Eliminar
-    public function giveAdminAccess()
+
+
+    public function notFound()
     {
-        $user = auth()->user();
-        $user->addGroup('admin');
-        $user->addPermission('admin.access');
-        return redirect()->to(base_url());
+        throw new PageNotFoundException('Lo siento, no hemos podido encontrar lo que estabas buscando.');
     }
 
 

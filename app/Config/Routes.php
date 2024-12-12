@@ -19,62 +19,64 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', [MainController::class, 'index'], ['as' => 'index']);
 
 
-// Refactorizar
-//TODO: ordenar por orden alfabetico de controlador.
-//Bien
-//Usar filtros session e group!
-//if (auth()->loggedIn()) {}
-$routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'legal-notice']);
-$routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'cookies-policy']);
-$routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'privacy-policy']);
 
-//Mensajes
-$routes->post('/crear-mensaje/(:segment)', [MessagesController::class, 'create'], ['as' => 'create-message']);
-$routes->delete('/eliminar-mensaje/(:segment)', [MessagesController::class, 'delete'], ['as' => 'delete-message']);
-
-
-//Temas
+//Rutas de temas para usuario
 $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
 $routes->delete('/eliminar-tema/(:segment)', [TopicsController::class, 'delete'], ['as' => 'delete-topic']);
 
 
+
+//Rutas de mensajes para usuario
+$routes->post('/crear-mensaje/(:segment)', [MessagesController::class, 'create'], ['as' => 'create-message']);
+$routes->delete('/eliminar-mensaje/(:segment)', [MessagesController::class, 'delete'], ['as' => 'delete-message']);
+
+
+
+// RUTAS DEL PANEL DE ADMINISTRACIÓN
+
 // Categorías
 $routes->get('admin/categorias', [CategoriesController::class, 'index'], ['as' => 'categories', 'filter' => 'group:admin']);
-$routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category']);
-$routes->match(['get', 'patch'], 'admin/editar-categoria/(:segment)', [CategoriesController::class, 'patch'], ['as' => 'edit-category']);
-$routes->delete('admin/eliminar-categoria/(:segment)', [CategoriesController::class, 'delete'], ['as' => 'delete-category']);
+$routes->match(['get', 'post'], 'admin/crear-categoria', [CategoriesController::class, 'create'], ['as' => 'create-category', 'filter' => 'group:admin']);
+$routes->match(['get', 'patch'], 'admin/editar-categoria/(:segment)', [CategoriesController::class, 'patch'], ['as' => 'edit-category', 'filter' => 'group:admin']);
+$routes->delete('admin/eliminar-categoria/(:segment)', [CategoriesController::class, 'delete'], ['as' => 'delete-category', 'filter' => 'group:admin']);
 
 // Subcategorías
 $routes->get('admin/subcategorias', [SubcategoriesController::class, 'index'], ['as' => 'subcategories', 'filter' => 'group:admin']);
-$routes->match(['get', 'post'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory']);
-$routes->match(['get', 'patch'], 'admin/editar-subcategoria/(:segment)', [SubcategoriesController::class, 'patch'], ['as' => 'edit-subcategory']);
-$routes->delete('admin/eliminar-subcategoria/(:segment)', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategory']);
+$routes->match(['get', 'post'], 'admin/crear-subcategoria', [SubcategoriesController::class, 'create'], ['as' => 'create-subcategory', 'filter' => 'group:admin']);
+$routes->match(['get', 'patch'], 'admin/editar-subcategoria/(:segment)', [SubcategoriesController::class, 'patch'], ['as' => 'edit-subcategory', 'filter' => 'group:admin']);
+$routes->delete('admin/eliminar-subcategoria/(:segment)', [SubcategoriesController::class, 'delete'], ['as' => 'delete-subcategory', 'filter' => 'group:admin']);
 
 // Temas
-$routes->get('admin/temas', [TopicsController::class, 'index'], ['as' => 'topics']);
-$routes->delete('admin/eliminar-tema/(:segment)', [TopicsController::class, 'adminDelete'], ['as' => 'admin-delete-topic']);
+$routes->get('admin/temas', [TopicsController::class, 'index'], ['as' => 'topics', 'filter' => 'group:admin']);
+$routes->delete('admin/eliminar-tema/(:segment)', [TopicsController::class, 'adminDelete'], ['as' => 'admin-delete-topic', 'filter' => 'group:admin']);
 
 // Usuarios
-$routes->get('admin/usuarios', [UsersController::class, 'index'], ['as' => 'users']);
-$routes->get('admin/incluir-admin/(:segment)', [AdminController::class, 'includeInAdminGroup'], ['as' => 'include-admin']);
-$routes->get('admin/eliminar-admin/(:segment)', [AdminController::class, 'removeFromAdminGroup'], ['as' => 'remove-admin']);
-$routes->delete('admin/eliminar-usuario/(:segment)', [UsersController::class, 'delete'], ['as' => 'delete-user']);
+$routes->get('admin/usuarios', [UsersController::class, 'index'], ['as' => 'users', 'filter' => 'group:admin']);
+$routes->get('admin/incluir-admin/(:segment)', [AdminController::class, 'includeInAdminGroup'], ['as' => 'include-admin', 'filter' => 'group:admin']);
+$routes->get('admin/eliminar-admin/(:segment)', [AdminController::class, 'removeFromAdminGroup'], ['as' => 'remove-admin', 'filter' => 'group:admin']);
+$routes->delete('admin/eliminar-usuario/(:segment)', [UsersController::class, 'delete'], ['as' => 'delete-user', 'filter' => 'group:admin']);
 
-
-
+// Ruta falsa de "subcategoría admin no encontrada"
 $routes->get('admin/(:segment)', [AdminController::class, 'adminNotFound']);
 
-# Routes Setup: The default auth routes can be setup with a single call in app/Config/Routes.php
-# Rutas establecidas por Shield para login y registro
+
+
+// Rutas de información legal
+$routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' => 'legal-notice']);
+$routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'cookies-policy']);
+$routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'privacy-policy']);
+
+
+
+// Rutas establecidas por Shield (necesarias para login, logout y registro)
 service('auth')->routes($routes, ['except' => ['magic-link']]);
 
 
-# En principio no voy a añadir el blog
-/* $routes->get('blog', [MainController::class, 'blog']);
-$routes->get('blog-post', [MainController::class, 'blog_post']); */
 
+
+// Rutas que tienen que ir al final para no colisionar con otras
 $routes->get('/perfil/(:segment)', [ProfileController::class, 'index'], ['as' => 'profile']);
 $routes->get('/01001101-01101001-01110011-01101000-01101001-01101101-01101001-01110011-01101000-01101001', [MainController::class, 'interview']);
 $routes->get('/(:segment)', [SubcategoriesController::class, 'show'], ['as' => 'subcategory']);
 $routes->get('/(:segment)/(:segment)', [TopicsController::class, 'show'], ['as' => 'topic']);
-$routes->get('/(:segment)/(:segment)/(:any)', [AdminController::class, 'notFound']);
+$routes->get('/(:segment)/(:segment)/(:any)', [MainController::class, 'notFound']);

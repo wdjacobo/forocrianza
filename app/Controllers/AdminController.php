@@ -9,12 +9,6 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class AdminController extends BaseController
 {
 
-
-    public function notFound()
-    {
-        throw new PageNotFoundException('Lo siento, no hemos podido encontrar lo que estabas buscando.');
-    }
-
     public function adminNotFound()
     {
         if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
