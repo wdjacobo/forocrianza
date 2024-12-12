@@ -89,7 +89,7 @@
                                     id="EmailInput"
                                     name="email"
                                     placeholder="<?= lang('Auth.email') ?>"
-                                    value="admin@admin.com"
+                                    value=""
                                     required>
                                 <div class="invalid-feedback">
                                     Debes introducir un email válido.
@@ -103,7 +103,7 @@
                                     class="form-control"
                                     id="PasswordInput"
                                     name="password"
-                                    placeholder="<?= lang('Auth.password') ?>" value="daw2pass" required>
+                                    placeholder="<?= lang('Auth.password') ?>" value="" required>
                                 <div class="invalid-feedback">
                                     Debes introducir una contraseña.
                                 </div>

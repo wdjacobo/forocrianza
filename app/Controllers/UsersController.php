@@ -20,13 +20,14 @@ class UsersController extends BaseController
 
         $usersModel = auth()->getProvider();
         $users = $usersModel->orderBy('username')->findAll();
+
         // Tranformamos cada instancia de usuario a arrays para mantener la coherencia con el resto de la aplicación
         // Ver Example #2 https://www.php.net/manual/en/function.array-map.php
         $usersArray = array_map(fn($user) => $user->toArray(), $users);
-        foreach($usersArray as &$user){
+        foreach ($usersArray as &$user) {
             $user['isAdmin'] = false;
             $currentUser = $usersModel->find($user['id']);
-            if($currentUser->inGroup('admin')){
+            if ($currentUser->inGroup('admin')) {
                 $user['isAdmin'] = true;
             }
         }
@@ -43,62 +44,6 @@ class UsersController extends BaseController
     }
 
 
-    public function patch()
-    {
-        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
-            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
-        }
-        // Es necesario para el uso de set_value() en las vistas!
-        helper('form');
-
-
-        // Ojo, aquí usaremos el user Provider
-        //$topicsModel = model('TopicsModel');
-        // El proveedor de usuarios por defecto, UserModel
-        $usersModel = auth()->getProvider();
-
-        $users = $usersModel->orderBy('username')->findAll();
-
-        // Tranformamos cada instancia de usuario a arrays para mantener la coherencia con el resto de la aplicación
-        // Ver Example #2 https://www.php.net/manual/en/function.array-map.php
-        $usersArray = array_map(fn($user) => $user->toArray(), $users);
-
-        $data = [
-            'title' => 'Usuarios',
-            'users' => $usersArray,
-        ];
-
-
-        return view('admin/users', $data);
-        /*         return view('templates/headerTemplate', $data)
-        . view('general/nuevo-tema')
-        . view('templates/footerTemplate'); */
-        //return redirect()->to(base_url());
-    }
-
-
-    /**
-     * Muestra la página de inicio.
-     * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
-     * 
-     * @return string la renderización de la vista correspondiente.
-     */
-    public function update()
-    {
-        $users = auth()->getProvider();
-
-        $user = new User([
-            'username' => 'nuevoUsuario',
-            'email'    => 'correo@ejemplo.com',
-            'password' => 'contraseña123',
-        ]);
-
-        $users->save($user);
-        $user = $users->findById($users->getInsertID());
-
-        $users->addToDefaultGroup($user);
-    }
 
     public function delete($userId)
     {
@@ -116,14 +61,31 @@ class UsersController extends BaseController
         }
     }
 
-    /**
-     * Muestra la página de inicio.
-     * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
-     * 
-     * @return string la renderización de la vista correspondiente.
-     */
-    public function _delete()
+
+    public function patch()
+    {
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
+        }
+
+        // Ojo, aquí usaremos el user Provider
+        $usersModel = auth()->getProvider();
+
+        $users = $usersModel->orderBy('username')->findAll();
+
+        $usersArray = array_map(fn($user) => $user->toArray(), $users);
+
+        $data = [
+            'title' => 'Usuarios',
+            'users' => $usersArray,
+        ];
+
+
+        return view('admin/users', $data);
+    }
+
+
+    public function update()
     {
         $users = auth()->getProvider();
 

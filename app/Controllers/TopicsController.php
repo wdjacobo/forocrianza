@@ -10,103 +10,6 @@ use \CodeIgniter\HTTP\RedirectResponse;
 class TopicsController extends BaseController
 {
 
-    public function index()
-    {
-        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
-            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
-        }
-
-
-        $topicsModel = model('TopicsModel');
-
-        $data = [
-            'title' => 'Temas',
-            'topics' => $topicsModel->orderBy('title')->findAll(),
-        ];
-
-
-        return view('templates/adminHeaderTemplate', $data)
-            . view('templates/adminAsideTemplate')
-            . view('topics/index')
-            . view('templates/adminFooterTemplate');
-    }
-
-
-
-    /**
-     * Muestra la página de inicio.
-     * 
-     * Prepara los datos necesarios y renderiza la vista de la página.
-     * 
-     * @return string la renderización de la vista correspondiente.
-     */
-    public function show($subcategory_slug, $topic_slug)
-    {
-        $subcategoriesModel = model('SubcategoriesModel');
-        $topicsModel = model('TopicsModel');
-        $messagesModel = model('MessagesModel');
-
-        if ($subcategoriesModel->getSubcategoryBySlug($subcategory_slug) === []) {
-            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $subcategory_slug . '", ¿se habrá ido a por tabaco?');
-        }
-
-        if ($topicsModel->getTopicBySlug($topic_slug) === []) {
-            throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '". Podrías crearlo tú, ¡da menos trabajo que tener un bebé!');
-        }
-
-        $topic = $topicsModel->where('slug', $topic_slug)->first();
-        $topicInfo = $topicsModel->getTopicInfo($topic['id']);
-        $messages = $messagesModel->getMessagesByTopic($topic['id']);
-
-        //return var_dump($topicInfo);
-        //return var_dump($topic);
-        //return var_dump($messages);
-
-
-        $resultado = $topicsModel->getTopicMessagesBySlug($topic_slug);
-
-        $titulo = $resultado[0]['topic_title'];
-
-        $data = [
-            'title'     => $titulo, //$topicsModel->getTitle($slug),
-            'slug' => $topic_slug,
-            'topic' => $topicInfo,
-            'messages' => $messagesModel->getMessagesByTopic($topic['id']),
-            'trending_subcategories' => $this->trendingSubcategories,
-            'last_topics' => $this->lastTopics,
-            'topics_with_most_messages' => $this->topicsWithMostMessages,
-            'ad_urls' => $this->adUrls,
-        ];
-
-        /*         return view('templates/headerTemplate', $data)
-            . view('general/topic')
-            . view('templates/footerTemplate'); */
-
-        return view('templates/headerTemplate', $data)
-            . view('templates/asideTemplate')
-            . view('templates/asideModalTemplate')
-            . view('topics/show')
-            . view('templates/adBannerTemplate')
-            . view('templates/footerTemplate');
-    }
-
-
-    public function delete(int $topic_id): RedirectResponse
-    {
-        $topicsModel = model('TopicsModel');
-        $topic = $topicsModel->find($topic_id);
-
-        // 1. Acción en la BD
-        try {
-            $topicsModel->delete($topic);
-            return redirect()->to('/');
-        } catch (\Exception $e) {
-            // 2. Manejo de excepciones
-            return redirect()->back()->with('error', 'Se produjo un error eliminando el tema.');
-        }
-    }
-
-
     public function adminDelete(int $topic_id): RedirectResponse
     {
         $topicsModel = model('TopicsModel');
@@ -123,6 +26,8 @@ class TopicsController extends BaseController
     }
 
 
+
+    // Este método...
     public function create()
     {
         if (!auth()->loggedIn()) {
@@ -177,7 +82,6 @@ class TopicsController extends BaseController
 
         if ($this->request->is('post')) {
 
-            //Falta obtener el author_id!
             $data = $this->request->getPost();
 
 
@@ -217,7 +121,6 @@ class TopicsController extends BaseController
             //1. Validar
             if ($this->validateData($data, $rules, $errors)) {
 
-                //ENGADIR TRY CATCH??
 
                 $validData = $this->validator->getValidated();
                 $validData['author-id'] = user_id();
@@ -236,8 +139,6 @@ class TopicsController extends BaseController
                     $topicSlug = $topicsModel->find($topicId)['slug'];
                     $subcategorySlug = $subcategoriesModel->find($topicsModel->find($topicId)['subcategory_id'])['slug'];
                     $ruta = base_url("$subcategorySlug/$topicSlug");
-                    /*                     echo "Todo salió bien, id del tema insertado: $topicId<br>Slug del tema: $topicSlug<br>Slug de la subcategoría del tema: $subcategorySlug<br>Ruta hacia el tema: $ruta";
-                    exit(); */
 
                     // 5. Redirigir al tema recién creado
                     return redirect()->to(base_url("$subcategorySlug/$topicSlug"));
@@ -245,38 +146,92 @@ class TopicsController extends BaseController
                     return redirect()->back()->withInput()->with('error', 'Se produjo un error al guardar el tema');
                 }
 
-
-
-                try {
-                    $transactionStatus = $topicsmodel->create($validData);
-                    if ($transactionStatus) {
-                        $id = $topicsModel->getInsertID();
-                        $newTopicSlug = $topicsModel->find($id)['slug'];
-                        //Conseguir el slug de la subcategoría...
-                        echo "Todo salió bien, id del tema insertado: $id<br>Slug del tema: $newTopicSlug";
-                        exit();
-                    } else {
-                        echo "Algo salió mal";
-                        exit();
-                    }
-
-                    // Redirigir si todo sale bien             //redirigir al usuario a la página del tema recién creado
-                    //return redirect()->to('/success-page');
-                } catch (\Exception $e) { // Usamos \ para el namespace global de PHP
-                    //Retornar la página con error de esto en concreto:
-                    /*                     $data['data'] = $data;
-                    $data['errors'] = $this->validator->getErrors();
-                    return view('/topics/create', $data); */
-
-                    echo "Se ha producido un error: " . $e->getMessage();
-                    exit();
-                    // Si hay un error, mostrarlo y hacer un rollback si fuera necesario
-                    return redirect()->back()->with('error', $e->getMessage());
-                }
-            } else { // 2. Devolver errores
+            } else {
                 // 2. Devolver errores
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
         }
+    }
+
+
+    public function delete(int $topic_id): RedirectResponse
+    {
+        $topicsModel = model('TopicsModel');
+        $topic = $topicsModel->find($topic_id);
+
+        // 1. Acción en la BD
+        try {
+            $topicsModel->delete($topic);
+            return redirect()->to('/');
+        } catch (\Exception $e) {
+            // 2. Manejo de excepciones
+            return redirect()->back()->with('error', 'Se produjo un error eliminando el tema.');
+        }
+    }
+
+
+    public function index()
+    {
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "admin", ¿se habrá ido a por tabaco?');
+        }
+
+
+        $topicsModel = model('TopicsModel');
+
+        $data = [
+            'title' => 'Temas',
+            'topics' => $topicsModel->orderBy('title')->findAll(),
+        ];
+
+
+        return view('templates/adminHeaderTemplate', $data)
+            . view('templates/adminAsideTemplate')
+            . view('topics/index')
+            . view('templates/adminFooterTemplate');
+    }
+
+ 
+    public function show($subcategory_slug, $topic_slug)
+    {
+        $subcategoriesModel = model('SubcategoriesModel');
+        $topicsModel = model('TopicsModel');
+        $messagesModel = model('MessagesModel');
+
+        if ($subcategoriesModel->getSubcategoryBySlug($subcategory_slug) === []) {
+            throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $subcategory_slug . '", ¿se habrá ido a por tabaco?');
+        }
+
+        if ($topicsModel->getTopicBySlug($topic_slug) === []) {
+            throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '". Podrías crearlo tú, ¡da menos trabajo que tener un bebé!');
+        }
+
+        $topic = $topicsModel->where('slug', $topic_slug)->first();
+        $topicInfo = $topicsModel->getTopicInfo($topic['id']);
+        $messages = $messagesModel->getMessagesByTopic($topic['id']);
+
+
+
+        $resultado = $topicsModel->getTopicMessagesBySlug($topic_slug);
+
+        $titulo = $resultado[0]['topic_title'];
+
+        $data = [
+            'title'     => $titulo,
+            'slug' => $topic_slug,
+            'topic' => $topicInfo,
+            'messages' => $messagesModel->getMessagesByTopic($topic['id']),
+            'trending_subcategories' => $this->trendingSubcategories,
+            'last_topics' => $this->lastTopics,
+            'topics_with_most_messages' => $this->topicsWithMostMessages,
+            'ad_urls' => $this->adUrls,
+        ];
+
+        return view('templates/headerTemplate', $data)
+            . view('templates/asideTemplate')
+            . view('templates/asideModalTemplate')
+            . view('topics/show')
+            . view('templates/adBannerTemplate')
+            . view('templates/footerTemplate');
     }
 }

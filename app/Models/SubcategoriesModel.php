@@ -20,19 +20,8 @@ class SubcategoriesModel extends Model
     protected $allowedFields = ['title', 'description', 'category_id', 'slug'];
 
 
-    /**
-     * Obtiene los temas de una subcategoría concreta ordenados por fecha de creación.
-     * 
-     * @param string $subcategory_slug El slug de la subcategoría cuyos temas se quieren obtener.todas.
-     * 
-     * @return array Array de temas con los campos 'title', 'topic_slug', 'author', 'message_number', 'last_message_date' y 'subcategory_slug'
-     */
-    /**
-     * 
-     */
-    public function getSubcategoryTopics(string $subcategory_id): array
+    public function getSubcategoryTopics(string $subcategoryId): array
     {
-        // Comprobar que devuelve bien... todo, y ver por que uso inner y no left!
         return $this->select('
         topics.title, 
         topics.slug, 
@@ -43,7 +32,7 @@ class SubcategoriesModel extends Model
             ->join('topics', 'subcategories.id = topics.subcategory_id', 'left')
             ->join('users', 'topics.author_id = users.id', 'left')
             ->join('messages', 'topics.id =messages.topic_id', 'left')
-            ->where('subcategories.id', $subcategory_id)
+            ->where('subcategories.id', $subcategoryId)
             ->groupBy('topics.id') // Agrupación para el uso de COUNT y MAX
             ->orderBy('topics.created_at', 'DESC')
             ->get()
@@ -53,133 +42,42 @@ class SubcategoriesModel extends Model
             
     }
 
-    //Podo facer isto para todas as subcategorias e agrupar por subcategoria para ter un array no que ter todo¿?
-
     /**
      * Obtiene los últimos temas de una subcategoría concreta ordenados por fecha de creación.
      * 
-     * @param string $subcategory_slug El slug de la subcategoría cuyos temas se quieren obtener.
-     * @param int $limit El número máximo de resultados a obtener, 5 por defecto.
+     * @param string $subcategory_slug El slug de la subcategoría
+     * @param int $limit Máximo de resultados a obtener
      * 
-     * @return array Array de temas con los campos 'title', 'topic_slug', 'created_at' y 'subcategory_slug'
+     * @return array Array de temas 
      */
-    public function getSubcategoryLastTopics(string $subcategory_slug, int $limit = 5): array
+    public function getSubcategoryLastTopics(string $subcategorySlug, int $limit = 5): array
     {
         return $this->select('topics.title, topics.slug AS topic_slug, topics.created_at, subcategories.slug AS subcategory_slug')
             ->join('topics', 'subcategories.id = topics.subcategory_id', 'left')
-            ->where('subcategories.id', $subcategory_slug)
+            ->where('subcategories.id', $subcategorySlug)
             ->orderBy('topics.created_at', 'DESC')
             ->limit($limit)
             ->get()
             ->getResultArray();
     }
 
-    /**
-     * Obtiene los temas de una subcategoría concreta ordenados por fecha de creación.
-     * 
-     * @param string $subcategory_slug El slug de la subcategoría cuyos temas se quieren obtener.todas.
-     * 
-     * @return array Array de temas con los campos 'title', 'topic_slug', 'author', 'message_number', 'last_message_date' y 'subcategory_slug'
-     */
+    
     public function getTrendingSubcategories($limit = 5)
     {
         return $this->select('subcategories.title, subcategories.slug, COUNT(topics.id) AS topic_count')
             ->join('topics', 'topics.subcategory_id = subcategories.id', 'left') // Unimos subcategories con topics
-            ->groupBy('subcategories.id') // Agrupamos por subcategoría
-            ->orderBy('topic_count', 'DESC') // Ordenamos por número de temas, descendente
-            ->limit($limit) // Limitar el número de resultados
+            ->groupBy('subcategories.id')
+            ->orderBy('topic_count', 'DESC')
+            ->limit($limit) 
             ->get()
             ->getResultArray();
     }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * 
-     * With this code, you can perform two different queries.
-     * You can get all news records, or get a news item by its slug.
-     * You might have noticed that the $slug variable wasn’t escaped before running the query;
-     * Query Builder does this for you.
-     * 
-     * @param false|string $titulo
-     *
-     * @return array|null
-     */
-    public function getSubcategories($subcategory_id = false)
-
+    public function getSubcategoriesByCategory($categoryId)
     {
-        if ($subcategory_id === false) {
-            return $this->findAll();
-        }
-        return $this->find($subcategory_id);
-    }
-
-
-    /**
-     * 
-     * With this code, you can perform two different queries.
-     * You can get all news records, or get a news item by its slug.
-     * You might have noticed that the $slug variable wasn’t escaped before running the query;
-     * Query Builder does this for you.
-     * 
-     * @param false|string $titulo
-     *
-     * @return array|null
-     */
-    public function getSubcategoryBySlug($subcategory_slug)
-
-    {
-        $resultArray = $this->select('subcategories.*')
-            ->where('subcategories.slug', $subcategory_slug)
-            ->get()
-            ->getResultArray();
-
-        return $resultArray;
-    }
-
-    /**
-     * Obtener subcategorías por id_categoria
-     * 
-     * @param int $id_categoria
-     * @return array
-     */
-    public function getSubcategoriesByCategory($category_id)
-    {
-        return $this->where('category_id', $category_id)->findAll();
+        return $this->where('category_id', $categoryId)->findAll();
     }
 
     public function getTitle($slug): string
@@ -191,5 +89,17 @@ class SubcategoriesModel extends Model
             ->getResultArray();
 
         return $resultArray[0]['title'];
+    }
+
+
+    public function getSubcategoryBySlug($subcategorySlug)
+
+    {
+        $resultArray = $this->select('subcategories.*')
+            ->where('subcategories.slug', $subcategorySlug)
+            ->get()
+            ->getResultArray();
+
+        return $resultArray;
     }
 }

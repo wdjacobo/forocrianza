@@ -5,18 +5,21 @@ declare(strict_types=1);
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Models\SubcategoriasModel;
 
 
-class CategoriasModel extends Model
+class TemplateModel extends Model
 {
+
+    // Modelo con información de referencia para consultar y copiar/pegar
+
+
     //El query builder escapa los valores automáticamente.
     // No se hacen necesarios los prepared statements, únicamente serían útiles en algunos casos en lo que se refiere al rednimiento.
     // Pagination library: https://codeigniter4.github.io/userguide/libraries/pagination.html
 
     // See: https://www.codeigniter.com/user_guide/models/model.html
-// https://www.codeigniter.com/user_guide/database/query_builder.html
-// https://www.codeigniter.com/user_guide/libraries/validation.html#saving-validation-rules-to-config-file
+    // https://www.codeigniter.com/user_guide/database/query_builder.html
+    // https://www.codeigniter.com/user_guide/libraries/validation.html#saving-validation-rules-to-config-file
 
     //The first two are used by all of the CRUD methods to determine what table to use and how we can find the required records:
 
@@ -114,9 +117,9 @@ protected $table      = 'users';
 */
 
 
-// Métodos disponibles:
+    // Métodos disponibles:
 
-/*
+    /*
 
 FIND DATA:
 
@@ -178,5 +181,4 @@ Setting Validation Rules https://www.codeigniter.com/user_guide/models/model.htm
         In most cases, you will be using the Pager library in order to paginate results that you retrieve from the database. When using the Model class, you can use its built-in paginate() method to automatically retrieve the current batch of results, as well as set up the Pager library so it’s ready to use in your controllers. It even reads the current page it should display from the current URL via a page=X query variable.
 
 */
-
 }

@@ -108,61 +108,72 @@
     </main>
 
     <script>
-const subcategories = <?= json_encode($subcategories) ?>;
+        // Para manejar el array subcategories en formato JSON
+        const subcategories = <?= json_encode($subcategories) ?>;
 
-// Función para cargar subcategorías según la categoría seleccionada
-function loadSubcategories(categoryId, selectedSubcategoryId = null) {
-    const subcategorySelect = document.getElementById('subcategory');
+        /**
+         * Carga subcategorías en el select según la categoría seleccionada.
+         * 
+         * @param {string} categoryId - ID de la categoría seleccionada
+         * @param {string|null} [selectedSubcategoryId=null] - El ID de la subcategoría selecionada anteriormente
+         * 
+         */
+        function loadSubcategories(categoryId, selectedSubcategoryId = null) {
 
-    // Limpiar las opciones actuales
-    subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
+            // Eliminamos las opciones actuales
+            const subcategorySelect = document.getElementById('subcategory');
+            subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
 
-    // Si no hay categoría seleccionada, deshabilitar el select de subcategorías
-    if (!categoryId || !subcategories[categoryId]) {
-        subcategorySelect.disabled = true;
-        return;
-    }
+            // Si no hay categoría seleccionada se deshabilita el select
+            if (!categoryId || !subcategories[categoryId]) {
+                subcategorySelect.disabled = true;
+                return;
+            }
 
-    // Si hay subcategorías disponibles, habilitar el selector y llenarlo
-    subcategories[categoryId].forEach(subcat => {
-        const option = document.createElement('option');
-        option.value = subcat.id; // Usar el ID de la subcategoría como valor
-        option.textContent = subcat.title; // Usar el título de la subcategoría como texto
+            // Rellenamos el select con las opciones de subcategorías
+            subcategories[categoryId].forEach(subcat => {
+                const option = document.createElement('option');
+                option.value = subcat.id; // Usar el ID de la subcategoría como valor
+                option.textContent = subcat.title; // Usar el título de la subcategoría como texto
 
-        // Seleccionar la subcategoría previamente guardada
-        if (subcat.id === selectedSubcategoryId) {
-            option.selected = true;
+                // Se marca como selected la subcategoría seleccionada anteriormente en caso de haberla
+                if (subcat.id === selectedSubcategoryId) {
+                    option.selected = true;
+                }
+
+                subcategorySelect.appendChild(option);
+            });
+
+            // Habilitamos el select
+            subcategorySelect.disabled = false;
         }
 
-        subcategorySelect.appendChild(option);
-    });
 
-    subcategorySelect.disabled = false; // Habilitar el selector
-}
+        /**
+         * Inicializa las interacciones entre los formularios de categorías y subcategorias.
+         *
+         */
+        function initDinamicForms() {
+            const categorySelect = document.getElementById('category');
+            const subcategorySelect = document.getElementById('subcategory');
 
-// Función para inicializar las interacciones del formulario
-function initializeFormInteractions() {
-    const categorySelect = document.getElementById('category');
-    const subcategorySelect = document.getElementById('subcategory');
+            // Comprobamos el valor seleccionado de subcategoria para pasalo a loadSubcategories()
+            const selectedSubcategoryId = subcategorySelect.dataset.selectedValue;
 
-    // Leer el valor previamente seleccionado de las subcategorías
-    const selectedSubcategoryId = subcategorySelect.dataset.selectedValue;
+            // Se recargan las subcategorías cuando seleccionamos un nuevo valor de categoría
+            categorySelect.addEventListener('change', () => {
 
-    // Escuchar cambios en el select de categoría
-    categorySelect.addEventListener('change', () => {
-        const selectedCategory = categorySelect.value;
-        loadSubcategories(selectedCategory); // Cargar subcategorías sin valor seleccionado
-    });
+                const selectedCategory = categorySelect.value;
+                loadSubcategories(selectedCategory);
+            });
 
-    // Al cargar la página, inicializar el select de subcategorías si ya hay una categoría seleccionada
-    if (categorySelect.value) {
-        loadSubcategories(categorySelect.value, selectedSubcategoryId);
-    } else {
-        subcategorySelect.disabled = true; // Desactivar subcategorías si no hay categoría seleccionada
-    }
-}
+            // Si ya había una categoría seleccionada y se vuelve por errores de validación), se inicializa el selector de subcategorías, se desactiva si no
+            if (categorySelect.value) {
+                loadSubcategories(categorySelect.value, selectedSubcategoryId);
+            } else {
+                subcategorySelect.disabled = true;
+            }
+        }
 
-// Ejecutar la función de inicialización cuando el DOM esté cargado
-document.addEventListener('DOMContentLoaded', initializeFormInteractions);
-
+        initDinamicForms();
     </script>

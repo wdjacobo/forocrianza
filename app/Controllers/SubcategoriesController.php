@@ -11,16 +11,18 @@ use \CodeIgniter\HTTP\RedirectResponse;
 class SubcategoriesController extends BaseController
 {
 
+    // Ahora ya se controla la pertenencia a admin con el filtro group
+
     /**
      * 
-     * Muestra la página de subcategorías (listado de subccategorías ordenadas por título) del panel de administración si el usuario autenticado pertenece al grupo 'admin'.
+     * Muestra la página de subcategorías (listado de subccategorías ordenadas por título) del panel de administración si el usuario autenticado pertenece al grupo admin.
      * 
-     * Si el usuario no está autenticado o no pertenece al grupo 'admin' se lanza una excepción de página no encontrada.
+     * Si el usuario no está autenticado o no pertenece al grupo admin se lanza una excepción de página no encontrada.
      * 
      * 
      * @return string Renderización de la vista correspondiente.
      * 
-     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo admin.
      */
     public function index(): string
     {
@@ -49,7 +51,7 @@ class SubcategoriesController extends BaseController
      * 
      * @return string|RedirectResponse Renderización de la vista correspondiente para las solicitudes GET o redirección para las solicitudes POST.
      * 
-     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo admin.
      */
     public function create(): string|RedirectResponse
     {
@@ -273,13 +275,7 @@ class SubcategoriesController extends BaseController
     }
 
 
-
-
-
-
-
-
-
+    // Muestra la página de una subcategoría concreta
     public function show($slug)
     {
         $subcategoriesModel = model('SubcategoriesModel');

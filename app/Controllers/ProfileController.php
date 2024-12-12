@@ -25,13 +25,11 @@ class ProfileController extends BaseController
         }
 
         $user = $user->toArray();
-        // Pasamos la fecha a un formato más adecuado (F no está funcionando en español por algún motivo)
+        // Pasamos la fecha a un formato más adecuado (F, mes escrito, no está funcionando en español por algún motivo)
         $user['created_at'] = $user['created_at']->format('d \d\e\l m \d\e Y');
 
         $topicsModel = model('TopicsModel');
         $messagesModel = model('MessagesModel');
-        //return var_dump($topicsModel->getTopicsbyUser($user['id']));
-        //return var_dump($messagesModel->getUserMessages($user['id']));
 
 
         $data = [

@@ -34,22 +34,29 @@ class MessagesModel extends Model
      * 
      * @return array Un array con toda la información de los mensajes asociados al tema.
      */
-    public function getMessagesByTopic(string $topic_id): array
+    public function getMessagesByTopic(string $topicId): array
     {
-        return $this->select('messages.*, users.username AS author_username') // Seleccionamos todos los campos de messages y el campo username de users
-            ->join('users', 'users.id = messages.author_id', 'left') // Relacionamos los mensajes con los usuarios (autores)
-            ->where('messages.topic_id', $topic_id) // Filtro por el ID del tema
-            ->orderBy('messages.created_at', 'ASC') // Ordenamos los mensajes por fecha de creación (puedes cambiar el orden si lo prefieres)
+        return $this->select('messages.*, users.username AS author_username')
+            ->join('users', 'users.id = messages.author_id', 'left') 
+            ->where('messages.topic_id', $topicId)
+            ->orderBy('messages.created_at', 'ASC')
             ->get()
-            ->getResultArray(); // Devuelve todos los mensajes asociados al tema como un array
+            ->getResultArray();
     }
 
 
-    public function getUserMessages(int $userId)
+    /**
+     * Obtiene los mensajes de un usuario específico
+     * 
+     * @param int $userId ID del usuario
+     * 
+     * @return array Un array con toda la información de los mensajes del usuario
+     */
+    public function getUserMessages(int $userId): array
     {
         return $this->select('messages.id, messages.content, messages.created_at, messages.topic_id')
-            ->where('messages.author_id', $userId) // Filtrar por ID de autor
-            ->orderBy('messages.created_at', 'DESC') // Ordenar por fecha de creación descendente
+            ->where('messages.author_id', $userId)
+            ->orderBy('messages.created_at', 'DESC')
             ->get()
             ->getResultArray();
     }

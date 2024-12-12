@@ -10,19 +10,16 @@ use \CodeIgniter\HTTP\RedirectResponse;
 class CategoriesController extends BaseController
 {
 
-
-
-
     /**
      * Muestra la vista del formulario de creación de categoría o procesa la creación de una categoría.
      * 
-     * Si el usuario no está autenticado o no pertenece al grupo 'admin' se lanza una excepción de página no encontrada.
+     * Si el usuario no está autenticado o no pertenece al grupo admin se lanza una excepción de página no encontrada.
      * 
      * Si la solicitud es GET, muestra el formulario, y si es POST procesa los datos, creando una nueva categoría y redirigiendo a la página de categorías o redirigiendo nuevamente al formulario junto con los errores encontrados en caso de haberlos.
      * 
      * @return string|RedirectResponse Renderización de la vista correspondiente para las solicitudes GET o redirección para las solicitudes POST.
      * 
-     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo admin.
      */
     public function create(): string|RedirectResponse
     {
@@ -114,30 +111,16 @@ class CategoriesController extends BaseController
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 
-     * Muestra la página de categorías (listado de categorías ordenadas por título) del panel de administración si el usuario autenticado pertenece al grupo 'admin'.
+     * Muestra la página de categorías (listado de categorías ordenadas por título) del panel de administración si el usuario autenticado pertenece al grupo admin.
      * 
-     * Si el usuario no está autenticado o no pertenece al grupo 'admin' se lanza una excepción de página no encontrada.
+     * Si el usuario no está autenticado o no pertenece al grupo admin se lanza una excepción de página no encontrada.
      * 
      * 
      * @return string Renderización de la vista correspondiente.
      * 
-     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo 'admin'.
+     * @throws PageNotFoundException Si el usuario no está autenticado o no pertenece al grupo admin.
      */
     public function index(): string
     {
@@ -162,7 +145,7 @@ class CategoriesController extends BaseController
     /**
      * Muestra la vista del formulario de edición de categoría o procesa la edición de una categoría en base a su ID.
      * 
-     * Si el usuario no está autenticado o no pertenece al grupo 'admin', o si la ID de la categoría no existe se lanza una excepción de página no encontrada.
+     * Si el usuario no está autenticado o no pertenece al grupo admin, o si la ID de la categoría no existe se lanza una excepción de página no encontrada.
      * 
      * Si la solicitud es GET, muestra el formulario, y si es PATCH procesa los datos, editando la  categoría y redirigiendo a la página de categorías o redirigiendo nuevamente al formulario junto con los errores encontrados en caso de haberlos.
      * 
@@ -184,8 +167,6 @@ class CategoriesController extends BaseController
         if (!$category) {
             throw new PageNotFoundException('Parece que intentas editar una categoría que no existe.');
         }
-
-
 
         if ($this->request->is('get')) {
 
