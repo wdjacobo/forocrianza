@@ -99,12 +99,26 @@ class TopicsController extends BaseController
 
         $categoriesModel = model('CategoriesModel');
         $subcategoriesModel = model('SubcategoriesModel');
-        $data['categories'] = $categoriesModel->getCategories();
-        $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
-        //return var_dump($categoriesModel->getCategoriesWithSubcategories());
+        $allCategories = $categoriesModel->getCategories();
+        $categories = [];
+        $subcategories = [];
 
-        $categoriesIds = $categoriesModel->findColumn('id');
-        $subcategoriesIds = $subcategoriesModel->findColumn('id');
+        // Seleccionamos solo las categorías con subcategorías
+        foreach ($allCategories as $category) {
+            if ($subcategoriesModel->getSubcategoriesByCategory($category['id']) !== []) {
+                $categories[] = $category;
+            }
+        }
+
+        // Creamos un array de subcategorías agrupadas por la ID de la categoría como clave
+        foreach ($categories as $category) {
+            $subcategoriesArray = $subcategoriesModel->getSubcategoriesByCategory($category['id']);
+            $subcategories[$category['id']] = $subcategoriesArray;
+        }
+
+
+        $data['categories'] = $categories;
+        $data['subcategories'] = $subcategories;
 
 
         if ($this->request->is('get')) {
@@ -130,6 +144,8 @@ class TopicsController extends BaseController
             $data = $this->request->getPost();
             $data['categories'] = $categoriesModel->getCategories();
             $data['categoriesWithSubcategories'] = $categoriesModel->getCategoriesWithSubcategories();
+            $categoriesIds = $categoriesModel->findColumn('id');
+            $subcategoriesIds = $subcategoriesModel->findColumn('id');
 
             // Consultar reglas: https://codeigniter4.github.io/userguide/libraries/validation.html#rules-for-general-use
             $rules = [

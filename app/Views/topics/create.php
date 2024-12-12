@@ -63,7 +63,7 @@
                     id="topic-opening-message"
                     name="topic-opening-message"
                     class="form-control"
-                    placeholder="Incluir edición con Quill"
+                    placeholder="Escribe aquí el contenido de tu tema..."
                     rows="8"
                     minlength="40"
                     required><?= esc(set_value('topic-opening-message')) ?></textarea>
@@ -101,14 +101,55 @@
                 </div>
             <?php endif; ?>
             <div class="col-sm-12 d-flex ms-auto gap-1">
-                <a href="<?= previous_url() ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
+                <a href="<?= url_to('index') ?>" class="w-100 btn btn-danger btn-lg text-center">Cancelar</a>
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
             </div>
         </form>
     </main>
 
     <script>
-      
+        const subcategories = <?= json_encode($subcategories) ?>;
 
-      
+        // Función para cargar subcategorías según la categoría seleccionada
+        function loadSubcategories(categoryId) {
+            const subcategorySelect = document.getElementById('subcategory');
+
+            // Limpiar las opciones actuales
+            subcategorySelect.innerHTML = '<option value="">Selecciona una subcategoría...</option>';
+
+            // Si no hay categoría seleccionada, deshabilitar el select de subcategorías
+            if (!categoryId || !subcategories[categoryId]) {
+                subcategorySelect.disabled = true;
+                return;
+            }
+
+            // Si hay subcategorías disponibles, habilitar el selector y llenarlo
+            subcategories[categoryId].forEach(subcat => {
+                const option = document.createElement('option');
+                option.value = subcat.id; // Usar el ID de la subcategoría como valor
+                option.textContent = subcat.title; // Usar el título de la subcategoría como texto
+                subcategorySelect.appendChild(option);
+            });
+
+            subcategorySelect.disabled = false; // Habilitar el selector
+        }
+
+        // Función para inicializar las interacciones del formulario
+        function initializeFormInteractions() {
+            const categorySelect = document.getElementById('category');
+
+            // Escuchar cambios en el select de categoría
+            categorySelect.addEventListener('change', () => {
+                const selectedCategory = categorySelect.value;
+                loadSubcategories(selectedCategory); // Llamar a la función independiente
+            });
+
+            // Desactivar subcategorías inicialmente si no hay categoría seleccionada
+            if (!categorySelect.value) {
+                document.getElementById('subcategory').disabled = true;
+            }
+        }
+
+        // Ejecutar la función de inicialización cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', initializeFormInteractions);
     </script>

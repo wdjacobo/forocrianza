@@ -20,30 +20,6 @@ class SubcategoriesModel extends Model
     protected $allowedFields = ['title', 'description', 'category_id', 'slug'];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Obtiene los temas de una subcategoría concreta ordenados por fecha de creación.
      * 

@@ -10,6 +10,7 @@
   --font-size-description: 14px;
 
   --admin-color: #f27932;
+  --topic-author-color: rgba(127, 255, 212, 0.3);
   --black: #0c120c;
   --gray: #6c7486;
   --gray-strong: #6c7486;
@@ -53,6 +54,10 @@ h4.card-header-category-title {
 
 .admin-color {
   color: var(--admin-color);
+}
+
+.bg-author {
+  background-color: var(--topic-author-color);
 }
 
 .card,
