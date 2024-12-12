@@ -32,7 +32,6 @@ class SubcategoriesModel extends Model
      */
     public function getSubcategoryTopics(string $subcategory_id): array
     {
-
         // Comprobar que devuelve bien... todo, y ver por que uso inner y no left!
         return $this->select('
         topics.title, 
@@ -41,14 +40,17 @@ class SubcategoriesModel extends Model
         COUNT(messages.id) AS total_messages, 
         MAX(messages.created_at) AS last_message_date
     ')
-            ->join('topics', 'subcategories.id = topics.subcategory_id', 'inner')
-            ->join('users', 'topics.author_id = users.id', 'inner')
+            ->join('topics', 'subcategories.id = topics.subcategory_id', 'left')
+            ->join('users', 'topics.author_id = users.id', 'left')
             ->join('messages', 'topics.id =messages.topic_id', 'left')
             ->where('subcategories.id', $subcategory_id)
             ->groupBy('topics.id') // Agrupación para el uso de COUNT y MAX
             ->orderBy('topics.created_at', 'DESC')
             ->get()
             ->getResultArray();
+
+
+            
     }
 
     //Podo facer isto para todas as subcategorias e agrupar por subcategoria para ter un array no que ter todo¿?

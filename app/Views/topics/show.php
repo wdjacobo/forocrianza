@@ -1,117 +1,61 @@
 <main class="col-md-9 col-lg-7 order-2 px-1">
-
-    <article class="card mb-4">
-        <div class="card-header">
-
-            <h4><?= esc($topic_messages[0]['topic_title']) ?></h4>
-
-
-            <!-- Paginado de Bootstrap no implementado -->
-            <!--             <li class="list-group-item d-flex justify-content-center">
-                <div class="bd-example-snippet bd-code-snippet">
-                    <div class="bd-example m-0 border-0">
-
-                        <nav aria-label="Standard pagination example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Primera">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Anterior">
-                                        <span aria-hidden="true">&lsaquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Siguiente">
-                                        <span aria-hidden="true"> &rsaquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Última">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                    </div>
-                </div>
-            </li> -->
+    <article class="card mb-4 bg-transparent">
+        <div class="card-header bg-transparent">
+            <h4><?= esc($topic['title']) ?></h4>
         </div>
-
-
         <div class="list-group">
-            <?php //var_dump($topic_messages[0]['topic_author_status_message']); exit(); 
-            ?>
-            <?php if ($topic_messages !== []): ?>
-                <div class="list-group-item topic-author-message">
-                    <h5><a href="<?= base_url() . "perfil/" . esc($topic_messages[0]['topic_author_username']) ?>"><?= esc($topic_messages[0]['topic_author_username']) ?></a></h5>
-                    <p><?= esc($topic_messages[0]['topic_opening_message']) ?></p>
-                    <!-- Comprobar el id del autor del mensaje y comparar con el id del autor del tema, si coinciden, poner una clase que le da color distinto al mensaje -->
-                    <?php if (user_id() == $topic_messages[0]['topic_author_id']) : ?>
-                        <a href="<?= previous_url() ?>" class="btn btn-danger btn-lg text-center">Eliminar tema</a>
-                    <?php else: ?>
-                        <p>Id del autor<?= esc($topic_messages[0]['topic_author_id']) ?></p>
-                        <p>Tu id: <?= esc(user_id()) ?></p>
-                    <?php endif ?>
-                </div>
-            <?php endif ?>
-            <div class="list-group-item topic-author-message">
-                <h5><a href="#">Autor</a></h5>
-                <p>Contenido</p>
-                <!-- Comprobar el id del autor del mensaje y comparar con el id del autor del tema, si coinciden, poner una clase que le da color distinto al mensaje -->
+            <div class="list-group-item bg-author">
+                <h5><a href="<?= base_url() . "perfil/" . esc($topic['author_username']) ?>"><?= $topic['author_username'] ?></a></h5>
+                <p><?= $topic['opening_message'] ?></p>
+                <?php if (user_id() == $topic['author_id']) : ?>
+                    <a href="<?= previous_url() ?>" class="btn btn-danger btn-lg text-center">Eliminar tema</a>
+                <?php else: ?>
+                    <p>Id del autor<?= esc($topic['author_id']) ?></p>
+                    <p>Tu id: <?= esc(user_id()) ?></p>
+                <?php endif ?>
+            </div>
+            <div class="list-group-item rounded-bottom">
+                <h5><a href="#">Autor de una respuesta</a></h5>
+                <p>Respuesta, si coincide el id, poner clase bg-author</p>
                 <a href="<?= previous_url() ?>" class="btn btn-danger btn-lg text-center">Eliminar mensaje</a>
             </div>
-            <div class="list-group-item topic-author-message">
-                <form action="" class="d-flex flex-column">
-                    <textarea name="" id=""></textarea>
-                    <label for="">Aquí va un formulario si estás logueado</label>
-                    <button type="submit">Publicar</button>
-                </form>
-            </div>
-
-            <!-- Paginado de Bootstrap no implementado -->
-            <!--             <li class="list-group-item d-flex justify-content-center">
-                <div class="bd-example-snippet bd-code-snippet">
-                    <div class="bd-example m-0 border-0">
-
-                        <nav aria-label="Standard pagination example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Primera">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Anterior">
-                                        <span aria-hidden="true">&lsaquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Siguiente">
-                                        <span aria-hidden="true"> &rsaquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Última">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-
+            <form action="<?= base_url('crear-mensaje') ?>" method="post" class="list-group-itemneeds-validation g-3 p-2 pb-4 mt-2" novalidate>
+                <?= csrf_field() ?>
+                <div class="col-12">
+                    <textarea
+                        id="message"
+                        name="message"
+                        class="form-control"
+                        placeholder="Escribe una respuesta..."
+                        rows="8"
+                        minlength="10"
+                        required><?= esc(set_value('message')) ?></textarea>
+                    <small class="text-body-secondary">Debe contener al menor 10 caracteres</small>
+                    <div class="invalid-feedback">
+                        Introduce un contenido válido. Asegúrate de cumplir las reglas para el contenido.
                     </div>
                 </div>
-            </li> -->
-
+                <?php if (session()->has('errors')): ?>
+                    <div class="alert alert-danger">
+                        <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
+                        <ul>
+                            <?php foreach (session()->get('errors') as $error): ?>
+                                <li><?= $error ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php elseif (session()->has('error')): ?>
+                    <div class="alert alert-danger">
+                        <p>Se han detectado errores en el formulario enviado. Asegúrate de cumplir con lo siguiente:</p>
+                        <ul>
+                            <li> <?= session('error') ?></li>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+                <div class="col-sm-12 d-flex mt-3">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Publicar</button>
+                </div>
+            </form>
         </div>
     </article>
 </main>

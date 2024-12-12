@@ -197,15 +197,48 @@ class TopicsModel extends Model
 
 
     /**
-     * Obtener subcategorías por id_categoria
+     * Obtiene todos los temas asociados a una subcategoría especificada por su ID, 
+     * incluyendo el nombre de usuario del autor, el número total de mensajes, 
+     * y la hora del último mensaje asociado a cada tema.
      * 
-     * @param int $id_categoria
-     * @return array
+     * @param int $subcategory_id El ID de la subcategoría cuyos temas se desean obtener.
+     * 
+     * @return array Un array con los temas asociados a la subcategoría, el nombre de usuario del autor, 
+     *               el número de mensajes, y la hora del último mensaje.
      */
-    public function getTopicsBySubcategory($subcategory_id)
+    public function getTopicsBySubcategory(string $subcategory_id): array
     {
-        return $this->where('subcategory_id', $subcategory_id)->findAll();
+        return $this->select('topics.title AS topic_title, topics.slug AS topic_slug, users.username AS author_username, COUNT(messages.id) AS message_count, MAX(messages.created_at) AS last_message_time')
+            ->join('subcategories', 'subcategories.id = topics.subcategory_id', 'left') // Relación de temas con subcategorías
+            ->join('users', 'users.id = topics.author_id', 'left') // Relación de temas con usuarios (autores)
+            ->join('messages', 'messages.topic_id = topics.id', 'left') // Relación de temas con mensajes
+            ->where('topics.subcategory_id', $subcategory_id) // Filtro por el ID de la subcategoría
+            ->groupBy('topics.id') // Agrupamos por ID de tema para contar los mensajes por cada uno y obtener el último mensaje
+            ->orderBy('topics.created_at', 'DESC') // Ordenar por fecha de creación, de más reciente a más antiguo
+            ->get()
+            ->getResultArray();
     }
+
+    public function getTopicInfo(string $topic_id): array
+    {
+        return $this->select('topics.*, users.username AS author_username') // Seleccionamos todos los campos de topics y el campo username de users
+            ->join('users', 'users.id = topics.author_id', 'left') // Relación de temas con usuarios (autores)
+            ->where('topics.id', $topic_id) // Filtro por el ID del tema
+            ->get()
+            ->getRowArray();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Obtener todas las categorías con sus subcategorías

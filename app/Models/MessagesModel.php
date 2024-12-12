@@ -47,51 +47,19 @@ class MessagesModel extends Model
 
 
     /**
-     * Obtener subcategorías por id_categoria
+     * Obtiene toda la información de los mensajes asociados a un tema específico.
      * 
-     * @param int $id_categoria
-     * @return array
+     * @param string $topic_id El ID del tema cuyos mensajes se desean obtener.
+     * 
+     * @return array Un array con toda la información de los mensajes asociados al tema.
      */
-    public function getMessagesByTopic(int $topic_id, ?int $limit = null): ?array
+    public function getMessagesByTopic(string $topic_id): array
     {
-        if ($limit === null) {
-            return $this->where('topic_id', $topic_id)->findAll();
-        }
-
-        return $this->where('topic_id', $topic_id)->orderBy('created_at', 'DESC')
-            ->findAll($limit);
-    }
-
-    //                      _ 
-    //                     | |
-    //   ___ _ __ _   _  __| |
-    //  / __| '__| | | |/ _` |
-    // | (__| |  | |_| | (_| |
-    //  \___|_|   \__,_|\__,_|
-
-
-    /**
-     * @param false|string $slug
-     *
-     * @return array|null
-     */
-    public function crearCategoria()
-    {
-        /*         // Get the User Provider (UserModel by default)
-        $users = auth()->getProvider();
-
-        $user = new User([
-            'username' => 'foo-bar',
-            'email'    => '[email protected]',
-            'password' => 'secret plain text password',
-        ]);
-
-        $users->save($user);
-
-        // To get the complete user object with ID, we need to get from the database
-        $user = $users->findById($users->getInsertID());
-
-        // Add to default group
-        $users->addToDefaultGroup($user); */
+        return $this->select('messages.*, users.username AS author_username') // Seleccionamos todos los campos de messages y el campo username de users
+            ->join('users', 'users.id = messages.author_id', 'left') // Relacionamos los mensajes con los usuarios (autores)
+            ->where('messages.topic_id', $topic_id) // Filtro por el ID del tema
+            ->orderBy('messages.created_at', 'ASC') // Ordenamos los mensajes por fecha de creación (puedes cambiar el orden si lo prefieres)
+            ->get()
+            ->getResultArray(); // Devuelve todos los mensajes asociados al tema como un array
     }
 }

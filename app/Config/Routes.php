@@ -4,6 +4,7 @@ use App\Controllers\AdminController;
 use App\Controllers\CategoriesController;
 use App\Controllers\LegalController;
 use App\Controllers\MainController;
+use App\Controllers\MessagesController;
 use App\Controllers\ProfileController;
 use App\Controllers\SubcategoriesController;
 use App\Controllers\TopicsController;
@@ -25,6 +26,8 @@ $routes->get('aviso-legal', [LegalController::class, 'showLegalNotice'], ['as' =
 $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'], ['as' => 'cookies-policy']);
 $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'privacy-policy']);
 
+//Mensajes
+$routes->post('/crear-mensaje', [MessagesController::class, 'create'], ['as' => 'create-topic']);
 
 
 
@@ -54,6 +57,7 @@ $routes->delete('admin/eliminar-tema/(:segment)', [TopicsController::class, 'del
 $routes->get('admin/usuarios', [UsersController::class, 'index'], ['as' => 'users']);
 $routes->match(['get', 'patch'], 'admin/editar-usuario/(:segment)', [UsersController::class, 'patch'], ['as' => 'edit-user']);
 $routes->delete('admin/eliminar-usuario/(:segment)', [UsersController::class, 'delete'], ['as' => 'delete-user']);
+
 
 
 $routes->get('admin/(:segment)', [AdminController::class, 'adminNotFound']);

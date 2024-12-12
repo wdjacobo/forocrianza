@@ -42,25 +42,34 @@ class TopicsController extends BaseController
      */
     public function show($subcategory_slug, $topic_slug)
     {
-        $topicsModel = model('TopicsModel');
-
-
         $subcategoriesModel = model('SubcategoriesModel');
+        $topicsModel = model('TopicsModel');
+        $messagesModel = model('MessagesModel');
 
         if ($subcategoriesModel->getSubcategoryBySlug($subcategory_slug) === []) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $subcategory_slug . '", ¿se habrá ido a por tabaco?');
         }
+
         if ($topicsModel->getTopicBySlug($topic_slug) === []) {
             throw new PageNotFoundException('No se ha podido encontrar el tema "' . $topic_slug . '". Podrías crearlo tú, ¡da menos trabajo que tener un bebé!');
         }
 
+        $topic = $topicsModel->where('slug', $topic_slug)->first();
+        $topicInfo = $topicsModel->getTopicInfo($topic['id']);
+        $messages = $messagesModel->getMessagesByTopic($topic['id']);
+        //return var_dump($topicInfo);
+        //return var_dump($topic);
+
+
         $resultado = $topicsModel->getTopicMessagesBySlug($topic_slug);
+
         $titulo = $resultado[0]['topic_title'];
 
         $data = [
             'title'     => $titulo, //$topicsModel->getTitle($slug),
             'slug' => $topic_slug,
-            'topic_messages' => $topicsModel->getTopicMessagesBySlug($topic_slug), //['s'], //$topicsModel->getTopicMessages($slug),
+            'topic' => $topicInfo,
+            'topic_messages' => $topicsModel->getTopicMessagesBySlug($topic_slug),
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,

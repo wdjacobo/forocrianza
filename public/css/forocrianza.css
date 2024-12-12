@@ -80,10 +80,6 @@ h4.card-header-category-title {
   color: var(--black);
 }
 
-.topic-author-message {
-  background-color: aquamarine;
-}
-
 .bg-primary-fc {
   background-color: var(--primary-color-10);
 }

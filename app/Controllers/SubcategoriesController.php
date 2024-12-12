@@ -280,25 +280,23 @@ class SubcategoriesController extends BaseController
 
 
 
-
-
-
-
     public function show($slug)
     {
         $subcategoriesModel = model('SubcategoriesModel');
+        $topicsModel = model('TopicsModel');
 
         if ($subcategoriesModel->getSubcategoryBySlug($slug) === []) {
             throw new PageNotFoundException('No se ha podido encontrar la subcategoría "' . $slug . '", ¿se habrá ido a por tabaco?');
         }
 
         $subcategory = $subcategoriesModel->where('slug', $slug)->first();
-        //return var_dump($subcategoriesModel->getSubcategoryTopics($subcategory['id']));
+        $subcategoryTopics = $topicsModel->getTopicsBySubcategory($subcategory['id']);
+        //return var_dump($subcategoryTopics);
 
         $data = [
             'title'     => $subcategory['title'],
             'slug' => $subcategory['slug'],
-            'subcategory_topics' => [],
+            'subcategory_topics' => $subcategoriesModel->getSubcategoryTopics($subcategory['id']),
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,

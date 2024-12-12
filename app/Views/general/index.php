@@ -19,7 +19,6 @@
 
                                                 <?php if (isset($subcategory['last_topic'])) : ?>
                                                     <a href="<?= base_url() . $subcategory['slug'] . '/' . $subcategory['last_topic']['slug'] ?>"><?= character_limiter($subcategory['last_topic']['title'], 28) ?></a>
-                                                    </a>
                                                     <p><?= $subcategory['last_topic']['created_at'] ?></p>
                                                 <?php else: ?>
                                                     <p>Sin temas</p>

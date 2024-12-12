@@ -57,7 +57,7 @@
                     Introduce un título válido. Asegúrate de cumplir las reglas para el título.
                 </div>
             </div>
-            <div class="col-sm-12 topic-opening-message">
+            <div class="col-sm-12">
                 <label for="topic-opening-message" class="form-label">Contenido *</label>
                 <textarea
                     id="topic-opening-message"
