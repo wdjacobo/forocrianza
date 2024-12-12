@@ -16,7 +16,7 @@ class MessagesModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['content'];
+    protected $allowedFields = ['content', 'author_id', 'topic_id'];
 
     // Dates
     protected $useTimestamps = true;

@@ -59,6 +59,7 @@ class TopicsController extends BaseController
         $messages = $messagesModel->getMessagesByTopic($topic['id']);
         //return var_dump($topicInfo);
         //return var_dump($topic);
+        //return var_dump($messages);
 
 
         $resultado = $topicsModel->getTopicMessagesBySlug($topic_slug);
@@ -69,7 +70,7 @@ class TopicsController extends BaseController
             'title'     => $titulo, //$topicsModel->getTitle($slug),
             'slug' => $topic_slug,
             'topic' => $topicInfo,
-            'topic_messages' => $topicsModel->getTopicMessagesBySlug($topic_slug),
+            'messages' => $messagesModel->getMessagesByTopic($topic['id']),
             'trending_subcategories' => $this->trendingSubcategories,
             'last_topics' => $this->lastTopics,
             'topics_with_most_messages' => $this->topicsWithMostMessages,
@@ -87,6 +88,34 @@ class TopicsController extends BaseController
             . view('templates/adBannerTemplate')
             . view('templates/footerTemplate');
     }
+
+
+    public function delete(int $topic_id): RedirectResponse
+    {
+        $topicsModel = model('TopicsModel');
+        $topic = $topicsModel->find($topic_id);
+
+        // 1. Acción en la BD
+        try {
+            $topicsModel->delete($topic);
+            return redirect()->to('/');
+        } catch (\Exception $e) {
+            // 2. Manejo de excepciones
+            return redirect()->back()->with('error', 'Se produjo un error eliminando el tema.');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

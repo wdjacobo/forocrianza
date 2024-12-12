@@ -27,14 +27,13 @@ $routes->get('politica-de-cookies', [LegalController::class, 'showCookiesPolicy'
 $routes->get('politica-de-privacidad', [LegalController::class, 'showPrivacyPolicy'], ['as' => 'privacy-policy']);
 
 //Mensajes
-$routes->post('/crear-mensaje', [MessagesController::class, 'create'], ['as' => 'create-topic']);
-
-
-
+$routes->post('/crear-mensaje/(:segment)', [MessagesController::class, 'create'], ['as' => 'create-message']);
+$routes->delete('/eliminar-mensaje/(:segment)', [MessagesController::class, 'delete'], ['as' => 'delete-message']);
 
 
 //Temas
 $routes->match(['get', 'post'], '/crear-tema', [TopicsController::class, 'create'], ['as' => 'create-topic']);
+$routes->delete('/eliminar-tema/(:segment)', [TopicsController::class, 'delete'], ['as' => 'delete-topic']);
 
 
 // Categorías
