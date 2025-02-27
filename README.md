@@ -30,7 +30,7 @@ A nivel específicos tamén se buscou conseguir o seguinte:
 - Figma
 
 
-## Características salientables
+## Características principais
 
 - Implementación do patrón Modelo Vista Controlador
 - Uso da programación orientada a obxectos
