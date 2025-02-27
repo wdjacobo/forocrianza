@@ -1,7 +1,7 @@
 # ForoCrianza
 
 
-## Introdución
+## Presentación
 
 ForoCrianza é un proxecto de desenvolvemento de aplicacións web que integra as principais competencias adquiridas durante a formación. A aplicación busca permitir a interacción entre usuarios a través do intercambio de mensaxes en temas creados pola propia comunidade nas subcategorías dispostas para ese fin, as cales están englobadas en categorías máis xenéricas.
 
